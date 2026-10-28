@@ -18,8 +18,8 @@
 body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
-  background-image: linear-gradient(90deg, transparent calc(100% - var(--outline-width)), rgba(16, 21, 13, .13) 0);
-  border-width: var(--outline-width);
+  background-image: linear-gradient(90deg, transparent calc(100% - 1px), rgba(16, 21, 13, .13) 0);
+  border-width: 1px;
 }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
