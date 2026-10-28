@@ -4,15 +4,15 @@
   --bg: #ffffff;
   --bg-surface: #f1f3ee;
   --bg-surface-hover: #e7f6d6;
-  --fg: #10150d;
-  --fg-muted: #374330;
-  --muted: #4a5742;
+  --fg: #101010;
+  --fg-muted: #3b3b3b;
+  --muted: #555555;
   --lime: #adff00;
-  --lime-dim: #297600;
-  --accent-ink: #297600;
+  --lime-dim: var(--lime);
+  --accent-ink: var(--lime);
   --line: rgba(16, 21, 13, .21);
   --line-strong: rgba(16, 21, 13, .4);
-  --line-lime: rgba(75, 156, 0, .65);
+  --line-lime: rgba(173, 255, 0, .65);
 }
 .grain-overlay { mix-blend-mode: multiply; opacity: .026; }
 body { font-weight: 450; }
@@ -36,17 +36,17 @@ body { font-weight: 450; }
 .solutions-controls button, .gallery-controls button, .motion-toggle { border-width: 2px; }
 .scene-stages { color: var(--muted); }
 .scene-stages i { height: 2px; background: var(--line-strong); }
-.wordmark span, .float-logo span { color: #52ad00; }
+.wordmark span, .float-logo span { color: var(--lime); }
 .hero-line.outline, .manifesto .manifesto-line.outline,
 .expertise-line.outline, .approach-line.outline {
   color: transparent;
   -webkit-text-stroke: 1.8px var(--fg);
 }
-.solution-type { color: transparent; -webkit-text-stroke: 1.6px #4a5742; }
+.solution-type { color: transparent; -webkit-text-stroke: 1.6px var(--lime); }
 .solution-card.is-active .solution-type, .solution-card:hover .solution-type {
   color: var(--accent-ink); -webkit-text-stroke-color: var(--accent-ink);
 }
-.title-dot { color: #79c900; }
+.title-dot { color: var(--lime); }
 .lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
 .scene-stages > span.active, .solution-card-meta, .solutions-hint,
 .service-index, .service-plus, .service[open] h3, .tags > span:hover,
@@ -61,8 +61,8 @@ body { font-weight: 450; }
 }
 .contact-pill { background: rgba(255, 255, 255, .55); }
 .contact-pill.contact-pill--filled:hover, .gallery-footer .gallery-all:hover {
-  background: #99ec00;
-  border-color: #99ec00;
+  background: var(--lime);
+  border-color: var(--lime);
 }
 .contact-pill:hover, .contact-pill.contact-pill--filled,
 .float-cta, .round-link, .gallery-footer .gallery-all,

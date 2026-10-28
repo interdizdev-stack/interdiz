@@ -16,15 +16,15 @@ export function createScene(container, reduced = false) {
   camera.position.set(0, 0, 12);
   const pmrem = new THREE.PMREMGenerator(renderer);
   const studio = new THREE.Scene();
-  studio.background = new THREE.Color('#67745b');
-  const roomMaterial = new THREE.MeshBasicMaterial({ color: 0x242f1c, side: THREE.BackSide });
+  studio.background = new THREE.Color('#6a6a6a');
+  const roomMaterial = new THREE.MeshBasicMaterial({ color: 0x242424, side: THREE.BackSide });
   const room = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), roomMaterial);
   studio.add(room);
   const panels = [
     [0, 8, 0, 9, 1, 6, 0xffffff, 2.5],
-    [-7, 1, 4, 1, 7, 3, 0xf0ffd2, 2],
+    [-7, 1, 4, 1, 7, 3, 0xffffff, 2],
     [7, 2, 2, 1, 8, 5, 0xffffff, 3],
-    [0, -5, -3, 8, 1, 5, 0x92b84d, 1],
+    [0, -5, -3, 8, 1, 5, 0xadff00, 1],
     [0, 0, 8, 1, 9, 1, 0xffffff, 2]
   ];
   panels.forEach(([x,y,z,w,h,d,color,intensity]) => {
@@ -43,7 +43,7 @@ export function createScene(container, reduced = false) {
   const rim = new THREE.DirectionalLight(0xadff00, 2);
   rim.position.set(4, -2, -4); scene.add(rim);
 
-  const limeMaterial = new THREE.MeshPhysicalMaterial({ color:0x80ff00, metalness:0.12, roughness:0.32, clearcoat:0.45, clearcoatRoughness:0.18, envMapIntensity:.5 });
+  const limeMaterial = new THREE.MeshPhysicalMaterial({ color:0xadff00, metalness:0.12, roughness:0.32, clearcoat:0.45, clearcoatRoughness:0.18, envMapIntensity:.5 });
   const chromeMaterial = new THREE.MeshPhysicalMaterial({ color:0xffffff, metalness:1, roughness:0.2, clearcoat:0.8, envMapIntensity:1.15 });
   const darkMaterial = new THREE.MeshPhysicalMaterial({ color:0xf4f5ed, metalness:0.15, roughness:0.5 });
   const sculpture = new THREE.Group();
@@ -87,7 +87,7 @@ export function createScene(container, reduced = false) {
   world.add(satelliteGroup);
 
   const portal = new THREE.Group();
-  const ringMaterial = new THREE.MeshBasicMaterial({ color:0xc2ff43, transparent:true, opacity:0, wireframe:true });
+  const ringMaterial = new THREE.MeshBasicMaterial({ color:0xadff00, transparent:true, opacity:0, wireframe:true });
   for(let i=0;i<9;i++) {
     const ring = new THREE.Mesh(new THREE.TorusGeometry(2.35+i*.13, .009, 3, mobile?60:100), ringMaterial);
     ring.position.z = -i*1.5; ring.rotation.z=i*.15; portal.add(ring);
