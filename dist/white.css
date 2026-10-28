@@ -96,6 +96,17 @@ body { font-weight: 450; }
 .webgl-unavailable .hero { background: #fff; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: var(--accent-ink); }
 
+.contact-pill.contact-pill--filled,
+.contact-pill:hover, .contact-pill.contact-pill--filled:hover,
+.float-cta, .round-link,
+.gallery-footer .gallery-all, .gallery-footer .gallery-all:hover,
+.scroll-cue:hover .scroll-circle,
+.solutions-controls button:hover:not(:disabled),
+.gallery-controls button:hover:not(:disabled),
+.dialog-close:hover, .project-image:hover .project-open {
+  border: 2px solid #000;
+}
+
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
   .hero-line.outline, .manifesto .manifesto-line.outline,
