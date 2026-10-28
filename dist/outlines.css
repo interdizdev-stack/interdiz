@@ -1,5 +1,5 @@
 /* Shared two-pixel outlines for both themes and all screen sizes. */
-:root { --transparent-button-outline-width: 2.5px; }
+:root { --transparent-button-outline-width: var(--outline-width); }
 
 /* Include borderless buttons and link-based buttons in every interaction state. */
 :is(button, [role="button"], summary, .contact-pill, .float-cta, .round-link,
