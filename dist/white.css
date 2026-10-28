@@ -10,6 +10,8 @@
   --lime: #adff00;
   --lime-dim: var(--lime);
   --accent-ink: var(--lime);
+  --lime-outline-width: 1.5px;
+  --lime-outline-color: #000;
   --line: rgba(16, 21, 13, .21);
   --line-strong: rgba(16, 21, 13, .4);
   --line-lime: rgba(173, 255, 0, .65);
@@ -104,7 +106,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 .solutions-controls button:hover:not(:disabled),
 .gallery-controls button:hover:not(:disabled),
 .dialog-close:hover, .project-image:hover .project-open {
-  border: 2px solid #000;
+  border: var(--lime-outline-width) solid var(--lime-outline-color);
 }
 
 /* Outline the lime glyphs without replacing their bright fill. */
@@ -117,28 +119,33 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 .footer-clock, .dialog-kicker, .dialog-link, .motion-icon, .nav-num,
 .float-status, .float-links a:hover, .header nav a:hover, .contact-val:hover,
 .back-to-top:hover, .approach-testimonial figcaption a:hover {
-  -webkit-text-stroke: 1px #000;
+  -webkit-text-stroke: var(--lime-outline-width) var(--lime-outline-color);
   paint-order: stroke fill;
-}
-.wordmark span, .float-logo span, .title-dot,
-.hero-chapter em, .hero-end span, .contact-glow {
-  -webkit-text-stroke-width: 1.6px;
 }
 .solutions-count > span:last-child { -webkit-text-stroke-width: 0; }
 .solution-type {
-  filter: drop-shadow(.6px 0 0 #000) drop-shadow(-.6px 0 0 #000)
-    drop-shadow(0 .6px 0 #000) drop-shadow(0 -.6px 0 #000);
+  filter: drop-shadow(var(--lime-outline-width) 0 0 var(--lime-outline-color))
+    drop-shadow(calc(-1 * var(--lime-outline-width)) 0 0 var(--lime-outline-color))
+    drop-shadow(0 var(--lime-outline-width) 0 var(--lime-outline-color))
+    drop-shadow(0 calc(-1 * var(--lime-outline-width)) 0 var(--lime-outline-color));
 }
 .solution-card.is-active .solution-type, .solution-card:hover .solution-type {
-  -webkit-text-stroke: 1.6px #000;
+  -webkit-text-stroke: var(--lime-outline-width) var(--lime-outline-color);
   paint-order: stroke fill;
   filter: none;
 }
-.status-pulse, .approach-mark, .swiss-cursor-dot { border: 1.3px solid #000; }
+.status-pulse, .approach-mark, .swiss-cursor-dot {
+  border: var(--lime-outline-width) solid var(--lime-outline-color);
+}
 .studio-badge, .tags > span:hover, .marquee,
-.swiss-cursor-ring.cursor-card { border-color: #000; }
+.copy-toast, .swiss-cursor-ring.cursor-card {
+  border-color: var(--lime-outline-color);
+  border-width: var(--lime-outline-width);
+}
 .solutions-progress > span, .gallery-progress > span,
-.approach-card::after { box-shadow: 0 0 0 .8px #000; }
+.scroll-progress > span, .approach-card::after {
+  box-shadow: 0 0 0 var(--lime-outline-width) var(--lime-outline-color);
+}
 
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
