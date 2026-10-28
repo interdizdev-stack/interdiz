@@ -10,12 +10,23 @@
   <link rel="stylesheet" href="./style.css">
   <link id="white-theme" rel="stylesheet" href="./white.css">
   <link rel="stylesheet" href="./theme.css">
+  <link rel="stylesheet" href="./outlines.css">
   <script src="./theme.js"></script>
   <script defer src="./vendor/gsap.min.js"></script>
   <script defer src="./vendor/ScrollTrigger.min.js"></script>
   <script type="module" src="./app.js"></script>
 </head>
 <body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none">
+    <defs>
+      <filter id="lime-contour-outline" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
+        <feFlood flood-color="#000" result="ink" />
+        <feComposite in="ink" in2="expanded" operator="in" result="outline" />
+        <feMerge><feMergeNode in="outline" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+  </svg>
   <!-- Analog Film Grain Overlay -->
   <div class="grain-overlay" aria-hidden="true"></div>
 

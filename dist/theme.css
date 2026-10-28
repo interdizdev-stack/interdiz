@@ -25,7 +25,7 @@ html[data-theme="dark"] { color-scheme: dark; }
   flex-shrink: 0;
   width: 36px;
   height: 36px;
-  border: var(--lime-outline-width, 1.5px) solid currentColor;
+  border: var(--outline-width) solid currentColor;
   border-radius: 50%;
   color: var(--fg);
   background: var(--bg);
@@ -37,7 +37,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 .theme-switch-face {
   position: absolute;
   inset: 4px;
-  border: var(--lime-outline-width, 1.5px) solid #000;
+  border: var(--outline-width) solid #000;
   border-radius: 50%;
   background: linear-gradient(135deg, #101010 50%, #fff 50%);
 }
@@ -45,7 +45,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
   content: '';
   position: absolute;
   inset: 7px;
-  border: var(--lime-outline-width, 1.5px) solid #000;
+  border: var(--outline-width) solid #000;
   border-radius: 50%;
   background: var(--lime);
 }
@@ -63,7 +63,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
   left: calc(50% - 3.5px);
   width: 7px;
   height: 7px;
-  border: var(--lime-outline-width, 1.5px) solid #000;
+  border: var(--outline-width) solid #000;
   border-radius: 50%;
   background: var(--lime);
 }

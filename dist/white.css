@@ -10,8 +10,6 @@
   --lime: #adff00;
   --lime-dim: var(--lime);
   --accent-ink: var(--lime);
-  --lime-outline-width: 1.5px;
-  --lime-outline-color: #000;
   --line: rgba(16, 21, 13, .21);
   --line-strong: rgba(16, 21, 13, .4);
   --line-lime: rgba(173, 255, 0, .65);
@@ -20,8 +18,8 @@
 body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
-  background-image: linear-gradient(90deg, transparent calc(100% - 2px), rgba(16, 21, 13, .13) 0);
-  border-width: 2px;
+  background-image: linear-gradient(90deg, transparent calc(100% - var(--outline-width)), rgba(16, 21, 13, .13) 0);
+  border-width: var(--outline-width);
 }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
@@ -32,19 +30,19 @@ body { font-weight: 450; }
 .solution-card-meta, .solutions-hint, .tags > span { font-weight: 500; }
 .contact-pill { font-weight: 600; }
 .section-kicker, .gallery-footer, .footer-bottom, .service,
-.approach-card, .approach, .contact, .manifesto, .marquee { border-width: 2px; }
+.approach-card, .approach, .contact, .manifesto, .marquee { border-width: var(--outline-width); }
 .solution-card, .project-image, .contact-card, .contact-pill,
 .floating-nav, .project-dialog, .dialog-close, .scroll-circle,
-.solutions-controls button, .gallery-controls button, .motion-toggle { border-width: 2px; }
+.solutions-controls button, .gallery-controls button, .motion-toggle { border-width: var(--outline-width); }
 .scene-stages { color: var(--muted); }
-.scene-stages i { height: 2px; background: var(--line-strong); }
+.scene-stages i { height: var(--outline-width); background: var(--line-strong); }
 .wordmark span, .float-logo span { color: var(--lime); }
 .hero-line.outline, .manifesto .manifesto-line.outline,
 .expertise-line.outline, .approach-line.outline {
   color: transparent;
-  -webkit-text-stroke: 1.8px var(--fg);
+  -webkit-text-stroke: var(--outline-width) var(--fg);
 }
-.solution-type { color: transparent; -webkit-text-stroke: 1.6px var(--lime); }
+.solution-type { color: transparent; -webkit-text-stroke: var(--outline-width) var(--lime); }
 .solution-card.is-active .solution-type, .solution-card:hover .solution-type {
   color: var(--accent-ink); -webkit-text-stroke-color: var(--accent-ink);
 }
@@ -59,7 +57,7 @@ body { font-weight: 450; }
 .back-to-top:hover, .approach-testimonial figcaption a:hover { color: var(--accent-ink); }
 .floating-nav {
   background: rgba(255, 255, 255, .88);
-  box-shadow: 0 12px 35px rgba(32, 37, 30, .1), 0 0 0 1px rgba(32, 37, 30, .04);
+  box-shadow: 0 12px 35px rgba(32, 37, 30, .1);
 }
 .contact-pill { background: rgba(255, 255, 255, .55); }
 .contact-pill.contact-pill--filled:hover, .gallery-footer .gallery-all:hover {
@@ -98,59 +96,10 @@ body { font-weight: 450; }
 .webgl-unavailable .hero { background: #fff; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: var(--accent-ink); }
 
-.contact-pill.contact-pill--filled,
-.contact-pill:hover, .contact-pill.contact-pill--filled:hover,
-.float-cta, .round-link,
-.gallery-footer .gallery-all, .gallery-footer .gallery-all:hover,
-.scroll-cue:hover .scroll-circle,
-.solutions-controls button:hover:not(:disabled),
-.gallery-controls button:hover:not(:disabled),
-.dialog-close:hover, .project-image:hover .project-open {
-  border: var(--lime-outline-width) solid var(--lime-outline-color);
-}
-
-/* Outline the lime glyphs without replacing their bright fill. */
-.wordmark span, .float-logo span, .title-dot,
-.lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
-.scene-stages > span.active, .solution-card-meta, .solutions-hint,
-.solutions-count, .studio-badge, .service-index, .service-plus,
-.service[open] h3, .tags > span:hover, .approach-index, .approach-step,
-.testimonial-emphasis, .contact-glow, .copy-tag, .online-tag, .location-tag,
-.footer-clock, .dialog-kicker, .dialog-link, .motion-icon, .nav-num,
-.float-status, .float-links a:hover, .header nav a:hover, .contact-val:hover,
-.back-to-top:hover, .approach-testimonial figcaption a:hover {
-  -webkit-text-stroke: var(--lime-outline-width) var(--lime-outline-color);
-  paint-order: stroke fill;
-}
-.solutions-count > span:last-child { -webkit-text-stroke-width: 0; }
-.solution-type {
-  filter: drop-shadow(var(--lime-outline-width) 0 0 var(--lime-outline-color))
-    drop-shadow(calc(-1 * var(--lime-outline-width)) 0 0 var(--lime-outline-color))
-    drop-shadow(0 var(--lime-outline-width) 0 var(--lime-outline-color))
-    drop-shadow(0 calc(-1 * var(--lime-outline-width)) 0 var(--lime-outline-color));
-}
-.solution-card.is-active .solution-type, .solution-card:hover .solution-type {
-  -webkit-text-stroke: var(--lime-outline-width) var(--lime-outline-color);
-  paint-order: stroke fill;
-  filter: none;
-}
-.status-pulse, .approach-mark, .swiss-cursor-dot {
-  border: var(--lime-outline-width) solid var(--lime-outline-color);
-}
-.studio-badge, .tags > span:hover, .marquee,
-.copy-toast, .swiss-cursor-ring.cursor-card {
-  border-color: var(--lime-outline-color);
-  border-width: var(--lime-outline-width);
-}
-.solutions-progress > span, .gallery-progress > span,
-.scroll-progress > span, .approach-card::after {
-  box-shadow: 0 0 0 var(--lime-outline-width) var(--lime-outline-color);
-}
-
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
   .hero-line.outline, .manifesto .manifesto-line.outline,
-  .expertise-line.outline, .approach-line.outline { -webkit-text-stroke-width: 1.5px; }
+  .expertise-line.outline, .approach-line.outline { -webkit-text-stroke-width: var(--outline-width); }
   .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }
   .hero-topline { left: var(--pad); right: var(--pad); gap: 22px; font-size: 10px; line-height: 1.5; }
   .hero-topline > span { max-width: 50%; }
