@@ -18,8 +18,18 @@
 body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
-  background-image: linear-gradient(90deg, transparent calc(100% - 1px), rgba(16, 21, 13, .13) 0);
-  border-width: 1px;
+  background-image: linear-gradient(90deg, transparent calc(100% - .5px), rgba(16, 21, 13, .13) 0);
+  border: 0;
+}
+.hero-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, var(--line) .5px, transparent .5px),
+    linear-gradient(to right, var(--line) .5px, transparent .5px),
+    linear-gradient(to left, var(--line) .5px, transparent .5px);
 }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
