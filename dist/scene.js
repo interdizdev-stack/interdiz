@@ -16,8 +16,8 @@ export function createScene(container, reduced = false) {
   camera.position.set(0, 0, 12);
   const pmrem = new THREE.PMREMGenerator(renderer);
   const studio = new THREE.Scene();
-  studio.background = new THREE.Color('#e4e8dc');
-  const roomMaterial = new THREE.MeshBasicMaterial({ color: 0xdde2d5, side: THREE.BackSide });
+  studio.background = new THREE.Color('#67745b');
+  const roomMaterial = new THREE.MeshBasicMaterial({ color: 0x242f1c, side: THREE.BackSide });
   const room = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), roomMaterial);
   studio.add(room);
   const panels = [
@@ -38,13 +38,13 @@ export function createScene(container, reduced = false) {
   studio.traverse(o => { o.geometry?.dispose(); o.material?.dispose(); });
   pmrem.dispose();
   scene.add(new THREE.AmbientLight(0xffffff, .55));
-  const key = new THREE.DirectionalLight(0xf5ffe3, 2.2);
+  const key = new THREE.DirectionalLight(0xffffff, 2);
   key.position.set(-3, 7, 6); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xc2ff43, 2);
+  const rim = new THREE.DirectionalLight(0xadff00, 2);
   rim.position.set(4, -2, -4); scene.add(rim);
 
-  const limeMaterial = new THREE.MeshPhysicalMaterial({ color:0x9beb12, metalness:0.24, roughness:0.27, clearcoat:1, clearcoatRoughness:0.12, envMapIntensity:.85 });
-  const chromeMaterial = new THREE.MeshPhysicalMaterial({ color:0xd9e2cf, metalness:1, roughness:0.16, clearcoat:0.8, envMapIntensity:1.4 });
+  const limeMaterial = new THREE.MeshPhysicalMaterial({ color:0x80ff00, metalness:0.12, roughness:0.32, clearcoat:0.45, clearcoatRoughness:0.18, envMapIntensity:.5 });
+  const chromeMaterial = new THREE.MeshPhysicalMaterial({ color:0xffffff, metalness:1, roughness:0.2, clearcoat:0.8, envMapIntensity:1.15 });
   const darkMaterial = new THREE.MeshPhysicalMaterial({ color:0xf4f5ed, metalness:0.15, roughness:0.5 });
   const sculpture = new THREE.Group();
   const world = new THREE.Group();
