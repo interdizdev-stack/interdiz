@@ -15,23 +15,34 @@
   --line-lime: rgba(75, 156, 0, .65);
 }
 .grain-overlay { mix-blend-mode: multiply; opacity: .026; }
+body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
-  background-image: linear-gradient(90deg, transparent calc(100% - 1px), rgba(16, 21, 13, .1) 0);
+  background-image: linear-gradient(90deg, transparent calc(100% - 2px), rgba(16, 21, 13, .13) 0);
+  border-width: 2px;
 }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
 .expertise-caption, .approach-description, .solution-card p, .service-content p,
-.dialog-description, .approach-testimonial blockquote p { color: var(--fg-muted); }
+.dialog-description, .approach-testimonial blockquote p { color: var(--fg-muted); font-weight: 500; }
+.section-kicker, .scene-stages, .project-info p, .project-info > span,
+.contact-desc, .footer-bottom, .motion-toggle, .header nav, .float-links,
+.solution-card-meta, .solutions-hint, .tags > span { font-weight: 500; }
+.contact-pill { font-weight: 600; }
+.section-kicker, .gallery-footer, .footer-bottom, .service,
+.approach-card, .approach, .contact, .manifesto, .marquee { border-width: 2px; }
+.solution-card, .project-image, .contact-card, .contact-pill,
+.floating-nav, .project-dialog, .dialog-close, .scroll-circle,
+.solutions-controls button, .gallery-controls button, .motion-toggle { border-width: 2px; }
 .scene-stages { color: var(--muted); }
-.scene-stages i { background: var(--line-strong); }
+.scene-stages i { height: 2px; background: var(--line-strong); }
 .wordmark span, .float-logo span { color: #52ad00; }
 .hero-line.outline, .manifesto .manifesto-line.outline,
 .expertise-line.outline, .approach-line.outline {
   color: transparent;
-  -webkit-text-stroke: 1px var(--fg);
+  -webkit-text-stroke: 1.8px var(--fg);
 }
-.solution-type { color: transparent; -webkit-text-stroke: 1px #4a5742; }
+.solution-type { color: transparent; -webkit-text-stroke: 1.6px #4a5742; }
 .solution-card.is-active .solution-type, .solution-card:hover .solution-type {
   color: var(--accent-ink); -webkit-text-stroke-color: var(--accent-ink);
 }
@@ -87,6 +98,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
+  .hero-line.outline, .manifesto .manifesto-line.outline,
+  .expertise-line.outline, .approach-line.outline { -webkit-text-stroke-width: 1.5px; }
   .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }
   .hero-topline { left: var(--pad); right: var(--pad); gap: 22px; font-size: 10px; line-height: 1.5; }
   .hero-topline > span { max-width: 50%; }
