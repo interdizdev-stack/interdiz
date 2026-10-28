@@ -40,7 +40,7 @@ body { font-weight: 450; }
 .hero-line.outline, .manifesto .manifesto-line.outline,
 .expertise-line.outline, .approach-line.outline {
   color: transparent;
-  -webkit-text-stroke: var(--outline-width) var(--fg);
+  -webkit-text-stroke: var(--outline-width) #000;
 }
 .solution-type { color: transparent; -webkit-text-stroke: var(--outline-width) var(--lime); }
 .solution-card.is-active .solution-type, .solution-card:hover .solution-type {
