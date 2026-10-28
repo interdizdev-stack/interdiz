@@ -107,6 +107,39 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
   border: 2px solid #000;
 }
 
+/* Outline the lime glyphs without replacing their bright fill. */
+.wordmark span, .float-logo span, .title-dot,
+.lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
+.scene-stages > span.active, .solution-card-meta, .solutions-hint,
+.solutions-count, .studio-badge, .service-index, .service-plus,
+.service[open] h3, .tags > span:hover, .approach-index, .approach-step,
+.testimonial-emphasis, .contact-glow, .copy-tag, .online-tag, .location-tag,
+.footer-clock, .dialog-kicker, .dialog-link, .motion-icon, .nav-num,
+.float-status, .float-links a:hover, .header nav a:hover, .contact-val:hover,
+.back-to-top:hover, .approach-testimonial figcaption a:hover {
+  -webkit-text-stroke: .7px #000;
+  paint-order: stroke fill;
+}
+.wordmark span, .float-logo span, .title-dot,
+.hero-chapter em, .hero-end span, .contact-glow {
+  -webkit-text-stroke-width: 1.2px;
+}
+.solutions-count > span:last-child { -webkit-text-stroke-width: 0; }
+.solution-type {
+  filter: drop-shadow(.45px 0 0 #000) drop-shadow(-.45px 0 0 #000)
+    drop-shadow(0 .45px 0 #000) drop-shadow(0 -.45px 0 #000);
+}
+.solution-card.is-active .solution-type, .solution-card:hover .solution-type {
+  -webkit-text-stroke: 1.2px #000;
+  paint-order: stroke fill;
+  filter: none;
+}
+.status-pulse, .approach-mark, .swiss-cursor-dot { border: 1px solid #000; }
+.studio-badge, .tags > span:hover, .marquee,
+.swiss-cursor-ring.cursor-card { border-color: #000; }
+.solutions-progress > span, .gallery-progress > span,
+.approach-card::after { box-shadow: 0 0 0 .6px #000; }
+
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
   .hero-line.outline, .manifesto .manifesto-line.outline,
