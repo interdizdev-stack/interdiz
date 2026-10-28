@@ -732,6 +732,10 @@ h1, h2, h3, h4, h5, h6,
   font-style: normal;
   color: var(--lime);
 }
+/* Clear only the к–т pair, accounting for inherited tracking and the stroke. */
+.hero-chapter .product-letter-clearance {
+  padding-inline-start: calc(0.065em + 1.5px);
+}
 
 .hero-end {
   position: absolute;
