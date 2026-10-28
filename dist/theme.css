@@ -7,19 +7,24 @@ html[data-theme="dark"] { color-scheme: dark; }
   z-index: 80;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 .display-controls .motion-toggle {
   position: static;
-  min-height: 44px;
+  min-height: 36px;
+  height: 36px;
+  padding: 6px 10px;
+  gap: 6px;
+  font-size: 12px;
 }
+.display-controls .motion-icon { font-size: 11px; }
 .theme-switch {
   --theme-orbit-angle: 45deg;
   position: relative;
   display: block;
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border: var(--lime-outline-width, 1.5px) solid currentColor;
   border-radius: 50%;
   color: var(--fg);
@@ -31,7 +36,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 .theme-switch:hover { transform: translateY(-2px) scale(1.04); }
 .theme-switch-face {
   position: absolute;
-  inset: 6px;
+  inset: 4px;
   border: var(--lime-outline-width, 1.5px) solid #000;
   border-radius: 50%;
   background: linear-gradient(135deg, #101010 50%, #fff 50%);
@@ -39,7 +44,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 .theme-switch-face::after {
   content: '';
   position: absolute;
-  inset: 10px;
+  inset: 7px;
   border: var(--lime-outline-width, 1.5px) solid #000;
   border-radius: 50%;
   background: var(--lime);
@@ -54,10 +59,10 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 }
 .theme-switch-orbit > span {
   position: absolute;
-  top: -4px;
-  left: calc(50% - 4.5px);
-  width: 9px;
-  height: 9px;
+  top: -3px;
+  left: calc(50% - 3.5px);
+  width: 7px;
+  height: 7px;
   border: var(--lime-outline-width, 1.5px) solid #000;
   border-radius: 50%;
   background: var(--lime);
@@ -68,7 +73,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 .reduced-motion .theme-switch:hover .theme-switch-orbit { transform: rotate(var(--theme-orbit-angle)); }
 @media (max-width: 600px) {
   .display-controls { right: 12px; bottom: 12px; }
-  .display-controls .motion-toggle { width: 44px; padding: 0; justify-content: center; }
+  .display-controls .motion-toggle { width: 36px; padding: 0; justify-content: center; }
   html[data-theme="dark"] .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }
   html[data-theme="dark"] .hero-topline { left: var(--pad); right: var(--pad); gap: 22px; font-size: 10px; line-height: 1.5; }
   html[data-theme="dark"] .hero-topline > span { max-width: 50%; }
