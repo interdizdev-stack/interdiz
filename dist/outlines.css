@@ -1,5 +1,21 @@
 /* Shared two-pixel outlines for both themes and all screen sizes. */
 
+/* Include borderless buttons and link-based buttons in every interaction state. */
+:is(button, [role="button"], summary, .contact-pill, .float-cta, .round-link,
+  .gallery-all, .project-open, .theme-switch, .scroll-circle) {
+  border-width: var(--outline-width) !important;
+  border-style: solid !important;
+}
+.copy-email-btn {
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.service summary {
+  margin-top: 8px;
+  padding: 16px 12px;
+  border-radius: 6px;
+}
+
 .contact-pill.contact-pill--filled,
 .contact-pill:hover, .contact-pill.contact-pill--filled:hover,
 .float-cta, .round-link,
