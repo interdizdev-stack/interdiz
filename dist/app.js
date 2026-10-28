@@ -560,7 +560,7 @@ function setupCopyClipboard() {
 // Import failure or lack of WebGL never hides the page or its links.
 async function init() {
   try {
-    const { createScene } = await import('./scene.js');
+    const { createScene } = await import(document.documentElement.dataset.theme === 'dark' ? './scene-dark.js' : './scene.js');
     scene = createScene($('#webgl'), reduced);
     document.documentElement.classList.add('webgl-ready');
   } catch (error) {

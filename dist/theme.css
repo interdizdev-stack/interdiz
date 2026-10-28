@@ -1,0 +1,57 @@
+/* A shared switch remains visible in both versions. */
+html[data-theme="dark"] { color-scheme: dark; }
+.header { gap: clamp(14px, 2.2vw, 32px); }
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 9px;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 30px;
+  color: var(--fg);
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform .2s;
+}
+.theme-switch:hover { transform: translateY(-2px); }
+.theme-switch-mark {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--fg) 50%, var(--bg) 50%);
+}
+@media (max-width: 1100px) {
+  .header-caption { display: none; }
+}
+@media (max-width: 900px) {
+  .header nav { display: none; }
+  .header .theme-switch { margin-left: auto; }
+}
+@media (max-width: 600px) {
+  .header > .contact-pill { display: none; }
+  html[data-theme="dark"] .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }
+  html[data-theme="dark"] .hero-topline { left: var(--pad); right: var(--pad); gap: 22px; font-size: 10px; line-height: 1.5; }
+  html[data-theme="dark"] .hero-topline > span { max-width: 50%; }
+  html[data-theme="dark"] .hero-topline > span:last-child { text-align: right; }
+  html[data-theme="dark"] .hero-intro { top: 180px; left: var(--pad); }
+  html[data-theme="dark"] .hero h1,
+  html[data-theme="dark"] .manifesto h2,
+  html[data-theme="dark"] .projects h2,
+  html[data-theme="dark"] .expertise h2,
+  html[data-theme="dark"] .approach h2 { font-size: 8.4vw; line-height: 1.08; }
+  html[data-theme="dark"] .hero-description { margin-top: 18px; font-size: 14px; }
+  html[data-theme="dark"] .hero-actions { margin-top: 24px; }
+  html[data-theme="dark"] .webgl { inset: 430px 0 90px; }
+  html[data-theme="dark"] .hero-bottom { bottom: 78px; }
+  html[data-theme="dark"] .hero-bottom p { font-size: 11px; }
+  html[data-theme="dark"] .scroll-cue { font-size: 10px; }
+  html[data-theme="dark"] .scene-stages { font-size: 9px; gap: 7px; }
+  html[data-theme="dark"] .side-note { font-size: 9px; }
+}
