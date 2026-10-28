@@ -47,8 +47,9 @@
   paint-order: stroke fill;
 }
 .solutions-count > span:last-child { -webkit-text-stroke-width: 0; }
-/* Keep the full two-pixel black stroke visible around “IT-продукты”. */
+/* Keep the black 1.5px stroke visible around “IT-продукты”. */
 .hero-chapter em {
+  -webkit-text-stroke-width: 1.5px;
   paint-order: fill stroke;
 }
 .solution-type {
