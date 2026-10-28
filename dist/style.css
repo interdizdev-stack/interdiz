@@ -475,6 +475,7 @@ h1, h2, h3, h4, h5, h6,
   background: radial-gradient(ellipse at 59% 39%, #1e2616 0%, #0c0e0c 60%);
 }
 
+.hero-grid-lines { display: none; }
 .hero-grid {
   position: absolute;
   inset: 96px var(--pad) 0;

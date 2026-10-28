@@ -19,19 +19,27 @@ body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
   --hero-grid-line-width: .5px;
-  background-image: linear-gradient(90deg, transparent calc(100% - var(--hero-grid-line-width)), rgba(16, 21, 13, .13) 0);
-  border: 0;
+  background-image: none;
+  /* Keep the original border box used by the initial grid. */
+  border: var(--outline-width) solid transparent;
+  border-bottom: 0;
 }
-.hero-grid::after {
-  content: '';
+.hero-grid-lines {
+  display: block;
   position: absolute;
-  inset: 0;
+  left: calc(-1 * var(--outline-width));
+  top: calc(-1 * var(--outline-width));
+  width: calc(100% + 2 * var(--outline-width));
+  height: calc(100% + var(--outline-width));
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, var(--line) var(--hero-grid-line-width), transparent var(--hero-grid-line-width)),
-    linear-gradient(to right, var(--line) var(--hero-grid-line-width), transparent var(--hero-grid-line-width)),
-    linear-gradient(to left, var(--line) var(--hero-grid-line-width), transparent var(--hero-grid-line-width));
+  overflow: visible;
+  fill: none;
+  stroke-width: var(--hero-grid-line-width);
+  shape-rendering: geometricPrecision;
 }
+.hero-grid-lines line { vector-effect: non-scaling-stroke; }
+.hero-grid-inner-lines { stroke: rgba(16, 21, 13, .13); }
+.hero-grid-frame-lines { stroke: var(--line); }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
 .expertise-caption, .approach-description, .solution-card p, .service-content p,
@@ -109,6 +117,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 
 /* Keep the same hierarchy on a narrow screen without the sculpture covering copy. */
 @media (max-width: 600px) {
+  .hero-grid-quarter { display: none; }
   .hero-line.outline, .manifesto .manifesto-line.outline,
   .expertise-line.outline, .approach-line.outline { -webkit-text-stroke-width: var(--outline-width); }
   .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }

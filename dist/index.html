@@ -65,7 +65,21 @@
 
   <main id="main" tabindex="-1">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true">
+        <svg class="hero-grid-lines" aria-hidden="true" focusable="false">
+          <g class="hero-grid-inner-lines">
+            <line class="hero-grid-quarter" x1="25%" x2="25%" y1="2" y2="100%" />
+            <line x1="50%" x2="50%" y1="2" y2="100%" transform="translate(-1 0)" />
+            <line class="hero-grid-quarter" x1="75%" x2="75%" y1="2" y2="100%" transform="translate(-2 0)" />
+            <line x1="100%" x2="100%" y1="2" y2="100%" transform="translate(-3 0)" />
+          </g>
+          <g class="hero-grid-frame-lines">
+            <line x1="0" x2="100%" y1="1" y2="1" />
+            <line x1="1" x2="1" y1="1" y2="100%" />
+            <line x1="100%" x2="100%" y1="1" y2="100%" transform="translate(-1 0)" />
+          </g>
+        </svg>
+      </div>
       <div id="webgl" class="webgl" aria-hidden="true"></div>
       
       <!-- Precision Swiss coordinates & status -->
