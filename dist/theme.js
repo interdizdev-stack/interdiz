@@ -20,12 +20,16 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('.theme-switch');
-    const destination = new URL(location.href);
-    destination.searchParams.set('theme', dark ? 'light' : 'dark');
-    destination.hash = '';
-    toggle.href = destination.pathname + destination.search;
-    toggle.setAttribute('aria-label', dark ? 'Включить белую версию сайта' : 'Включить чёрную версию сайта');
-    toggle.querySelector('.theme-switch-label').textContent = dark ? 'Белая версия' : 'Чёрная версия';
+    document.querySelectorAll('[data-theme-option]').forEach(option => {
+      const selected = option.dataset.themeOption === theme;
+      const destination = new URL(location.href);
+      destination.searchParams.set('theme', option.dataset.themeOption);
+      destination.hash = '';
+      option.href = destination.pathname + destination.search;
+      option.classList.toggle('is-active', selected);
+      if (selected) option.setAttribute('aria-current', 'true');
+      else option.removeAttribute('aria-current');
+      option.title = option.dataset.themeOption === 'dark' ? 'Чёрная версия' : 'Белая версия';
+    });
   });
 })();

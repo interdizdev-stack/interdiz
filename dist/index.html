@@ -49,10 +49,6 @@
       <a href="#projects">Проекты <span>03</span></a>
       <a href="#expertise">Подход</a>
     </nav>
-    <a class="theme-switch" href="?theme=dark" aria-label="Включить чёрную версию сайта">
-      <span class="theme-switch-mark" aria-hidden="true"></span>
-      <span class="theme-switch-label">Чёрная версия</span>
-    </a>
     <a class="contact-pill" href="#contact">Обсудим проект <span>↗</span></a>
   </header>
 
@@ -602,10 +598,17 @@
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
   <!-- Reduced Motion Toggle -->
-  <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Уменьшить движение">
-    <span class="motion-icon">Ⅱ</span>
-    <span class="motion-label">Меньше движения</span>
-  </button>
+  <div class="display-controls" role="group" aria-label="Настройки отображения">
+    <div class="theme-switch" role="group" aria-label="Цветовая тема">
+      <span class="theme-switch-caption" aria-hidden="true">[ВИД]<span>↔</span></span>
+      <a class="theme-switch-option theme-switch-option--dark" data-theme-option="dark" href="?theme=dark" aria-label="Включить чёрную версию сайта">ЧЁРН</a>
+      <a class="theme-switch-option theme-switch-option--light is-active" data-theme-option="light" href="?theme=light" aria-label="Включить белую версию сайта" aria-current="true">БЕЛ</a>
+    </div>
+    <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Уменьшить движение">
+      <span class="motion-icon">Ⅱ</span>
+      <span class="motion-label">Меньше движения</span>
+    </button>
+  </div>
 
   <!-- Notification Toast -->
   <div class="copy-toast" id="copy-toast" aria-live="polite">✓ Скопировано в буфер обмена</div>
