@@ -1,10 +1,15 @@
 /* Shared two-pixel outlines for both themes and all screen sizes. */
+:root { --transparent-button-outline-width: 3px; }
 
 /* Include borderless buttons and link-based buttons in every interaction state. */
 :is(button, [role="button"], summary, .contact-pill, .float-cta, .round-link,
   .gallery-all, .project-open, .theme-switch, .scroll-circle) {
   border-width: var(--outline-width) !important;
   border-style: solid !important;
+}
+:is(.contact-pill:not(.contact-pill--filled), .solutions-controls button,
+  .gallery-controls button, .scroll-circle, .copy-email-btn, .service summary) {
+  border-width: var(--transparent-button-outline-width) !important;
 }
 .copy-email-btn {
   padding: 6px 8px;
