@@ -956,7 +956,8 @@ h1, h2, h3, h4, h5, h6,
   gap: 20px;
   font-size: 14px;
   white-space: nowrap;
-  background: var(--bg-surface-hover);
+  background: transparent;
+  backdrop-filter: none;
 }
 .solution-card .service-open:hover {
   background: var(--lime);
