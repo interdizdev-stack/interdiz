@@ -72,3 +72,12 @@
 .scroll-progress > span, .approach-card::after {
   box-shadow: 0 0 0 var(--outline-width) #000;
 }
+
+/* Dark edition: replace hollow lettering with solid brand green. */
+html[data-theme="dark"] :is(.hero-line.outline,
+  .manifesto .manifesto-line.outline, .expertise-line.outline,
+  .approach-line.outline, .solution-type) {
+  color: var(--lime);
+  -webkit-text-stroke: 0;
+  filter: none;
+}
