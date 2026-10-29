@@ -813,7 +813,7 @@ h1, h2, h3, h4, h5, h6,
   overflow: hidden;
   isolation: isolate;
   border-top: var(--outline-width) solid var(--line);
-  border-bottom: var(--outline-width) solid var(--line);
+  border-bottom: var(--outline-width) solid transparent;
 }
 
 .manifesto-inner {
