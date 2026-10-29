@@ -537,9 +537,7 @@ function setupAnimations() {
 
         // Use the section's layout coordinates: its inner content already has
         // a parallax transform, which must not shift these trigger positions.
-        const cardsTop = () => $('.solutions-stage').getBoundingClientRect().top
-          - $('.manifesto').getBoundingClientRect().top
-          - Number(gsap.getProperty('.manifesto-inner', 'y'));
+        const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
         gsap.fromTo('.solution-card', {
           '--solution-parallax-y': i => `${(mobile ? 70 : 140) + (i % 3) * (mobile ? 18 : 48)}px`
         }, {
@@ -550,6 +548,30 @@ function setupAnimations() {
             trigger: '.manifesto',
             start: () => `top+=${cardsTop()} bottom`,
             end: () => `top+=${cardsTop()} ${mobile ? '45%' : '50%'}`,
+            scrub: smoother ? true : 0.6,
+            invalidateOnRefresh: true
+          }
+        });
+
+        // Hold the outgoing section behind the next panel without adding a gap.
+        // Animate its contents, keeping the pinned element itself stable.
+        gsap.fromTo('.manifesto-inner', {
+          scale: 1,
+          opacity: 1,
+          transformOrigin: '50% 100%'
+        }, {
+          scale: mobile ? 0.9 : 0.86,
+          opacity: 0.28,
+          ease: 'none',
+          scrollTrigger: {
+            id: 'solutions-projects-cover',
+            trigger: '.manifesto',
+            start: 'bottom bottom',
+            endTrigger: '.projects',
+            end: 'top top',
+            pin: true,
+            pinSpacing: false,
+            anticipatePin: 1,
             scrub: smoother ? true : 0.6,
             invalidateOnRefresh: true
           }
@@ -574,7 +596,7 @@ function setupAnimations() {
 }
 
 $('.motion-toggle')?.addEventListener('click', () => {
-  const previousSection = [...$$('main>section'), $('.contact')].findLast(el => el.getBoundingClientRect().top < innerHeight * 0.5);
+  const previousSection = [...$$('main section[id]'), $('.contact')].findLast(el => el.getBoundingClientRect().top < innerHeight * 0.5);
   reduced = !reduced; userReduced = reduced;
   try { sessionStorage.setItem('interdiz-reduced', String(reduced)); } catch {}
   setupAnimations();

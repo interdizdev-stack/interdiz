@@ -12,6 +12,12 @@ html[data-theme="dark"].motion-enabled .manifesto {
   z-index: 6;
   box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
 }
+html[data-theme="dark"].motion-enabled .projects {
+  position: relative;
+  z-index: 7;
+  isolation: isolate;
+  box-shadow: 0 -32px 64px rgba(0, 0, 0, .32);
+}
 /* Reserve room inside the horizontal scroller without moving its controls. */
 html[data-theme="dark"].motion-enabled .solutions-stage {
   --solution-parallax-space: 260px;
