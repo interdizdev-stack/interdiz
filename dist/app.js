@@ -553,36 +553,57 @@ function setupAnimations() {
           }
         });
 
-        // Hold the outgoing section behind the next panel without adding a gap.
-        // Animate its contents, keeping the pinned element itself stable.
-        gsap.fromTo('.manifesto-inner', {
-          scale: 1,
-          opacity: 1,
-          transformOrigin: '50% 100%'
-        }, {
-          scale: mobile ? 0.9 : 0.86,
-          opacity: 0.28,
-          ease: 'none',
+        // Reveal the title first; each image then opens upward as it enters view.
+        gsap.timeline({
           scrollTrigger: {
-            id: 'solutions-projects-cover',
-            trigger: '.manifesto',
-            start: 'bottom bottom',
-            endTrigger: '.projects',
-            end: 'top top',
-            pin: true,
-            pinSpacing: false,
-            anticipatePin: 1,
+            id: 'projects-title-reveal',
+            trigger: '.projects-heading',
+            start: 'top 92%',
+            once: true
+          }
+        })
+          .from('.projects-heading h2', { yPercent: 110, duration: 0.85, ease: 'power3.out', clearProps: 'transform' })
+          .from('.projects-heading p', { y: 14, opacity: 0, duration: 0.65, ease: 'power2.out', clearProps: 'transform,opacity' }, 0.2);
+
+        const images = $$('.project-image');
+        const photos = images.map(image => image.querySelector('img'));
+        const stagger = i => (i % (mobile ? 1 : 2)) * 0.12;
+        const reveal = gsap.timeline({
+          scrollTrigger: {
+            id: 'projects-shutter-reveal',
+            trigger: '.gallery-window',
+            start: 'top 92%',
+            end: 'top 32%',
             scrub: smoother ? true : 0.6,
+            invalidateOnRefresh: true
+          }
+        });
+        reveal
+          .fromTo(images, { clipPath: 'inset(100% 0% 0% 0% round 8px)' }, {
+            clipPath: 'inset(0% 0% 0% 0% round 8px)', duration: 1,
+            stagger, ease: 'power2.inOut'
+          }, 0)
+          .fromTo(photos, { '--project-reveal-scale': 1.18 }, {
+            '--project-reveal-scale': 1, duration: 1.12, stagger, ease: 'power2.out'
+          }, 0)
+          .fromTo('.project-info', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger, ease: 'power2.out' }, 0.7);
+
+        // Independent scale/translate preserve the gallery's hover and drag effects.
+        gsap.fromTo('.project-image img', { '--project-parallax-y': '2%' }, {
+          '--project-parallax-y': '-2%', ease: 'none',
+          scrollTrigger: {
+            id: 'projects-image-parallax', trigger: '.gallery-window',
+            start: 'top bottom', end: 'bottom top', scrub: smoother ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
         gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
+        gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
+        gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
       }
 
-      gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
-      gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
       gsap.from('.service', { y: 35, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
       gsap.from('.expertise h2', { y: 70, opacity: 0.2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: 0.6 } });
       gsap.from('.approach-line', { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach', start: 'top 85%', once: true } });

@@ -12,11 +12,19 @@ html[data-theme="dark"].motion-enabled .manifesto {
   z-index: 6;
   box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
 }
-html[data-theme="dark"].motion-enabled .projects {
-  position: relative;
-  z-index: 7;
-  isolation: isolate;
-  box-shadow: 0 -32px 64px rgba(0, 0, 0, .32);
+html[data-theme="dark"].motion-enabled .projects-title-mask {
+  overflow: clip;
+}
+/* Hide delayed cards too; disabling motion restores the unmasked base styles. */
+html[data-theme="dark"].motion-enabled .project-image {
+  clip-path: inset(100% 0% 0% 0% round 8px);
+}
+html[data-theme="dark"].motion-enabled .project-image img {
+  scale: var(--project-reveal-scale, 1.18);
+  translate: 0 var(--project-parallax-y, 0%);
+}
+html[data-theme="dark"].motion-enabled .project-info {
+  opacity: 0;
 }
 /* Reserve room inside the horizontal scroller without moving its controls. */
 html[data-theme="dark"].motion-enabled .solutions-stage {
