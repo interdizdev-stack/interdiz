@@ -50,22 +50,22 @@ const projects = {
   "divo-dental": {"title": "Divo Dental", "description": "Divo Dental — разработка логотипа для современной стоматологии", "image": "./assets/divo-dental.webp", "link": "https://www.behance.net/gallery/249932083/The-Geometry-of-Trust-A-Logo-for-a-Modern-Dental-Brand"}
 };
 
-const dialog = $('.project-dialog');
+const dialog = $('.project-dialog:not(.service-dialog)');
 let dialogOpener;
 $$('[data-open-project]').forEach(button => button.addEventListener('click', () => {
   const project = projects[button.dataset.openProject];
   if (!project) return;
   dialogOpener = button;
   $('#dialog-title').textContent = project.title;
-  $('.dialog-description').textContent = project.description;
-  $('.dialog-image').src = project.image;
-  $('.dialog-image').alt = `Проект ${project.title}`;
-  $('.dialog-link').href = project.link;
+  $('.dialog-description', dialog).textContent = project.description;
+  $('.dialog-image', dialog).src = project.image;
+  $('.dialog-image', dialog).alt = `Проект ${project.title}`;
+  $('.dialog-link', dialog).href = project.link;
   dialog.showModal();
   document.body.classList.add('dialog-open');
 }));
 
-$('.dialog-close')?.addEventListener('click', () => dialog.close());
+$('.dialog-close', dialog)?.addEventListener('click', () => dialog.close());
 dialog?.addEventListener('click', e => {
   if (e.target === dialog) {
     const r = dialog.getBoundingClientRect();
