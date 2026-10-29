@@ -1,6 +1,20 @@
 // Content and links are usable without animation or WebGL.
 const $ = (selector, root=document) => root.querySelector(selector);
 const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
+
+// Keep the dark chapter caption on the same top rail as the opening caption.
+if (document.documentElement.dataset.theme === 'dark') {
+  const caption = $('.hero-chapter > .mono-meta');
+  if (caption) {
+    const spacer = caption.cloneNode(true);
+    spacer.style.visibility = 'hidden';
+    spacer.setAttribute('aria-hidden', 'true');
+    caption.replaceWith(spacer);
+    caption.classList.add('hero-topline', 'hero-chapter-topline');
+    caption.setAttribute('aria-hidden', 'true');
+    $('.hero').append(caption);
+  }
+}
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let userReduced = null;
 try { const saved=sessionStorage.getItem('interdiz-reduced'); if(saved!==null) userReduced=saved==='true'; } catch {}
@@ -383,11 +397,17 @@ function setupAnimations() {
       heroTrigger = heroTimeline.scrollTrigger;
       heroTimeline.to('.hero-line:first-child', { xPercent: -18, y: -110, opacity: 0, duration: 0.34 }, 0)
         .to('.hero-line.outline', { xPercent: 22, y: 70, opacity: 0, duration: 0.34 }, 0)
-        .to('.hero-bottom, .hero-description, .hero-actions, .hero-topline', { autoAlpha: 0, y: -30, duration: 0.22 }, 0)
+        .to('.hero-bottom, .hero-description, .hero-actions, .hero-topline:not(.hero-chapter-topline)', { autoAlpha: 0, y: -30, duration: 0.22 }, 0)
         .fromTo('.hero-chapter', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 0.2 }, 0.26)
         .to('.hero-chapter', { autoAlpha: 0, y: -60, duration: 0.16 }, 0.57)
         .fromTo('.hero-end', { autoAlpha: 0, scale: 0.85 }, { autoAlpha: 1, scale: 1, duration: 0.17 }, 0.74)
         .to('.hero-end', { scale: 1.1, duration: 0.09 }, 0.91);
+
+      const chapterCaption = $('.hero-chapter-topline');
+      if (chapterCaption) {
+        heroTimeline.fromTo(chapterCaption, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 0.26)
+          .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
+      }
 
       if (scene) {
         heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
