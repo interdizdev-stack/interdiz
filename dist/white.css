@@ -44,6 +44,7 @@ body { font-weight: 450; }
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
 .expertise-caption, .approach-description, .solution-card p, .service-content p,
 .dialog-description, .approach-testimonial blockquote p { color: var(--fg-muted); font-weight: 500; }
+.service-dialog-kicker { color: var(--fg-muted); }
 .section-kicker, .scene-stages, .project-info p, .project-info > span,
 .contact-desc, .footer-bottom, .motion-toggle, .header nav, .float-links,
 .solution-card-meta, .solutions-hint, .tags > span { font-weight: 500; }

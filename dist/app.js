@@ -77,6 +77,75 @@ dialog?.addEventListener('close', () => {
   dialogOpener?.focus({ preventScroll: true });
 });
 
+const serviceDetails = {
+  web: {
+    scope: ['Структура сайта и сценарии пользователей.', 'Дизайн интерфейса и адаптация для телефона и компьютера.', 'Разработка страниц и нужных функций, подключение форм и сервисов.', 'Проверка, запуск и передача проекта.'],
+    process: 'Разбираем задачу и определяем состав сайта. Согласуем структуру и дизайн, затем разрабатываем, тестируем и запускаем проект.',
+    result: 'Работающий сайт или веб-приложение с согласованными функциями, доступами и инструкциями по управлению.'
+  },
+  design: {
+    scope: ['Фирменный стиль и визуальная концепция.', 'Дизайн сайтов и интерфейсов.', 'Презентации и материалы для коммуникации с клиентами.', 'Подготовка макетов и исходных файлов.'],
+    process: 'Изучаем продукт, аудиторию и задачу. Предлагаем визуальное направление, согласуем концепцию и прорабатываем выбранные материалы.',
+    result: 'Согласованный комплект дизайн-материалов и исходников, готовых к разработке или использованию в коммуникациях.'
+  },
+  ai: {
+    scope: ['Сценарии общения и границы задач помощника.', 'Подготовка базы знаний из материалов компании.', 'Подключение бота к нужному каналу или рабочему сервису.', 'Проверка ответов и передача сложных обращений сотруднику.'],
+    process: 'Выбираем задачи, которые стоит поручить помощнику. Готовим материалы, собираем сценарии и проверяем ответы на реальных вопросах перед запуском.',
+    result: 'Настроенный бот или ассистент для согласованных сценариев: ответов по материалам компании, приёма обращений или поиска информации.'
+  },
+  crm: {
+    scope: ['Разбор текущего пути заявки и повторяющихся операций.', 'Связь сайта, CRM и рабочих сервисов.', 'Автоматическая передача данных, документов и уведомлений.', 'Проверка сценариев и инструкции для сотрудников.'],
+    process: 'Описываем процесс и точки, где теряются данные или время. Согласуем схему интеграций, настраиваем её и проверяем прохождение данных по всей цепочке.',
+    result: 'Связанные сервисы и согласованные автоматические сценарии, которые сокращают ручную передачу данных.'
+  },
+  seo: {
+    scope: ['Проверка структуры и технического состояния сайта.', 'Изучение поисковых запросов по вашим услугам.', 'Доработка страниц, текстов и внутренних связей.', 'Отслеживание изменений и план дальнейших улучшений.'],
+    process: 'Проводим аудит и определяем приоритеты. Готовим план доработок, внедряем согласованные изменения и оцениваем их влияние по данным аналитики.',
+    result: 'Сайт с улучшенной структурой, содержанием и технической основой для поиска, а также понятный план дальнейшего продвижения.'
+  },
+  ads: {
+    scope: ['Изучение аудитории, предложений и посадочных страниц.', 'Подбор запросов и подготовка объявлений.', 'Настройка кампаний в Яндекс.Директе и отслеживания обращений.', 'Анализ результатов и корректировка рекламы.'],
+    process: 'Определяем цели и согласуем бюджет. Настраиваем аналитику и кампании, запускаем рекламу и корректируем её по обращениям и другим согласованным показателям.',
+    result: 'Настроенные рекламные кампании и данные об их результатах для дальнейших решений по продвижению.'
+  }
+};
+
+const serviceDialog = $('#service-dialog');
+let serviceOpener;
+$$('[data-open-service]').forEach(button => button.addEventListener('click', () => {
+  const details = serviceDetails[button.dataset.openService];
+  if (!details || !serviceDialog) return;
+  const card = button.closest('.solution-card');
+  serviceOpener = button;
+  $('#service-dialog-title').textContent = $('h3', card).textContent;
+  $('#service-dialog-description').textContent = $('p', card).textContent;
+  $('.service-dialog-kicker').textContent = `[ ${card.dataset.number} // УСЛУГА INTERDIZ ]`;
+  $('.service-scope-list').replaceChildren(...details.scope.map(text => {
+    const item = document.createElement('li');
+    item.textContent = text;
+    return item;
+  }));
+  $('.service-process-description').textContent = details.process;
+  $('.service-result-description').textContent = details.result;
+  serviceDialog.showModal();
+  serviceDialog.scrollTop = 0;
+  document.body.classList.add('dialog-open');
+}));
+$('.service-dialog-close')?.addEventListener('click', () => serviceDialog.close());
+serviceDialog?.addEventListener('click', event => {
+  if (event.target !== serviceDialog) return;
+  const bounds = serviceDialog.getBoundingClientRect();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) serviceDialog.close();
+});
+serviceDialog?.addEventListener('close', () => {
+  document.body.classList.remove('dialog-open');
+  serviceOpener?.focus({ preventScroll: true });
+});
+$('.service-dialog-contact')?.addEventListener('click', () => {
+  serviceOpener = null;
+  serviceDialog.close();
+});
+
 // Keep native click/keyboard controls; reveal the current step while reading.
 function setupProcessAccordion() {
   const list = $('#expertise .service-list');
@@ -221,6 +290,7 @@ function setupSolutionsCarousel() {
 
   track.addEventListener('pointerdown', event => {
     if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    if (event.target.closest('button, a')) return;
     requestedIndex = null;
     drag = { id: event.pointerId, x: event.clientX, left: track.scrollLeft, moved: false };
     track.setPointerCapture(event.pointerId);

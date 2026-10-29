@@ -148,36 +148,42 @@
             <div class="solution-type" aria-hidden="true">web</div>
             <h3>Сайты и веб-приложения</h3>
             <p>Разрабатываем лендинги, интернет-магазины, корпоративные сайты и онлайн-сервисы. От структуры и дизайна до запуска.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="web" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: Сайты и веб-приложения">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
           <article class="solution-card" data-number="02">
             <div class="solution-card-meta mono-meta" aria-hidden="true"><span>[02]</span><span class="crosshair">+</span></div>
             <div class="solution-type" aria-hidden="true">design</div>
             <h3>Дизайн</h3>
             <p>Создаём фирменный стиль, интерфейсы и презентации. Помогаем понятно представить продукт и выделиться среди конкурентов.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="design" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: Дизайн">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
           <article class="solution-card" data-number="03">
             <div class="solution-card-meta mono-meta" aria-hidden="true"><span>[03]</span><span class="crosshair">+</span></div>
             <div class="solution-type" aria-hidden="true">ai</div>
             <h3>ИИ-боты и ассистенты</h3>
             <p>Создаём помощников, которые отвечают на вопросы по материалам компании, принимают обращения и помогают сотрудникам находить информацию.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="ai" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: ИИ-боты и ассистенты">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
           <article class="solution-card" data-number="04">
             <div class="solution-card-meta mono-meta" aria-hidden="true"><span>[04]</span><span class="crosshair">+</span></div>
             <div class="solution-type" aria-hidden="true">cr<span class="solution-type-gap">m</span></div>
             <h3>Автоматизация и CRM</h3>
             <p>Связываем сайт, CRM и рабочие сервисы. Автоматизируем передачу заявок, подготовку документов и уведомления.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="crm" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: Автоматизация и CRM">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
           <article class="solution-card" data-number="05">
             <div class="solution-card-meta mono-meta" aria-hidden="true"><span>[05]</span><span class="crosshair">+</span></div>
             <div class="solution-type" aria-hidden="true">seo</div>
             <h3>SEO-продвижение</h3>
             <p>Улучшаем структуру, тексты и техническое состояние сайта, чтобы клиенты находили ваши услуги в поиске.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="seo" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: SEO-продвижение">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
           <article class="solution-card" data-number="06">
             <div class="solution-card-meta mono-meta" aria-hidden="true"><span>[06]</span><span class="crosshair">+</span></div>
             <div class="solution-type" aria-hidden="true">ads</div>
             <h3>Яндекс.Директ</h3>
             <p>Настраиваем и ведём рекламу. Отслеживаем обращения и корректируем кампании на основе результатов.</p>
+            <button class="contact-pill service-open" type="button" data-open-service="ads" aria-haspopup="dialog" aria-controls="service-dialog" aria-label="Изучить услугу: Яндекс.Директ">Изучить услугу <span aria-hidden="true">↗</span></button>
           </article>
         </div>
         </div>
@@ -611,6 +617,30 @@
   </main>
   </div>
   </div>
+
+  <dialog class="project-dialog service-dialog" id="service-dialog" aria-labelledby="service-dialog-title" aria-describedby="service-dialog-description">
+    <button type="button" class="dialog-close service-dialog-close" aria-label="Закрыть описание услуги">✕</button>
+    <div class="dialog-inner">
+      <span class="service-dialog-kicker mono-meta"></span>
+      <h2 id="service-dialog-title"></h2>
+      <p class="dialog-description" id="service-dialog-description"></p>
+      <div class="service-detail-grid">
+        <section class="service-detail-scope" aria-labelledby="service-scope-title">
+          <h3 id="service-scope-title">Что входит</h3>
+          <ul class="service-scope-list"></ul>
+        </section>
+        <section aria-labelledby="service-process-title">
+          <h3 id="service-process-title">Как работаем</h3>
+          <p class="service-process-description"></p>
+        </section>
+        <section aria-labelledby="service-result-title">
+          <h3 id="service-result-title">Что вы получите</h3>
+          <p class="service-result-description"></p>
+        </section>
+      </div>
+      <a href="#contact" class="contact-pill contact-pill--filled service-dialog-contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
 
   <!-- Project Dialog Modal -->
   <dialog class="project-dialog" aria-labelledby="dialog-title">
