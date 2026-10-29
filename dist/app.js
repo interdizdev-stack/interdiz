@@ -412,13 +412,13 @@ function setupAnimations() {
       if (scene) {
         heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
           .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
-          .to(scene.state, { zoom: 1, rotation: 3.1, opacity: 0.1, duration: 0.25 }, 0.75);
+          .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
       }
       gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: 'opacity' });
       gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
 
       if (document.documentElement.dataset.theme === 'dark') {
-        // The outgoing scene lags behind the foreground section during the handoff.
+        // Keep the scene almost stationary while the foreground slides over it.
         const transition = gsap.timeline({
           defaults: { ease: 'none', duration: 1 },
           scrollTrigger: {
@@ -431,11 +431,11 @@ function setupAnimations() {
           }
         });
         transition
-          .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.38, scale: 1.08, immediateRender: false }, 0)
-          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.16, immediateRender: false }, 0)
-          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.28, immediateRender: false }, 0)
-          .fromTo('.manifesto > .section-kicker', { y: mobile ? 18 : 36 }, { y: 0 }, 0)
-          .fromTo('.manifesto-inner', { y: mobile ? 48 : 96 }, { y: 0 }, 0);
+          .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0)
+          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.42, immediateRender: false }, 0)
+          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
+          .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (mobile ? 0.07 : 0.1) }, { y: 0 }, 0)
+          .fromTo('.manifesto-inner', { y: () => innerHeight * (mobile ? 0.22 : 0.32) }, { y: 0 }, 0);
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
       }
