@@ -83,7 +83,8 @@ html[data-theme="dark"] :is(.hero-line.outline,
 }
 
 html[data-theme="dark"] .hero-chapter em,
-html[data-theme="dark"] .hero-end span {
+html[data-theme="dark"] .hero-end span,
+html[data-theme="dark"] .scene-stages > span {
   -webkit-text-stroke: 0;
 }
 
