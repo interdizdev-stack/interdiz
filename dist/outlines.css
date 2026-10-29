@@ -76,10 +76,21 @@
 /* Dark edition: replace hollow lettering with solid brand green. */
 html[data-theme="dark"] :is(.hero-line.outline,
   .manifesto .manifesto-line.outline, .expertise-line.outline,
-  .approach-line.outline, .solution-type, .title-dot) {
+  .approach-line.outline, .title-dot) {
   color: var(--lime);
   -webkit-text-stroke: 0;
   filter: none;
+}
+
+/* Solution labels light up with their card when selected or hovered. */
+html[data-theme="dark"] .solution-type {
+  color: transparent;
+  -webkit-text-stroke: var(--outline-width) rgba(242, 243, 237, 0.32);
+  filter: none;
+}
+html[data-theme="dark"] .solution-card:is(.is-active, :hover) .solution-type {
+  color: var(--lime);
+  -webkit-text-stroke-color: var(--lime);
 }
 
 html[data-theme="dark"] .hero-chapter em,
