@@ -417,7 +417,28 @@ function setupAnimations() {
       gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: 'opacity' });
       gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
 
-      gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
+      if (document.documentElement.dataset.theme === 'dark') {
+        // The outgoing scene lags behind the foreground section during the handoff.
+        const transition = gsap.timeline({
+          defaults: { ease: 'none', duration: 1 },
+          scrollTrigger: {
+            id: 'hero-solutions-parallax',
+            trigger: '.manifesto',
+            start: 'top bottom',
+            end: 'top top',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        });
+        transition
+          .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.38, scale: 1.08, immediateRender: false }, 0)
+          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.16, immediateRender: false }, 0)
+          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.28, immediateRender: false }, 0)
+          .fromTo('.manifesto > .section-kicker', { y: mobile ? 18 : 36 }, { y: 0 }, 0)
+          .fromTo('.manifesto-inner', { y: mobile ? 48 : 96 }, { y: 0 }, 0);
+      } else {
+        gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
+      }
       gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
 
       gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });

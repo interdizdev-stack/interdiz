@@ -8,6 +8,10 @@ html[data-theme="dark"] .header nav a span { font-size: 12px; }
   pointer-events: none;
 }
 .reduced-motion .hero-chapter-topline { display: none; }
+html[data-theme="dark"].motion-enabled .manifesto {
+  z-index: 6;
+  box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
+}
 .display-controls {
   position: fixed;
   right: 22px;
