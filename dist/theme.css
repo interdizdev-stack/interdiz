@@ -12,10 +12,6 @@ html[data-theme="dark"].motion-enabled .manifesto {
   z-index: 6;
   box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
 }
-/* Keep staggered cards hidden until their entrance; reduced motion stays static. */
-html[data-theme="dark"].motion-enabled .project-card {
-  opacity: 0;
-}
 /* Reserve room inside the horizontal scroller without moving its controls. */
 html[data-theme="dark"].motion-enabled .solutions-stage {
   --solution-parallax-space: 260px;

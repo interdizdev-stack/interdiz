@@ -553,7 +553,7 @@ function setupAnimations() {
           }
         });
 
-        gsap.fromTo('.projects-heading', { y: 24, opacity: 0 }, {
+        gsap.fromTo('.projects-heading', { y: 32, opacity: 0 }, {
           y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
           clearProps: 'transform,opacity',
           scrollTrigger: {
@@ -564,25 +564,20 @@ function setupAnimations() {
           }
         });
 
-        // Move whole cards from depth, leaving image hover and drag transforms free.
-        gsap.fromTo('.project-card', {
-          y: mobile ? 32 : 48,
-          z: mobile ? -100 : -180,
-          scale: 0.9,
-          rotationX: mobile ? 7 : 10,
-          rotationY: i => i % 2 ? 5 : -5,
-          transformPerspective: 1400,
-          transformOrigin: '50% 50%',
+        // Move the viewport as one ribbon; its native carousel coordinates stay intact.
+        gsap.fromTo('.gallery-window', {
+          x: () => Math.min(innerWidth * (mobile ? 0.35 : 0.24), mobile ? 200 : 360),
           opacity: 0
         }, {
-          y: 0, z: 0, scale: 1, rotationX: 0, rotationY: 0, opacity: 1,
-          duration: 1.1, stagger: 0.14, ease: 'power3.out',
-          clearProps: 'transform,transformOrigin',
+          x: 0, opacity: 1,
+          duration: 1.25, ease: 'power3.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
-            id: 'projects-depth-reveal',
+            id: 'projects-horizontal-reveal',
             trigger: '.gallery-window',
             start: 'top 82%',
-            once: true
+            once: true,
+            invalidateOnRefresh: true
           }
         });
       } else {
