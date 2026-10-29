@@ -553,48 +553,36 @@ function setupAnimations() {
           }
         });
 
-        // Reveal the title first; each image then opens upward as it enters view.
-        gsap.timeline({
+        gsap.fromTo('.projects-heading', { y: 24, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
             id: 'projects-title-reveal',
             trigger: '.projects-heading',
             start: 'top 92%',
             once: true
           }
-        })
-          .from('.projects-heading h2', { yPercent: 110, duration: 0.85, ease: 'power3.out', clearProps: 'transform' })
-          .from('.projects-heading p', { y: 14, opacity: 0, duration: 0.65, ease: 'power2.out', clearProps: 'transform,opacity' }, 0.2);
-
-        const images = $$('.project-image');
-        const photos = images.map(image => image.querySelector('img'));
-        const stagger = i => (i % (mobile ? 1 : 2)) * 0.12;
-        const reveal = gsap.timeline({
-          scrollTrigger: {
-            id: 'projects-shutter-reveal',
-            trigger: '.gallery-window',
-            start: 'top 92%',
-            end: 'top 32%',
-            scrub: smoother ? true : 0.6,
-            invalidateOnRefresh: true
-          }
         });
-        reveal
-          .fromTo(images, { clipPath: 'inset(100% 0% 0% 0% round 8px)' }, {
-            clipPath: 'inset(0% 0% 0% 0% round 8px)', duration: 1,
-            stagger, ease: 'power2.inOut'
-          }, 0)
-          .fromTo(photos, { '--project-reveal-scale': 1.18 }, {
-            '--project-reveal-scale': 1, duration: 1.12, stagger, ease: 'power2.out'
-          }, 0)
-          .fromTo('.project-info', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger, ease: 'power2.out' }, 0.7);
 
-        // Independent scale/translate preserve the gallery's hover and drag effects.
-        gsap.fromTo('.project-image img', { '--project-parallax-y': '2%' }, {
-          '--project-parallax-y': '-2%', ease: 'none',
+        // Move whole cards from depth, leaving image hover and drag transforms free.
+        gsap.fromTo('.project-card', {
+          y: mobile ? 32 : 48,
+          z: mobile ? -100 : -180,
+          scale: 0.9,
+          rotationX: mobile ? 7 : 10,
+          rotationY: i => i % 2 ? 5 : -5,
+          transformPerspective: 1400,
+          transformOrigin: '50% 50%',
+          opacity: 0
+        }, {
+          y: 0, z: 0, scale: 1, rotationX: 0, rotationY: 0, opacity: 1,
+          duration: 1.1, stagger: 0.14, ease: 'power3.out',
+          clearProps: 'transform,transformOrigin',
           scrollTrigger: {
-            id: 'projects-image-parallax', trigger: '.gallery-window',
-            start: 'top bottom', end: 'bottom top', scrub: smoother ? true : 0.6,
-            invalidateOnRefresh: true
+            id: 'projects-depth-reveal',
+            trigger: '.gallery-window',
+            start: 'top 82%',
+            once: true
           }
         });
       } else {
