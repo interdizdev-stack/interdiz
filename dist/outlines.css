@@ -76,7 +76,7 @@
 /* Dark edition: replace hollow lettering with solid brand green. */
 html[data-theme="dark"] :is(.hero-line.outline,
   .manifesto .manifesto-line.outline, .expertise-line.outline,
-  .approach-line.outline, .solution-type) {
+  .approach-line.outline, .solution-type, .title-dot) {
   color: var(--lime);
   -webkit-text-stroke: 0;
   filter: none;
