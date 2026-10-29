@@ -81,3 +81,10 @@ html[data-theme="dark"] :is(.hero-line.outline,
   -webkit-text-stroke: 0;
   filter: none;
 }
+
+/* Hide button frames without changing their size or keyboard focus indicator. */
+html[data-theme="dark"] :is(button, [role="button"], summary,
+  .contact-pill, .float-cta, .round-link, .gallery-all,
+  .project-open, .theme-switch, .scroll-circle) {
+  border-color: transparent !important;
+}
