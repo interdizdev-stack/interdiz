@@ -459,10 +459,30 @@ function setupAnimations() {
           .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
           .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (mobile ? 0.07 : 0.1) }, { y: 0 }, 0)
           .fromTo('.manifesto-inner', { y: () => innerHeight * (mobile ? 0.22 : 0.32) }, { y: 0 }, 0);
+
+        // Use the section's layout coordinates: its inner content already has
+        // a parallax transform, which must not shift these trigger positions.
+        const cardsTop = () => $('.solutions-stage').getBoundingClientRect().top
+          - $('.manifesto').getBoundingClientRect().top
+          - Number(gsap.getProperty('.manifesto-inner', 'y'));
+        gsap.fromTo('.solution-card', {
+          '--solution-parallax-y': i => `${(mobile ? 70 : 140) + (i % 3) * (mobile ? 18 : 48)}px`
+        }, {
+          '--solution-parallax-y': '0px',
+          ease: 'none',
+          scrollTrigger: {
+            id: 'solutions-cards-parallax',
+            trigger: '.manifesto',
+            start: () => `top+=${cardsTop()} bottom`,
+            end: () => `top+=${cardsTop()} ${mobile ? '45%' : '50%'}`,
+            scrub: smoother ? true : 0.6,
+            invalidateOnRefresh: true
+          }
+        });
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
+        gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
       }
-      gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
 
       gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
       gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });

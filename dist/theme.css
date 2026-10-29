@@ -12,6 +12,25 @@ html[data-theme="dark"].motion-enabled .manifesto {
   z-index: 6;
   box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
 }
+/* Reserve room inside the horizontal scroller without moving its controls. */
+html[data-theme="dark"].motion-enabled .solutions-stage {
+  --solution-parallax-space: 260px;
+  display: flow-root;
+}
+html[data-theme="dark"].motion-enabled .solutions-track {
+  padding-bottom: calc(28px + var(--solution-parallax-space));
+  margin-bottom: calc(-1 * var(--solution-parallax-space));
+  overflow-y: hidden;
+}
+html[data-theme="dark"].motion-enabled .solution-card {
+  /* Keep scroll motion independent of the existing hover scale transition. */
+  translate: 0 var(--solution-parallax-y, 0px);
+}
+@media (max-width: 900px) {
+  html[data-theme="dark"].motion-enabled .solutions-stage {
+    --solution-parallax-space: 128px;
+  }
+}
 .display-controls {
   position: fixed;
   right: 22px;
