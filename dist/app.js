@@ -19,18 +19,21 @@ const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let userReduced = null;
 try { const saved=sessionStorage.getItem('interdiz-reduced'); if(saved!==null) userReduced=saved==='true'; } catch {}
 let reduced = userReduced ?? motionPreference.matches;
-let scene, animationContext;
+let scene, animationContext, smoother;
 let heroTrigger;
+let updateProcessOnScroll;
+const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 
 const updateProgress = () => {
   const distance = document.documentElement.scrollHeight - innerHeight;
-  const progress = distance > 0 ? scrollY / distance : 0;
+  const position = pageScroll();
+  const progress = distance > 0 ? position / distance : 0;
   const progressEl = $('.scroll-progress span');
   if (progressEl) progressEl.style.transform = `scaleX(${progress})`;
 
   const floatNav = $('#floating-nav');
   if (floatNav) {
-    floatNav.classList.toggle('visible', scrollY > 260);
+    floatNav.classList.toggle('visible', position > 260);
   }
 };
 addEventListener('scroll', updateProgress, { passive: true });
@@ -81,7 +84,7 @@ function setupProcessAccordion() {
   const rows = $$('.service', list);
   let scrollFrame = 0;
   let layoutTimer = 0;
-  let previousScroll = scrollY;
+  let previousScroll = pageScroll();
 
   function openStep(row) {
     if (row.open) return;
@@ -121,11 +124,13 @@ function setupProcessAccordion() {
       }, 180);
     });
   });
-  addEventListener('scroll', () => {
-    if (Math.abs(scrollY - previousScroll) < 1) return;
-    previousScroll = scrollY;
+  updateProcessOnScroll = () => {
+    const position = pageScroll();
+    if (Math.abs(position - previousScroll) < 1) return;
+    previousScroll = position;
     if (!scrollFrame) scrollFrame = requestAnimationFrame(revealOnScroll);
-  }, { passive: true });
+  };
+  addEventListener('scroll', updateProcessOnScroll, { passive: true });
   addEventListener('resize', () => {
     if (!scrollFrame) scrollFrame = requestAnimationFrame(revealOnScroll);
   });
@@ -361,8 +366,10 @@ function setupProjectGallery() {
 
 function setupAnimations() {
   if (!window.gsap || !window.ScrollTrigger) return;
-  const { gsap, ScrollTrigger } = window;
+  const { gsap, ScrollTrigger, ScrollSmoother } = window;
   animationContext?.revert();
+  smoother?.kill();
+  smoother = null;
   heroTrigger = null;
   scene?.setReduced(reduced);
   if (scene) Object.assign(scene.state, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1 });
@@ -370,6 +377,22 @@ function setupAnimations() {
   updateMotionButton();
   if (reduced) { scene?.refresh(); ScrollTrigger.refresh(); return; }
   gsap.registerPlugin(ScrollTrigger);
+  // Smooth the page and parallax together, rather than letting scrub lag
+  // fight immediate native scrolling at the edge of the pinned hero.
+  if (document.documentElement.dataset.theme === 'dark' && ScrollSmoother) {
+    gsap.registerPlugin(ScrollSmoother);
+    smoother = ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
+      content: '#smooth-content',
+      smooth: 1,
+      smoothTouch: 0.15,
+      effects: false,
+      onUpdate: () => {
+        updateProgress();
+        updateProcessOnScroll?.();
+      }
+    });
+  }
 
   animationContext = gsap.context(() => {
     const media = gsap.matchMedia();
@@ -384,7 +407,7 @@ function setupAnimations() {
           start: 'top top',
           end: () => `+=${innerHeight * (mobile ? 1.65 : 2.3)}`,
           pin: true,
-          scrub: 0.85,
+          scrub: smoother ? true : 0.85,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: self => {
@@ -426,7 +449,7 @@ function setupAnimations() {
             trigger: '.manifesto',
             start: 'top bottom',
             end: 'top top',
-            scrub: 0.6,
+            scrub: smoother ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
@@ -460,7 +483,10 @@ $('.motion-toggle')?.addEventListener('click', () => {
   reduced = !reduced; userReduced = reduced;
   try { sessionStorage.setItem('interdiz-reduced', String(reduced)); } catch {}
   setupAnimations();
-  if (previousSection) scrollTo({ top: previousSection.getBoundingClientRect().top + scrollY, behavior: 'instant' });
+  if (previousSection) {
+    if (smoother) smoother.scrollTo(previousSection, false, 'top top');
+    else scrollTo({ top: previousSection.getBoundingClientRect().top + scrollY, behavior: 'instant' });
+  }
   updateProgress();
 });
 motionPreference.addEventListener('change', e => { if (userReduced === null) { reduced = e.matches; setupAnimations(); } });
@@ -469,10 +495,11 @@ motionPreference.addEventListener('change', e => { if (userReduced === null) { r
 $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
   const target = $(link.getAttribute('href')); if (!target) return;
   event.preventDefault();
-  let top = target.getBoundingClientRect().top + scrollY;
+  let top = smoother ? smoother.offset(target, 'top top') : target.getBoundingClientRect().top + scrollY;
   if (target.id === 'top' && heroTrigger) top = heroTrigger.start;
   history.replaceState(null, '', link.getAttribute('href'));
-  scrollTo({ top: Math.max(0, top), behavior: reduced ? 'instant' : 'smooth' });
+  if (smoother) smoother.scrollTo(Math.max(0, top), true);
+  else scrollTo({ top: Math.max(0, top), behavior: reduced ? 'instant' : 'smooth' });
   if (target.id === 'main') target.focus({ preventScroll: true });
 }));
 
@@ -624,4 +651,4 @@ async function init() {
 }
 
 if (document.readyState === 'complete') init(); else addEventListener('load', init, { once: true });
-addEventListener('pagehide', e => { if (!e.persisted) { scene?.dispose(); animationContext?.revert(); } });
+addEventListener('pagehide', e => { if (!e.persisted) { scene?.dispose(); animationContext?.revert(); smoother?.kill(); } });
