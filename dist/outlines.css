@@ -82,6 +82,10 @@ html[data-theme="dark"] :is(.hero-line.outline,
   filter: none;
 }
 
+html[data-theme="dark"] .hero-chapter em {
+  -webkit-text-stroke: 0;
+}
+
 /* Hide button frames without changing their size or keyboard focus indicator. */
 html[data-theme="dark"] :is(button, [role="button"], summary,
   .contact-pill, .float-cta, .round-link, .gallery-all,
