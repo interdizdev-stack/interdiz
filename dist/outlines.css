@@ -92,5 +92,5 @@ html[data-theme="dark"] :is(button, [role="button"], summary,
 html[data-theme="dark"] .header > .contact-pill,
 html[data-theme="dark"] .hero-actions > .contact-pill:not(.contact-pill--filled) {
   border-color: var(--fg) !important;
-  border-width: 1px !important;
+  border-width: 1.5px !important;
 }
