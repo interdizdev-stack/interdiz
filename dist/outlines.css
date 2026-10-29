@@ -88,3 +88,7 @@ html[data-theme="dark"] :is(button, [role="button"], summary,
   .project-open, .theme-switch, .scroll-circle) {
   border-color: transparent !important;
 }
+
+html[data-theme="dark"] .header > .contact-pill {
+  border-color: var(--fg) !important;
+}
