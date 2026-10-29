@@ -1,5 +1,6 @@
 /* Display controls share a fixed corner in both versions. */
 html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="dark"] .header-caption { margin-inline-start: -30px; }
 .display-controls {
   position: fixed;
   right: 22px;
