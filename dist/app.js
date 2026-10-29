@@ -628,20 +628,16 @@ function setupCursor() {
 
   document.addEventListener('mouseover', e => {
     const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, .service summary');
+    const overCard = target?.closest('.solutions-track, .project-card, .gallery-window');
+    dot.classList.toggle('cursor-card-active', Boolean(overCard));
     if (!target) {
       ring.className = 'swiss-cursor-ring';
       if (label) label.textContent = '';
       return;
     }
-    if (target.closest('.solutions-track')) {
+    if (overCard) {
       ring.className = 'swiss-cursor-ring cursor-card';
-      if (label) label.textContent = 'ЛИСТАТЬ ↔';
-    } else if (target.closest('.project-card')) {
-      ring.className = 'swiss-cursor-ring cursor-card';
-      if (label) label.textContent = 'ЛИСТАТЬ ↔';
-    } else if (target.closest('.gallery-window')) {
-      ring.className = 'swiss-cursor-ring cursor-card';
-      if (label) label.textContent = 'ЛИСТАТЬ ↔';
+      if (label) label.textContent = '↗';
     } else {
       ring.className = 'swiss-cursor-ring cursor-hover';
       if (label) label.textContent = '';

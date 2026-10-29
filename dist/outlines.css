@@ -64,7 +64,7 @@
   border: var(--outline-width) solid #000;
 }
 .studio-badge, .tags > span:hover, .marquee,
-.copy-toast, .swiss-cursor-ring.cursor-card {
+.copy-toast {
   border-color: #000;
   border-width: var(--outline-width);
 }
