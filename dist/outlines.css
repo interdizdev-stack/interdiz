@@ -89,6 +89,7 @@ html[data-theme="dark"] :is(button, [role="button"], summary,
   border-color: transparent !important;
 }
 
-html[data-theme="dark"] .header > .contact-pill {
+html[data-theme="dark"] .header > .contact-pill,
+html[data-theme="dark"] .hero-actions > .contact-pill:not(.contact-pill--filled) {
   border-color: var(--fg) !important;
 }
