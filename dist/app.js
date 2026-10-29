@@ -557,7 +557,7 @@ function setupAnimations() {
         const line = $('.projects-line-effect');
         const projectsReveal = gsap.timeline({
           scrollTrigger: {
-            id: 'projects-lime-pulse',
+            id: 'projects-pulse-horizontal-reveal',
             trigger: '.gallery-window',
             start: 'top 88%',
             once: true,
@@ -572,12 +572,15 @@ function setupAnimations() {
           }, 0)
           .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
           .to(pulse, { opacity: 0, duration: 0.15 }, 0.8)
-          .fromTo('.projects-heading', { y: 22, opacity: 0 }, {
-            y: 0, opacity: 1, duration: 0.75, ease: 'power3.out',
+          .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
             immediateRender: true, clearProps: 'transform,opacity'
           }, 0.8)
-          .fromTo('.gallery-window', { y: 26, opacity: 0 }, {
-            y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+          .fromTo('.gallery-window', {
+            x: () => Math.min(innerWidth * (mobile ? 0.35 : 0.24), mobile ? 200 : 360),
+            opacity: 0
+          }, {
+            x: 0, opacity: 1, duration: 1.25, ease: 'power3.out',
             immediateRender: true, clearProps: 'transform,opacity'
           }, 1.02);
       } else {
