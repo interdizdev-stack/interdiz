@@ -112,3 +112,6 @@ html[data-theme="dark"] .solution-card .service-open {
   border-color: var(--fg) !important;
   border-width: 1.5px !important;
 }
+html[data-theme="dark"] .solution-card .service-open:hover {
+  border-color: transparent !important;
+}
