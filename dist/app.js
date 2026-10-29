@@ -553,33 +553,33 @@ function setupAnimations() {
           }
         });
 
-        gsap.fromTo('.projects-heading', { y: 32, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
-          clearProps: 'transform,opacity',
+        const pulse = $('.projects-line-pulse');
+        const line = $('.projects-line-effect');
+        const projectsReveal = gsap.timeline({
           scrollTrigger: {
-            id: 'projects-title-reveal',
-            trigger: '.projects-heading',
-            start: 'top 92%',
-            once: true
-          }
-        });
-
-        // Move the viewport as one ribbon; its native carousel coordinates stay intact.
-        gsap.fromTo('.gallery-window', {
-          x: () => Math.min(innerWidth * (mobile ? 0.35 : 0.24), mobile ? 200 : 360),
-          opacity: 0
-        }, {
-          x: 0, opacity: 1,
-          duration: 1.25, ease: 'power3.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            id: 'projects-horizontal-reveal',
+            id: 'projects-lime-pulse',
             trigger: '.gallery-window',
-            start: 'top 82%',
+            start: 'top 88%',
             once: true,
             invalidateOnRefresh: true
           }
         });
+        // A single accent crosses the existing rule before the content appears.
+        projectsReveal
+          .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
+            x: () => line.clientWidth,
+            duration: 0.95, ease: 'power2.inOut'
+          }, 0)
+          .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
+          .to(pulse, { opacity: 0, duration: 0.15 }, 0.8)
+          .fromTo('.projects-heading', { y: 22, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.75, ease: 'power3.out',
+            immediateRender: true, clearProps: 'transform,opacity'
+          }, 0.8)
+          .fromTo('.gallery-window', { y: 26, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+            immediateRender: true, clearProps: 'transform,opacity'
+          }, 1.02);
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
         gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });

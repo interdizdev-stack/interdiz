@@ -12,6 +12,28 @@ html[data-theme="dark"].motion-enabled .manifesto {
   z-index: 6;
   box-shadow: 0 -28px 56px rgba(0, 0, 0, .3);
 }
+.projects-line-effect { display: none; }
+html[data-theme="dark"].motion-enabled .projects > .section-kicker {
+  position: relative;
+}
+html[data-theme="dark"].motion-enabled .projects-line-effect {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--outline-width));
+  height: var(--outline-width);
+  overflow: hidden;
+  pointer-events: none;
+}
+.projects-line-pulse {
+  display: block;
+  width: clamp(72px, 20vw, 240px);
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--lime) 45%, var(--lime) 75%, transparent);
+  transform: translateX(-100%);
+  opacity: 0;
+}
 /* Reserve room inside the horizontal scroller without moving its controls. */
 html[data-theme="dark"].motion-enabled .solutions-stage {
   --solution-parallax-space: 260px;
