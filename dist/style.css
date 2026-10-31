@@ -1336,7 +1336,7 @@ h1, h2, h3, h4, h5, h6,
   white-space: nowrap;
   width: max-content;
   font-size: clamp(19px, 2.75vw, 45px);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
   font-family: Inter, sans-serif;
