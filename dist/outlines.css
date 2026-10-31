@@ -118,6 +118,12 @@ html[data-theme="dark"] .solution-card .service-open:hover {
 
 /* Navigation labels stay clean in both themes. */
 .floating-nav, .floating-nav * { -webkit-text-stroke: 0 !important; text-shadow: none !important; }
-.floating-nav { max-width: calc(100vw - 24px); }
-.float-links { min-width: 0; overflow-x: auto; }
-.float-links a { white-space: nowrap; flex-shrink: 0; }
+.floating-nav { width: max-content; max-width: calc(100vw - 24px); gap: 12px; padding: 8px 14px; }
+.floating-nav .float-links { min-width: 0; gap: 8px; overflow: visible; }
+.floating-nav .float-links a { white-space: nowrap; flex-shrink: 0; gap: 4px; padding: 4px 2px; }
+.floating-nav > .float-logo, .floating-nav > .float-divider, .floating-nav > .float-cta { flex-shrink: 0; }
+@media (min-width: 901px) and (max-width: 1100px) {
+  .floating-nav { gap: 8px; padding-inline: 10px; }
+  .floating-nav .float-links { gap: 5px; }
+  .floating-nav .float-links a { gap: 3px; }
+}
