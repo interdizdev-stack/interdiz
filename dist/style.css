@@ -1335,12 +1335,12 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   white-space: nowrap;
   width: max-content;
-  font-size: clamp(19px, 2.75vw, 45px);
+  font-size: clamp(17px, calc(2.75vw - 2px), 43px);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
   font-family: Inter, sans-serif;
-  animation: marquee-run 170s linear infinite;
+  animation: marquee-run 140s linear infinite;
 }
 
 .marquee-group {
