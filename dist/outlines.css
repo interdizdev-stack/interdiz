@@ -158,3 +158,9 @@ html[data-theme="dark"] .solution-card .service-open:hover {
   gap: 20px;
   white-space: nowrap;
 }
+
+/* Hide only the outer separators between page sections; retain their spacing. */
+html body :is(.manifesto, .projects, .marquee, .expertise, .approach, .reviews, .contact) {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
