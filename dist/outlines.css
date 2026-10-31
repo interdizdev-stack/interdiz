@@ -164,3 +164,10 @@ html body :is(.manifesto, .projects, .marquee, .expertise, .approach, .reviews, 
   border-top-color: transparent;
   border-bottom-color: transparent;
 }
+
+/* The header CTA fills green on hover without a visible outline. */
+html[data-theme="dark"] .header > .contact-pill:hover {
+  background: var(--lime);
+  color: #0c0e0c;
+  border-color: transparent !important;
+}
