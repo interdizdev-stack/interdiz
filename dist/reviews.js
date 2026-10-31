@@ -1,5 +1,5 @@
 // Local version of the moving card wall from https://interdiz.ru/#reviews.
-// Recycle complete columns so every review remains a real, accessible DOM node.
+// Keep column membership stable when recycling in either direction.
 export function setupReviews(isReduced) {
   const wall = document.querySelector('.reviews-wall');
   const track = wall?.querySelector('.reviews-track');
@@ -7,16 +7,8 @@ export function setupReviews(isReduced) {
   if (!wall || !track || !button) return;
   const cards = [...track.children];
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
-  const previous = document.querySelector('.reviews-arrow--prev');
-  const next = document.querySelector('.reviews-arrow--next');
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
-  previous?.removeAttribute('hidden');
-  next?.removeAttribute('hidden');
   let source = 'all';
-  let navigation = null;
-  let navigationHold = false;
-  let navigationTimer;
-  let navigationTarget = 0;
   let visible = false;
   let paused = false;
   let hovering = false;
@@ -26,25 +18,70 @@ export function setupReviews(isReduced) {
   let speed = 60;
   let columnStep = 0;
   let position = 0;
+  let loopItems = [];
+  let canLoop = false;
   let drag = null;
   let suppressClick = false;
   let resumeTimer;
 
-  function updateControls() {
-    if (previous) previous.disabled = wall.scrollLeft <= 1;
-    if (next) next.disabled = wall.scrollLeft >= wall.scrollWidth - wall.clientWidth - 1;
-  }
-  function stopNavigation() {
-    navigation?.kill();
-    navigation = null;
-    clearTimeout(navigationTimer);
-    navigationHold = false;
+  function setPosition(value) {
+    if (canLoop) {
+      while (value < 0) {
+        const column = loopItems.pop();
+        loopItems.unshift(column);
+        track.prepend(column);
+        value += columnStep;
+      }
+      while (value >= columnStep) {
+        const column = loopItems.shift();
+        loopItems.push(column);
+        track.append(column);
+        value -= columnStep;
+      }
+    }
+    position = Math.max(0, Math.min(wall.scrollWidth - wall.clientWidth, value));
+    wall.scrollLeft = position;
+    // Compensate for native pixel rounding without changing card geometry.
+    track.style.transform = `translate3d(${-(position - wall.scrollLeft)}px,0,0)`;
+    return position;
   }
   function measure() {
-    stopNavigation();
-    columnStep = cards.find(card => !card.hidden).getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
-    position = wall.scrollLeft;
-    updateControls();
+    stop();
+    const wallLeft = wall.getBoundingClientRect().left;
+    const ordered = [...track.querySelectorAll('.review-card')];
+    const anchor = ordered.find(card => !card.hidden && card.getBoundingClientRect().right > wallLeft);
+    const anchorLeft = anchor?.getBoundingClientRect().left;
+    track.style.transform = '';
+    track.classList.remove('is-looping');
+    track.replaceChildren(...ordered);
+    if (source === 'all') {
+      // Read the existing masonry positions before changing the DOM. Wrapping
+      // these exact groups prevents vertical jumps when the last column moves first.
+      const groups = [];
+      ordered.forEach(card => {
+        const left = card.offsetLeft;
+        let group = groups[groups.length - 1];
+        if (!group || Math.abs(group.left - left) > 2) {
+          group = { left, cards: [] };
+          groups.push(group);
+        }
+        group.cards.push(card);
+      });
+      loopItems = groups.map(group => {
+        const column = document.createElement('div');
+        column.className = 'reviews-column';
+        column.setAttribute('role', 'presentation');
+        column.append(...group.cards);
+        return column;
+      });
+      track.classList.add('is-looping');
+      track.replaceChildren(...loopItems);
+    } else loopItems = ordered.filter(card => !card.hidden);
+    columnStep = loopItems[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
+    canLoop = loopItems.length > 1 && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
+    const target = anchor ? wall.scrollLeft + anchor.getBoundingClientRect().left - anchorLeft : wall.scrollLeft;
+    const placed = setPosition(target);
+    if (drag) drag.left += placed - target;
   }
   function stop() {
     cancelAnimationFrame(frame);
@@ -56,44 +93,27 @@ export function setupReviews(isReduced) {
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0;
     previousTime = time;
     speed += ((hovering ? 10 : 60) - speed) * (1 - Math.exp(-7 * delta));
-    position += speed * delta;
-    wall.scrollLeft = position;
-    // Moving whole columns keeps all visible cards in the same position.
-    let passes = 0;
-    while (columnStep > 0 && position >= columnStep && passes++ < track.children.length) {
-      const left = track.firstElementChild.offsetLeft;
-      const column = [...track.children].filter(card => Math.abs(card.offsetLeft - left) < 2);
-      column.forEach(card => track.append(card));
-      position -= columnStep;
-      wall.scrollLeft = position;
-    }
-    // Keep the original subpixel motion even when scrollLeft is pixel-rounded.
-    track.style.transform = `translate3d(${-(position - wall.scrollLeft)}px,0,0)`;
+    setPosition(position + speed * delta);
   }
   function update() {
     const reduced = isReduced();
     const filtered = source !== 'all';
     const focused = wall.contains(document.activeElement);
-    if (reduced) stopNavigation();
     button.disabled = reduced || filtered;
     button.setAttribute('aria-pressed', String(paused));
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
-    wall.classList.toggle('is-paused', paused || reduced || navigationHold || touching);
-    if (visible && !paused && !reduced && !filtered && !focused && !touching && !navigationHold && !document.hidden) {
+    wall.classList.toggle('is-paused', paused || reduced || touching);
+    if (visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
   filters.forEach(filter => filter.addEventListener('click', () => {
     stop();
-    stopNavigation();
     source = filter.dataset.reviewsFilter;
-    // Restore the original order even after the moving wall recycled columns.
-    cards.forEach(card => {
-      card.hidden = source !== 'all' && card.dataset.reviewPlatform !== source;
-      track.append(card);
-    });
+    cards.forEach(card => { card.hidden = source !== 'all' && card.dataset.reviewPlatform !== source; });
+    track.replaceChildren(...cards);
     filters.forEach(item => item.setAttribute('aria-pressed', String(item === filter)));
     wall.classList.toggle('is-filtered', source !== 'all');
     wall.setAttribute('aria-label', source === 'all' ? 'Лента отзывов клиентов' : 'Отзывы клиентов с Авито');
@@ -102,42 +122,13 @@ export function setupReviews(isReduced) {
     measure();
     update();
   }));
-  function move(direction) {
-    stop();
-    const from = navigation ? navigationTarget : wall.scrollLeft;
-    stopNavigation();
-    navigationHold = true;
-    navigationTarget = Math.max(0, Math.min(wall.scrollWidth - wall.clientWidth, from + direction * columnStep));
-    track.style.transform = '';
-    update();
-    if (window.gsap && !isReduced()) {
-      navigation = window.gsap.to(wall, {
-        scrollLeft: navigationTarget, duration: .55, ease: 'power2.out',
-        onUpdate: updateControls,
-        onComplete: finishNavigation
-      });
-    } else {
-      wall.scrollTo({ left: navigationTarget, behavior: isReduced() ? 'instant' : 'smooth' });
-      navigationTimer = setTimeout(finishNavigation, isReduced() ? 0 : 550);
-    }
-  }
-  function finishNavigation() {
-    navigation = null;
-    position = wall.scrollLeft;
-    updateControls();
-    navigationTimer = setTimeout(() => { navigationHold = false; update(); }, 1200);
-  }
-  previous?.addEventListener('click', () => move(-1));
-  next?.addEventListener('click', () => move(1));
-  wall.addEventListener('scroll', updateControls, { passive: true });
-  button.addEventListener('click', () => { stopNavigation(); paused = !paused; update(); });
+  button.addEventListener('click', () => { paused = !paused; update(); });
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });
   wall.addEventListener('focusin', update);
   wall.addEventListener('focusout', () => queueMicrotask(update));
   wall.addEventListener('wheel', event => {
     if (!event.deltaX && !event.shiftKey) return;
-    stopNavigation();
     clearTimeout(resumeTimer);
     touching = true;
     stop();
@@ -145,11 +136,11 @@ export function setupReviews(isReduced) {
   }, { passive: true });
   wall.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;
-    stopNavigation();
     clearTimeout(resumeTimer);
     touching = true;
     update();
-    if (event.pointerType === 'mouse' && !event.target.closest('a')) drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: wall.scrollLeft, moved: false };
+    // Links remain clickable, but can also serve as a drag starting point.
+    if (event.pointerType === 'mouse') drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: wall.scrollLeft, moved: false };
   });
   wall.addEventListener('pointermove', event => {
     if (!drag || event.pointerId !== drag.id) return;
@@ -158,8 +149,13 @@ export function setupReviews(isReduced) {
       drag.moved = true;
       wall.setPointerCapture(event.pointerId);
       wall.classList.add('is-dragging');
+      if (wall.contains(document.activeElement)) document.activeElement.blur();
     }
-    if (drag.moved) { event.preventDefault(); wall.scrollLeft = drag.left - delta; }
+    if (drag.moved) {
+      event.preventDefault();
+      const target = drag.left - delta;
+      drag.left += setPosition(target) - target;
+    }
   });
   function finish(event) {
     if (!touching) return;
@@ -177,11 +173,10 @@ export function setupReviews(isReduced) {
   wall.addEventListener('lostpointercapture', finish);
   wall.addEventListener('click', event => { if (suppressClick) { event.preventDefault(); event.stopPropagation(); } }, true);
   wall.addEventListener('dragstart', event => event.preventDefault());
-  // Touch scrolling can finish beyond the wall without pointer capture.
   addEventListener('pointerup', finish);
   document.addEventListener('visibilitychange', update);
   addEventListener('resize', () => { measure(); update(); });
-  addEventListener('pagehide', () => { stop(); stopNavigation(); });
+  addEventListener('pagehide', stop);
   addEventListener('pageshow', update);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }, { rootMargin: '200px' }).observe(wall);
   measure();

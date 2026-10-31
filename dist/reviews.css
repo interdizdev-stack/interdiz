@@ -36,6 +36,9 @@
 .swiss-cursor-ring.cursor-reviews .cursor-label { font-size: 13px; font-weight: 700; letter-spacing: .8px; }
 .reviews-wall.is-dragging { cursor: grabbing; user-select: none; }
 .reviews-track { display: flex; flex-flow: column wrap; align-content: flex-start; gap: 16px; height: clamp(640px, 52vw, 800px); width: 100%; will-change: transform; }
+.reviews-track.is-looping { flex-flow: row nowrap; align-items: flex-start; }
+.reviews-column { display: flex; flex: 0 0 auto; flex-direction: column; gap: 16px; width: 30vw; min-width: 300px; }
+.reviews-column > .review-card { width: 100%; min-width: 0; }
 .review-card { flex: 0 0 auto; width: 30vw; min-width: 300px; margin: 0; padding: 24px; border: var(--outline-width) solid var(--line-strong); background: var(--bg); transition: border-color .4s ease; }
 .review-card:hover { border-color: var(--lime); }
 .review-card[hidden] { display: none; }
@@ -60,6 +63,7 @@
   .reviews-arrow--prev { left: 0; }
   .reviews-arrow--next { right: 0; }
   .review-card { width: 100%; min-width: 0; }
+  .reviews-column { width: 100%; min-width: 0; }
   .reviews-wall.is-filtered .review-card { flex-basis: 100%; }
 }
 @media (max-width: 600px) {
