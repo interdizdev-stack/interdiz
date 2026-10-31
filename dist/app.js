@@ -748,14 +748,23 @@ function setupAnimations() {
           .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
             y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
             immediateRender: true, clearProps: 'transform,opacity'
-          }, 0)
-          .fromTo('.gallery-window', {
-            x: () => Math.min(innerWidth * (mobile ? 0.35 : 0.24), mobile ? 200 : 360),
-            opacity: 0
-          }, {
-            x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
-            immediateRender: true, clearProps: 'transform,opacity'
-          }, 0.08);
+          }, 0);
+
+        // Start the sideways entrance when the cases themselves enter view.
+        gsap.fromTo('.gallery-window', {
+          x: () => Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+          opacity: 1
+        }, {
+          x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          immediateRender: true, clearProps: 'transform,opacity',
+          scrollTrigger: {
+            id: 'projects-cases-side-reveal',
+            trigger: '.gallery-window',
+            start: 'top 98%',
+            once: true,
+            invalidateOnRefresh: true
+          }
+        });
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
         gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
