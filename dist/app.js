@@ -765,6 +765,30 @@ function setupAnimations() {
 
       gsap.from('.service', { y: 35, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
       gsap.from('.expertise h2', { y: 70, opacity: 0.2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: 0.6 } });
+      // A staggered reveal gives the FAQ a clear reading rhythm without
+      // changing accordion heights or the section's layout coordinates.
+      const faqIntro = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        scrollTrigger: { id: 'faq-clarity-reveal', trigger: '.approach', start: 'top 78%', once: true }
+      });
+      faqIntro.from('.approach > .section-kicker', {
+        opacity: 0, y: 14, duration: 0.55, clearProps: 'transform,opacity'
+      }, 0).from('.approach-line', {
+        y: mobile ? 35 : 65, opacity: 0,
+        clipPath: 'inset(0 0 100% 0)', duration: 1.05, stagger: 0.17,
+        clearProps: 'transform,opacity,clipPath'
+      }, 0.12).from('.approach-description', {
+        y: 20, opacity: 0, duration: 0.75, clearProps: 'transform,opacity'
+      }, 0.7);
+      gsap.from('.faq-item', {
+        x: mobile ? 16 : 35, opacity: 0, stagger: 0.1, duration: 0.75,
+        ease: 'power3.out', clearProps: 'transform,opacity',
+        scrollTrigger: { id: 'faq-questions-reveal', trigger: '.faq-list', start: 'top 88%', once: true }
+      });
+      gsap.from('.faq-contact', {
+        y: 18, opacity: 0, duration: 0.7, ease: 'power3.out', clearProps: 'transform,opacity',
+        scrollTrigger: { trigger: '.faq-contact', start: 'top 94%', once: true }
+      });
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
       gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
