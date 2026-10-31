@@ -128,3 +128,6 @@ html[data-theme="dark"] .solution-card .service-open:hover {
   .floating-nav .float-links { gap: 5px; }
   .floating-nav .float-links a { gap: 3px; }
 }
+
+/* White menu labels and section numbers. */
+.floating-nav .float-links a, .floating-nav .float-links a:hover, .floating-nav .float-links .nav-num { color: #fff; }

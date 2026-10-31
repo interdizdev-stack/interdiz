@@ -42,7 +42,7 @@ body { font-weight: 450; }
 .hero-grid-frame-lines { stroke: var(--line); }
 .header-caption, .hero-topline, .hero-object-label, .side-note,
 .hero-bottom p, .hero-description, .solutions-note, .projects-heading p,
-.expertise-caption, .approach-description, .solution-card p, .service-content p,
+.expertise-caption, .approach-description, .reviews-caption, .solution-card p, .service-content p,
 .dialog-description, .approach-testimonial blockquote p { color: var(--fg-muted); font-weight: 500; }
 .service-dialog-kicker { color: var(--fg-muted); }
 .section-kicker, .scene-stages, .project-info p, .project-info > span,
@@ -58,7 +58,7 @@ body { font-weight: 450; }
 .scene-stages i { height: var(--outline-width); background: var(--line-strong); }
 .wordmark span, .float-logo span { color: var(--lime); }
 .hero-line.outline, .manifesto .manifesto-line.outline,
-.expertise-line.outline, .approach-line.outline {
+.expertise-line.outline, .approach-line.outline, .reviews-line.outline {
   color: transparent;
   -webkit-text-stroke: var(--outline-width) #000;
 }
@@ -120,13 +120,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 @media (max-width: 600px) {
   .hero-grid-quarter { display: none; }
   .hero-line.outline, .manifesto .manifesto-line.outline,
-  .expertise-line.outline, .approach-line.outline { -webkit-text-stroke-width: var(--outline-width); }
+  .expertise-line.outline, .approach-line.outline, .reviews-line.outline { -webkit-text-stroke-width: var(--outline-width); }
   .hero { height: max(880px, 100svh); min-height: 880px; max-height: none; }
   .hero-topline { left: var(--pad); right: var(--pad); gap: 22px; font-size: 10px; line-height: 1.5; }
   .hero-topline > span { max-width: 50%; }
   .hero-topline > span:last-child { text-align: right; }
   .hero-intro { top: 180px; left: var(--pad); }
-  .hero h1, .manifesto h2, .projects h2, .expertise h2, .approach h2 {
+  .hero h1, .manifesto h2, .projects h2, .expertise h2, .approach h2, .reviews h2 {
     font-size: 8.4vw;
     line-height: 1.08;
   }

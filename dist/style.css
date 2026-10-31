@@ -533,7 +533,8 @@ h1, h2, h3, h4, h5, h6,
 .manifesto h2,
 .projects h2,
 .expertise h2,
-.approach h2 {
+.approach h2,
+.reviews h2 {
   width: fit-content;
   font-size: calc(clamp(60px, 8.8vw, 160px) - 20px);
   line-height: 1.02;
@@ -549,7 +550,8 @@ h1, h2, h3, h4, h5, h6,
 .solutions-note,
 .projects-heading p,
 .expertise-caption,
-.approach-description {
+.approach-description,
+.reviews-caption {
   max-width: 540px;
   margin-top: 8px;
   font-family: var(--text);
@@ -586,7 +588,8 @@ h1, h2, h3, h4, h5, h6,
 .hero-line,
 .manifesto-line,
 .expertise-line,
-.approach-line {
+.approach-line,
+.reviews-line {
   display: block;
   white-space: nowrap;
 }
@@ -594,7 +597,8 @@ h1, h2, h3, h4, h5, h6,
 .hero-line.outline,
 .manifesto .manifesto-line.outline,
 .expertise-line.outline,
-.approach-line.outline {
+.approach-line.outline,
+.reviews-line.outline {
   font-family: 'Studio Outline', var(--display);
   color: transparent;
   -webkit-text-stroke: var(--outline-width) #f1f2ec;
@@ -2012,7 +2016,8 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   .manifesto h2,
   .projects h2,
   .expertise h2,
-  .approach h2 {
+  .approach h2,
+  .reviews h2 {
     font-size: calc(9vw - 20px);
   }
   .hero-bottom p {
@@ -2102,7 +2107,8 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   .manifesto h2,
   .projects h2,
   .expertise h2,
-  .approach h2 {
+  .approach h2,
+  .reviews h2 {
     font-size: calc(9.3vw - 20px);
     line-height: 1.15;
   }

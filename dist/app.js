@@ -1,3 +1,5 @@
+import { setupReviews } from './reviews.js';
+
 // Content and links are usable without animation or WebGL.
 const $ = (selector, root=document) => root.querySelector(selector);
 const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
@@ -23,6 +25,7 @@ let scene, animationContext, smoother;
 let heroTrigger;
 let updateProcessOnScroll;
 let finishProcessAnimations;
+let updateReviewsMotion;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 
 const updateProgress = () => {
@@ -365,6 +368,7 @@ function updateMotionButton() {
   $('.motion-icon').textContent = reduced ? '▷' : 'Ⅱ';
   $('.motion-label').textContent = reduced ? 'Включить анимации' : 'Меньше движения';
   document.documentElement.classList.toggle('reduced-motion', reduced);
+  updateReviewsMotion?.();
 }
 updateMotionButton();
 
@@ -587,7 +591,7 @@ function setupProjectGallery() {
 
 function setupAnimations() {
   finishProcessAnimations?.();
-  if (!window.gsap || !window.ScrollTrigger) return;
+  if (!window.gsap || !window.ScrollTrigger) { updateMotionButton(); return; }
   const { gsap, ScrollTrigger, ScrollSmoother } = window;
   animationContext?.revert();
   smoother?.kill();
@@ -904,6 +908,7 @@ async function init() {
   setupProjectGallery();
   setupProcessAccordion();
   setupFAQ();
+  updateReviewsMotion = setupReviews(() => reduced);
   setupAnimations();
   setupCursor();
   setupCardTilt();
