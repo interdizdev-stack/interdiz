@@ -1584,7 +1584,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 .expertise-testimonial-anchor { margin-top: 32px; }
 .expertise-testimonial { margin-top: 0; }
 @media (min-width: 1101px) {
-  .expertise-testimonial-anchor { position: sticky; top: 120px; }
+  .expertise-testimonial-anchor { position: sticky; top: calc(100dvh - var(--testimonial-height, 0px) - 24px); }
 }
 .testimonial-label { display: flex; align-items: center; gap: 10px; color: var(--fg-muted); font-size: 12px; letter-spacing: 1px; }
 .approach-testimonial blockquote { margin: 0; }

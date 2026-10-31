@@ -611,6 +611,14 @@ function setupProjectGallery() {
   render();
 }
 
+function setupTestimonialStickySize() {
+  const testimonial = $('.expertise-testimonial-anchor');
+  if (!testimonial) return;
+  const updateHeight = () => testimonial.style.setProperty('--testimonial-height', `${testimonial.offsetHeight}px`);
+  updateHeight();
+  new ResizeObserver(updateHeight).observe(testimonial);
+}
+
 function setupAnimations() {
   finishProcessAnimations?.();
   if (!window.gsap || !window.ScrollTrigger) { updateMotionButton(); return; }
@@ -804,7 +812,7 @@ function setupAnimations() {
       const testimonial = $('.expertise-testimonial-anchor');
       const layout = $('.expertise-layout');
       if (!testimonial || !layout) return;
-      const stickyTop = () => Math.min(120, innerHeight - testimonial.offsetHeight - 24);
+      const stickyTop = () => innerHeight - testimonial.offsetHeight - 24;
       gsap.set(testimonial, { position: 'relative', top: 0 });
       ScrollTrigger.create({
         id: 'expertise-testimonial-sticky',
@@ -982,6 +990,7 @@ async function init() {
   setupProcessAccordion();
   setupFAQ();
   updateReviewsMotion = setupReviews(() => reduced);
+  setupTestimonialStickySize();
   setupAnimations();
   updateActiveMenu();
   if (window.gsap) window.gsap.ticker.add(updateActiveMenu);
