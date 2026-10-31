@@ -171,3 +171,14 @@ html[data-theme="dark"] .header > .contact-pill:hover {
   color: #0c0e0c;
   border-color: transparent !important;
 }
+
+/* Center the FAQ call to action between the content edges at every width. */
+.approach .faq-contact {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.approach .faq-contact > .contact-pill {
+  align-self: center;
+  margin-inline: auto;
+}
