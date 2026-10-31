@@ -796,6 +796,29 @@ function setupAnimations() {
       gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
     });
+
+    // Native sticky handles normal scrolling; pin its wrapper inside the
+    // transformed ScrollSmoother content without animating the pinned node.
+    media.add('(min-width: 1101px)', () => {
+      if (!smoother) return;
+      const testimonial = $('.expertise-testimonial-anchor');
+      const layout = $('.expertise-layout');
+      if (!testimonial || !layout) return;
+      const stickyTop = () => Math.min(120, innerHeight - testimonial.offsetHeight - 24);
+      gsap.set(testimonial, { position: 'relative', top: 0 });
+      ScrollTrigger.create({
+        id: 'expertise-testimonial-sticky',
+        trigger: testimonial,
+        start: () => `top ${stickyTop()}px`,
+        endTrigger: layout,
+        end: () => `bottom ${stickyTop() + testimonial.offsetHeight}px`,
+        pin: true,
+        pinType: 'transform',
+        pinSpacing: false,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      });
+    });
   });
   ScrollTrigger.refresh();
 }

@@ -1581,7 +1581,11 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   padding: 20px 0 0 40px;
   border-left: var(--outline-width) solid var(--line-lime);
 }
-.expertise-testimonial { margin-top: 32px; }
+.expertise-testimonial-anchor { margin-top: 32px; }
+.expertise-testimonial { margin-top: 0; }
+@media (min-width: 1101px) {
+  .expertise-testimonial-anchor { position: sticky; top: 120px; }
+}
 .testimonial-label { display: flex; align-items: center; gap: 10px; color: var(--fg-muted); font-size: 12px; letter-spacing: 1px; }
 .approach-testimonial blockquote { margin: 0; }
 .approach-testimonial blockquote p { font-size: 17px; line-height: 1.65; color: #e2e5dc; }
