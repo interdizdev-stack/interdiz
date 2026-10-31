@@ -76,7 +76,7 @@
 /* Dark edition: replace hollow lettering with solid brand green. */
 html[data-theme="dark"] :is(.hero-line.outline,
   .manifesto .manifesto-line.outline, .expertise-line.outline,
-  .approach-line.outline, .title-dot) {
+  .approach-line.outline, .reviews-line.outline, .title-dot) {
   color: var(--lime);
   -webkit-text-stroke: 0;
   filter: none;
@@ -115,3 +115,9 @@ html[data-theme="dark"] .solution-card .service-open {
 html[data-theme="dark"] .solution-card .service-open:hover {
   border-color: transparent !important;
 }
+
+/* Navigation labels stay clean in both themes. */
+.floating-nav, .floating-nav * { -webkit-text-stroke: 0 !important; text-shadow: none !important; }
+.floating-nav { max-width: calc(100vw - 24px); }
+.float-links { min-width: 0; overflow-x: auto; }
+.float-links a { white-space: nowrap; flex-shrink: 0; }

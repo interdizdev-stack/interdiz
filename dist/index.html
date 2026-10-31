@@ -11,6 +11,7 @@
   <link id="white-theme" rel="stylesheet" href="./white.css">
   <link rel="stylesheet" href="./theme.css">
   <link rel="stylesheet" href="./outlines.css">
+  <link rel="stylesheet" href="./reviews.css">
   <script src="./theme.js"></script>
   <script defer src="./vendor/gsap.min.js"></script>
   <script defer src="./vendor/ScrollTrigger.min.js"></script>
@@ -45,12 +46,11 @@
       <a href="#manifesto"><span class="nav-num">[01]</span> Взгляд</a>
       <a href="#projects"><span class="nav-num">[02]</span> Проекты</a>
       <a href="#expertise"><span class="nav-num">[03]</span> Услуги</a>
+      <a href="#approach"><span class="nav-num">[04]</span> Подход</a>
+      <a href="#reviews"><span class="nav-num">[05]</span> Отзывы</a>
+      <a href="#contact"><span class="nav-num">[06]</span> Контакты</a>
     </div>
     <div class="float-divider" aria-hidden="true"></div>
-    <div class="float-status" title="Статус студии: принимаем новые проекты">
-      <span class="status-pulse"></span>
-      <span class="status-text">Q2/Q4 AVAILABLE</span>
-    </div>
     <a class="float-cta" href="#contact">Обсудить ↗</a>
   </nav>
 
@@ -112,7 +112,7 @@
         <a href="#projects" class="round-link" aria-label="Смотреть проекты">↗</a>
       </div>
 
-      <span class="side-note">SCROLL TO EXPLORE — 01 / 05</span>
+      <span class="side-note">SCROLL TO EXPLORE — 01 / 06</span>
       <div class="hero-chapter" aria-hidden="true">
         <span class="mono-meta"><span class="crosshair">+</span> ИЗ ХАОСА — В СИСТЕМУ</span>
         <p>разрабатываем<br>любые <em>IT-продук<span class="product-letter-clearance">т</span>ы.</em></p>
@@ -565,10 +565,146 @@
       </div>
     </section>
 
+    <!-- Published reviews and card-wall presentation from https://interdiz.ru/#reviews, copied 2026-10-31. -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+      <div class="section-kicker">
+        <span class="kicker-index"><span class="crosshair">+</span> 05 // ОТЗЫВЫ КЛИЕНТОВ</span>
+        <span class="kicker-meta">ЯНДЕКС КАРТЫ И 2ГИС <span class="crosshair">+</span></span>
+      </div>
+      <div class="reviews-heading">
+        <h2 id="reviews-title"><span class="reviews-line">ОТЗЫВЫ</span><span class="reviews-line outline">КЛИЕНТОВ<span class="title-dot">.</span></span></h2>
+        <button class="reviews-pause" type="button" aria-pressed="false" aria-label="Приостановить движение отзывов"><span class="reviews-pause-icon" aria-hidden="true">Ⅱ</span><span class="reviews-pause-label">Пауза</span></button>
+      </div>
+      <p class="reviews-caption">Реальные отзывы о работе со студией с Яндекс Карт и 2ГИС.</p>
+      <div class="reviews-wall" role="region" aria-label="Лента отзывов клиентов">
+        <div class="reviews-track" role="list">
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-01.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=npvbzcecjre7zwwqyp68hyzp5g&amp;si=8iz75sa5o9XG6GH2o-uSQFxnqMk34w&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Sasha M. на Яндекс Картах"><h3 class="review-card__author-name">Sasha M.</h3><time class="review-card__date" datetime="2026-03-05">5 марта 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=npvbzcecjre7zwwqyp68hyzp5g&amp;si=8iz75sa5o9XG6GH2o-uSQFxnqMk34w&amp;utm_source=review"><p>Заказывала интернет-магазин, дизайн и разработку, все прошло отлично, подключили тг бота для оперативной обработки заказов,  работает как часы. Студия всегда на связи, помогает, отвечает на вопросы.</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/227180567" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Александра Медведева на 2ГИС"><h3 class="review-card__author-name">Александра Медведева</h3><time class="review-card__date" datetime="2026-03-05">5 марта 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/227180567"><p>Заказывала интернет-магазин, дизайн и разработку, все прошло отлично, подключили тг бота для оперативной обработки заказов, работает как часы. Студия всегда на связи, помогает, отвечает на вопросы.</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-03.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=95tke4uh6uhu96vnfxpgk624a8&amp;si=Vm_GqQf7NK5lbEPH-VY61EXHq3-dvU1E&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Кактус на Яндекс Картах"><h3 class="review-card__author-name">Кактус</h3><time class="review-card__date" datetime="2026-01-28">28 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=95tke4uh6uhu96vnfxpgk624a8&amp;si=Vm_GqQf7NK5lbEPH-VY61EXHq3-dvU1E&amp;utm_source=review"><p>Здравствуйте! Работать с этой студией понравилось. Надежные, грамотные ребята, сделали все как и хотели и без доделок. Все устроило. Рекомендую!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/214254700" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Лидия Лебедева на 2ГИС"><h3 class="review-card__author-name">Лидия Лебедева</h3><time class="review-card__date" datetime="2026-01-24">24 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/214254700"><p>Долго выбирали подрядчика и не прогадали. Главное, что хочется отметить - это невероятная отзывчивость. Ребята всегда на связи, не нужно ждать ответа сутками, любой вопрос или уточнение разбираются практически в моменте.<br><br>Порадовала и скорость, проект сдали даже чуть раньше срока, при то, что мы и хотели. Отдельное спасибо за терпение и внимание к нашим мелочам - на все наши бесконечные “а как это работает?” давали четкие и понятные ответы. Очень профессиональный подход. Рекомендуем!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/214150213" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Альбина Гареева на 2ГИС"><h3 class="review-card__author-name">Альбина Гареева</h3><time class="review-card__date" datetime="2026-01-24">24 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/214150213"><p>Классная студия графического дизайна и создания сайтов! Студия создала замечательный сайт, учли все пожелания, выполнили все в срок, не теряются и продолжают обслуживать, быстро и четко отвечают на возникающие вопросы. Очень приятно сотрудничать, рекомендую!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-06.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=ytxkrpeh3w3bqx7czwq385nmxc&amp;si=II2c62P_bSLaW_nauieH4nOKyuV513kTO&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Альбина Гареева на Яндекс Картах"><h3 class="review-card__author-name">Альбина Гареева</h3><time class="review-card__date" datetime="2026-01-24">24 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=ytxkrpeh3w3bqx7czwq385nmxc&amp;si=II2c62P_bSLaW_nauieH4nOKyuV513kTO&amp;utm_source=review"><p>Классная студия графического дизайна и создания сайтов! Студия создала замечательный сайт, учли все пожелания, выполнили все в срок, не теряются и продолжают обслуживать, быстро и четко отвечают на возникающие вопросы. Очень приятно сотрудничать, рекомендую!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-07.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=rukzqpq7re4pp19qyzb1vtxzz8&amp;si=RSmj8Ud9YTz_cnXnH6z0tnwZtunB3L&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Yomaku A. на Яндекс Картах"><h3 class="review-card__author-name">Yomaku A.</h3><time class="review-card__date" datetime="2026-01-21">21 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=rukzqpq7re4pp19qyzb1vtxzz8&amp;si=RSmj8Ud9YTz_cnXnH6z0tnwZtunB3L&amp;utm_source=review"><p>Отличная студия! Сайт сделали современный и удобный, учли все пожелания. Особенно ценю, что даже после завершения работы ребята остаются на связи – всегда подскажут, помогут, ответят на любой вопрос. Это редкость сейчас! Приятно работать с теми, кто относится к клиентам по-человечески. Обязательно обращусь еще!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/213582689" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Fox Crazy на 2ГИС"><h3 class="review-card__author-name">Fox Crazy</h3><time class="review-card__date" datetime="2026-01-21">21 января 2026</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/213582689"><p>Отличная студия! Сайт сделали современный и удобный, учли все пожелания. Особенно ценю, что даже после завершения работы ребята остаются на связи – всегда подскажут, помогут, ответят на любой вопрос. Это редкость сейчас! Приятно работать с теми, кто относится к клиентам по-человечески. Обязательно обращусь еще!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-09.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=048ptpz28024ra0tejw4mfgj0w&amp;si=NlcInTLKByJglitwY8CCBoi778BGP8Z&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Анна Шахайда на Яндекс Картах"><h3 class="review-card__author-name">Анна Шахайда</h3><time class="review-card__date" datetime="2025-12-19">19 декабря 2025</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=048ptpz28024ra0tejw4mfgj0w&amp;si=NlcInTLKByJglitwY8CCBoi778BGP8Z&amp;utm_source=review"><p>Искренняя благодарность команде студии ИнтерДиз за работу над логотипом для нашего зоомагазина! Ребят мгновенно поняли нашу концепцию, прислушались ко всем пожеланиям и предложили по-настоящему креативные идеи. В итоге мы получили яркий и запоминающийся логотип, близкий владельцам питомцев. Большое спасибо за ваш труд и талант!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-10.png" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=pk7e5g2xr778h82j989rhaeq5m&amp;si=eVOg3IpKw6407YeaddKcJFW8YO3Q9jk&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Avocado на Яндекс Картах"><h3 class="review-card__author-name">Avocado</h3><time class="review-card__date" datetime="2025-12-19">19 декабря 2025</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=pk7e5g2xr778h82j989rhaeq5m&amp;si=eVOg3IpKw6407YeaddKcJFW8YO3Q9jk&amp;utm_source=review"><p>Заказывали логотип и одностраничник. Работа ребят очень понравилась, все четко, быстро! Рекомендуем!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=fhpu4zn2945y1w3v4z1fqe5d5m&amp;si=fq0XbjHw-w77oa3e_eRJAo133jraGC&amp;utm_source=review" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Максим Щ. на Яндекс Картах"><h3 class="review-card__author-name">Максим Щ.</h3><time class="review-card__date" datetime="2024-07-08">8 июля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://yandex.ru/maps/org/138990591693/reviews?reviews%5BpublicId%5D=fhpu4zn2945y1w3v4z1fqe5d5m&amp;si=fq0XbjHw-w77oa3e_eRJAo133jraGC&amp;utm_source=review"><p>Заказал у ребят сайт для турагентства. Сделали очень быстро и качественно. Разработали уникальный дизайн, а не шаблоны как многие предлагали. Дотошно отнеслись к мелочам и нюансам. Теперь работаю только со студией InterDiz. Рекламную продукцию, поддержку сайта доверяю только им. Рад сотрудничеству.</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-12.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/yandex.webp" alt="Яндекс Карты" width="20" height="20" loading="lazy"></div>
+                <div class="review-card__info"><h3 class="review-card__author-name">ignes_vulpes</h3><time class="review-card__date" datetime="2024-04-25">25 апреля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></div>
+              </div>
+              <blockquote class="review-card__text"><p>Заказывала у ребят логотип для своей студии. Сделали в кратчайшие сроки и очень качественно! Результатом осталась очень довольна. Благодарю??<br>Планирую в дальнейшем делать сайт, теперь буду обращаться только к ним. ??<br>Рекомендую!?</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/80162665" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Валерия Леонтьева на 2ГИС"><h3 class="review-card__author-name">Валерия Леонтьева</h3><time class="review-card__date" datetime="2024-04-25">25 апреля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/80162665"><p>Заказывала у ребят логотип для своей студии. Сделали в кратчайшие сроки и очень качественно! Результатом осталась очень довольна. Планирую в дальнейшем делать сайт, теперь буду обращаться только к ним. Рекомендую!?</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/80129250" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Игорь Колосов на 2ГИС"><h3 class="review-card__author-name">Игорь Колосов</h3><time class="review-card__date" datetime="2024-04-24">24 апреля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/80129250"><p>Отличные ребята, все оперативно сделали и в лучшем виде! Макеты получились бомбические, графика на уровне, отдельное спасибо за срочность!</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/placeholder.webp" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/80123318" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Лена П на 2ГИС"><h3 class="review-card__author-name">Лена П</h3><time class="review-card__date" datetime="2024-04-24">24 апреля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/80123318"><p>Заказали разработку сайта, все сделали в срок и очень качественно. Очень довольны результатом, спасибо)))</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-16.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/80094342" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Вероника Романовна на 2ГИС"><h3 class="review-card__author-name">Вероника Романовна</h3><time class="review-card__date" datetime="2024-04-24">24 апреля 2024</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/80094342"><p>Заказывали небольшой сайт и разработку логотипа. Ребята справились качественно и быстро! Все понравилось, будем заказывать еще</p></blockquote>
+            </article>
+            <article class="review-card" role="listitem">
+              <div class="review-card__author">
+                <div class="review-card__avatar-wrap"><img class="review-card__author-icon" src="./assets/reviews/avatar-17.jpg" alt="" width="50" height="50" loading="lazy" decoding="async"><img class="review-card__platform-icon" src="./assets/reviews/twogis.webp" alt="2ГИС" width="20" height="20" loading="lazy"></div>
+                <a class="review-card__info" href="https://2gis.ru/reviews/70000001054466459/review/55519355" target="_blank" rel="noopener noreferrer" aria-label="Отзыв Константин В. на 2ГИС"><h3 class="review-card__author-name">Константин В.</h3><time class="review-card__date" datetime="2023-07-17">17 июля 2023</time><span class="review-card__rating" role="img" aria-label="Оценка 5 из 5"><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""><img src="./assets/reviews/star.svg" width="12" height="12" alt=""></span></a>
+              </div>
+              <blockquote class="review-card__text" cite="https://2gis.ru/reviews/70000001054466459/review/55519355"><p>Очень понравился дизайнер, индивидуальный подход к каждому клиенту. Утонченный вкус, кропотливое отношение к деталям, даже к самым маленьким и почти незаметным.</p></blockquote>
+            </article>
+        </div>
+      </div>
+    </section>
+
     <!-- Swiss Editorial Footer / Contact (High-contrast, professional, zero blinding light) -->
     <footer class="contact" id="contact">
       <div class="section-kicker">
-        <span class="kicker-index"><span class="crosshair">+</span> 05 // СЛЕДУЮЩИЙ ШАГ</span>
+        <span class="kicker-index"><span class="crosshair">+</span> 06 // СЛЕДУЮЩИЙ ШАГ</span>
         <span class="kicker-meta">НАЧИНАЕТСЯ С РАЗГОВОРА <span class="crosshair">+</span></span>
       </div>
 
