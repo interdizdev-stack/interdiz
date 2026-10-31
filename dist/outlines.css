@@ -189,7 +189,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 
 /* Bring the city and live clock closer to the footer logo on wide screens. */
 @media (min-width: 1101px) {
-  .footer-bottom .footer-clock { transform: translateX(-200px); }
+  .footer-bottom .footer-clock { transform: translateX(-250px); }
 }
 
 /* Keep the footer city and clock lettering free of outlines. */
