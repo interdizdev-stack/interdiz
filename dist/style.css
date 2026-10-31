@@ -1384,6 +1384,10 @@ h1, h2, h3, h4, h5, h6,
   overflow-anchor: none;
 }
 
+.service-list.process-enhanced {
+  min-height: var(--process-list-height, 0px);
+}
+
 .service {
   position: relative;
   border-top: var(--outline-width) solid var(--line);

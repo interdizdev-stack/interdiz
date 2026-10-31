@@ -160,21 +160,35 @@ function setupProcessAccordion() {
   const gsap = window.gsap;
   const states = new Map();
   let scrollFrame = 0;
-  let layoutTimer = 0;
   let hoverTimer = 0;
+  let hoveredRow = null;
   let interactionUntil = 0;
   let previousScroll = pageScroll();
 
-  function refreshLayout() {
-    clearTimeout(layoutTimer);
-    layoutTimer = setTimeout(() => {
-      // Refresh only downstream sections: rebuilding the pinned hero here jumps.
-      const triggers = window.ScrollTrigger?.getAll() ?? [];
-      triggers.forEach(trigger => {
-        if (!trigger.pin && trigger.trigger?.closest?.('.approach, .contact')) trigger.refresh();
-      });
-      updateProgress();
-    }, 50);
+  function measureGeometry() {
+    let collapsedHeight = 0;
+    let maximumContentHeight = 0;
+    rows.forEach(row => {
+      const state = states.get(row);
+      // Measure outside closed details, without changing the page's layout.
+      const probe = state.content.cloneNode(true);
+      probe.setAttribute('aria-hidden', 'true');
+      probe.inert = true;
+      probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;height:auto;overflow:visible;width:${row.clientWidth}px`;
+      list.append(probe);
+      state.height = probe.getBoundingClientRect().height;
+      probe.remove();
+      const bounds = row.getBoundingClientRect();
+      state.anchor = collapsedHeight + state.summary.getBoundingClientRect().top - bounds.top;
+      collapsedHeight += bounds.height - (row.open ? state.content.getBoundingClientRect().height : 0);
+      maximumContentHeight = Math.max(maximumContentHeight, state.height);
+    });
+    // One description slot is shared by all rows. Its size never changes while
+    // switching, so ScrollSmoother's ResizeObserver cannot rebuild the hero.
+    list.style.setProperty('--process-list-height', `${Math.ceil(collapsedHeight + maximumContentHeight) + 1}px`);
+    rows.forEach((row, index) => {
+      states.get(row).anchor += maximumContentHeight * index / rows.length;
+    });
   }
 
   function finishRow(row) {
@@ -186,12 +200,12 @@ function setupProcessAccordion() {
     gsap?.set(state.content, { clearProps: 'height,overflow' });
     gsap?.set(state.copy, { clearProps: 'opacity,transform' });
     gsap?.set(state.pulse, { clearProps: 'opacity,transform' });
-    refreshLayout();
+    updateProgress();
   }
 
-  function setExpanded(row, expanded) {
+  function setExpanded(row, expanded, retime = false) {
     const state = states.get(row);
-    if (state.expanded === expanded) return;
+    if (state.expanded === expanded && !(retime && state.timeline)) return;
     state.timeline?.kill();
     const wasOpen = row.open;
     const currentHeight = wasOpen ? state.content.getBoundingClientRect().height : 0;
@@ -207,15 +221,13 @@ function setupProcessAccordion() {
     // Keep details open until the closing animation ends, and reverse from
     // the current height when the user switches again before it finishes.
     row.open = true;
-    gsap.set(state.content, { height: 'auto', overflow: 'hidden' });
-    const targetHeight = state.content.getBoundingClientRect().height;
-    gsap.set(state.content, { height: currentHeight });
+    gsap.set(state.content, { height: currentHeight, overflow: 'hidden', autoRound: false });
     row.classList.add('is-animating');
     const timeline = gsap.timeline({ onComplete: () => finishRow(row) });
     state.timeline = timeline;
     if (expanded) {
       if (!wasOpen) gsap.set(state.copy, { y: 18, opacity: 0 });
-      timeline.to(state.content, { height: targetHeight, duration: 0.62, ease: 'power3.inOut' }, 0)
+      timeline.to(state.content, { height: state.height, autoRound: false, duration: 0.62, ease: 'power3.inOut' }, 0)
         .to(state.copy, { y: 0, opacity: 1, duration: 0.48, ease: 'power3.out' }, 0.12)
         .fromTo(state.pulse, { x: '-100%', opacity: 1 }, {
           x: () => row.clientWidth, duration: 0.8, ease: 'power2.inOut'
@@ -223,7 +235,7 @@ function setupProcessAccordion() {
         .to(state.pulse, { opacity: 0, duration: 0.16 }, 0.64);
     } else {
       timeline.to(state.copy, { y: -8, opacity: 0, duration: 0.18, ease: 'power2.in' }, 0)
-        .to(state.content, { height: 0, duration: 0.42, ease: 'power3.inOut' }, 0)
+        .to(state.content, { height: 0, autoRound: false, duration: 0.62, ease: 'power3.inOut' }, 0)
         .to(state.pulse, { opacity: 0, duration: 0.12 }, 0);
     }
   }
@@ -231,7 +243,9 @@ function setupProcessAccordion() {
   function openStep(row, manual = false) {
     if (manual) interactionUntil = performance.now() + 900;
     if (states.get(row).expanded) return;
-    rows.forEach(other => setExpanded(other, other === row));
+    // Matching height tweens keep their combined height within the reserved slot,
+    // including interrupted transitions between three or more rows.
+    rows.forEach(other => setExpanded(other, other === row, true));
   }
 
   function revealOnScroll() {
@@ -240,15 +254,19 @@ function setupProcessAccordion() {
     if (performance.now() < interactionUntil) return;
     // Keyboard users keep control of the step they are interacting with.
     if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
-    // While pointing at the list, hover owns selection instead of the reading line.
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches && list.matches(':hover')) return;
     const readingLine = innerHeight * 0.55;
     const bounds = list.getBoundingClientRect();
     if (bounds.top > readingLine || bounds.bottom < 0) return;
+    const readingPosition = readingLine - bounds.top;
     let current = rows[0];
     rows.forEach(row => {
-      if ($('summary', row).getBoundingClientRect().top <= readingLine) current = row;
+      if (states.get(row).anchor <= readingPosition) current = row;
     });
+    const activeIndex = rows.findIndex(row => states.get(row).expanded);
+    const nextIndex = rows.indexOf(current);
+    // A small dead band prevents boundary chatter when wheel input changes direction.
+    if (activeIndex >= 0 && nextIndex > activeIndex && readingPosition < states.get(current).anchor + 20) return;
+    if (activeIndex >= 0 && nextIndex < activeIndex && readingPosition > states.get(rows[activeIndex]).anchor - 20) return;
     openStep(current);
   }
 
@@ -261,7 +279,7 @@ function setupProcessAccordion() {
     const pulse = document.createElement('span');
     scan.append(pulse);
     row.prepend(scan);
-    states.set(row, { summary, content, copy: $('p', content), pulse, expanded: row.open, timeline: null });
+    states.set(row, { summary, content, copy: $('p', content), pulse, expanded: row.open, timeline: null, height: 0, anchor: 0 });
     row.classList.toggle('is-expanded', row.open);
     summary.setAttribute('aria-expanded', String(row.open));
     content.setAttribute('aria-hidden', String(!row.open));
@@ -272,15 +290,25 @@ function setupProcessAccordion() {
       if (states.get(row).expanded) setExpanded(row, false);
       else openStep(row, true);
     });
-    row.addEventListener('pointerenter', event => {
-      if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
-      if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
-      clearTimeout(hoverTimer);
-      hoverTimer = setTimeout(() => openStep(row, true), 100);
-    });
-    row.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
+  });
+  // Only real pointer movement selects a hovered row. Layout changes and wheel
+  // scrolling beneath a stationary pointer must not start another transition.
+  list.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
+    if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
+    const row = event.target.closest('.service');
+    if (row === hoveredRow) return;
+    hoveredRow = row;
+    clearTimeout(hoverTimer);
+    if (row) hoverTimer = setTimeout(() => openStep(row, true), 100);
+  });
+  list.addEventListener('pointerleave', () => {
+    hoveredRow = null;
+    clearTimeout(hoverTimer);
   });
   list.classList.add('process-enhanced');
+  measureGeometry();
+  document.fonts.ready.then(measureGeometry);
   finishProcessAnimations = () => rows.forEach(finishRow);
   updateProcessOnScroll = () => {
     const position = pageScroll();
@@ -291,6 +319,7 @@ function setupProcessAccordion() {
   addEventListener('scroll', updateProcessOnScroll, { passive: true });
   addEventListener('resize', () => {
     finishProcessAnimations();
+    measureGeometry();
     if (!scrollFrame) scrollFrame = requestAnimationFrame(revealOnScroll);
   });
   requestAnimationFrame(revealOnScroll);
