@@ -233,3 +233,12 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 .contact .contact-hero h2 > a:hover .contact-glow {
   text-shadow: none;
 }
+
+/* Shorten both FAQ dashes while keeping their stroke weight. */
+.approach .faq-short-dash {
+  display: inline-block;
+  width: .8em;
+  transform: scaleX(.8);
+  transform-origin: left center;
+  white-space: nowrap;
+}
