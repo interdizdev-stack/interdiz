@@ -1003,15 +1003,16 @@ h1, h2, h3, h4, h5, h6,
   transition: transform 0.45s;
 }
 
-.solutions-hint {
+.solutions-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-left: auto;
-  color: var(--muted);
-  font-size: 14px;
 }
 
-.solutions-hint > span {
-  margin-left: 12px;
-  color: var(--lime);
+.solutions-hint {
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .solutions-controls {
@@ -1980,9 +1981,6 @@ h1, h2, h3, h4, h5, h6,
   .gallery-navigation { grid-column: 1 / -1; justify-self: end; }
   .solutions-hint {
     display: none;
-  }
-  .solutions-controls {
-    margin-left: auto;
   }
   .contact-grid {
     grid-template-columns: 1fr;
