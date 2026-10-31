@@ -118,7 +118,7 @@ html[data-theme="dark"] .solution-card .service-open:hover {
 
 /* Navigation labels stay clean in both themes. */
 .floating-nav, .floating-nav * { -webkit-text-stroke: 0 !important; text-shadow: none !important; }
-.floating-nav { width: max-content; max-width: calc(100vw - 24px); gap: 12px; padding: 8px 29px; }
+.floating-nav { width: max-content; max-width: calc(100vw - 24px); gap: 12px; padding: 28px 29px; }
 .floating-nav .float-links { min-width: 0; gap: 8px; overflow: visible; }
 .floating-nav .float-links a { position: relative; display: block; white-space: nowrap; flex-shrink: 0; font-size: 16px; line-height: 1.4; padding: 7px 21px 4px 2px; }
 .floating-nav .float-links .nav-num { position: absolute; top: 2px; right: 1px; font-size: 9px; line-height: 1; }
