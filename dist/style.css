@@ -1385,6 +1385,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .service {
+  position: relative;
   border-top: var(--outline-width) solid var(--line);
   padding: 0 0 24px;
   transition: background 0.3s;
@@ -1436,7 +1437,7 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 300;
   font-size: 32px;
   color: var(--lime);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .service[open] .service-plus {
@@ -1444,11 +1445,12 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .service-content {
+  display: flow-root;
   padding-left: 45px;
   padding-right: 12px;
 }
 
-.service[open] .service-content {
+.service-list:not(.process-enhanced) .service[open] .service-content {
   animation: process-reveal 0.3s ease-out both;
 }
 
@@ -1457,7 +1459,30 @@ h1, h2, h3, h4, h5, h6,
   to { opacity: 1; transform: translateY(0); }
 }
 
+.process-enhanced .service .service-plus { transform: rotate(0); }
+.process-enhanced .service.is-expanded .service-plus { transform: rotate(45deg); }
+
+.service-scan {
+  position: absolute;
+  top: calc(-1 * var(--outline-width));
+  left: 0;
+  right: 0;
+  height: var(--outline-width);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.service-scan > span {
+  display: block;
+  width: 32%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--lime), transparent);
+  opacity: 0;
+}
+
 .reduced-motion .service-content { animation: none; }
+.reduced-motion .service-plus { transition: none; }
+.reduced-motion .service-scan { display: none; }
 
 .service-content p {
   font-size: 15px;

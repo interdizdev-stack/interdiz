@@ -22,6 +22,7 @@ let reduced = userReduced ?? motionPreference.matches;
 let scene, animationContext, smoother;
 let heroTrigger;
 let updateProcessOnScroll;
+let finishProcessAnimations;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 
 const updateProgress = () => {
@@ -151,25 +152,96 @@ $('.service-dialog-contact')?.addEventListener('click', () => {
   serviceDialog.close();
 });
 
-// Keep native click/keyboard controls; reveal the current step while reading.
+// Keep native summary keyboard activation while animating both directions.
 function setupProcessAccordion() {
   const list = $('#expertise .service-list');
   if (!list) return;
   const rows = $$('.service', list);
+  const gsap = window.gsap;
+  const states = new Map();
   let scrollFrame = 0;
   let layoutTimer = 0;
+  let hoverTimer = 0;
+  let interactionUntil = 0;
   let previousScroll = pageScroll();
 
-  function openStep(row) {
-    if (row.open) return;
-    rows.forEach(other => { other.open = other === row; });
+  function refreshLayout() {
+    clearTimeout(layoutTimer);
+    layoutTimer = setTimeout(() => {
+      // Refresh only downstream sections: rebuilding the pinned hero here jumps.
+      const triggers = window.ScrollTrigger?.getAll() ?? [];
+      triggers.forEach(trigger => {
+        if (!trigger.pin && trigger.trigger?.closest?.('.approach, .contact')) trigger.refresh();
+      });
+      updateProgress();
+    }, 50);
+  }
+
+  function finishRow(row) {
+    const state = states.get(row);
+    state.timeline?.kill();
+    state.timeline = null;
+    row.open = state.expanded;
+    row.classList.remove('is-animating');
+    gsap?.set(state.content, { clearProps: 'height,overflow' });
+    gsap?.set(state.copy, { clearProps: 'opacity,transform' });
+    gsap?.set(state.pulse, { clearProps: 'opacity,transform' });
+    refreshLayout();
+  }
+
+  function setExpanded(row, expanded) {
+    const state = states.get(row);
+    if (state.expanded === expanded) return;
+    state.timeline?.kill();
+    const wasOpen = row.open;
+    const currentHeight = wasOpen ? state.content.getBoundingClientRect().height : 0;
+    state.expanded = expanded;
+    row.classList.toggle('is-expanded', expanded);
+    state.summary.setAttribute('aria-expanded', String(expanded));
+    state.content.setAttribute('aria-hidden', String(!expanded));
+    if (reduced || !gsap) {
+      finishRow(row);
+      return;
+    }
+
+    // Keep details open until the closing animation ends, and reverse from
+    // the current height when the user switches again before it finishes.
+    row.open = true;
+    gsap.set(state.content, { height: 'auto', overflow: 'hidden' });
+    const targetHeight = state.content.getBoundingClientRect().height;
+    gsap.set(state.content, { height: currentHeight });
+    row.classList.add('is-animating');
+    const timeline = gsap.timeline({ onComplete: () => finishRow(row) });
+    state.timeline = timeline;
+    if (expanded) {
+      if (!wasOpen) gsap.set(state.copy, { y: 18, opacity: 0 });
+      timeline.to(state.content, { height: targetHeight, duration: 0.62, ease: 'power3.inOut' }, 0)
+        .to(state.copy, { y: 0, opacity: 1, duration: 0.48, ease: 'power3.out' }, 0.12)
+        .fromTo(state.pulse, { x: '-100%', opacity: 1 }, {
+          x: () => row.clientWidth, duration: 0.8, ease: 'power2.inOut'
+        }, 0)
+        .to(state.pulse, { opacity: 0, duration: 0.16 }, 0.64);
+    } else {
+      timeline.to(state.copy, { y: -8, opacity: 0, duration: 0.18, ease: 'power2.in' }, 0)
+        .to(state.content, { height: 0, duration: 0.42, ease: 'power3.inOut' }, 0)
+        .to(state.pulse, { opacity: 0, duration: 0.12 }, 0);
+    }
+  }
+
+  function openStep(row, manual = false) {
+    if (manual) interactionUntil = performance.now() + 900;
+    if (states.get(row).expanded) return;
+    rows.forEach(other => setExpanded(other, other === row));
   }
 
   function revealOnScroll() {
     scrollFrame = 0;
     if (document.body.classList.contains('dialog-open')) return;
+    if (performance.now() < interactionUntil) return;
     // Keyboard users keep control of the step they are interacting with.
     if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
+    // While pointing at the list, hover owns selection instead of the reading line.
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches && list.matches(':hover')) return;
     const readingLine = innerHeight * 0.55;
     const bounds = list.getBoundingClientRect();
     if (bounds.top > readingLine || bounds.bottom < 0) return;
@@ -181,23 +253,35 @@ function setupProcessAccordion() {
   }
 
   rows.forEach(row => {
+    const summary = $('summary', row);
+    const content = $('.service-content', row);
+    const scan = document.createElement('span');
+    scan.className = 'service-scan';
+    scan.setAttribute('aria-hidden', 'true');
+    const pulse = document.createElement('span');
+    scan.append(pulse);
+    row.prepend(scan);
+    states.set(row, { summary, content, copy: $('p', content), pulse, expanded: row.open, timeline: null });
+    row.classList.toggle('is-expanded', row.open);
+    summary.setAttribute('aria-expanded', String(row.open));
+    content.setAttribute('aria-hidden', String(!row.open));
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      clearTimeout(hoverTimer);
+      interactionUntil = performance.now() + 900;
+      if (states.get(row).expanded) setExpanded(row, false);
+      else openStep(row, true);
+    });
     row.addEventListener('pointerenter', event => {
-      if (event.pointerType === 'mouse' && matchMedia('(hover: hover)').matches) openStep(row);
+      if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
+      if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => openStep(row, true), 100);
     });
-    row.addEventListener('toggle', () => {
-      if (row.open) rows.forEach(other => { if (other !== row) other.open = false; });
-      clearTimeout(layoutTimer);
-      layoutTimer = setTimeout(() => {
-        // Refresh only the sections below the steps. A global refresh would
-        // unpin/rebuild the hero during the user's scroll.
-        const triggers = window.ScrollTrigger?.getAll() ?? [];
-        triggers.forEach(trigger => {
-          if (!trigger.pin && trigger.trigger?.closest?.('.approach, .contact')) trigger.refresh();
-        });
-        updateProgress();
-      }, 180);
-    });
+    row.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
   });
+  list.classList.add('process-enhanced');
+  finishProcessAnimations = () => rows.forEach(finishRow);
   updateProcessOnScroll = () => {
     const position = pageScroll();
     if (Math.abs(position - previousScroll) < 1) return;
@@ -206,6 +290,7 @@ function setupProcessAccordion() {
   };
   addEventListener('scroll', updateProcessOnScroll, { passive: true });
   addEventListener('resize', () => {
+    finishProcessAnimations();
     if (!scrollFrame) scrollFrame = requestAnimationFrame(revealOnScroll);
   });
   requestAnimationFrame(revealOnScroll);
@@ -440,6 +525,7 @@ function setupProjectGallery() {
 }
 
 function setupAnimations() {
+  finishProcessAnimations?.();
   if (!window.gsap || !window.ScrollTrigger) return;
   const { gsap, ScrollTrigger, ScrollSmoother } = window;
   animationContext?.revert();
