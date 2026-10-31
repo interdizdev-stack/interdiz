@@ -208,3 +208,20 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 @media (max-width: 600px) {
   .footer-bottom .footer-copyright { align-self: center; text-align: center; }
 }
+
+/* A fixed shortcut back to the first screen beside the display controls. */
+.quick-home {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--lime);
+  border: var(--outline-width) solid var(--line-strong);
+  font-size: 22px;
+  line-height: 1;
+  transition: background .2s, color .2s;
+}
+.quick-home:hover { background: var(--lime); color: #0c0e0c; }
