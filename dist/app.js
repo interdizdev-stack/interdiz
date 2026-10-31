@@ -731,31 +731,31 @@ function setupAnimations() {
         const projectsReveal = gsap.timeline({
           scrollTrigger: {
             id: 'projects-pulse-horizontal-reveal',
-            trigger: '.gallery-window',
-            start: 'top 88%',
+            trigger: '.projects',
+            start: 'top 95%',
             once: true,
             invalidateOnRefresh: true
           }
         });
-        // A single accent crosses the existing rule before the content appears.
+        // Reveal the content with the accent as soon as the section enters.
         projectsReveal
           .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
             x: () => line.clientWidth,
-            duration: 0.95, ease: 'power2.inOut'
+            duration: 0.55, ease: 'power2.inOut'
           }, 0)
           .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
-          .to(pulse, { opacity: 0, duration: 0.15 }, 0.8)
+          .to(pulse, { opacity: 0, duration: 0.15 }, 0.4)
           .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
-            y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+            y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
             immediateRender: true, clearProps: 'transform,opacity'
-          }, 0.8)
+          }, 0)
           .fromTo('.gallery-window', {
             x: () => Math.min(innerWidth * (mobile ? 0.35 : 0.24), mobile ? 200 : 360),
             opacity: 0
           }, {
-            x: 0, opacity: 1, duration: 1.25, ease: 'power3.out',
+            x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
             immediateRender: true, clearProps: 'transform,opacity'
-          }, 1.02);
+          }, 0.08);
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
         gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
@@ -765,20 +765,24 @@ function setupAnimations() {
 
       gsap.from('.service', { y: 35, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
       gsap.from('.expertise h2', { y: 70, opacity: 0.2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: 0.6 } });
-      // Reveal the complete FAQ chapter as one unit, including its heading.
-      gsap.from('.approach', {
-        y: mobile ? 45 : 80,
-        opacity: 0,
-        duration: 1.15,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity',
-        scrollTrigger: {
-          id: 'faq-block-reveal',
-          trigger: '.approach',
-          start: 'top 85%',
-          once: true
-        }
-      });
+      // Move the complete FAQ with scroll; use layout coordinates so its
+      // own transform cannot shift the trigger on refresh.
+      const faqSection = $('.approach');
+      if (faqSection) {
+        const faqParallax = mobile ? 55 : 110;
+        gsap.fromTo(faqSection, { y: faqParallax }, {
+          y: 0,
+          ease: 'none',
+          scrollTrigger: {
+            id: 'faq-block-parallax',
+            trigger: faqSection.parentElement,
+            start: () => `top+=${faqSection.offsetTop} bottom`,
+            end: () => `top+=${faqSection.offsetTop} 20%`,
+            scrub: smoother ? true : 0.6,
+            invalidateOnRefresh: true
+          }
+        });
+      }
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
       gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
