@@ -50,7 +50,7 @@ body { font-weight: 450; }
 .solution-card-meta, .solutions-hint, .gallery-hint, .tags > span { font-weight: 500; }
 .contact-pill { font-weight: 600; }
 .section-kicker, .gallery-footer, .footer-bottom, .service,
-.approach-card, .approach, .contact, .manifesto, .marquee { border-width: var(--outline-width); }
+.faq-item, .approach, .contact, .manifesto, .marquee { border-width: var(--outline-width); }
 .solution-card, .project-image, .contact-card, .contact-pill,
 .floating-nav, .project-dialog, .dialog-close, .scroll-circle,
 .solutions-controls button, .gallery-controls button, .motion-toggle { border-width: var(--outline-width); }

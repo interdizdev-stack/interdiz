@@ -325,6 +325,38 @@ function setupProcessAccordion() {
   requestAnimationFrame(revealOnScroll);
 }
 
+// Native details keep click and keyboard behavior; one shared answer slot keeps
+// ScrollSmoother from rebuilding the pinned hero whenever a question changes.
+function setupFAQ() {
+  const list = $('.faq-list');
+  if (!list) return;
+  const rows = $$('.faq-item', list);
+  function measure() {
+    let collapsedHeight = 0;
+    let answerHeight = 0;
+    rows.forEach(row => {
+      const answer = $('.faq-answer', row);
+      const probe = answer.cloneNode(true);
+      probe.setAttribute('aria-hidden', 'true');
+      probe.inert = true;
+      probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;width:${row.clientWidth}px`;
+      list.append(probe);
+      answerHeight = Math.max(answerHeight, probe.getBoundingClientRect().height);
+      probe.remove();
+      collapsedHeight += row.getBoundingClientRect().height - (row.open ? answer.getBoundingClientRect().height : 0);
+    });
+    list.style.setProperty('--faq-list-height', `${Math.ceil(collapsedHeight + answerHeight) + 1}px`);
+    list.classList.add('faq-enhanced');
+  }
+  // Also group questions in browsers without support for details[name].
+  rows.forEach(row => row.addEventListener('toggle', () => {
+    if (row.open) rows.forEach(other => { if (other !== row) other.open = false; });
+  }));
+  measure();
+  document.fonts.ready.then(measure);
+  addEventListener('resize', measure);
+}
+
 function updateMotionButton() {
   const btn = $('.motion-toggle');
   if (!btn) return;
@@ -707,8 +739,6 @@ function setupAnimations() {
 
       gsap.from('.service', { y: 35, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
       gsap.from('.expertise h2', { y: 70, opacity: 0.2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: 0.6 } });
-      gsap.from('.approach-line', { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach', start: 'top 85%', once: true } });
-      gsap.from('.approach-card', { x: -18, opacity: 0, stagger: 0.1, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-grid', start: 'top 90%', once: true } });
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
       gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
@@ -771,7 +801,7 @@ function setupCursor() {
   requestAnimationFrame(renderCursor);
 
   document.addEventListener('mouseover', e => {
-    const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, .service summary');
+    const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, summary');
     const overCard = target?.closest('.solutions-track, .project-card, .gallery-window');
     dot.classList.toggle('cursor-card-active', Boolean(overCard));
     if (!target) {
@@ -873,6 +903,7 @@ async function init() {
   setupSolutionsCarousel();
   setupProjectGallery();
   setupProcessAccordion();
+  setupFAQ();
   setupAnimations();
   setupCursor();
   setupCardTilt();

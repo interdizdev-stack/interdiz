@@ -60,7 +60,7 @@
   paint-order: stroke fill;
   filter: none;
 }
-.status-pulse, .approach-mark, .swiss-cursor-dot {
+.status-pulse, .swiss-cursor-dot {
   border: var(--outline-width) solid #000;
 }
 .studio-badge, .tags > span:hover, .marquee,
@@ -69,7 +69,7 @@
   border-width: var(--outline-width);
 }
 .solutions-progress > span, .gallery-progress > span,
-.scroll-progress > span, .approach-card::after {
+.scroll-progress > span {
   box-shadow: 0 0 0 var(--outline-width) #000;
 }
 
