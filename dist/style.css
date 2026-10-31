@@ -1365,6 +1365,8 @@ h1, h2, h3, h4, h5, h6,
   margin-top: 40px;
 }
 
+.expertise-sidebar { min-width: 0; }
+
 .studio-badge {
   display: inline-flex;
   align-items: center;
@@ -1528,10 +1530,6 @@ h1, h2, h3, h4, h5, h6,
 .approach h2 { margin-top: 40px; }
 
 .approach-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(40px, 6vw, 100px);
   margin-top: 48px;
 }
 
@@ -1591,6 +1589,7 @@ h1, h2, h3, h4, h5, h6,
   padding: 20px 0 0 40px;
   border-left: var(--outline-width) solid var(--line-lime);
 }
+.expertise-testimonial { margin-top: 32px; }
 .testimonial-label { display: flex; align-items: center; gap: 10px; color: var(--fg-muted); font-size: 12px; letter-spacing: 1px; }
 .approach-testimonial blockquote { margin: 0; }
 .approach-testimonial blockquote p { font-size: 17px; line-height: 1.65; color: #e2e5dc; }
@@ -1995,7 +1994,6 @@ h1, h2, h3, h4, h5, h6,
    15. Responsive Adaptations
    ======================================================== */
 @media (max-width: 1100px) {
-  .approach-content { grid-template-columns: 1fr; }
   .gallery-navigation { grid-column: 1 / -1; justify-self: end; }
   .solutions-hint,
   .gallery-hint {
@@ -2228,7 +2226,7 @@ h1, h2, h3, h4, h5, h6,
   .expertise h2 {
     margin: 40px 0 0;
   }
-  .approach-content { margin-top: 28px; gap: 36px; }
+  .approach-content { margin-top: 28px; }
   .approach-card { padding: 24px 0; gap: 16px; }
   .approach-testimonial { padding: 28px 0 0; border-left: 0; border-top: var(--outline-width) solid var(--line-lime); }
   .service summary {
