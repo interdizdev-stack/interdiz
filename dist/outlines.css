@@ -131,3 +131,17 @@ html[data-theme="dark"] .solution-card .service-open:hover {
 
 /* White menu labels and section numbers. */
 .floating-nav .float-links a, .floating-nav .float-links a:hover, .floating-nav .float-links .nav-num { color: #fff; }
+
+/* Current section glows as the page moves between chapters. */
+.floating-nav .float-links a,
+.floating-nav .float-links .nav-num {
+  transition: color .3s ease, text-shadow .3s ease;
+}
+.floating-nav .float-links a.is-current,
+.floating-nav .float-links a.is-current .nav-num {
+  color: var(--lime);
+  text-shadow: 0 0 14px rgba(194, 255, 67, .5) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-nav .float-links a, .floating-nav .float-links .nav-num { transition: none; }
+}

@@ -28,6 +28,28 @@ let finishProcessAnimations;
 let updateReviewsMotion;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 
+const menuSections = $$('.floating-nav .float-links a').map(link => ({
+  link, section: document.querySelector(link.getAttribute('href'))
+})).filter(item => item.section);
+let activeMenuLink = null;
+function updateActiveMenu() {
+  const rail = Math.max(120, innerHeight * 0.3);
+  let active = null;
+  for (const item of menuSections) {
+    if (item.section.getBoundingClientRect().top <= rail) active = item.link;
+  }
+  if (innerHeight + pageScroll() >= document.documentElement.scrollHeight - 4) {
+    active = menuSections.at(-1)?.link ?? active;
+  }
+  if (active === activeMenuLink) return;
+  activeMenuLink = active;
+  menuSections.forEach(({ link }) => {
+    link.classList.toggle('is-current', link === active);
+    if (link === active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+}
+
 const updateProgress = () => {
   const distance = document.documentElement.scrollHeight - innerHeight;
   const position = pageScroll();
@@ -910,6 +932,10 @@ async function init() {
   setupFAQ();
   updateReviewsMotion = setupReviews(() => reduced);
   setupAnimations();
+  updateActiveMenu();
+  if (window.gsap) window.gsap.ticker.add(updateActiveMenu);
+  else addEventListener('scroll', updateActiveMenu, { passive: true });
+  addEventListener('resize', updateActiveMenu, { passive: true });
   setupCursor();
   setupCardTilt();
   setupClock();
