@@ -827,8 +827,9 @@ function setupCursor() {
   requestAnimationFrame(renderCursor);
 
   document.addEventListener('mouseover', e => {
-    const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, summary');
-    const overCard = target?.closest('.solutions-track, .project-card, .gallery-window');
+    const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, .reviews-wall, summary');
+    const overReviews = target?.closest('.reviews-wall');
+    const overCard = target?.closest('.solutions-track, .project-card, .gallery-window, .reviews-wall');
     dot.classList.toggle('cursor-card-active', Boolean(overCard));
     if (!target) {
       ring.className = 'swiss-cursor-ring';
@@ -836,8 +837,8 @@ function setupCursor() {
       return;
     }
     if (overCard) {
-      ring.className = 'swiss-cursor-ring cursor-card';
-      if (label) label.textContent = '↗';
+      ring.className = `swiss-cursor-ring cursor-card${overReviews ? ' cursor-reviews' : ''}`;
+      if (label) label.textContent = overReviews ? 'ЛИСТАТЬ' : '↗';
     } else {
       ring.className = 'swiss-cursor-ring cursor-hover';
       if (label) label.textContent = '';

@@ -13,9 +13,9 @@ export function setupReviews(isReduced) {
   previous?.removeAttribute('hidden');
   next?.removeAttribute('hidden');
   let source = 'all';
-  let introComplete = false;
-  let introTimer;
   let navigation = null;
+  let navigationHold = false;
+  let navigationTimer;
   let navigationTarget = 0;
   let visible = false;
   let paused = false;
@@ -37,10 +37,8 @@ export function setupReviews(isReduced) {
   function stopNavigation() {
     navigation?.kill();
     navigation = null;
-  }
-  function finishIntro() {
-    clearTimeout(introTimer);
-    introComplete = true;
+    clearTimeout(navigationTimer);
+    navigationHold = false;
   }
   function measure() {
     stopNavigation();
@@ -82,17 +80,14 @@ export function setupReviews(isReduced) {
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
-    wall.classList.toggle('is-paused', paused || reduced);
-    wall.classList.toggle('is-reading', !introComplete);
-    if (visible && introComplete && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
+    wall.classList.toggle('is-paused', paused || reduced || navigationHold || touching);
+    if (visible && !paused && !reduced && !filtered && !focused && !touching && !navigationHold && !document.hidden) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
   filters.forEach(filter => filter.addEventListener('click', () => {
     stop();
     stopNavigation();
-    finishIntro();
-    paused = true;
     source = filter.dataset.reviewsFilter;
     // Restore the original order even after the moving wall recycled columns.
     cards.forEach(card => {
@@ -109,10 +104,9 @@ export function setupReviews(isReduced) {
   }));
   function move(direction) {
     stop();
-    finishIntro();
-    paused = true;
     const from = navigation ? navigationTarget : wall.scrollLeft;
     stopNavigation();
+    navigationHold = true;
     navigationTarget = Math.max(0, Math.min(wall.scrollWidth - wall.clientWidth, from + direction * columnStep));
     track.style.transform = '';
     update();
@@ -120,17 +114,23 @@ export function setupReviews(isReduced) {
       navigation = window.gsap.to(wall, {
         scrollLeft: navigationTarget, duration: .55, ease: 'power2.out',
         onUpdate: updateControls,
-        onComplete: () => { navigation = null; position = wall.scrollLeft; updateControls(); }
+        onComplete: finishNavigation
       });
     } else {
       wall.scrollTo({ left: navigationTarget, behavior: isReduced() ? 'instant' : 'smooth' });
-      updateControls();
+      navigationTimer = setTimeout(finishNavigation, isReduced() ? 0 : 550);
     }
+  }
+  function finishNavigation() {
+    navigation = null;
+    position = wall.scrollLeft;
+    updateControls();
+    navigationTimer = setTimeout(() => { navigationHold = false; update(); }, 1200);
   }
   previous?.addEventListener('click', () => move(-1));
   next?.addEventListener('click', () => move(1));
   wall.addEventListener('scroll', updateControls, { passive: true });
-  button.addEventListener('click', () => { stopNavigation(); finishIntro(); paused = !paused; update(); });
+  button.addEventListener('click', () => { stopNavigation(); paused = !paused; update(); });
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });
   wall.addEventListener('focusin', update);
@@ -180,19 +180,12 @@ export function setupReviews(isReduced) {
   // Touch scrolling can finish beyond the wall without pointer capture.
   addEventListener('pointerup', finish);
   document.addEventListener('visibilitychange', update);
-  addEventListener('resize', measure);
-  addEventListener('pagehide', () => { stop(); stopNavigation(); clearTimeout(introTimer); });
+  addEventListener('resize', () => { measure(); update(); });
+  addEventListener('pagehide', () => { stop(); stopNavigation(); });
   addEventListener('pageshow', update);
-  // Let the first review (Vadim) be read before the wall starts moving.
-  new IntersectionObserver(([entry]) => {
-    const entered = entry.isIntersecting && entry.intersectionRatio >= .5;
-    if (entered && !visible && !introComplete) introTimer = setTimeout(() => { introComplete = true; update(); }, 8000);
-    if (!entered) clearTimeout(introTimer);
-    visible = entered;
-    update();
-  }, { threshold: [0, .5] }).observe(wall);
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }, { rootMargin: '200px' }).observe(wall);
   measure();
-  document.fonts.ready.then(measure);
+  document.fonts.ready.then(() => { measure(); update(); });
   update();
   return update;
 }
