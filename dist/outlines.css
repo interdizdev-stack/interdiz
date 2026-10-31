@@ -227,3 +227,9 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 .quick-home:hover { background: var(--lime); color: #0c0e0c; }
 
 .approach .faq-cta { font-weight: 700; }
+
+/* Keep the contact headline crisp without a glow in any interaction state. */
+.contact .contact-glow,
+.contact .contact-hero h2 > a:hover .contact-glow {
+  text-shadow: none;
+}
