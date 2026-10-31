@@ -254,3 +254,24 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 .contact-card:last-child .contact-card-top > span:first-child {
   white-space: nowrap;
 }
+
+/* Share text rows across contact cards instead of spacing each card separately. */
+@media (min-width: 1101px) {
+  .contact-grid { row-gap: 24px; }
+  .contact-grid > .contact-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    align-items: start;
+  }
+  .contact-card .contact-card-top { margin: 0; align-self: start; align-items: baseline; gap: 12px; }
+  .contact-card .contact-desc { margin: 0; align-self: start; }
+}
+.contact-card .contact-val {
+  margin: 0;
+  padding: 6px 0;
+  border: 0 solid transparent !important;
+  min-height: 42px;
+  line-height: 1.35;
+  align-self: start;
+}
