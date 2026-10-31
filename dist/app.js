@@ -36,7 +36,7 @@ function updateActiveMenu() {
   const rail = Math.max(120, innerHeight * 0.3);
   let active = null;
   for (const item of menuSections) {
-    if (item.section.getBoundingClientRect().top <= rail) active = item.link;
+    if (item.section.getBoundingClientRect().top <= rail && (!active || item.section.getBoundingClientRect().top > document.querySelector(active.getAttribute('href')).getBoundingClientRect().top)) active = item.link;
   }
   if (innerHeight + pageScroll() >= document.documentElement.scrollHeight - 4) {
     active = menuSections.at(-1)?.link ?? active;
