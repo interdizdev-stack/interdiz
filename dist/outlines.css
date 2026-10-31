@@ -242,3 +242,15 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   transform-origin: left center;
   white-space: nowrap;
 }
+
+/* Give the phone card more room while retaining the stacked mobile layout. */
+@media (min-width: 1101px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); }
+}
+.contact-card:last-child .contact-card-top {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.contact-card:last-child .contact-card-top > span:first-child {
+  white-space: nowrap;
+}
