@@ -2,7 +2,7 @@
 html[data-theme="dark"] { color-scheme: dark; }
 html[data-theme="dark"] .header-caption { margin-inline-start: -20px; }
 html[data-theme="dark"] .header nav a span { font-size: 12px; }
-html[data-theme="dark"] :is(.solutions-controls, .gallery-controls) { color: var(--lime); }
+html[data-theme="dark"] :is(.solutions-controls, .gallery-controls, .reviews-carousel) { color: var(--lime); }
 .hero-chapter-topline {
   display: block;
   visibility: hidden;
@@ -147,4 +147,9 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
   html[data-theme="dark"] .scroll-cue { font-size: 10px; }
   html[data-theme="dark"] .scene-stages { font-size: 9px; gap: 7px; }
   html[data-theme="dark"] .side-note { font-size: 9px; }
+}
+
+/* Keep the process and FAQ chapters on one continuous dark background. */
+html[data-theme="dark"] :is(.expertise, .approach) {
+  background: var(--bg);
 }
