@@ -1331,6 +1331,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .marquee > div {
+  --marquee-gap: 0.6em;
   display: flex;
   white-space: nowrap;
   width: max-content;
@@ -1346,10 +1347,16 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  justify-content: space-around;
-  min-width: 100vw;
-  gap: 0.6em;
-  padding-right: 0.6em;
+  gap: var(--marquee-gap);
+  padding-right: var(--marquee-gap);
+}
+
+.marquee-group > span {
+  flex-shrink: 0;
+}
+
+.marquee-separator {
+  letter-spacing: 0;
 }
 
 @keyframes marquee-run {
