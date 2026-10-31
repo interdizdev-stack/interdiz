@@ -145,3 +145,16 @@ html[data-theme="dark"] .solution-card .service-open:hover {
 @media (prefers-reduced-motion: reduce) {
   .floating-nav .float-links a, .floating-nav .float-links .nav-num { transition: none; }
 }
+
+/* Match the floating call to action to the site's filled buttons. */
+.floating-nav .float-cta {
+  min-width: 160px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 1.2;
+  justify-content: space-between;
+  gap: 20px;
+  white-space: nowrap;
+}
