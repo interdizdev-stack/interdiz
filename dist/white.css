@@ -47,7 +47,7 @@ body { font-weight: 450; }
 .service-dialog-kicker { color: var(--fg-muted); }
 .section-kicker, .scene-stages, .project-info p, .project-info > span,
 .contact-desc, .footer-bottom, .motion-toggle, .header nav, .float-links,
-.solution-card-meta, .solutions-hint, .tags > span { font-weight: 500; }
+.solution-card-meta, .solutions-hint, .gallery-hint, .tags > span { font-weight: 500; }
 .contact-pill { font-weight: 600; }
 .section-kicker, .gallery-footer, .footer-bottom, .service,
 .approach-card, .approach, .contact, .manifesto, .marquee { border-width: var(--outline-width); }
@@ -68,7 +68,7 @@ body { font-weight: 450; }
 }
 .title-dot { color: var(--lime); }
 .lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
-.scene-stages > span.active, .solution-card-meta, .solutions-hint,
+.scene-stages > span.active, .solution-card-meta, .solutions-hint, .gallery-hint,
 .service-index, .service-plus, .service[open] h3, .tags > span:hover,
 .approach-index, .approach-step, .testimonial-emphasis,
 .copy-tag, .online-tag, .location-tag, .footer-clock, .dialog-kicker,

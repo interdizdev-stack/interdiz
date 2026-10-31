@@ -36,7 +36,7 @@
 /* Outline the lime glyphs without replacing their bright fill. */
 .wordmark span, .float-logo span, .title-dot,
 .lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
-.scene-stages > span.active, .solution-card-meta, .solutions-hint,
+.scene-stages > span.active, .solution-card-meta, .solutions-hint, .gallery-hint,
 .solutions-count, .studio-badge, .service-index, .service-plus,
 .service[open] h3, .tags > span:hover, .approach-index, .approach-step,
 .testimonial-emphasis, .contact-glow, .copy-tag, .online-tag, .location-tag,
