@@ -147,7 +147,7 @@ html[data-theme="dark"] .solution-card .service-open:hover {
 }
 
 /* Match the floating call to action to the site's filled buttons. */
-.floating-nav .float-cta {
+.floating-nav .float-cta, .approach .faq-cta {
   min-width: 160px;
   min-height: 48px;
   padding: 12px 22px;
@@ -225,3 +225,5 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   transition: background .2s, color .2s;
 }
 .quick-home:hover { background: var(--lime); color: #0c0e0c; }
+
+.approach .faq-cta { font-weight: 700; }
