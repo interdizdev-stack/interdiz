@@ -194,3 +194,17 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 
 /* Keep the footer city and clock lettering free of outlines. */
 .footer-bottom .footer-clock, .footer-bottom .footer-clock * { -webkit-text-stroke: 0; text-shadow: none; filter: none; }
+
+/* Center the copyright independently of the neighboring footer items. */
+.footer-bottom { position: relative; }
+@media (min-width: 601px) {
+  .footer-bottom .footer-copyright {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+}
+@media (max-width: 600px) {
+  .footer-bottom .footer-copyright { align-self: center; text-align: center; }
+}
