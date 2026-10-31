@@ -7,8 +7,16 @@ export function setupReviews(isReduced) {
   if (!wall || !track || !button) return;
   const cards = [...track.children];
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
+  const previous = document.querySelector('.reviews-arrow--prev');
+  const next = document.querySelector('.reviews-arrow--next');
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
+  previous?.removeAttribute('hidden');
+  next?.removeAttribute('hidden');
   let source = 'all';
+  let introComplete = false;
+  let introTimer;
+  let navigation = null;
+  let navigationTarget = 0;
   let visible = false;
   let paused = false;
   let hovering = false;
@@ -22,9 +30,23 @@ export function setupReviews(isReduced) {
   let suppressClick = false;
   let resumeTimer;
 
+  function updateControls() {
+    if (previous) previous.disabled = wall.scrollLeft <= 1;
+    if (next) next.disabled = wall.scrollLeft >= wall.scrollWidth - wall.clientWidth - 1;
+  }
+  function stopNavigation() {
+    navigation?.kill();
+    navigation = null;
+  }
+  function finishIntro() {
+    clearTimeout(introTimer);
+    introComplete = true;
+  }
   function measure() {
+    stopNavigation();
     columnStep = cards.find(card => !card.hidden).getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
     position = wall.scrollLeft;
+    updateControls();
   }
   function stop() {
     cancelAnimationFrame(frame);
@@ -54,18 +76,23 @@ export function setupReviews(isReduced) {
     const reduced = isReduced();
     const filtered = source !== 'all';
     const focused = wall.contains(document.activeElement);
+    if (reduced) stopNavigation();
     button.disabled = reduced || filtered;
     button.setAttribute('aria-pressed', String(paused));
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
     wall.classList.toggle('is-paused', paused || reduced);
-    if (visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
+    wall.classList.toggle('is-reading', !introComplete);
+    if (visible && introComplete && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
   filters.forEach(filter => filter.addEventListener('click', () => {
     stop();
+    stopNavigation();
+    finishIntro();
+    paused = true;
     source = filter.dataset.reviewsFilter;
     // Restore the original order even after the moving wall recycled columns.
     cards.forEach(card => {
@@ -80,13 +107,37 @@ export function setupReviews(isReduced) {
     measure();
     update();
   }));
-  button.addEventListener('click', () => { paused = !paused; update(); });
+  function move(direction) {
+    stop();
+    finishIntro();
+    paused = true;
+    const from = navigation ? navigationTarget : wall.scrollLeft;
+    stopNavigation();
+    navigationTarget = Math.max(0, Math.min(wall.scrollWidth - wall.clientWidth, from + direction * columnStep));
+    track.style.transform = '';
+    update();
+    if (window.gsap && !isReduced()) {
+      navigation = window.gsap.to(wall, {
+        scrollLeft: navigationTarget, duration: .55, ease: 'power2.out',
+        onUpdate: updateControls,
+        onComplete: () => { navigation = null; position = wall.scrollLeft; updateControls(); }
+      });
+    } else {
+      wall.scrollTo({ left: navigationTarget, behavior: isReduced() ? 'instant' : 'smooth' });
+      updateControls();
+    }
+  }
+  previous?.addEventListener('click', () => move(-1));
+  next?.addEventListener('click', () => move(1));
+  wall.addEventListener('scroll', updateControls, { passive: true });
+  button.addEventListener('click', () => { stopNavigation(); finishIntro(); paused = !paused; update(); });
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });
   wall.addEventListener('focusin', update);
   wall.addEventListener('focusout', () => queueMicrotask(update));
   wall.addEventListener('wheel', event => {
     if (!event.deltaX && !event.shiftKey) return;
+    stopNavigation();
     clearTimeout(resumeTimer);
     touching = true;
     stop();
@@ -94,6 +145,7 @@ export function setupReviews(isReduced) {
   }, { passive: true });
   wall.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;
+    stopNavigation();
     clearTimeout(resumeTimer);
     touching = true;
     update();
@@ -129,9 +181,16 @@ export function setupReviews(isReduced) {
   addEventListener('pointerup', finish);
   document.addEventListener('visibilitychange', update);
   addEventListener('resize', measure);
-  addEventListener('pagehide', stop);
+  addEventListener('pagehide', () => { stop(); stopNavigation(); clearTimeout(introTimer); });
   addEventListener('pageshow', update);
-  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }, { rootMargin: '200px' }).observe(wall);
+  // Let the first review (Vadim) be read before the wall starts moving.
+  new IntersectionObserver(([entry]) => {
+    const entered = entry.isIntersecting && entry.intersectionRatio >= .5;
+    if (entered && !visible && !introComplete) introTimer = setTimeout(() => { introComplete = true; update(); }, 8000);
+    if (!entered) clearTimeout(introTimer);
+    visible = entered;
+    update();
+  }, { threshold: [0, .5] }).observe(wall);
   measure();
   document.fonts.ready.then(measure);
   update();

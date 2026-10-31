@@ -1037,7 +1037,8 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .solutions-controls button,
-.gallery-controls button {
+.gallery-controls button,
+.reviews-arrow {
   display: grid;
   place-items: center;
   width: 48px;
@@ -1049,14 +1050,16 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .solutions-controls button:hover:not(:disabled),
-.gallery-controls button:hover:not(:disabled) {
+.gallery-controls button:hover:not(:disabled),
+.reviews-arrow:hover:not(:disabled) {
   background: var(--lime);
   color: var(--bg);
   border-color: var(--lime);
 }
 
 .solutions-controls button:disabled,
-.gallery-controls button:disabled {
+.gallery-controls button:disabled,
+.reviews-arrow:disabled {
   opacity: 0.25;
   cursor: default;
 }
@@ -2178,7 +2181,8 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
     gap: 16px;
   }
   .solutions-controls button,
-  .gallery-controls button {
+  .gallery-controls button,
+  .reviews-arrow {
     width: 44px;
     height: 44px;
   }

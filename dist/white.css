@@ -86,7 +86,7 @@ body { font-weight: 450; }
 }
 .contact-pill:hover, .contact-pill.contact-pill--filled,
 .float-cta, .round-link, .gallery-footer .gallery-all,
-.solutions-controls button:hover, .gallery-controls button:hover:not(:disabled) {
+.solutions-controls button:hover, .gallery-controls button:hover:not(:disabled), .reviews-arrow:hover:not(:disabled) {
   color: var(--fg);
 }
 .project-image { background: var(--bg-surface); }
