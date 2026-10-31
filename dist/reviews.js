@@ -5,6 +5,10 @@ export function setupReviews(isReduced) {
   const track = wall?.querySelector('.reviews-track');
   const button = document.querySelector('.reviews-pause');
   if (!wall || !track || !button) return;
+  const cards = [...track.children];
+  const filters = [...document.querySelectorAll('[data-reviews-filter]')];
+  document.querySelector('.reviews-filters')?.removeAttribute('hidden');
+  let source = 'all';
   let visible = false;
   let paused = false;
   let hovering = false;
@@ -19,7 +23,7 @@ export function setupReviews(isReduced) {
   let resumeTimer;
 
   function measure() {
-    columnStep = track.firstElementChild.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
+    columnStep = cards.find(card => !card.hidden).getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
     position = wall.scrollLeft;
   }
   function stop() {
@@ -48,17 +52,34 @@ export function setupReviews(isReduced) {
   }
   function update() {
     const reduced = isReduced();
+    const filtered = source !== 'all';
     const focused = wall.contains(document.activeElement);
-    button.disabled = reduced;
+    button.disabled = reduced || filtered;
     button.setAttribute('aria-pressed', String(paused));
-    button.setAttribute('aria-label', reduced ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
-    button.querySelector('.reviews-pause-icon').textContent = reduced ? '○' : paused ? '▷' : 'Ⅱ';
-    button.querySelector('.reviews-pause-label').textContent = reduced ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
+    button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
+    button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
+    button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
     wall.classList.toggle('is-paused', paused || reduced);
-    if (visible && !paused && !reduced && !focused && !touching && !document.hidden) {
+    if (visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
+  filters.forEach(filter => filter.addEventListener('click', () => {
+    stop();
+    source = filter.dataset.reviewsFilter;
+    // Restore the original order even after the moving wall recycled columns.
+    cards.forEach(card => {
+      card.hidden = source !== 'all' && card.dataset.reviewPlatform !== source;
+      track.append(card);
+    });
+    filters.forEach(item => item.setAttribute('aria-pressed', String(item === filter)));
+    wall.classList.toggle('is-filtered', source !== 'all');
+    wall.setAttribute('aria-label', source === 'all' ? 'Лента отзывов клиентов' : 'Отзывы клиентов с Авито');
+    track.style.transform = '';
+    wall.scrollLeft = 0;
+    measure();
+    update();
+  }));
   button.addEventListener('click', () => { paused = !paused; update(); });
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });

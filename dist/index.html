@@ -576,7 +576,11 @@
         <button class="reviews-pause" type="button" aria-pressed="false" aria-label="Приостановить движение отзывов"><span class="reviews-pause-icon" aria-hidden="true">Ⅱ</span><span class="reviews-pause-label">Пауза</span></button>
       </div>
       <p class="reviews-caption">Реальные отзывы о работе со студией с Яндекс Карт, 2ГИС и Авито.</p>
-      <div class="reviews-wall" role="region" aria-label="Лента отзывов клиентов">
+      <div class="reviews-filters" role="group" aria-label="Источник отзывов" hidden>
+        <button class="reviews-filter" type="button" data-reviews-filter="all" aria-pressed="true" aria-controls="reviews-wall">Все отзывы · 19</button>
+        <button class="reviews-filter" type="button" data-reviews-filter="avito" aria-pressed="false" aria-controls="reviews-wall">Авито · 2</button>
+      </div>
+      <div class="reviews-wall" id="reviews-wall" role="region" aria-label="Лента отзывов клиентов">
         <div class="reviews-track" role="list">
             <article class="review-card" role="listitem" data-review-platform="avito">
               <div class="review-card__author">
