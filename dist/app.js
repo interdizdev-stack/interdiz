@@ -883,12 +883,12 @@ function setupClock() {
     try {
       const now = new Date();
       const timeStr = new Intl.DateTimeFormat('ru-RU', {
-        timeZone: 'Europe/Samara',
+        timeZone: 'Europe/Moscow',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit'
       }).format(now);
-      $$('.ast-clock').forEach(el => el.textContent = `${timeStr} UTC+4`);
+      $$('.ast-clock').forEach(el => el.textContent = `${timeStr} UTC+3`);
     } catch {}
   }
   setInterval(tick, 1000);
