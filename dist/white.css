@@ -166,3 +166,13 @@ html[data-theme="light"] :is(.crosshair, .cross, .service-plus, .faq-plus) { fon
 
 /* Place the second caption on the same rail as the opening caption. */
 html[data-theme="light"] .hero-chapter-topline { margin-left: 0; color: var(--fg); }
+
+/* Solid green business headline with a precise black contour. */
+html[data-theme="light"] .manifesto .manifesto-line.outline {
+  font-family: var(--display);
+  color: var(--lime);
+  -webkit-text-fill-color: var(--lime);
+  -webkit-text-stroke: 1.5px #000;
+  paint-order: stroke fill;
+  filter: none;
+}
