@@ -1,4 +1,5 @@
 import * as THREE from './vendor/three.module.js';
+import { measureCompactFraming } from './scene-framing.js';
 
 // A segmented trefoil sculpture: a single geometric language, three scroll states.
 export function createScene(container, reduced = false) {
@@ -94,12 +95,13 @@ export function createScene(container, reduced = false) {
     ring.position.z = -i*1.5; ring.rotation.z=i*.15; portal.add(ring);
   }
   scene.add(portal);
-  const state = { explosion:0, rotation:0, zoom:0, portal:0, opacity:1 };
+  const state = { explosion:0, rotation:0, zoom:0, portal:0, opacity:1, framing:0 };
   const pointer = { x:0, y:0 };
   const smoothed = { x:0, y:0 };
   let active = true, disposed = false, raf = 0, last = 0, aliveTime = 0;
   let staticMotion = reduced;
   let width = 1, height = 1;
+  let compactFrame = { scale:1.55, y:0, sceneScale:1.27 };
 
   function resize() {
     width=container.clientWidth; height=container.clientHeight;
@@ -107,6 +109,7 @@ export function createScene(container, reduced = false) {
     renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.65));
     renderer.setSize(width,height,false);
     camera.aspect=width/height; camera.updateProjectionMatrix();
+    if (compactLayout.matches) compactFrame = measureCompactFraming(container);
     render(performance.now());
   }
   function pointerMove(e) { pointer.x = (e.clientX/innerWidth-.5)*2; pointer.y = (e.clientY/innerHeight-.5)*2; requestRender(); }
@@ -118,8 +121,9 @@ export function createScene(container, reduced = false) {
     smoothed.y=THREE.MathUtils.damp(smoothed.y,pointer.y,3,dt);
     const p = state.explosion;
     const idle = staticMotion?0:aliveTime*.09;
-    world.position.set(compactLayout.matches ? 0 : 1.7, compactLayout.matches ? 0 : .1, 0);
-    world.scale.setScalar(compactLayout.matches ? 1.55 : 1.27);
+    const framing = THREE.MathUtils.clamp(state.framing, 0, 1);
+    world.position.set(compactLayout.matches ? 0 : 1.7, compactLayout.matches ? THREE.MathUtils.lerp(compactFrame.y, 0, framing) : .1, 0);
+    world.scale.setScalar(compactLayout.matches ? THREE.MathUtils.lerp(compactFrame.scale, compactFrame.sceneScale, framing) : 1.27);
     world.rotation.set(.32 + (staticMotion?0:smoothed.y*.1), .2 + (staticMotion?0:smoothed.x*.14), -.34);
     sculpture.rotation.set(.25+state.rotation*.35, idle+state.rotation*1.65, -.1+state.rotation*.28);
     sculpture.position.y = staticMotion ? 0 : Math.sin(aliveTime*.6)*.075;

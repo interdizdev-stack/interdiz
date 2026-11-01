@@ -681,7 +681,7 @@ function setupAnimations() {
     clearProps: 'transform,opacity,visibility'
   });
   scene?.setReduced(reduced);
-  if (scene) Object.assign(scene.state, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1 });
+  if (scene) Object.assign(scene.state, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 });
   document.documentElement.classList.toggle('motion-enabled', !reduced);
   updateMotionButton();
   if (reduced) { scene?.refresh(); ScrollTrigger.refresh(); return; }
@@ -718,7 +718,7 @@ function setupAnimations() {
             id: 'hero-scene',
             trigger: '.hero',
             start: 'top top',
-            end: () => `+=${innerHeight * (mobile ? 1.65 : 2.3)}`,
+            end: () => `+=${(compact ? $('.hero').clientHeight : innerHeight) * 2.3}`,
             pin: true,
             scrub: smoother ? true : 0.85,
             anticipatePin: 1,
@@ -745,17 +745,8 @@ function setupAnimations() {
             .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
         }
 
-        if (compact) {
-          // Bring the sculpture into the visible viewport on short phones
-          // after the opening content leaves, keeping its initial position.
-          const sculpture = $('.hero .webgl');
-          heroTimeline.to(sculpture, {
-            y: () => Math.min(0, innerHeight * .65 - (sculpture.offsetTop + sculpture.offsetHeight / 2 - 8)),
-            duration: .24
-          }, .22);
-        }
-
         if (scene) {
+          if (compact) heroTimeline.to(scene.state, { framing: 1, duration: .26 }, .18);
           heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
             .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
             .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
