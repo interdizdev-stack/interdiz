@@ -27,6 +27,7 @@ let updateProcessOnScroll;
 let finishProcessAnimations;
 let updateReviewsMotion;
 let updateSolutionsHint;
+let updateProjectsHint;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
 const isCompactLayout = () => compactMedia.matches;
@@ -443,6 +444,7 @@ function updateMotionButton() {
   document.documentElement.classList.toggle('reduced-motion', reduced);
   updateReviewsMotion?.();
   updateSolutionsHint?.();
+  updateProjectsHint?.();
 }
 updateMotionButton();
 
@@ -572,13 +574,13 @@ function setupSolutionsCarousel() {
   sizing.observe(track);
   $('.solutions-controls').hidden = false;
   render(0);
-  swipeHint = setupSolutionsSwipeHint(track);
+  swipeHint = setupCarouselSwipeHint(track, cards[0]);
   updateSolutionsHint = swipeHint?.sync;
 }
 
-function setupSolutionsSwipeHint(track) {
+function setupCarouselSwipeHint(track, firstCard) {
   const gsap = window.gsap;
-  if (!gsap || !window.IntersectionObserver) return;
+  if (!gsap || !window.IntersectionObserver || !firstCard) return;
   let played = false;
   let visible = false;
   let animation;
@@ -617,7 +619,7 @@ function setupSolutionsSwipeHint(track) {
     visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .55;
     sync();
   }, { threshold: .55, rootMargin: '0px 0px -8% 0px' });
-  observer.observe(track.querySelector('.solution-card'));
+  observer.observe(firstCard);
   // User input always takes over; never pull the carousel back during a swipe.
   ['pointerdown', 'touchstart', 'keydown'].forEach(type => {
     track.addEventListener(type, dismiss, { passive: true });
@@ -638,6 +640,7 @@ function setupProjectGallery() {
   let frame = 0;
   let drag = null;
   let suppressClick = false;
+  let swipeHint;
   const maximum = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
   const position = card => card.offsetLeft - track.offsetLeft;
   const step = () => cards.length > 1 ? position(cards[1]) - position(cards[0]) : viewport.clientWidth;
@@ -660,6 +663,7 @@ function setupProjectGallery() {
     next.disabled = maximum() - viewport.scrollLeft <= 2;
   }
   function goTo(left) {
+    swipeHint?.dismiss();
     viewport.scrollTo({left: Math.max(0, Math.min(maximum(), left)), behavior: reduced ? 'instant' : 'smooth'});
   }
   const move = direction => goTo((Math.round(viewport.scrollLeft / step()) + direction) * step());
@@ -716,9 +720,14 @@ function setupProjectGallery() {
     if (suppressClick) { event.preventDefault(); event.stopPropagation(); }
   }, true);
   viewport.addEventListener('dragstart', event => event.preventDefault());
-  new ResizeObserver(render).observe(viewport);
+  new ResizeObserver(() => {
+    swipeHint?.sync();
+    render();
+  }).observe(viewport);
   $('.gallery-controls').hidden = false;
   render();
+  swipeHint = setupCarouselSwipeHint(viewport, cards[0]);
+  updateProjectsHint = swipeHint?.sync;
 }
 
 function setupTestimonialStickySize() {
