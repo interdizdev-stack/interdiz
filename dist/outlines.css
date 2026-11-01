@@ -374,3 +374,16 @@ html[data-theme="light"] .solutions-hint {
   font-size: 18px;
   -webkit-text-stroke-width: 1px;
 }
+
+/* Center carousel arrows and show navigation cues in the brand green. */
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  line-height: 1;
+  color: var(--lime);
+}
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:hover:not(:disabled) {
+  color: #000;
+}
+html[data-theme="light"] :is(.solutions-hint, .gallery-hint) { color: var(--lime); }
