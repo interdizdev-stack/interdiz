@@ -320,3 +320,12 @@ html[data-theme="light"] :is(.wordmark, .float-logo) > span {
   -webkit-text-stroke: 2px #000;
   paint-order: stroke fill;
 }
+
+/* Black navigation labels, numbers and separators in the white edition. */
+html[data-theme="light"] .floating-nav .float-links a,
+html[data-theme="light"] .floating-nav .float-links a:is(:hover, .is-current),
+html[data-theme="light"] .floating-nav .float-links .nav-num {
+  color: #000;
+  text-shadow: none !important;
+}
+html[data-theme="light"] .floating-nav .float-divider { background: #000; }
