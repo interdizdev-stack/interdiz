@@ -58,7 +58,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero h1 { padding-inline-start: calc(var(--outline-width) + 5px); font-size: calc(clamp(26px, 8.2vw, 84px) + 10px); }
   html[data-theme] :is(.hero-description, .solutions-note, .projects-heading p, .expertise-caption, .approach-description, .reviews-caption) { margin-top: 18px; max-width: 560px; font-size: 16px; line-height: 1.6; }
   html[data-theme] .hero .hero-description { margin-top: 8px; padding-inline: calc(var(--outline-width) + 5px); font-size: 12px; }
-  html[data-theme] .hero-actions { width: 80%; max-width: 432px; gap: 8px; margin-top: 22px; margin-inline-start: calc(var(--outline-width) + 5px); }
+  html[data-theme] .hero-actions { width: 80%; max-width: 432px; gap: 8px; margin-top: 42px; margin-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] .hero-actions .contact-pill { position: relative; min-height: 38.4px; padding: 9.6px 12.8px; gap: 12px; font-size: 14.2px; line-height: 1.2; }
   html[data-theme] .hero-actions .contact-pill::before { content: ''; position: absolute; inset-inline: 0; top: 50%; height: max(100%, 44px); transform: translateY(-50%); }
   html[data-theme] .hero-actions .contact-pill span { font-size: 16px; }
