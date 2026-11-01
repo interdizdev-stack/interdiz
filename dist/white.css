@@ -149,3 +149,9 @@ html:not([data-theme="dark"]) .reviews-track.is-looping {
 /* Gray contours apply exclusively to the white edition. */
 html[data-theme="light"] { --contour-ink: #808080; }
 html[data-theme="light"] #lime-contour-outline feFlood { flood-color: #808080; }
+
+/* Solid brand-green lettering on the white edition's opening screen. */
+html[data-theme="light"] .hero-line.outline {
+  color: var(--lime);
+  -webkit-text-fill-color: var(--lime);
+}
