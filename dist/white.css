@@ -147,8 +147,8 @@ html:not([data-theme="dark"]) .reviews-track.is-looping {
 }
 
 /* Gray contours apply exclusively to the white edition. */
-html[data-theme="light"] { --contour-ink: #606060; }
-html[data-theme="light"] #lime-contour-outline feFlood { flood-color: #606060; }
+html[data-theme="light"] { --contour-ink: #000; }
+html[data-theme="light"] #lime-contour-outline feFlood { flood-color: #000; }
 
 /* Solid brand-green lettering on the white edition's opening screen. */
 html[data-theme="light"] .hero-line.outline {
