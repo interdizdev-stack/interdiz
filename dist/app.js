@@ -610,7 +610,8 @@ function setupSolutionsSwipeHint(track) {
       }
     })
       .to(track, { scrollLeft: origin + distance, duration: .6, ease: 'power2.inOut' })
-      .to(track, { scrollLeft: origin, duration: .75, ease: 'power2.inOut' }, '+=.16');
+      .to(track, { scrollLeft: origin, duration: .75, ease: 'power2.inOut' }, '+=.16')
+      .timeScale(1.1);
   }
   const observer = new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .55;
