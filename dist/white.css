@@ -185,3 +185,9 @@ html[data-theme="light"] .hero-chapter em {
   -webkit-text-fill-color: var(--lime);
   opacity: 1;
 }
+
+/* Match the opening green headline to the five-pixel contour. */
+html[data-theme="light"] .hero-line.outline {
+  -webkit-text-stroke: 5px #000;
+  paint-order: stroke fill;
+}
