@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./theme.css">
   <link rel="stylesheet" href="./outlines.css">
   <link rel="stylesheet" href="./reviews.css">
+  <link rel="stylesheet" href="./mobile-dark.css">
   <script src="./theme.js"></script>
   <script defer src="./vendor/gsap.min.js"></script>
   <script defer src="./vendor/ScrollTrigger.min.js"></script>
@@ -51,6 +52,7 @@
       <a href="#contact"><span class="nav-num">[06]</span> Контакты</a>
     </div>
     <div class="float-divider" aria-hidden="true"></div>
+    <button class="mobile-menu-toggle" type="button" data-mobile-menu aria-controls="mobile-menu" aria-haspopup="dialog" aria-expanded="false" hidden>Меню <span class="mobile-menu-icon" aria-hidden="true"><i></i><i></i></span></button>
     <a class="float-cta contact-pill contact-pill--filled" href="#contact">Обсудить <span aria-hidden="true">↗</span></a>
   </nav>
 
@@ -63,6 +65,7 @@
       <a href="#projects">Проекты <span>03</span></a>
       <a href="#expertise">Подход</a>
     </nav>
+    <button class="mobile-menu-toggle" type="button" data-mobile-menu aria-controls="mobile-menu" aria-haspopup="dialog" aria-expanded="false" hidden>Меню <span class="mobile-menu-icon" aria-hidden="true"><i></i><i></i></span></button>
     <a class="contact-pill" href="#contact">Обсудить проект <span>↗</span></a>
   </header>
 
@@ -790,6 +793,23 @@
   </main>
   </div>
   </div>
+
+  <dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title" hidden>
+    <div class="mobile-menu-heading">
+      <span class="mono-meta" id="mobile-menu-title">МЕНЮ СТУДИИ</span>
+      <button class="mobile-menu-close" type="button" aria-label="Закрыть меню">×</button>
+    </div>
+    <nav class="mobile-menu-links" aria-label="Разделы сайта">
+      <a href="#top"><span>[01]</span> Главная <span aria-hidden="true">↗</span></a>
+      <a href="#manifesto"><span>[02]</span> Услуги <span aria-hidden="true">↗</span></a>
+      <a href="#projects"><span>[03]</span> Проекты <span aria-hidden="true">↗</span></a>
+      <a href="#expertise"><span>[04]</span> Как работаем <span aria-hidden="true">↗</span></a>
+      <a href="#approach"><span>[05]</span> FAQ <span aria-hidden="true">↗</span></a>
+      <a href="#reviews"><span>[06]</span> Отзывы <span aria-hidden="true">↗</span></a>
+      <a href="#contact"><span>[07]</span> Контакты <span aria-hidden="true">↗</span></a>
+    </nav>
+    <a class="contact-pill contact-pill--filled mobile-menu-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+  </dialog>
 
   <dialog class="project-dialog service-dialog" id="service-dialog" aria-labelledby="service-dialog-title" aria-describedby="service-dialog-description">
     <button type="button" class="dialog-close service-dialog-close" aria-label="Закрыть описание услуги">✕</button>

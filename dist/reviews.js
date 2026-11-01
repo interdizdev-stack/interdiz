@@ -5,6 +5,8 @@ export function setupReviews(isReduced) {
   const track = wall?.querySelector('.reviews-track');
   const button = document.querySelector('.reviews-pause');
   if (!wall || !track || !button) return;
+  const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
+  const compactDark = () => document.documentElement.dataset.theme === 'dark' && compactLayout.matches;
   const cards = [...track.children];
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
@@ -15,7 +17,7 @@ export function setupReviews(isReduced) {
   let touching = false;
   let frame = 0;
   let previousTime = 0;
-  let speed = 60;
+  let speed = compactDark() ? 28 : 60;
   let columnStep = 0;
   let position = 0;
   let loopItems = [];
@@ -54,6 +56,17 @@ export function setupReviews(isReduced) {
     track.style.transform = '';
     track.classList.remove('is-looping');
     track.replaceChildren(...ordered);
+    if (compactDark()) {
+      // Reserve the tallest full review even when a source filter is active.
+      // Measuring synchronously avoids a flash and keeps all text readable.
+      const hidden = ordered.map(card => card.hidden);
+      wall.classList.remove('is-filtered');
+      ordered.forEach(card => { card.hidden = false; });
+      const height = Math.max(...ordered.map(card => card.offsetHeight));
+      ordered.forEach((card, index) => { card.hidden = hidden[index]; });
+      wall.classList.toggle('is-filtered', source !== 'all');
+      track.style.setProperty('--compact-review-height', `${Math.ceil(height)}px`);
+    } else track.style.removeProperty('--compact-review-height');
     if (source === 'all') {
       // Read the existing masonry positions before changing the DOM. Wrapping
       // these exact groups prevents vertical jumps when the last column moves first.
@@ -92,7 +105,7 @@ export function setupReviews(isReduced) {
     frame = requestAnimationFrame(tick);
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0;
     previousTime = time;
-    speed += ((hovering ? 10 : 60) - speed) * (1 - Math.exp(-7 * delta));
+    speed += ((hovering ? 10 : compactDark() ? 28 : 60) - speed) * (1 - Math.exp(-7 * delta));
     setPosition(position + speed * delta);
   }
   function update() {

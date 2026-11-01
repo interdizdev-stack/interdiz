@@ -27,6 +27,55 @@ let updateProcessOnScroll;
 let finishProcessAnimations;
 let updateReviewsMotion;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
+const compactDarkMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
+const isCompactDark = () => document.documentElement.dataset.theme === 'dark' && compactDarkMedia.matches;
+let closeMobileNavigation;
+
+function setupMobileNavigation() {
+  if (document.documentElement.dataset.theme !== 'dark') return;
+  const menu = $('#mobile-menu');
+  const toggles = $$('[data-mobile-menu]');
+  if (!menu) return;
+  let opener;
+  menu.hidden = false;
+  const sync = () => {
+    toggles.forEach(button => { button.hidden = !isCompactDark(); });
+    if (!isCompactDark()) closeMobileNavigation(false);
+  };
+  closeMobileNavigation = (restoreFocus = true) => {
+    if (!restoreFocus) opener = null;
+    if (menu.open) menu.close();
+  };
+  toggles.forEach(button => button.addEventListener('click', () => {
+    if (!isCompactDark()) return;
+    opener = button;
+    const links = $$('.mobile-menu-links a', menu);
+    const current = links.findLast(link => $(link.getAttribute('href')).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
+    links.forEach(link => {
+      link.classList.toggle('is-current', link === current);
+      if (link === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    menu.showModal();
+    menu.scrollTop = 0;
+    toggles.forEach(toggle => toggle.setAttribute('aria-expanded', 'true'));
+    document.body.classList.add('dialog-open');
+  }));
+  $('.mobile-menu-close', menu).addEventListener('click', () => closeMobileNavigation());
+  menu.addEventListener('click', event => {
+    if (event.target !== menu) return;
+    const bounds = menu.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeMobileNavigation();
+  });
+  menu.addEventListener('close', () => {
+    toggles.forEach(button => button.setAttribute('aria-expanded', 'false'));
+    if (!$('dialog[open]')) document.body.classList.remove('dialog-open');
+    opener?.focus({ preventScroll: true });
+    opener = null;
+  });
+  compactDarkMedia.addEventListener('change', sync);
+  sync();
+}
 
 const menuSections = $$('.floating-nav .float-links a').map(link => ({
   link, section: document.querySelector(link.getAttribute('href'))
@@ -275,6 +324,7 @@ function setupProcessAccordion() {
 
   function revealOnScroll() {
     scrollFrame = 0;
+    if (isCompactDark()) return;
     if (document.body.classList.contains('dialog-open')) return;
     if (performance.now() < interactionUntil) return;
     // Keyboard users keep control of the step they are interacting with.
@@ -319,6 +369,7 @@ function setupProcessAccordion() {
   // Only real pointer movement selects a hovered row. Layout changes and wheel
   // scrolling beneath a stationary pointer must not start another transition.
   list.addEventListener('pointermove', event => {
+    if (isCompactDark()) return;
     if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
     if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
     const row = event.target.closest('.service');
@@ -635,7 +686,7 @@ function setupAnimations() {
   gsap.registerPlugin(ScrollTrigger);
   // Smooth the page and parallax together, rather than letting scrub lag
   // fight immediate native scrolling at the edge of the pinned hero.
-  if (document.documentElement.dataset.theme === 'dark' && ScrollSmoother) {
+  if (document.documentElement.dataset.theme === 'dark' && !isCompactDark() && ScrollSmoother) {
     gsap.registerPlugin(ScrollSmoother);
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
@@ -652,75 +703,92 @@ function setupAnimations() {
 
   animationContext = gsap.context(() => {
     const media = gsap.matchMedia();
-    media.add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, context => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    media.add(dark ? { desktop: '(min-width: 1101px)', mobile: compactDarkMedia.media } : { desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, context => {
       const mobile = context.conditions.mobile;
+      const compactDark = dark && mobile;
       heroTrigger = null;
-      const heroTimeline = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          id: 'hero-scene',
-          trigger: '.hero',
-          start: 'top top',
-          end: () => `+=${innerHeight * (mobile ? 1.65 : 2.3)}`,
-          pin: true,
-          scrub: smoother ? true : 0.85,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: self => {
-            const index = self.progress < 0.3 ? 0 : self.progress < 0.69 ? 1 : 2;
-            $$('.scene-stages>span').forEach((el, i) => el.classList.toggle('active', index === i));
-            if (scene) scene.refresh();
+      if (!compactDark) {
+        const heroTimeline = gsap.timeline({
+          defaults: { ease: 'none' },
+          scrollTrigger: {
+            id: 'hero-scene',
+            trigger: '.hero',
+            start: 'top top',
+            end: () => `+=${innerHeight * (mobile ? 1.65 : 2.3)}`,
+            pin: true,
+            scrub: smoother ? true : 0.85,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: self => {
+              const index = self.progress < 0.3 ? 0 : self.progress < 0.69 ? 1 : 2;
+              $$('.scene-stages>span').forEach((el, i) => el.classList.toggle('active', index === i));
+              if (scene) scene.refresh();
+            }
           }
+        });
+        heroTrigger = heroTimeline.scrollTrigger;
+        heroTimeline.to('.hero-line:first-child', { xPercent: -18, y: -110, opacity: 0, duration: 0.34 }, 0)
+          .to('.hero-line.outline', { xPercent: 22, y: 70, opacity: 0, duration: 0.34 }, 0)
+          .to('.hero-bottom, .hero-description, .hero-actions, .hero-topline:not(.hero-chapter-topline)', { autoAlpha: 0, y: -30, duration: 0.22 }, 0)
+          .fromTo('.hero-chapter', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 0.2 }, 0.26)
+          .to('.hero-chapter', { autoAlpha: 0, y: -60, duration: 0.16 }, 0.57)
+          .fromTo('.hero-end', { autoAlpha: 0, scale: 0.85 }, { autoAlpha: 1, scale: 1, duration: 0.17 }, 0.74)
+          .to('.hero-end', { scale: 1.1, duration: 0.09 }, 0.91);
+
+        const chapterCaption = $('.hero-chapter-topline');
+        if (chapterCaption) {
+          heroTimeline.fromTo(chapterCaption, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 0.26)
+            .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
         }
-      });
-      heroTrigger = heroTimeline.scrollTrigger;
-      heroTimeline.to('.hero-line:first-child', { xPercent: -18, y: -110, opacity: 0, duration: 0.34 }, 0)
-        .to('.hero-line.outline', { xPercent: 22, y: 70, opacity: 0, duration: 0.34 }, 0)
-        .to('.hero-bottom, .hero-description, .hero-actions, .hero-topline:not(.hero-chapter-topline)', { autoAlpha: 0, y: -30, duration: 0.22 }, 0)
-        .fromTo('.hero-chapter', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 0.2 }, 0.26)
-        .to('.hero-chapter', { autoAlpha: 0, y: -60, duration: 0.16 }, 0.57)
-        .fromTo('.hero-end', { autoAlpha: 0, scale: 0.85 }, { autoAlpha: 1, scale: 1, duration: 0.17 }, 0.74)
-        .to('.hero-end', { scale: 1.1, duration: 0.09 }, 0.91);
 
-      const chapterCaption = $('.hero-chapter-topline');
-      if (chapterCaption) {
-        heroTimeline.fromTo(chapterCaption, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 0.26)
-          .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
+        if (scene) {
+          heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
+            .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
+            .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
+        }
+        gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: 'opacity' });
+        gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
+      } else {
+        // Native scrolling keeps the opening screen and its calls to action
+        // immediately usable. Only the sculpture responds to scroll on touch layouts.
+        gsap.from('.hero-intro', { y: 24, opacity: 0, duration: .65, ease: 'power3.out', clearProps: 'transform,opacity' });
+        if (scene) gsap.to(scene.state, {
+          rotation: .7, explosion: .24, opacity: .65, ease: 'none',
+          scrollTrigger: {
+            id: 'compact-hero-scene', trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true,
+            onUpdate: () => scene.refresh()
+          }
+        });
       }
-
-      if (scene) {
-        heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
-          .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
-          .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
-      }
-      gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: 'opacity' });
-      gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
 
       if (document.documentElement.dataset.theme === 'dark') {
         // Keep the scene almost stationary while the foreground slides over it.
-        const transition = gsap.timeline({
-          defaults: { ease: 'none', duration: 1 },
-          scrollTrigger: {
-            id: 'hero-solutions-parallax',
-            trigger: '.manifesto',
-            start: 'top bottom',
-            end: 'top top',
-            scrub: smoother ? true : 0.6,
-            invalidateOnRefresh: true
-          }
-        });
-        transition
-          .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0)
-          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.42, immediateRender: false }, 0)
-          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
-          .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (mobile ? 0.07 : 0.1) }, { y: 0 }, 0)
-          .fromTo('.manifesto-inner', { y: () => innerHeight * (mobile ? 0.22 : 0.32) }, { y: 0 }, 0);
+        if (!compactDark) {
+          const transition = gsap.timeline({
+            defaults: { ease: 'none', duration: 1 },
+            scrollTrigger: {
+              id: 'hero-solutions-parallax',
+              trigger: '.manifesto',
+              start: 'top bottom',
+              end: 'top top',
+              scrub: smoother ? true : 0.6,
+              invalidateOnRefresh: true
+            }
+          });
+          transition
+            .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0)
+            .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.42, immediateRender: false }, 0)
+            .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
+            .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (mobile ? 0.07 : 0.1) }, { y: 0 }, 0)
+            .fromTo('.manifesto-inner', { y: () => innerHeight * (mobile ? 0.22 : 0.32) }, { y: 0 }, 0);
+        }
 
         // Use the section's layout coordinates: its inner content already has
         // a parallax transform, which must not shift these trigger positions.
         const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
         gsap.fromTo('.solution-card', {
-          '--solution-parallax-y': i => `${(mobile ? 70 : 140) + (i % 3) * (mobile ? 18 : 48)}px`
+          '--solution-parallax-y': i => `${(compactDark ? 24 : mobile ? 70 : 140) + (i % 3) * (compactDark ? 8 : mobile ? 18 : 48)}px`
         }, {
           '--solution-parallax-y': '0px',
           ease: 'none',
@@ -728,8 +796,8 @@ function setupAnimations() {
             id: 'solutions-cards-parallax',
             trigger: '.manifesto',
             start: () => `top+=${cardsTop()} bottom`,
-            end: () => `top+=${cardsTop()} ${mobile ? '45%' : '50%'}`,
-            scrub: smoother ? true : 0.6,
+            end: () => `top+=${cardsTop()} ${compactDark ? '85%' : mobile ? '45%' : '50%'}`,
+            scrub: smoother || compactDark ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
@@ -760,10 +828,10 @@ function setupAnimations() {
 
         // Start the sideways entrance when the cases themselves enter view.
         gsap.fromTo('.gallery-window', {
-          x: () => Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+          x: () => compactDark ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
           opacity: 1
         }, {
-          x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          x: 0, opacity: 1, duration: compactDark ? .55 : .8, ease: 'power3.out',
           immediateRender: true, clearProps: 'transform,opacity',
           scrollTrigger: {
             id: 'projects-cases-side-reveal',
@@ -780,13 +848,13 @@ function setupAnimations() {
         gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
       }
 
-      gsap.from('.service', { y: 35, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
-      gsap.from('.expertise h2', { y: 70, opacity: 0.2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: 0.6 } });
+      gsap.from('.service', { y: compactDark ? 18 : 35, opacity: 0, stagger: compactDark ? .05 : .08, duration: compactDark ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
+      gsap.from('.expertise h2', { y: compactDark ? 24 : 70, opacity: compactDark ? .65 : .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: compactDark ? true : .6 } });
       // Move the complete FAQ with scroll; use layout coordinates so its
       // own transform cannot shift the trigger on refresh.
       const faqSection = $('.approach');
       if (faqSection) {
-        const faqParallax = mobile ? 55 : 110;
+        const faqParallax = compactDark ? 18 : mobile ? 55 : 110;
         gsap.fromTo(faqSection, { y: faqParallax }, {
           y: 0,
           ease: 'none',
@@ -795,13 +863,14 @@ function setupAnimations() {
             trigger: faqSection.parentElement,
             start: () => `top+=${faqSection.offsetTop} bottom`,
             end: () => `top+=${faqSection.offsetTop} 20%`,
-            scrub: smoother ? true : 0.6,
+            scrub: smoother || compactDark ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
       }
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
-      gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
+      if (compactDark) gsap.from('.contact-hero h2', { y: 24, opacity: 0, duration: .65, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact', start: 'top 90%', once: true } });
+      else gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
     });
 
@@ -848,7 +917,9 @@ motionPreference.addEventListener('change', e => { if (userReduced === null) { r
 $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
   const target = $(link.getAttribute('href')); if (!target) return;
   event.preventDefault();
+  if (link.closest('.mobile-menu')) closeMobileNavigation?.(false);
   let top = smoother ? smoother.offset(target, 'top top') : target.getBoundingClientRect().top + scrollY;
+  if (isCompactDark() && target.id !== 'top') top -= 82;
   if (target.id === 'top' && heroTrigger) top = heroTrigger.start;
   history.replaceState(null, '', link.getAttribute('href'));
   if (smoother) smoother.scrollTo(Math.max(0, top), true);
@@ -920,7 +991,7 @@ function setupCardTilt() {
   if (!matchMedia('(pointer: fine)').matches) return;
   $$('.project-card').forEach(card => {
     card.addEventListener('mousemove', e => {
-      if (reduced || card.closest('.is-dragging')) return;
+      if (reduced || isCompactDark() || card.closest('.is-dragging')) return;
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -991,7 +1062,20 @@ async function init() {
   setupFAQ();
   updateReviewsMotion = setupReviews(() => reduced);
   setupTestimonialStickySize();
+  setupMobileNavigation();
   setupAnimations();
+  if (document.documentElement.dataset.theme === 'dark') compactDarkMedia.addEventListener('change', () => {
+    // Rebuild smoothing only when switching between touch and desktop layouts.
+    const section = [...$$('main section[id]'), $('.contact')].findLast(el => el.getBoundingClientRect().top < innerHeight * .5);
+    const offset = section?.getBoundingClientRect().top ?? 0;
+    setupAnimations();
+    if (section) {
+      const top = (smoother ? smoother.offset(section, 'top top') : section.getBoundingClientRect().top + scrollY) - offset;
+      if (smoother) smoother.scrollTo(Math.max(0, top), false);
+      else scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    }
+    updateProgress();
+  });
   updateActiveMenu();
   if (window.gsap) window.gsap.ticker.add(updateActiveMenu);
   else addEventListener('scroll', updateActiveMenu, { passive: true });
