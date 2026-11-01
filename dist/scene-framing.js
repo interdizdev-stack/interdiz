@@ -9,10 +9,12 @@ export function measureCompactFraming(container) {
   for (let node = actions; node && node !== hero; node = node.offsetParent) {
     buttonsBottom += node.offsetTop;
   }
+  const openingOffset = hero ? Number.parseFloat(getComputedStyle(hero).getPropertyValue('--hero-opening-offset')) || 0 : 0;
+  buttonsBottom -= openingOffset;
   const openingHeight = (matchMedia('(max-width: 699px)').matches ? 200 : 260) * 1.4;
   const availableHeight = Math.max(100, height - buttonsBottom + 12);
   const frameHeight = Math.min(openingHeight, availableHeight * 1.15);
-  const center = Math.min(height - frameHeight * .42, buttonsBottom - 20 + frameHeight * .44);
+  const center = Math.min(height - frameHeight * .42, buttonsBottom - 20 + frameHeight * .44) + openingOffset;
   const viewHeight = 24 * Math.tan(19 * Math.PI / 180);
   return {
     scale: 1.55 * frameHeight / height,
