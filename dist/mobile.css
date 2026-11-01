@@ -54,8 +54,9 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero-topline > span { max-width: 50%; min-width: 0; }
   html[data-theme] .hero-topline > span:last-child { text-align: right; }
   html[data-theme] .hero-intro { position: relative; inset: auto; grid-row: 2; width: 100%; margin-block-start: calc(40px + var(--hero-opening-offset)); }
-  html[data-theme] :is(.hero h1, .manifesto h2, .projects h2, .expertise h2, .approach h2, .reviews h2) { max-width: 100%; font-size: clamp(26px, 8.2vw, 84px); line-height: 1.06; }
-  html[data-theme] .hero h1 { padding-inline-start: calc(var(--outline-width) + 5px); font-size: var(--mobile-hero-heading-size); }
+  html[data-theme] :is(.hero h1, .manifesto h2, .projects h2, .expertise h2, .approach h2, .reviews h2, .contact-hero h2) { max-width: 100%; font-size: var(--mobile-hero-heading-size); line-height: 1.06; }
+  html[data-theme] :is(.manifesto-line, .expertise-line, .approach-line, .reviews-line) { white-space: normal; }
+  html[data-theme] .hero h1 { padding-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] :is(.hero-description, .solutions-note, .projects-heading p, .expertise-caption, .approach-description, .reviews-caption) { margin-top: 18px; max-width: 560px; font-size: 16px; line-height: 1.6; }
   html[data-theme] .hero .hero-description { margin-top: 8px; padding-inline: calc(var(--outline-width) + 5px); font-size: 12px; }
   html[data-theme] .hero-actions { width: 80%; max-width: 432px; gap: 8px; margin-top: 42px; margin-inline-start: calc(var(--outline-width) + 5px); }
@@ -159,7 +160,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
 
   html[data-theme] .contact { padding-top: 64px; padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
   html[data-theme] .reviews + .contact { padding-top: 50px; }
-  html[data-theme] .contact-hero h2 { font-size: 8.8vw; line-height: 1.05; margin: 36px 0 40px; }
+  html[data-theme] .contact-hero h2 { line-height: 1.05; margin: 36px 0 40px; }
   html[data-theme] .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
   html[data-theme] .contact-card { display: flex; grid-row: auto; min-width: 0; padding: 24px; }
   html[data-theme] .contact-card:last-child { grid-column: 1 / -1; }
