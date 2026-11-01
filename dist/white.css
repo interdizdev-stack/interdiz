@@ -199,4 +199,4 @@ html[data-theme="light"] .hero-line.outline {
 }
 
 /* Tighten only the K–O pair in the white opening headline. */
-html[data-theme="light"] .hero-line.outline .hero-ko-spacing { margin-left: -6px; }
+html[data-theme="light"] .hero-line.outline .hero-ko-spacing { margin-left: -8px; }
