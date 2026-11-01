@@ -176,3 +176,12 @@ html[data-theme="light"] .manifesto .manifesto-line.outline {
   paint-order: stroke fill;
   filter: none;
 }
+
+/* Keep the IT-products chapter solid while its visibility follows the timeline. */
+html[data-theme="light"] .hero-chapter { opacity: 1 !important; }
+html[data-theme="light"] .hero-chapter em {
+  font-family: var(--display);
+  color: var(--lime);
+  -webkit-text-fill-color: var(--lime);
+  opacity: 1;
+}
