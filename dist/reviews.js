@@ -80,8 +80,8 @@ export function setupReviews(isReduced) {
         }
         group.cards.push(card);
       });
-      if (document.documentElement.dataset.theme !== 'dark') {
-        // White version: cap every vertical column at two complete reviews.
+      if (!compactDark()) {
+        // Cap each desktop column at two reviews; compact dark stays single-row.
         groups.length = 0;
         for (let index = 0; index < ordered.length; index += 2) {
           groups.push({ cards: ordered.slice(index, index + 2) });
