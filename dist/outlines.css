@@ -398,3 +398,12 @@ html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
   color: #000;
   border-color: #000 !important;
 }
+
+/* White edition: black previous control and green next control. */
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child {
+  color: var(--lime);
+  border-color: var(--lime) !important;
+}
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child:hover:not(:disabled) {
+  color: #000;
+}
