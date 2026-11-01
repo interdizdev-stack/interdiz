@@ -26,6 +26,7 @@ let heroTrigger;
 let updateProcessOnScroll;
 let finishProcessAnimations;
 let updateReviewsMotion;
+let updateSolutionsHint;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
 const isCompactLayout = () => compactMedia.matches;
@@ -441,6 +442,7 @@ function updateMotionButton() {
   $('.motion-label').textContent = reduced ? 'Включить анимации' : 'Меньше движения';
   document.documentElement.classList.toggle('reduced-motion', reduced);
   updateReviewsMotion?.();
+  updateSolutionsHint?.();
 }
 updateMotionButton();
 
@@ -457,6 +459,7 @@ function setupSolutionsCarousel() {
   let frame = 0;
   let settleTimer;
   let drag = null;
+  let swipeHint;
 
   function nearestIndex() {
     const maximum = track.scrollWidth - track.clientWidth;
@@ -485,6 +488,7 @@ function setupSolutionsCarousel() {
   }
 
   function goTo(index) {
+    swipeHint?.dismiss();
     const target = Math.max(0, Math.min(cards.length - 1, index));
     const card = cards[target];
     const maximum = track.scrollWidth - track.clientWidth;
@@ -561,12 +565,67 @@ function setupSolutionsCarousel() {
     });
   });
   const sizing = new ResizeObserver(() => {
+    swipeHint?.sync();
     requestedIndex = null;
     render(nearestIndex());
   });
   sizing.observe(track);
   $('.solutions-controls').hidden = false;
   render(0);
+  swipeHint = setupSolutionsSwipeHint(track);
+  updateSolutionsHint = swipeHint?.sync;
+}
+
+function setupSolutionsSwipeHint(track) {
+  const gsap = window.gsap;
+  if (!gsap || !window.IntersectionObserver) return;
+  let played = false;
+  let visible = false;
+  let animation;
+  let origin = 0;
+
+  function stop() {
+    animation?.kill();
+    animation = null;
+    track.classList.remove('is-swipe-hint');
+  }
+  function dismiss() {
+    played = true;
+    observer.disconnect();
+    stop();
+  }
+  function sync() {
+    if (reduced || !isCompactLayout() || !visible) { stop(); return; }
+    if (played || track.scrollLeft > 4) return;
+    const distance = Math.min(80, track.clientWidth * .18, track.scrollWidth - track.clientWidth);
+    if (distance < 12) return;
+    played = true;
+    observer.disconnect();
+    origin = track.scrollLeft;
+    track.classList.add('is-swipe-hint');
+    animation = gsap.timeline({
+      onComplete: () => {
+        track.scrollLeft = origin;
+        stop();
+      }
+    })
+      .to(track, { scrollLeft: origin + distance, duration: .6, ease: 'power2.inOut' })
+      .to(track, { scrollLeft: origin, duration: .75, ease: 'power2.inOut' }, '+=.16');
+  }
+  const observer = new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .55;
+    sync();
+  }, { threshold: .55, rootMargin: '0px 0px -8% 0px' });
+  observer.observe(track.querySelector('.solution-card'));
+  // User input always takes over; never pull the carousel back during a swipe.
+  ['pointerdown', 'touchstart', 'keydown'].forEach(type => {
+    track.addEventListener(type, dismiss, { passive: true });
+  });
+  track.addEventListener('wheel', event => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) dismiss();
+  }, { passive: true });
+  compactMedia.addEventListener('change', sync);
+  return { sync, dismiss };
 }
 
 function setupProjectGallery() {

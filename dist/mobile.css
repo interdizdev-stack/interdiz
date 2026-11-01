@@ -88,6 +88,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme].motion-enabled .solutions-track { padding-bottom: calc(28px + var(--solution-parallax-space)); margin-bottom: calc(-1 * var(--solution-parallax-space)); overflow-y: hidden; }
   html[data-theme].motion-enabled .solution-card { translate: 0 var(--solution-parallax-y, 0px); }
   html[data-theme] .solutions-track { gap: 16px; }
+  html[data-theme] .solutions-track.is-swipe-hint { scroll-snap-type: none; scroll-behavior: auto; }
   html[data-theme] .solution-card { flex-basis: calc((100vw - 2 * var(--pad) - 16px) / 2); min-height: 440px; padding: 24px; scroll-snap-align: start; }
   html[data-theme] .solution-type { margin-bottom: 24px; font-size: clamp(56px, 12vw, 88px); }
   html[data-theme] .solution-card h3 { font-size: clamp(24px, 3.5vw, 32px); line-height: 1.15; }
