@@ -368,3 +368,9 @@ html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
   -webkit-text-stroke: 5px #000 !important;
   filter: none !important;
 }
+
+/* White edition: larger service carousel hint with a fine contour. */
+html[data-theme="light"] .solutions-hint {
+  font-size: 16px;
+  -webkit-text-stroke-width: 1px;
+}
