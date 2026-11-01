@@ -407,3 +407,9 @@ html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last
 html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child:hover:not(:disabled) {
   color: #000;
 }
+
+/* Fine black outline for the green next control in the white edition. */
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child {
+  border-width: 1px !important;
+  border-color: #000 !important;
+}
