@@ -5,7 +5,7 @@ const $ = (selector, root=document) => root.querySelector(selector);
 const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
 
 // Keep the dark chapter caption on the same top rail as the opening caption.
-if (document.documentElement.dataset.theme === 'dark') {
+if (['dark', 'light'].includes(document.documentElement.dataset.theme)) {
   const caption = $('.hero-chapter > .mono-meta');
   if (caption) {
     const spacer = caption.cloneNode(true);
@@ -710,7 +710,8 @@ function setupAnimations() {
       const mobile = context.conditions.mobile;
       const compact = mobile;
       heroTrigger = null;
-      if (!compact) {
+      // Keep the same three-scene sequence on phones, tablets and desktop.
+      {
         const heroTimeline = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
@@ -749,19 +750,8 @@ function setupAnimations() {
             .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
             .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
         }
-        gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: 'opacity' });
-        gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
-      } else {
-        // Native scrolling keeps the opening screen and its calls to action
-        // immediately usable. Only the sculpture responds to scroll on touch layouts.
-        gsap.from('.hero-intro', { y: 24, opacity: 0, duration: .65, ease: 'power3.out', clearProps: 'transform,opacity' });
-        if (scene) gsap.to(scene.state, {
-          rotation: .7, explosion: .24, opacity: .65, ease: 'none',
-          scrollTrigger: {
-            id: 'compact-hero-scene', trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true,
-            onUpdate: () => scene.refresh()
-          }
-        });
+        gsap.from('.hero-intro', { y: compact ? 24 : 45, opacity: 0, duration: compact ? .65 : 1.3, ease: 'power3.out', clearProps: compact ? 'transform,opacity' : 'opacity' });
+        if (!compact) gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
       }
 
       if (dark || compact) {
