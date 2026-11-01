@@ -1,0 +1,224 @@
+/* Shared mobile layout for both themes; desktop styling stays in the theme files. */
+html[data-theme] .mobile-menu {
+  width: min(520px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 24px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: var(--outline-width) solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--fg);
+  background: var(--bg);
+}
+html[data-theme] .mobile-menu::backdrop { background: rgba(0, 0, 0, .8); backdrop-filter: blur(12px); }
+html[data-theme] .mobile-menu-heading { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg); color: var(--fg-muted); font-size: 12px; }
+html[data-theme] .mobile-menu-close { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 30px; line-height: 1; }
+html[data-theme] .mobile-menu-links { margin-top: 16px; }
+html[data-theme] .mobile-menu-links a { display: grid; grid-template-columns: 32px minmax(0, 1fr) 24px; align-items: baseline; gap: 10px; min-height: 58px; padding: 16px 0; border-top: var(--outline-width) solid var(--line); font-size: clamp(22px, 5.5vw, 30px); font-weight: 600; letter-spacing: -.04em; }
+html[data-theme] .mobile-menu-links a > span { font-size: 12px; font-weight: 400; color: var(--lime); letter-spacing: 0; }
+html[data-theme] .mobile-menu-links a > span:last-child { font-size: 24px; }
+html[data-theme] .mobile-menu-links a:is(:hover, .is-current) { color: var(--lime); }
+html[data-theme] .mobile-menu-contact { display: flex; justify-content: space-between; width: 100%; min-height: 48px; margin: 24px 0 0; padding: 14px 18px; font-size: 15px; }
+html[data-theme="light"] .mobile-menu::backdrop { background: rgba(232, 236, 226, .82); }
+html[data-theme="light"] .mobile-menu-links a { padding-inline: 10px; }
+html[data-theme="light"] .mobile-menu-links a > span { color: var(--fg); }
+html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: var(--fg); background: var(--lime); }
+
+@media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
+  html[data-theme] { --pad: clamp(20px, 4vw, 40px); scroll-padding-top: 92px; }
+  html[data-theme] :is(a, button, summary) { -webkit-tap-highlight-color: rgba(194, 255, 67, .16); }
+  html[data-theme] :is(button, .contact-pill, .gallery-all, .back-to-top) { touch-action: manipulation; }
+  html[data-theme] .swiss-cursor-dot,
+  html[data-theme] .swiss-cursor-ring { display: none; }
+
+  html[data-theme] .header { height: 80px; gap: 12px; }
+  html[data-theme] .header > .wordmark { font-size: 30px; }
+  html[data-theme] .header-caption,
+  html[data-theme] .header > nav { display: none; }
+  html[data-theme] .header > .contact-pill { margin-left: 0; min-height: 48px; padding: 12px 18px; font-size: 14px; }
+  html[data-theme] .mobile-menu-toggle:not([hidden]) { display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: 0 0 auto; min-width: 80px; min-height: 44px; padding: 10px 12px; border-radius: 99px; background: var(--bg-surface); color: var(--fg); font-size: 13px; line-height: 1.2; }
+  html[data-theme] .header > .mobile-menu-toggle { margin-left: auto; }
+  html[data-theme] .mobile-menu-icon { display: grid; gap: 5px; width: 16px; }
+  html[data-theme] .mobile-menu-icon i { height: var(--outline-width); background: currentColor; }
+  html[data-theme] .floating-nav { top: max(10px, env(safe-area-inset-top)); width: min(600px, calc(100% - 24px)); max-width: none; gap: 8px; padding: 8px 10px; }
+  html[data-theme] .floating-nav .float-links,
+  html[data-theme] .floating-nav .float-divider { display: none; }
+  html[data-theme] .floating-nav > .float-logo { font-size: 22px; }
+  html[data-theme] .floating-nav > .mobile-menu-toggle { margin-left: auto; }
+  html[data-theme] .floating-nav .float-cta { min-width: 0; min-height: 44px; padding: 10px 14px; gap: 12px; font-size: 13px; }
+
+  html[data-theme] .hero { display: grid; grid-template-rows: auto auto minmax(260px, 1fr) auto; gap: 24px; height: auto; min-height: 100svh; max-height: none; padding: 100px var(--pad) 58px; }
+  html[data-theme] .hero-grid { inset: 80px var(--pad) 0; }
+  html[data-theme] .hero-topline:not(.hero-chapter-topline) { position: relative; inset: auto; grid-row: 1; gap: 20px; padding-inline: calc(var(--outline-width) + 5px); font-size: 11px; line-height: 1.5; }
+  html[data-theme] .hero-topline > span { max-width: 50%; min-width: 0; }
+  html[data-theme] .hero-topline > span:last-child { text-align: right; }
+  html[data-theme] .hero-intro { position: relative; inset: auto; grid-row: 2; width: 100%; }
+  html[data-theme] :is(.hero h1, .manifesto h2, .projects h2, .expertise h2, .approach h2, .reviews h2) { max-width: 100%; font-size: clamp(26px, 8.2vw, 84px); line-height: 1.06; }
+  html[data-theme] :is(.hero-description, .solutions-note, .projects-heading p, .expertise-caption, .approach-description, .reviews-caption) { margin-top: 18px; max-width: 560px; font-size: 16px; line-height: 1.6; }
+  html[data-theme] .hero .hero-description { padding-inline: calc(var(--outline-width) + 5px); font-size: 12px; }
+  html[data-theme] .hero-actions { gap: 10px; margin-top: 22px; }
+  html[data-theme] .hero-actions .contact-pill { min-height: 48px; padding: 12px 16px; font-size: 14px; line-height: 1.2; }
+  html[data-theme] .hero-actions .contact-pill--filled { flex: 1 1 auto; }
+  html[data-theme] .hero .webgl { position: relative; inset: auto; grid-row: 3; width: 100%; min-height: 260px; }
+  html[data-theme] .hero .webgl canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  html[data-theme] :is(.hero-chapter, .hero-end, .hero-chapter-topline, .hero-object-label, .side-note, .scene-stages) { display: none; }
+  html[data-theme] .hero-bottom { position: relative; inset: auto; grid-row: 4; gap: 20px; align-items: center; }
+  html[data-theme] .hero-bottom p { max-width: 48%; margin: 0; font-size: 12px; line-height: 1.5; }
+  html[data-theme] .scroll-cue { gap: 10px; font-size: 10px; letter-spacing: .5px; }
+  html[data-theme] .scroll-circle { width: 44px; height: 44px; flex: 0 0 44px; }
+
+  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 72px; }
+  html[data-theme] .section-kicker { gap: 16px; align-items: flex-start; font-size: 11px; line-height: 1.5; letter-spacing: .8px; }
+  html[data-theme] .section-kicker > span { min-width: 0; }
+  html[data-theme] .section-kicker > span:last-child { text-align: right; }
+  html[data-theme] .manifesto-inner { margin-top: 38px; }
+  html[data-theme] .solutions-stage { margin-top: 24px; }
+  html[data-theme].motion-enabled .solutions-stage { --solution-parallax-space: 72px; display: flow-root; }
+  html[data-theme].motion-enabled .solutions-track { padding-bottom: calc(28px + var(--solution-parallax-space)); margin-bottom: calc(-1 * var(--solution-parallax-space)); overflow-y: hidden; }
+  html[data-theme].motion-enabled .solution-card { translate: 0 var(--solution-parallax-y, 0px); }
+  html[data-theme] .solutions-track { gap: 16px; }
+  html[data-theme] .solution-card { flex-basis: calc((100vw - 2 * var(--pad) - 16px) / 2); min-height: 440px; padding: 24px; scroll-snap-align: start; }
+  html[data-theme] .solution-type { margin-bottom: 24px; font-size: clamp(56px, 12vw, 88px); }
+  html[data-theme] .solution-card h3 { font-size: clamp(24px, 3.5vw, 32px); line-height: 1.15; }
+  html[data-theme] .solution-card p { padding-top: 20px; font-size: 15px; line-height: 1.65; }
+  html[data-theme] .solution-card .service-open { justify-content: space-between; align-self: stretch; min-height: 48px; padding: 12px 16px; font-size: 14px; }
+  html[data-theme] :is(.solutions-controls button, .gallery-controls button) { width: 48px; height: 48px; }
+  html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:hover:not(:disabled) { color: var(--fg); }
+  html[data-theme] .solutions-toolbar { gap: 16px; }
+  html[data-theme] .solutions-count { font-size: 16px; }
+
+  html[data-theme] .projects-heading { margin-top: 30px; }
+  html[data-theme].motion-enabled .projects > .section-kicker { position: relative; }
+  html[data-theme].motion-enabled .projects-line-effect { display: block; position: absolute; inset: auto 0 calc(-1 * var(--outline-width)); height: var(--outline-width); overflow: hidden; pointer-events: none; }
+  html[data-theme] .gallery-window { margin-top: 24px; }
+  html[data-theme] .project-track { gap: 16px; }
+  html[data-theme] .project-card { flex-basis: calc((100% - 16px) / 2); }
+  html[data-theme] .project-image { height: auto; min-height: 0; aspect-ratio: 4 / 3; }
+  html[data-theme] .project-info { gap: 12px; margin-top: 16px; }
+  html[data-theme] .project-info h3 { font-size: 26px; }
+  html[data-theme] .project-info p { font-size: 14px; line-height: 1.55; max-width: none; }
+  html[data-theme] .project-badges { top: 12px; left: 12px; gap: 6px; }
+  html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
+  html[data-theme] .project-open { right: 12px; bottom: 12px; padding: 12px 14px; font-size: 12px; }
+  html[data-theme] .gallery-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; margin-top: 28px; }
+  html[data-theme] .gallery-footer .gallery-all { grid-column: 1 / -1; justify-self: start; min-height: 48px; margin: 0; font-size: 14px; }
+  html[data-theme] .gallery-progress { grid-column: 1; grid-row: 2; order: 0; max-width: 180px; }
+  html[data-theme] .gallery-navigation { grid-column: 2; grid-row: 2; width: auto; justify-self: end; }
+
+  html[data-theme] .expertise h2 { margin-top: 36px; }
+  html[data-theme] .expertise-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 32px; }
+  html[data-theme] .expertise-sidebar { display: contents; }
+  html[data-theme] .studio-badge { order: 0; width: fit-content; max-width: 100%; margin: 0; font-size: 12px; }
+  html[data-theme] .service-list { order: 1; min-width: 0; }
+  html[data-theme] .expertise-testimonial-anchor { order: 2; position: static; margin: 8px 0 0; max-width: 680px; }
+  html[data-theme] .service summary { display: grid; grid-template-columns: 28px minmax(0, 1fr) 24px; gap: 12px; min-height: 72px; margin-top: 8px; padding: 18px 0; }
+  html[data-theme] .service h3 { font-size: clamp(26px, 4vw, 40px); line-height: 1.18; }
+  html[data-theme] .service-index { padding-top: 4px; font-size: 12px; }
+  html[data-theme] .service-plus { font-size: 28px; }
+  html[data-theme] .service-content { padding-inline: 40px 8px; }
+  html[data-theme] .service-content p { font-size: 16px; line-height: 1.65; }
+  html[data-theme] .approach-content { width: 100%; margin-top: 32px; }
+  html[data-theme] .faq-item summary { gap: 14px; min-height: 72px; padding: 22px 4px; grid-template-columns: minmax(0, 1fr) 24px; }
+  html[data-theme] .faq-item h3 { font-size: clamp(20px, 2.8vw, 28px); line-height: 1.35; }
+  html[data-theme] .faq-answer { padding: 0 8px 26px 4px; }
+  html[data-theme] .faq-answer p { font-size: 16px; line-height: 1.65; }
+  html[data-theme] .faq-contact { gap: 18px; margin-top: 32px; }
+  html[data-theme] .faq-contact > .contact-pill { min-height: 48px; }
+  html[data-theme] .approach-testimonial { gap: 20px; }
+  html[data-theme] .approach-testimonial blockquote p { font-size: 16px; line-height: 1.65; }
+
+  html[data-theme] .reviews-heading { align-items: flex-start; gap: 20px; margin-top: 32px; }
+  html[data-theme] .reviews-pause { width: auto; min-width: 112px; min-height: 44px; margin: 0; padding: 10px 14px; }
+  html[data-theme] .reviews-filter { min-height: 44px; padding: 10px 14px; font-size: 14px; }
+  html[data-theme] .reviews-carousel { margin-top: 28px; padding-inline: var(--pad); }
+  html[data-theme] .reviews-wall { overscroll-behavior-x: contain; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8px, #000 calc(100% - 8px), transparent); mask-image: linear-gradient(90deg, transparent, #000 8px, #000 calc(100% - 8px), transparent); }
+  html[data-theme] .reviews-track,
+  html[data-theme] .reviews-track.is-looping { flex-flow: row nowrap; align-items: flex-start; height: var(--compact-review-height, 680px); }
+  html[data-theme] :is(.review-card, .reviews-column) { width: calc((100% - 16px) / 2); min-width: 0; }
+  html[data-theme] .reviews-column > .review-card { width: 100%; }
+  html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: calc((100% - 16px) / 2); }
+  html[data-theme] .reviews { padding-bottom: 0; }
+  html[data-theme] .review-card { padding: 20px; }
+  html[data-theme] .review-card__text { font-size: 15px; line-height: 1.55; letter-spacing: -.015em; }
+  html[data-theme] .review-card__author-name { font-size: 15px; }
+  html[data-theme] .review-card__author-icon { width: 44px; height: 44px; }
+  html[data-theme] .reviews-wall:is(.is-paused, .is-filtered, :focus-within),
+  html[data-theme].reduced-motion .reviews-wall { -webkit-mask-image: none; mask-image: none; }
+
+  html[data-theme] .contact { padding-top: 64px; padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+  html[data-theme] .reviews + .contact { padding-top: 50px; }
+  html[data-theme] .contact-hero h2 { font-size: 8.8vw; line-height: 1.05; margin: 36px 0 40px; }
+  html[data-theme] .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
+  html[data-theme] .contact-card { display: flex; grid-row: auto; min-width: 0; padding: 24px; }
+  html[data-theme] .contact-card:last-child { grid-column: 1 / -1; }
+  html[data-theme] .contact-card-top { flex-wrap: wrap; gap: 10px 14px; font-size: 11px; line-height: 1.6; }
+  html[data-theme] .contact-card .contact-val { max-width: 100%; min-height: 48px; gap: 10px; font-size: clamp(20px, 2.6vw, 28px); overflow-wrap: anywhere; }
+  html[data-theme] .contact-desc { font-size: 14px; line-height: 1.6; }
+  html[data-theme] .footer-bottom { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 16px; padding-top: 26px; }
+  html[data-theme] .footer-bottom > .wordmark { grid-column: 1; grid-row: 1; margin: 0; }
+  html[data-theme] .footer-bottom > .footer-clock { grid-column: 2; grid-row: 1; justify-self: start; transform: none; font-size: 11px; }
+  html[data-theme] .footer-bottom > .back-to-top { grid-column: 3; grid-row: 1; display: flex; align-items: center; min-height: 44px; font-size: 12px; }
+  html[data-theme] .footer-bottom > .footer-copyright { grid-column: 1 / -1; grid-row: 2; justify-self: center; font-size: 12px; }
+  html[data-theme] .display-controls { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); gap: 6px; }
+  html[data-theme] .display-controls :is(.quick-home, .theme-switch, .motion-toggle) { width: 44px; height: 44px; min-height: 44px; flex: 0 0 44px; padding: 0; }
+  html[data-theme] .display-controls .motion-toggle { justify-content: center; }
+  html[data-theme] .display-controls .motion-label { display: none; }
+  html[data-theme] .copy-toast { width: calc(100% - 32px); max-width: 420px; bottom: 76px; padding: 12px 16px; font-size: 14px; text-align: center; overflow-wrap: anywhere; }
+  html[data-theme="light"] .quick-home { color: var(--fg); }
+
+  html[data-theme] .project-dialog { width: min(860px, calc(100% - 24px)); max-height: calc(100dvh - 24px); margin: auto; }
+  html[data-theme] .dialog-close { top: 12px; width: 48px; height: 48px; margin: 12px 12px -60px 0; }
+  html[data-theme] .dialog-inner { padding: 28px; }
+  html[data-theme] .dialog-inner h2 { padding-right: 32px; font-size: clamp(30px, 5vw, 56px); line-height: 1.1; }
+  html[data-theme] .dialog-kicker,
+  html[data-theme] .service-dialog-kicker { display: block; max-width: calc(100% - 48px); font-size: 11px; line-height: 1.5; }
+  html[data-theme] .service-dialog-contact { width: 100%; min-height: 48px; margin: 0; justify-content: space-between; }
+}
+
+@media (max-width: 699px) {
+  html[data-theme] .header > .contact-pill { display: none; }
+  html[data-theme] .floating-nav > .float-logo { font-size: 20px; }
+  html[data-theme] .floating-nav { gap: 6px; }
+  html[data-theme] .floating-nav .float-cta { padding-inline: 12px; font-size: 12px; }
+  html[data-theme] .hero { grid-template-rows: auto auto minmax(200px, 1fr) auto; gap: 20px; padding-bottom: 112px; }
+  html[data-theme] .hero .webgl { min-height: 200px; }
+  html[data-theme] .hero-topline:not(.hero-chapter-topline) { font-size: 10px; gap: 16px; }
+  html[data-theme] .hero-actions .contact-pill { font-size: 13px; padding-inline: 14px; }
+  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; }
+  html[data-theme] .section-kicker { font-size: 10px; gap: 12px; letter-spacing: .5px; }
+  html[data-theme] .section-kicker > span:last-child { max-width: 44%; }
+  html[data-theme] .solution-card { flex-basis: calc(100% - 20px); padding: 22px; }
+  html[data-theme] .solutions-stage::after { width: 16px; }
+  html[data-theme] .solution-type { font-size: clamp(56px, 17vw, 88px); }
+  html[data-theme] .project-card { flex-basis: calc(100% - 18px); }
+  html[data-theme] .gallery-footer .gallery-all { width: 100%; }
+  html[data-theme] .gallery-progress { max-width: 130px; }
+  html[data-theme] .expertise-layout { gap: 24px; }
+  html[data-theme] .approach-testimonial { padding: 24px 0 0; border-left: 0; border-top: var(--outline-width) solid var(--line-lime); }
+  html[data-theme] :is(.review-card, .reviews-column) { width: calc(100% - 16px); }
+  html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: 100%; }
+  html[data-theme] .reviews-heading { flex-direction: column; }
+  html[data-theme] .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  html[data-theme] .contact-card:last-child { grid-column: auto; }
+  html[data-theme] .contact-card { padding: 22px; }
+  html[data-theme] .contact-card-top > span { max-width: 100%; }
+  html[data-theme] .footer-bottom { grid-template-columns: minmax(0, 1fr) auto; }
+  html[data-theme] .footer-bottom > .back-to-top { grid-column: 2; }
+  html[data-theme] .footer-bottom > .footer-clock { grid-column: 1 / -1; grid-row: 2; }
+  html[data-theme] .footer-bottom > .footer-copyright { grid-row: 3; }
+  html[data-theme] .dialog-inner { padding: 24px 20px; }
+  html[data-theme] .service-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  html[data-theme] .service-detail-scope { grid-row: auto; }
+}
+
+@media (max-width: 360px) {
+  html[data-theme] .mobile-menu { padding: 18px; }
+  html[data-theme] .mobile-menu-links a { font-size: 22px; }
+  html[data-theme] .floating-nav > .mobile-menu-toggle { min-width: 44px; width: 44px; height: 44px; padding: 10px; gap: 0; font-size: 0; }
+  html[data-theme] .hero-bottom { gap: 12px; }
+  html[data-theme] .hero-bottom p { font-size: 11px; }
+  html[data-theme] .scroll-cue { font-size: 9px; gap: 8px; }
+  html[data-theme] .solution-card { padding: 20px; }
+  html[data-theme] .service-content { padding-left: 0; }
+}

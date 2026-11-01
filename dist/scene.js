@@ -3,6 +3,7 @@ import * as THREE from './vendor/three.module.js';
 // A segmented trefoil sculpture: a single geometric language, three scroll states.
 export function createScene(container, reduced = false) {
   let mobile = matchMedia('(max-width: 700px)').matches;
+  const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !mobile, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.25 : 1.65));
   renderer.setClearColor(0xffffff, 0);
@@ -117,8 +118,8 @@ export function createScene(container, reduced = false) {
     smoothed.y=THREE.MathUtils.damp(smoothed.y,pointer.y,3,dt);
     const p = state.explosion;
     const idle = staticMotion?0:aliveTime*.09;
-    world.position.set(mobile ? .1 : 1.7, mobile ? -.38 : .1, 0);
-    world.scale.setScalar(mobile ? .88 : 1.27);
+    world.position.set(compactLayout.matches ? 0 : 1.7, compactLayout.matches ? 0 : .1, 0);
+    world.scale.setScalar(compactLayout.matches ? 1.55 : 1.27);
     world.rotation.set(.32 + (staticMotion?0:smoothed.y*.1), .2 + (staticMotion?0:smoothed.x*.14), -.34);
     sculpture.rotation.set(.25+state.rotation*.35, idle+state.rotation*1.65, -.1+state.rotation*.28);
     sculpture.position.y = staticMotion ? 0 : Math.sin(aliveTime*.6)*.075;

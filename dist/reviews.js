@@ -6,7 +6,7 @@ export function setupReviews(isReduced) {
   const button = document.querySelector('.reviews-pause');
   if (!wall || !track || !button) return;
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
-  const compactDark = () => document.documentElement.dataset.theme === 'dark' && compactLayout.matches;
+  const compact = () => compactLayout.matches;
   const cards = [...track.children];
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
@@ -17,7 +17,7 @@ export function setupReviews(isReduced) {
   let touching = false;
   let frame = 0;
   let previousTime = 0;
-  let speed = compactDark() ? 28 : 60;
+  let speed = compact() ? 28 : 60;
   let columnStep = 0;
   let position = 0;
   let loopItems = [];
@@ -56,7 +56,7 @@ export function setupReviews(isReduced) {
     track.style.transform = '';
     track.classList.remove('is-looping');
     track.replaceChildren(...ordered);
-    if (compactDark()) {
+    if (compact()) {
       // Reserve the tallest full review even when a source filter is active.
       // Measuring synchronously avoids a flash and keeps all text readable.
       const hidden = ordered.map(card => card.hidden);
@@ -80,8 +80,8 @@ export function setupReviews(isReduced) {
         }
         group.cards.push(card);
       });
-      if (!compactDark()) {
-        // Cap each desktop column at two reviews; compact dark stays single-row.
+      if (!compact()) {
+        // Cap each desktop column at two reviews; compact layouts stay single-row.
         groups.length = 0;
         for (let index = 0; index < ordered.length; index += 2) {
           groups.push({ cards: ordered.slice(index, index + 2) });
@@ -112,7 +112,7 @@ export function setupReviews(isReduced) {
     frame = requestAnimationFrame(tick);
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0;
     previousTime = time;
-    speed += ((hovering ? 10 : compactDark() ? 28 : 60) - speed) * (1 - Math.exp(-7 * delta));
+    speed += ((hovering ? 10 : compact() ? 28 : 60) - speed) * (1 - Math.exp(-7 * delta));
     setPosition(position + speed * delta);
   }
   function update() {

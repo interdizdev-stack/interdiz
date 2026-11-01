@@ -27,27 +27,26 @@ let updateProcessOnScroll;
 let finishProcessAnimations;
 let updateReviewsMotion;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
-const compactDarkMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
-const isCompactDark = () => document.documentElement.dataset.theme === 'dark' && compactDarkMedia.matches;
+const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
+const isCompactLayout = () => compactMedia.matches;
 let closeMobileNavigation;
 
 function setupMobileNavigation() {
-  if (document.documentElement.dataset.theme !== 'dark') return;
   const menu = $('#mobile-menu');
   const toggles = $$('[data-mobile-menu]');
   if (!menu) return;
   let opener;
   menu.hidden = false;
   const sync = () => {
-    toggles.forEach(button => { button.hidden = !isCompactDark(); });
-    if (!isCompactDark()) closeMobileNavigation(false);
+    toggles.forEach(button => { button.hidden = !isCompactLayout(); });
+    if (!isCompactLayout()) closeMobileNavigation(false);
   };
   closeMobileNavigation = (restoreFocus = true) => {
     if (!restoreFocus) opener = null;
     if (menu.open) menu.close();
   };
   toggles.forEach(button => button.addEventListener('click', () => {
-    if (!isCompactDark()) return;
+    if (!isCompactLayout()) return;
     opener = button;
     const links = $$('.mobile-menu-links a', menu);
     const current = links.findLast(link => $(link.getAttribute('href')).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
@@ -73,7 +72,7 @@ function setupMobileNavigation() {
     opener?.focus({ preventScroll: true });
     opener = null;
   });
-  compactDarkMedia.addEventListener('change', sync);
+  compactMedia.addEventListener('change', sync);
   sync();
 }
 
@@ -324,7 +323,7 @@ function setupProcessAccordion() {
 
   function revealOnScroll() {
     scrollFrame = 0;
-    if (isCompactDark()) return;
+    if (isCompactLayout()) return;
     if (document.body.classList.contains('dialog-open')) return;
     if (performance.now() < interactionUntil) return;
     // Keyboard users keep control of the step they are interacting with.
@@ -369,7 +368,7 @@ function setupProcessAccordion() {
   // Only real pointer movement selects a hovered row. Layout changes and wheel
   // scrolling beneath a stationary pointer must not start another transition.
   list.addEventListener('pointermove', event => {
-    if (isCompactDark()) return;
+    if (isCompactLayout()) return;
     if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
     if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
     const row = event.target.closest('.service');
@@ -678,6 +677,9 @@ function setupAnimations() {
   smoother?.kill();
   smoother = null;
   heroTrigger = null;
+  if (isCompactLayout()) gsap.set('.hero-intro, .hero-line, .hero-description, .hero-actions, .hero-topline:not(.hero-chapter-topline), .hero-bottom', {
+    clearProps: 'transform,opacity,visibility'
+  });
   scene?.setReduced(reduced);
   if (scene) Object.assign(scene.state, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1 });
   document.documentElement.classList.toggle('motion-enabled', !reduced);
@@ -686,7 +688,7 @@ function setupAnimations() {
   gsap.registerPlugin(ScrollTrigger);
   // Smooth the page and parallax together, rather than letting scrub lag
   // fight immediate native scrolling at the edge of the pinned hero.
-  if (document.documentElement.dataset.theme === 'dark' && !isCompactDark() && ScrollSmoother) {
+  if (document.documentElement.dataset.theme === 'dark' && !isCompactLayout() && ScrollSmoother) {
     gsap.registerPlugin(ScrollSmoother);
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
@@ -704,11 +706,11 @@ function setupAnimations() {
   animationContext = gsap.context(() => {
     const media = gsap.matchMedia();
     const dark = document.documentElement.dataset.theme === 'dark';
-    media.add(dark ? { desktop: '(min-width: 1101px)', mobile: compactDarkMedia.media } : { desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, context => {
+    media.add({ desktop: '(min-width: 1101px)', mobile: compactMedia.media }, context => {
       const mobile = context.conditions.mobile;
-      const compactDark = dark && mobile;
+      const compact = mobile;
       heroTrigger = null;
-      if (!compactDark) {
+      if (!compact) {
         const heroTimeline = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
@@ -762,9 +764,9 @@ function setupAnimations() {
         });
       }
 
-      if (document.documentElement.dataset.theme === 'dark') {
+      if (dark || compact) {
         // Keep the scene almost stationary while the foreground slides over it.
-        if (!compactDark) {
+        if (!compact) {
           const transition = gsap.timeline({
             defaults: { ease: 'none', duration: 1 },
             scrollTrigger: {
@@ -788,7 +790,7 @@ function setupAnimations() {
         // a parallax transform, which must not shift these trigger positions.
         const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
         gsap.fromTo('.solution-card', {
-          '--solution-parallax-y': i => `${(compactDark ? 24 : mobile ? 70 : 140) + (i % 3) * (compactDark ? 8 : mobile ? 18 : 48)}px`
+          '--solution-parallax-y': i => `${(compact ? 24 : mobile ? 70 : 140) + (i % 3) * (compact ? 8 : mobile ? 18 : 48)}px`
         }, {
           '--solution-parallax-y': '0px',
           ease: 'none',
@@ -796,8 +798,8 @@ function setupAnimations() {
             id: 'solutions-cards-parallax',
             trigger: '.manifesto',
             start: () => `top+=${cardsTop()} bottom`,
-            end: () => `top+=${cardsTop()} ${compactDark ? '85%' : mobile ? '45%' : '50%'}`,
-            scrub: smoother || compactDark ? true : 0.6,
+            end: () => `top+=${cardsTop()} ${compact ? '85%' : mobile ? '45%' : '50%'}`,
+            scrub: smoother || compact ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
@@ -828,10 +830,10 @@ function setupAnimations() {
 
         // Start the sideways entrance when the cases themselves enter view.
         gsap.fromTo('.gallery-window', {
-          x: () => compactDark ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+          x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
           opacity: 1
         }, {
-          x: 0, opacity: 1, duration: compactDark ? .55 : .8, ease: 'power3.out',
+          x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
           immediateRender: true, clearProps: 'transform,opacity',
           scrollTrigger: {
             id: 'projects-cases-side-reveal',
@@ -848,13 +850,13 @@ function setupAnimations() {
         gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
       }
 
-      gsap.from('.service', { y: compactDark ? 18 : 35, opacity: 0, stagger: compactDark ? .05 : .08, duration: compactDark ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
-      gsap.from('.expertise h2', { y: compactDark ? 24 : 70, opacity: compactDark ? .65 : .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: compactDark ? true : .6 } });
+      gsap.from('.service', { y: compact ? 18 : 35, opacity: 0, stagger: compact ? .05 : .08, duration: compact ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
+      gsap.from('.expertise h2', { y: compact ? 24 : 70, opacity: compact ? .65 : .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: compact ? true : .6 } });
       // Move the complete FAQ with scroll; use layout coordinates so its
       // own transform cannot shift the trigger on refresh.
       const faqSection = $('.approach');
       if (faqSection) {
-        const faqParallax = compactDark ? 18 : mobile ? 55 : 110;
+        const faqParallax = compact ? 18 : mobile ? 55 : 110;
         gsap.fromTo(faqSection, { y: faqParallax }, {
           y: 0,
           ease: 'none',
@@ -863,13 +865,13 @@ function setupAnimations() {
             trigger: faqSection.parentElement,
             start: () => `top+=${faqSection.offsetTop} bottom`,
             end: () => `top+=${faqSection.offsetTop} 20%`,
-            scrub: smoother || compactDark ? true : 0.6,
+            scrub: smoother || compact ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
       }
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
-      if (compactDark) gsap.from('.contact-hero h2', { y: 24, opacity: 0, duration: .65, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact', start: 'top 90%', once: true } });
+      if (compact) gsap.from('.contact-hero h2', { y: 24, opacity: 0, duration: .65, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact', start: 'top 90%', once: true } });
       else gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
       gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
     });
@@ -919,7 +921,7 @@ $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
   if (link.closest('.mobile-menu')) closeMobileNavigation?.(false);
   let top = smoother ? smoother.offset(target, 'top top') : target.getBoundingClientRect().top + scrollY;
-  if (isCompactDark() && target.id !== 'top') top -= 82;
+  if (isCompactLayout() && target.id !== 'top') top -= 82;
   if (target.id === 'top' && heroTrigger) top = heroTrigger.start;
   history.replaceState(null, '', link.getAttribute('href'));
   if (smoother) smoother.scrollTo(Math.max(0, top), true);
@@ -991,7 +993,7 @@ function setupCardTilt() {
   if (!matchMedia('(pointer: fine)').matches) return;
   $$('.project-card').forEach(card => {
     card.addEventListener('mousemove', e => {
-      if (reduced || isCompactDark() || card.closest('.is-dragging')) return;
+      if (reduced || isCompactLayout() || card.closest('.is-dragging')) return;
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -1064,7 +1066,7 @@ async function init() {
   setupTestimonialStickySize();
   setupMobileNavigation();
   setupAnimations();
-  if (document.documentElement.dataset.theme === 'dark') compactDarkMedia.addEventListener('change', () => {
+  compactMedia.addEventListener('change', () => {
     // Rebuild smoothing only when switching between touch and desktop layouts.
     const section = [...$$('main section[id]'), $('.contact')].findLast(el => el.getBoundingClientRect().top < innerHeight * .5);
     const offset = section?.getBoundingClientRect().top ?? 0;
