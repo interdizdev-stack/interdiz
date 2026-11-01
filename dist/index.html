@@ -28,6 +28,11 @@
         <feComposite in="ink" in2="expanded" operator="in" result="outline" />
         <feMerge><feMergeNode in="outline" /><feMergeNode in="SourceGraphic" /></feMerge>
       </filter>
+      <filter id="white-service-outline" x="-25%" y="-25%" width="150%" height="150%">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded" />
+        <feFlood flood-color="#000" result="ink" />
+        <feComposite in="ink" in2="expanded" operator="in" />
+      </filter>
     </defs>
   </svg>
   <!-- Analog Film Grain Overlay -->

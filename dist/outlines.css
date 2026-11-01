@@ -353,3 +353,18 @@ html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
   paint-order: stroke fill;
   filter: none !important;
 }
+
+/* Unioned outline glyphs avoid internal overlaps in inactive white cards. */
+html[data-theme="light"] .solution-card .solution-type {
+  letter-spacing: calc(-0.085em + 1px);
+  font-family: 'Studio Outline', var(--display);
+  color: #000;
+  -webkit-text-stroke: 0 !important;
+  filter: url(#white-service-outline) !important;
+}
+html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
+  font-family: var(--display);
+  color: var(--lime);
+  -webkit-text-stroke: 5px #000 !important;
+  filter: none !important;
+}
