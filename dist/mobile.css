@@ -59,7 +59,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] :is(.hero-description, .solutions-note, .projects-heading p, .expertise-caption, .approach-description, .reviews-caption) { margin-top: 18px; max-width: 560px; font-size: 16px; line-height: 1.6; }
   html[data-theme] .hero .hero-description { padding-inline: calc(var(--outline-width) + 5px); font-size: 12px; }
   html[data-theme] .hero-actions { width: 80%; max-width: 432px; gap: 8px; margin-top: 22px; }
-  html[data-theme] .hero-actions .contact-pill { position: relative; min-height: 38.4px; padding: 9.6px 12.8px; gap: 12px; font-size: 11.2px; line-height: 1.2; }
+  html[data-theme] .hero-actions .contact-pill { position: relative; min-height: 38.4px; padding: 9.6px 12.8px; gap: 12px; font-size: 14.2px; line-height: 1.2; }
   html[data-theme] .hero-actions .contact-pill::before { content: ''; position: absolute; inset-inline: 0; top: 50%; height: max(100%, 44px); transform: translateY(-50%); }
   html[data-theme] .hero-actions .contact-pill span { font-size: 16px; }
   html[data-theme] .hero-actions .contact-pill--filled { flex: 1 1 auto; }
@@ -187,7 +187,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero { grid-template-rows: auto auto minmax(200px, 1fr) auto; gap: 20px; padding-bottom: 112px; }
   html[data-theme] .hero .webgl { min-height: 200px; }
   html[data-theme] .hero-topline:not(.hero-chapter-topline) { font-size: 10px; gap: 16px; }
-  html[data-theme] .hero-actions .contact-pill { font-size: 10.4px; padding-inline: 11.2px; }
+  html[data-theme] .hero-actions .contact-pill { font-size: 13.4px; padding-inline: 11.2px; }
   html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; }
   html[data-theme] .section-kicker { font-size: 10px; gap: 12px; letter-spacing: .5px; }
   html[data-theme] .section-kicker > span:last-child { max-width: 44%; }
