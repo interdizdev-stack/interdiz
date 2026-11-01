@@ -286,7 +286,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 html[data-theme="light"] :is(button, [role="button"], summary,
   .contact-pill, .float-cta, .round-link, .gallery-all, .project-open,
   .theme-switch, .scroll-circle, .quick-home, .back-to-top, .dialog-link) {
-  border-width: 1.5px !important;
+  border-width: 3px !important;
   border-style: solid !important;
   border-color: #000 !important;
 }
