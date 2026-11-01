@@ -67,7 +67,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero .webgl canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: translateY(-8px) scale(1.4); transform-origin: center; }
   html[data-theme] :is(.hero-chapter, .hero-end, .hero-chapter-topline, .hero-object-label, .side-note, .scene-stages) { display: none; }
   html[data-theme] .hero-bottom { position: relative; inset: auto; grid-row: 4; gap: 20px; align-items: center; }
-  html[data-theme] .hero-bottom p { max-width: 48%; margin: 0; font-size: 12px; line-height: 1.5; }
+  html[data-theme] .hero-bottom p { visibility: hidden; max-width: 48%; margin: 0; font-size: 12px; line-height: 1.5; }
   html[data-theme] .scroll-cue { visibility: hidden; pointer-events: none; gap: 10px; font-size: 10px; letter-spacing: .5px; }
   html[data-theme] .scroll-circle { width: 44px; height: 44px; flex: 0 0 44px; }
 
