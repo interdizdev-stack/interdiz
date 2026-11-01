@@ -161,8 +161,8 @@ html[data-theme="light"] { --outline-width: 1.5px; }
 
 
 /* Enlarge decorative plus marks only in the white edition. */
-html[data-theme="light"] .crosshair { font-size: calc(1.1em + 4px); }
-html[data-theme="light"] .cross { font-size: 34px; }
+html[data-theme="light"] :is(.crosshair, .cross, .service-plus, .faq-plus) { font-size: 21.6px; }
+
 
 /* Place the second caption on the same rail as the opening caption. */
 html[data-theme="light"] .hero-chapter-topline { margin-left: 0; color: var(--fg); }
