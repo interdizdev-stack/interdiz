@@ -200,3 +200,20 @@ html[data-theme="light"] .hero-line.outline {
 
 /* Tighten only the K–O pair in the white opening headline. */
 html[data-theme="light"] .hero-line.outline .hero-ko-spacing { margin-left: -8px; }
+
+/* Center the black separator in the gap between logo and caption. */
+html[data-theme="light"] .header-caption {
+  position: relative;
+  border-left: 0;
+  padding-left: 0;
+}
+html[data-theme="light"] .header-caption::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 1.5px;
+  height: 100%;
+  background: #000;
+  transform: translate(-50%, -50%);
+}
