@@ -336,3 +336,11 @@ html[data-theme="light"] .manifesto-line.outline .title-dot {
   paint-order: stroke fill;
   filter: none;
 }
+
+/* Five-pixel contours for service labels in the white edition. */
+html[data-theme="light"] .solution-type,
+html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
+  -webkit-text-stroke: 5px #000;
+  paint-order: stroke fill;
+  filter: none;
+}
