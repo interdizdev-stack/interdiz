@@ -68,8 +68,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] :is(.hero-object-label, .side-note, .scene-stages) { display: none; }
   html[data-theme] .hero-chapter { display: flex; inset: 0 var(--pad) auto; height: 100svh; flex-direction: column; justify-content: center; }
   html[data-theme] .hero-chapter > .mono-meta { position: absolute; inset: 250px 0 auto calc(var(--outline-width) + 5px); margin: 0; font-size: 11px; line-height: 1.5; }
-  html[data-theme] :is(.hero-chapter p, .hero-end) { font-size: clamp(28px, 9vw, 84px); line-height: 1.08; }
-  html[data-theme] .hero-chapter p { margin: 0; padding-inline-start: calc(var(--outline-width) + 5px); font-size: var(--mobile-hero-heading-size); line-height: 1.06; }
+  html[data-theme] :is(.hero-chapter p, .hero-end) { font-size: var(--mobile-hero-heading-size); line-height: 1.06; }
+  html[data-theme] .hero-chapter p { margin: 0; padding-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] .hero-chapter em { display: block; }
   html[data-theme] .hero-end { display: flex; inset: 0 var(--pad) auto; height: 100svh; text-align: center; }
   html[data-theme] .hero-chapter-topline { display: block; position: absolute; inset: 250px var(--pad) auto; padding-inline: calc(var(--outline-width) + 5px); font-size: 11px; line-height: 1.5; }
@@ -237,7 +237,6 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero h1 { grid-row: 1 / 3; }
   html[data-theme] .hero .hero-description { margin-top: 0; }
   html[data-theme] .hero-actions { grid-column: 2; margin-top: 0; }
-  html[data-theme] .hero-end { font-size: clamp(26px, 7svh, 50px); }
 }
 
 @media (max-width: 360px) {
