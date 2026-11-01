@@ -293,7 +293,7 @@ html[data-theme="light"] :is(button, [role="button"], summary,
 
 /* Explicit contour width for the white edition's IT-products caption. */
 html[data-theme="light"] .hero-chapter em {
-  -webkit-text-stroke: 1.5px #000;
+  -webkit-text-stroke: 5px #000;
   paint-order: stroke fill;
 }
 
