@@ -139,3 +139,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
   .scene-stages { font-size: 9px; gap: 7px; }
   .side-note { font-size: 9px; }
 }
+
+/* White version: show complete pairs of reviews in each vertical column. */
+html:not([data-theme="dark"]) .reviews-track.is-looping {
+  height: auto;
+  min-height: 0;
+}

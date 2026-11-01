@@ -80,6 +80,13 @@ export function setupReviews(isReduced) {
         }
         group.cards.push(card);
       });
+      if (document.documentElement.dataset.theme !== 'dark') {
+        // White version: cap every vertical column at two complete reviews.
+        groups.length = 0;
+        for (let index = 0; index < ordered.length; index += 2) {
+          groups.push({ cards: ordered.slice(index, index + 2) });
+        }
+      }
       loopItems = groups.map(group => {
         const column = document.createElement('div');
         column.className = 'reviews-column';
