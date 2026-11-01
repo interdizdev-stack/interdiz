@@ -304,7 +304,7 @@ html[data-theme="light"] .scene-stages > span.active {
 
 /* Match the white hero closing caption to the two-pixel headline contour. */
 html[data-theme="light"] .hero-end span {
-  -webkit-text-stroke: 2px #000;
+  -webkit-text-stroke: 5px #000;
   paint-order: stroke fill;
 }
 
