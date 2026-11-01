@@ -1705,7 +1705,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 /* Footer Bottom Strip */
 .footer-bottom {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   border-top: var(--outline-width) solid var(--line);
   padding-top: 30px;
