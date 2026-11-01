@@ -745,6 +745,16 @@ function setupAnimations() {
             .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
         }
 
+        if (compact) {
+          // Bring the sculpture into the visible viewport on short phones
+          // after the opening content leaves, keeping its initial position.
+          const sculpture = $('.hero .webgl');
+          heroTimeline.to(sculpture, {
+            y: () => Math.min(0, innerHeight * .65 - (sculpture.offsetTop + sculpture.offsetHeight / 2 - 8)),
+            duration: .24
+          }, .22);
+        }
+
         if (scene) {
           heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
             .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
