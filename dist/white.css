@@ -220,3 +220,7 @@ html[data-theme="light"] .header-caption::before {
 
 /* Separate the black and green parts of the white edition's logo. */
 html[data-theme="light"] :is(.wordmark, .float-logo) > span { margin-left: 2px; }
+
+/* Add one pixel between the green logo letters in the white edition. */
+html[data-theme="light"] .wordmark > span { letter-spacing: -1px; }
+html[data-theme="light"] .float-logo > span { letter-spacing: 0; }
