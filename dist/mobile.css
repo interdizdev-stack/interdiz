@@ -67,12 +67,12 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero .webgl canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: none; }
   html[data-theme] :is(.hero-object-label, .side-note, .scene-stages) { display: none; }
   html[data-theme] .hero-chapter { display: flex; inset: 0 var(--pad) auto; height: 100svh; flex-direction: column; justify-content: center; }
-  html[data-theme] .hero-chapter > .mono-meta { position: absolute; inset: 100px 0 auto calc(var(--outline-width) + 5px); margin: 0; font-size: 11px; line-height: 1.5; }
+  html[data-theme] .hero-chapter > .mono-meta { position: absolute; inset: 350px 0 auto calc(var(--outline-width) + 5px); margin: 0; font-size: 11px; line-height: 1.5; }
   html[data-theme] :is(.hero-chapter p, .hero-end) { font-size: clamp(28px, 9vw, 84px); line-height: 1.08; }
   html[data-theme] .hero-chapter p { margin: 0; padding-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] .hero-chapter em { display: block; }
   html[data-theme] .hero-end { display: flex; inset: 0 var(--pad) auto; height: 100svh; text-align: center; }
-  html[data-theme] .hero-chapter-topline { display: block; position: absolute; inset: 100px var(--pad) auto; padding-inline: calc(var(--outline-width) + 5px); font-size: 11px; line-height: 1.5; }
+  html[data-theme] .hero-chapter-topline { display: block; position: absolute; inset: 350px var(--pad) auto; padding-inline: calc(var(--outline-width) + 5px); font-size: 11px; line-height: 1.5; }
   html[data-theme] .hero-bottom { display: none; }
   html[data-theme] .hero-bottom p { visibility: hidden; max-width: 48%; margin: 0; font-size: 12px; line-height: 1.5; }
   html[data-theme] .scroll-cue { visibility: hidden; pointer-events: none; gap: 10px; font-size: 10px; letter-spacing: .5px; }
@@ -227,8 +227,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero h1 { font-size: calc(clamp(24px, 8.2vw, 58px) + 5px); }
   html[data-theme] .hero .hero-description { font-size: 11px; line-height: 1.5; }
   html[data-theme] .hero-actions { width: calc(100% - var(--outline-width) - 5px); margin-top: 22px; }
-  html[data-theme] .hero-chapter > .mono-meta { top: 92px; }
-  html[data-theme] .hero-chapter-topline { top: 92px; }
+  html[data-theme] .hero-chapter > .mono-meta { top: 342px; }
+  html[data-theme] .hero-chapter-topline { top: 342px; }
 }
 
 @media (max-height: 500px) and (min-width: 600px) and (max-width: 1100px), (max-height: 500px) and (min-width: 600px) and (pointer: coarse) and (max-width: 1400px) {
