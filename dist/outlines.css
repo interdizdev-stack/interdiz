@@ -387,3 +387,8 @@ html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:hove
   color: #000;
 }
 html[data-theme="light"] :is(.solutions-hint, .gallery-hint) { color: var(--lime); }
+
+/* Green circular outlines for the white carousel controls. */
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
+  border-color: var(--lime) !important;
+}
