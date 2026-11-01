@@ -197,3 +197,6 @@ html[data-theme="light"] .hero-line.outline {
   letter-spacing: -2px;
   font-kerning: none;
 }
+
+/* Tighten only the K–O pair in the white opening headline. */
+html[data-theme="light"] .hero-line.outline .hero-ko-spacing { margin-left: -3px; }
