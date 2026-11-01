@@ -314,3 +314,9 @@ html[data-theme="light"] .hero-line.outline .title-dot {
   paint-order: stroke fill;
   filter: none;
 }
+
+/* Two-pixel logo contours exclusively in the white edition. */
+html[data-theme="light"] :is(.wordmark, .float-logo) > span {
+  -webkit-text-stroke: 2px #000;
+  paint-order: stroke fill;
+}
