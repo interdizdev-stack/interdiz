@@ -281,3 +281,12 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   line-height: 1.35;
   align-self: start;
 }
+
+/* Uniform button contours exclusively in the white edition, in every state. */
+html[data-theme="light"] :is(button, [role="button"], summary,
+  .contact-pill, .float-cta, .round-link, .gallery-all, .project-open,
+  .theme-switch, .scroll-circle, .quick-home, .back-to-top, .dialog-link) {
+  border-width: 1.5px !important;
+  border-style: solid !important;
+  border-color: #000 !important;
+}
