@@ -392,3 +392,9 @@ html[data-theme="light"] :is(.solutions-hint, .gallery-hint) { color: var(--lime
 html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
   border-color: var(--lime) !important;
 }
+
+/* Black arrows and circular outlines in the white edition. */
+html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
+  color: #000;
+  border-color: #000 !important;
+}
