@@ -194,7 +194,7 @@ html[data-theme="light"] .hero-line.outline {
 
 /* Leave clear space between the thick outlines of the opening headline. */
 html[data-theme="light"] .hero-line.outline {
-  letter-spacing: -3px;
+  letter-spacing: -4px;
   font-kerning: none;
 }
 
