@@ -153,3 +153,9 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
 html[data-theme="dark"] :is(.expertise, .approach, .contact) {
   background: var(--bg);
 }
+
+/* Remove 150px of empty separation without resizing the reviews wall. */
+@media (min-width: 601px) {
+  html[data-theme="dark"] .reviews { padding-bottom: 0; }
+  html[data-theme="dark"] .reviews + .contact { padding-top: 50px; }
+}
