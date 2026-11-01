@@ -149,7 +149,7 @@ html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
   html[data-theme="dark"] .side-note { font-size: 9px; }
 }
 
-/* Keep the process and FAQ chapters on one continuous dark background. */
-html[data-theme="dark"] :is(.expertise, .approach) {
+/* Keep the process, FAQ and contact chapters on one continuous dark background. */
+html[data-theme="dark"] :is(.expertise, .approach, .contact) {
   background: var(--bg);
 }
