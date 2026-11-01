@@ -159,3 +159,7 @@ html[data-theme="light"] .hero-line.outline {
 /* Thin black contours exclusively in the white edition. */
 html[data-theme="light"] { --outline-width: 1.5px; }
 
+
+/* Enlarge decorative plus marks only in the white edition. */
+html[data-theme="light"] .crosshair { font-size: calc(1.1em + 4px); }
+html[data-theme="light"] .cross { font-size: 34px; }
