@@ -372,5 +372,5 @@ html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
 /* White edition: larger service carousel hint with a fine contour. */
 html[data-theme="light"] .solutions-hint {
   font-size: 16px;
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 0;
 }
