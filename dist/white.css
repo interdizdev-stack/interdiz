@@ -224,3 +224,8 @@ html[data-theme="light"] :is(.wordmark, .float-logo) > span { margin-left: 2px; 
 /* Add one pixel between the green logo letters in the white edition. */
 html[data-theme="light"] .wordmark > span { letter-spacing: -0.5px; }
 html[data-theme="light"] .float-logo > span { letter-spacing: 0.5px; }
+
+/* Give the white hero chapter five pixels of clearance from the left grid line. */
+@media (min-width: 1101px) {
+  html[data-theme="light"] .hero-chapter p { padding-left: 5px; }
+}
