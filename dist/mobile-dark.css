@@ -46,7 +46,7 @@ html[data-theme="dark"] .mobile-menu-contact { display: flex; justify-content: s
 
   html[data-theme="dark"] .hero { display: grid; grid-template-rows: auto auto minmax(260px, 1fr) auto; gap: 24px; height: auto; min-height: 100svh; max-height: none; padding: 100px var(--pad) 58px; }
   html[data-theme="dark"] .hero-grid { inset: 80px var(--pad) 0; }
-  html[data-theme="dark"] .hero-topline:not(.hero-chapter-topline) { position: relative; inset: auto; grid-row: 1; gap: 20px; font-size: 11px; line-height: 1.5; }
+  html[data-theme="dark"] .hero-topline:not(.hero-chapter-topline) { position: relative; inset: auto; grid-row: 1; gap: 20px; padding-inline: calc(var(--outline-width) + 5px); font-size: 11px; line-height: 1.5; }
   html[data-theme="dark"] .hero-topline > span { max-width: 50%; min-width: 0; }
   html[data-theme="dark"] .hero-topline > span:last-child { text-align: right; }
   html[data-theme="dark"] .hero-intro { position: relative; inset: auto; grid-row: 2; width: 100%; }
