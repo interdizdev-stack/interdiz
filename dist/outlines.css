@@ -296,3 +296,8 @@ html[data-theme="light"] .hero-chapter em {
   -webkit-text-stroke: 1.5px #000;
   paint-order: stroke fill;
 }
+
+/* Thin contours for the white hero stage labels. */
+html[data-theme="light"] .scene-stages > span.active {
+  -webkit-text-stroke-width: 1px;
+}
