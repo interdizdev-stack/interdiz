@@ -1721,6 +1721,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 
 .footer-clock {
   color: var(--lime);
+  font-size: 11px;
 }
 
 .footer-tagline {
