@@ -155,3 +155,7 @@ html[data-theme="light"] .hero-line.outline {
   color: var(--lime);
   -webkit-text-fill-color: var(--lime);
 }
+
+/* Thin black contours exclusively in the white edition. */
+html[data-theme="light"] { --outline-width: 1px; }
+
