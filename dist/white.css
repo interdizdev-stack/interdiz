@@ -219,4 +219,4 @@ html[data-theme="light"] .header-caption::before {
 }
 
 /* Separate the black and green parts of the white edition's logo. */
-html[data-theme="light"] :is(.wordmark, .float-logo) > span { margin-left: 1px; }
+html[data-theme="light"] :is(.wordmark, .float-logo) > span { margin-left: 2px; }
