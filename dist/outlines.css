@@ -329,3 +329,10 @@ html[data-theme="light"] .floating-nav .float-links .nav-num {
   text-shadow: none !important;
 }
 html[data-theme="light"] .floating-nav .float-divider { background: #000; }
+
+/* Match the question mark to the white business headline contour. */
+html[data-theme="light"] .manifesto-line.outline .title-dot {
+  -webkit-text-stroke: 5px #000;
+  paint-order: stroke fill;
+  filter: none;
+}
