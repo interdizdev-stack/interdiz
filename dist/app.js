@@ -43,10 +43,6 @@ function setupMobileNavigation() {
   const menu = $('#mobile-menu');
   const toggles = $$('[data-mobile-menu]');
   if (!menu) return;
-  const controls = $('.display-controls');
-  const controlsAnchor = controls.previousElementSibling;
-  const settings = $('.mobile-display-settings', menu);
-  const home = $('.quick-home', controls);
   const marquee = $('.marquee');
   $('.marquee-group + .marquee-group', marquee).setAttribute('aria-hidden', 'true');
   let opener;
@@ -55,14 +51,11 @@ function setupMobileNavigation() {
     const compact = isCompactLayout();
     toggles.forEach(button => { button.hidden = !compact; });
     if (compact) {
-      settings.append(controls);
       marquee.removeAttribute('aria-hidden');
       marquee.setAttribute('role', 'region');
       marquee.setAttribute('aria-label', 'Технологии студии');
     } else {
       closeMobileNavigation(false);
-      controlsAnchor.after(controls);
-      home.hidden = false;
       marquee.setAttribute('aria-hidden', 'true');
       marquee.removeAttribute('role');
       marquee.removeAttribute('aria-label');
@@ -77,7 +70,6 @@ function setupMobileNavigation() {
     if (!isCompactLayout()) return;
     opener = button;
     const links = $$('.mobile-menu-links a', menu);
-    home.hidden = $('#manifesto').getBoundingClientRect().top > innerHeight * .35;
     const current = links.findLast(link => $(link.getAttribute('href')).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
     links.forEach(link => {
       link.classList.toggle('is-current', link === current);
