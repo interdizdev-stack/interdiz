@@ -137,11 +137,12 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .project-badges { top: 12px; left: 12px; gap: 6px; }
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
   html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
-  html[data-theme] .gallery-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto; row-gap: 16px; margin-top: 28px; }
+  html[data-theme] .gallery-footer { display: grid; grid-template-columns: auto minmax(0, 1fr); row-gap: 16px; margin-top: 28px; }
   html[data-theme] .gallery-footer .gallery-all { grid-column: 1 / -1; justify-self: start; min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] .gallery-progress { display: none; }
   html[data-theme] .gallery-count { grid-column: 1; grid-row: 1; align-self: center; }
-  html[data-theme] .gallery-navigation { grid-column: 2; grid-row: 1; width: auto; justify-self: end; }
+  html[data-theme] .gallery-navigation { grid-column: 2; grid-row: 1; width: 100%; margin-left: 0; }
+  html[data-theme] .gallery-hint { min-width: 0; }
   html[data-theme] .gallery-footer .gallery-all { grid-row: 2; }
   html[data-theme] .marquee { overflow-x: auto; margin-top: 32px; overscroll-behavior-x: contain; box-shadow: none; }
   html[data-theme] .marquee > div { padding-inline: var(--pad); animation: none; font-size: 14px; letter-spacing: 0; }
