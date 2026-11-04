@@ -155,8 +155,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .studio-badge { order: 0; width: fit-content; max-width: 100%; margin: 0; font-size: 14.4px; }
   html[data-theme] .service-list { order: 1; min-width: 0; }
   html[data-theme] .expertise-testimonial-anchor { order: 2; position: static; margin: -12px 0 0; max-width: 680px; }
-  html[data-theme] .service { padding-bottom: 17px; }
-  html[data-theme] .service summary { display: grid; grid-template-columns: 28px minmax(0, 1fr) 24px; gap: 12px; min-height: 72px; margin-top: 1px; padding: 18px 0; }
+  html[data-theme] .service { padding-bottom: 12px; }
+  html[data-theme] .service summary { display: grid; grid-template-columns: 28px minmax(0, 1fr) 24px; gap: 12px; min-height: 72px; margin-top: -4px; padding: 18px 0; }
   html[data-theme] .service h3 { font-size: 24px; line-height: 1.18; }
   html[data-theme] .service-index { padding-top: 4px; font-size: 12px; }
   html[data-theme] .service-plus { font-size: 28px; }
