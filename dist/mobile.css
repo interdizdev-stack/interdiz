@@ -146,7 +146,6 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
   html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
   html[data-theme] .gallery-footer { position: relative; display: block; margin-top: 28px; padding: 0 0 24px; border: 0; }
-  html[data-theme] .gallery-footer::after { content: ''; position: absolute; inset-inline: 0; bottom: calc(-26px - var(--outline-width)); height: var(--outline-width); background: var(--line); }
   html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -30px; min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
   html[data-theme] .marquee { display: none; }
