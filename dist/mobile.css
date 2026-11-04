@@ -141,9 +141,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .gallery-footer::after { content: ''; position: absolute; inset-inline: 0; bottom: calc(-26px - var(--outline-width)); height: var(--outline-width); background: var(--line); }
   html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -30px; min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
-  html[data-theme] .marquee { overflow-x: auto; margin-top: 32px; overscroll-behavior-x: contain; box-shadow: none; }
-  html[data-theme] .marquee > div { padding-inline: var(--pad); animation: none; font-size: 14px; letter-spacing: 0; }
-  html[data-theme] .marquee-group + .marquee-group { display: none; }
+  html[data-theme] .marquee { overflow: hidden; margin-top: 32px; box-shadow: none; }
+  html[data-theme] .marquee > div { font-size: 14px; letter-spacing: 0; }
 
   html[data-theme] .expertise h2 { margin-top: 30px; }
   html[data-theme] .expertise-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 32px; }

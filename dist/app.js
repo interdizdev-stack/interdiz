@@ -48,6 +48,7 @@ function setupMobileNavigation() {
   const settings = $('.mobile-display-settings', menu);
   const home = $('.quick-home', controls);
   const marquee = $('.marquee');
+  $('.marquee-group + .marquee-group', marquee).setAttribute('aria-hidden', 'true');
   let opener;
   menu.hidden = false;
   const sync = () => {
@@ -58,7 +59,6 @@ function setupMobileNavigation() {
       marquee.removeAttribute('aria-hidden');
       marquee.setAttribute('role', 'region');
       marquee.setAttribute('aria-label', 'Технологии студии');
-      marquee.tabIndex = 0;
     } else {
       closeMobileNavigation(false);
       controlsAnchor.after(controls);
