@@ -4,6 +4,6 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "check": "node --check dist/app.js && node --check dist/reviews.js && node --check dist/scene.js && node --check dist/scene-dark.js && node --check dist/scene-framing.js && node --check dist/theme.js && node --check server.mjs"
+    "check": "node --check dist/app.js && node --check dist/projects.js && node --check dist/portfolio.js && node --check dist/reviews.js && node --check dist/scene.js && node --check dist/scene-dark.js && node --check dist/scene-framing.js && node --check dist/theme.js && node --check server.mjs"
   }
 }

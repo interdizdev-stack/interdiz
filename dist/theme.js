@@ -13,7 +13,9 @@
   document.documentElement.dataset.theme = theme;
   document.querySelector('#white-theme').disabled = dark;
   document.querySelector('meta[name="theme-color"]').content = dark ? '#0c0e0c' : '#ffffff';
-  document.title = dark ? 'InterDIZ — чёрная версия' : 'InterDIZ — белая версия';
+  if (document.querySelector('title[data-theme-title]')) {
+    document.title = dark ? 'InterDIZ — чёрная версия' : 'InterDIZ — белая версия';
+  }
   if (dark) {
     const icon = document.querySelector('link[rel="icon"]');
     icon.href = icon.href.replace('%23ffffff', '%230c0e0c').replace('%23adff00', '%23c2ff43');

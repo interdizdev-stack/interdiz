@@ -1,3 +1,4 @@
+import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
 
 // Content and links are usable without animation or WebGL.
@@ -71,7 +72,7 @@ function setupMobileNavigation() {
     if (!isCompactLayout()) return;
     opener = button;
     const links = $$('.mobile-menu-links a', menu);
-    const current = links.findLast(link => $(link.getAttribute('href')).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
+    const current = links.findLast(link => $(link.dataset.section ?? link.hash).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
     links.forEach(link => {
       link.classList.toggle('is-current', link === current);
       if (link === current) link.setAttribute('aria-current', 'location');
@@ -84,6 +85,8 @@ function setupMobileNavigation() {
   }));
   $('.mobile-menu-close', menu).addEventListener('click', () => closeMobileNavigation());
   menu.addEventListener('click', event => {
+    if (event.target.closest('.mobile-menu-links a[data-section]') &&
+        !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) closeMobileNavigation(false);
     if (event.target !== menu) return;
     const bounds = menu.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeMobileNavigation();
@@ -99,23 +102,25 @@ function setupMobileNavigation() {
 }
 
 const menuSections = $$('.floating-nav .float-links a').map(link => ({
-  link, section: document.querySelector(link.getAttribute('href'))
+  link, section: $(link.dataset.section ?? link.hash)
 })).filter(item => item.section);
 let activeMenuLink = null;
 function updateActiveMenu() {
   const rail = Math.max(120, innerHeight * 0.3);
   let active = null;
   for (const item of menuSections) {
-    if (item.section.getBoundingClientRect().top <= rail && (!active || item.section.getBoundingClientRect().top > document.querySelector(active.getAttribute('href')).getBoundingClientRect().top)) active = item.link;
+    const top = item.section.getBoundingClientRect().top;
+    if (top <= rail && (!active || top > active.section.getBoundingClientRect().top)) active = item;
   }
   if (innerHeight + pageScroll() >= document.documentElement.scrollHeight - 4) {
-    active = menuSections.at(-1)?.link ?? active;
+    active = menuSections.at(-1) ?? active;
   }
-  if (active === activeMenuLink) return;
-  activeMenuLink = active;
+  const nextLink = active?.link ?? null;
+  if (nextLink === activeMenuLink) return;
+  activeMenuLink = nextLink;
   menuSections.forEach(({ link }) => {
-    link.classList.toggle('is-current', link === active);
-    if (link === active) link.setAttribute('aria-current', 'location');
+    link.classList.toggle('is-current', link === nextLink);
+    if (link === nextLink) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');
   });
 }
@@ -152,44 +157,7 @@ function setupMobileControlsClearance() {
   update();
 }
 
-const projects = {
-  mama: { title: 'Я — мама', description: 'Лендинг и ASO-креативы для мобильного приложения. Мягкий визуальный язык, передающий заботу и эмоциональное доверие.', image: './assets/mama.webp', link: 'https://interdiz.ru/portfolio.html' },
-  poplavok: { title: 'Поплавок', description: 'Новая digital-глава ресторана у воды в Астрахани. Веб-дизайн, UX/UI, разработка на WordPress и интеграция Telegram / MAX.', image: './assets/poplavok.webp', link: 'https://interdiz.ru/portfolio.html' },
-  health: { title: 'Health Culture', description: 'Фирменный стиль с ощущением абсолютной чистоты. Логотип и брендбук, превращающие культуру здоровья в системный визуальный код.', image: './assets/health-culture.webp', link: 'https://www.behance.net/gallery/248062171/Health-Culture-design-with-a-sense-of-purity' },
-  "pierre-magnol": {"title": "Pierre Magnol", "description": "Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства", "image": "./assets/pierre-magnol.webp", "link": "https://www.behance.net/gallery/246354277/Pierre-Magnol-Digital-Storefront-Development"},
-  "home30": {"title": "HOME30", "description": "Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30", "image": "./assets/home30.webp", "link": "https://www.behance.net/gallery/246912169/Urban-Luxury-in-Black-Orange-Hostel-Website-Concept"},
-  "shogun-auto": {"title": "Shogun Auto", "description": "С Востока на весь мир — фирменный стиль Shogun Auto", "image": "./assets/shogun-auto.webp", "link": "https://www.behance.net/gallery/246098169/From-East-to-World-Shogun-Auto-Brand-Identity"},
-  "kyrilka": {"title": "Kyrilka", "description": "Kyrilka — контрастный дизайн для современной цифровой витрины", "image": "./assets/kyrilka.webp", "link": "https://www.behance.net/gallery/248739383/Kyrilka-Modern-E-commerce-Showcase"},
-  "ivan-grozny": {"title": "Иван Грозный — Перезагрузка", "description": "Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса", "image": "./assets/ivan-grozny.webp", "link": "https://interdiz.ru/portfolio.html"},
-  "divo-dental": {"title": "Divo Dental", "description": "Divo Dental — разработка логотипа для современной стоматологии", "image": "./assets/divo-dental.webp", "link": "https://www.behance.net/gallery/249932083/The-Geometry-of-Trust-A-Logo-for-a-Modern-Dental-Brand"}
-};
-
-const dialog = $('.project-dialog:not(.service-dialog)');
-let dialogOpener;
-$$('[data-open-project]').forEach(button => button.addEventListener('click', () => {
-  const project = projects[button.dataset.openProject];
-  if (!project) return;
-  dialogOpener = button;
-  $('#dialog-title').textContent = project.title;
-  $('.dialog-description', dialog).textContent = project.description;
-  $('.dialog-image', dialog).src = project.image;
-  $('.dialog-image', dialog).alt = `Проект ${project.title}`;
-  $('.dialog-link', dialog).href = project.link;
-  dialog.showModal();
-  document.body.classList.add('dialog-open');
-}));
-
-$('.dialog-close', dialog)?.addEventListener('click', () => dialog.close());
-dialog?.addEventListener('click', e => {
-  if (e.target === dialog) {
-    const r = dialog.getBoundingClientRect();
-    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
-  }
-});
-dialog?.addEventListener('close', () => {
-  document.body.classList.remove('dialog-open');
-  dialogOpener?.focus({ preventScroll: true });
-});
+setupProjectDialog();
 
 const serviceDetails = {
   web: {

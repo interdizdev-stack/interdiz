@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Портфолио студии InterDIZ: сайты, фирменные стили и рекламные проекты для разных отраслей.">
+  <title>Портфолио студии InterDIZ</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffffff'/%3E%3Cpath d='M16 14h10v36H16zm17 0h9q15 0 15 18T42 50h-9V40h9q5 0 5-8t-5-8h-9z' fill='%23adff00'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <link id="white-theme" rel="stylesheet" href="./white.css">
+  <link rel="stylesheet" href="./theme.css">
+  <link rel="stylesheet" href="./outlines.css">
+  <link rel="stylesheet" href="./mobile.css">
+  <link rel="stylesheet" href="./portfolio.css">
+  <script src="./theme.js"></script>
+  <script type="module" src="./portfolio.js"></script>
+</head>
+<body class="portfolio-page">
+  <a class="skip-link" href="#main">К содержимому</a>
+
+  <header class="header portfolio-header">
+    <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
+    <span class="header-caption">Независимая digital&#8209;студия</span>
+    <a class="portfolio-home" href="./#top"><span aria-hidden="true">←</span> На главную</a>
+    <a class="theme-switch" href="?theme=dark" aria-label="Включить чёрную версию сайта" title="Переключить на чёрную версию">
+      <span class="theme-switch-face" aria-hidden="true"></span>
+      <span class="theme-switch-orbit" aria-hidden="true"><span></span></span>
+    </a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="portfolio-intro" aria-labelledby="portfolio-title">
+      <div class="section-kicker">
+        <span class="kicker-index"><span class="crosshair" aria-hidden="true">+</span> ПОРТФОЛИО INTERDIZ</span>
+        <span class="kicker-meta">ДИЗАЙН / РАЗРАБОТКА</span>
+      </div>
+      <div class="portfolio-intro-layout">
+        <div class="portfolio-heading">
+          <h1 id="portfolio-title">
+            <span class="hero-line">ПРОЕКТЫ</span>
+            <span class="hero-line outline">СТУДИИ<span class="title-dot">.</span></span>
+          </h1>
+          <p class="hero-description">Сайты, фирменные стили и рекламные кампании. Посмотрите, как мы решаем задачи в разных отраслях.</p>
+        </div>
+        <div class="portfolio-index" aria-hidden="true">
+          <span class="crosshair">+</span>
+          <span class="portfolio-index-number">09<span>/</span></span>
+          <span>КЕЙСОВ СТУДИИ</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-catalog" aria-label="Каталог проектов">
+      <div class="portfolio-toolbar" hidden>
+        <div class="portfolio-toolbar-heading">
+          <p class="mono-meta" id="portfolio-filter-label">По тематикам</p>
+          <p class="portfolio-count mono-meta" role="status"></p>
+        </div>
+        <div class="portfolio-filters" role="group" aria-labelledby="portfolio-filter-label">
+          <button type="button" data-filter="all" aria-controls="portfolio-grid" aria-pressed="true">Все проекты</button>
+          <button type="button" data-filter="apps" aria-controls="portfolio-grid" aria-pressed="false">Сервисы и приложения</button>
+          <button type="button" data-filter="hospitality" aria-controls="portfolio-grid" aria-pressed="false">Рестораны и отели</button>
+          <button type="button" data-filter="health" aria-controls="portfolio-grid" aria-pressed="false">Здоровье</button>
+          <button type="button" data-filter="commerce" aria-controls="portfolio-grid" aria-pressed="false">Торговля и авто</button>
+          <button type="button" data-filter="culture" aria-controls="portfolio-grid" aria-pressed="false">Культура</button>
+        </div>
+      </div>
+      <div class="portfolio-grid" id="portfolio-grid">
+        <article class="project-card" data-topic="apps">
+          <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 01 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Сервисы и приложения</p>
+              <h3>Я — мама</h3>
+              <p>Цифровая забота, которую чувствуешь.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="hospitality">
+          <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="eager" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 02 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Рестораны и отели</p>
+              <h3>Поплавок</h3>
+              <p>Новая digital-глава ресторана у воды.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="health">
+          <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 03 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Здоровье</p>
+              <h3>Health Culture</h3>
+              <p>Айдентика с ощущением чистоты.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="commerce">
+          <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 04 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <h3>Pierre Magnol</h3>
+              <p>Цифровая витрина цветочного бутика.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="hospitality">
+          <button class="project-image" type="button" data-open-project="home30" aria-label="Открыть проект HOME30" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 05 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Рестораны и отели</p>
+              <h3>HOME30</h3>
+              <p>Сайт хостела в чёрно-оранжевых тонах.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="commerce">
+          <button class="project-image" type="button" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 06 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <h3>Shogun Auto</h3>
+              <p>С Востока на весь мир — фирменный стиль.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="commerce">
+          <button class="project-image" type="button" data-open-project="kyrilka" aria-label="Открыть проект Kyrilka" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 07 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <h3>Kyrilka</h3>
+              <p>Контрастный дизайн цифровой витрины.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="culture">
+          <button class="project-image" type="button" data-open-project="ivan-grozny" aria-label="Открыть проект Иван Грозный — Перезагрузка" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 08 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Культура</p>
+              <h3>Иван Грозный — Перезагрузка</h3>
+              <p>ТВ-реклама и афиши, в которых оживает история.</p>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" data-topic="health">
+          <button class="project-image" type="button" data-open-project="divo-dental" aria-label="Открыть проект Divo Dental" aria-haspopup="dialog">
+            <span class="project-preview">
+              <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
+              <span class="project-badges" aria-hidden="true"><span class="project-number">[ 09 ]</span></span>
+            </span>
+            <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
+          </button>
+          <div class="project-info">
+            <div>
+              <p class="portfolio-topic mono-meta">Здоровье</p>
+              <h3>Divo Dental</h3>
+              <p>Логотип для современной стоматологии.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="portfolio-footer">
+    <p>Обсудим ваш проект?</p>
+    <div class="portfolio-footer-links">
+      <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+      <a class="portfolio-home" href="./#top"><span aria-hidden="true">←</span> На главную</a>
+    </div>
+  </footer>
+
+  <dialog class="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button>
+    <div class="dialog-inner">
+      <span class="dialog-kicker mono-meta">[ ПРОЕКТ INTERDIZ ]</span>
+      <h2 id="dialog-title"></h2>
+      <p class="dialog-description" id="dialog-description"></p>
+      <img class="dialog-image" alt="" width="1920" height="1280">
+      <a class="dialog-link" hidden></a>
+    </div>
+  </dialog>
+</body>
+</html>
