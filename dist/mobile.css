@@ -208,7 +208,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .contact { padding-top: 56px; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
   html[data-theme] .reviews + .contact { padding-top: 50px; }
   html[data-theme] .contact-hero h2 { line-height: 1.11; margin: 30px 0 24px; }
-  html[data-theme] .contact-telegram { display: inline-flex; gap: 18px; min-height: 48px; margin: 0 0 32px; padding-inline: 18px; font-size: 15px; }
+  html[data-theme] .contact-telegram { display: inline-flex; gap: 18px; min-height: 48px; margin: 32px 0 0; padding-inline: 18px; font-size: 15px; }
   html[data-theme] .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
   html[data-theme] .contact-card { display: flex; grid-row: auto; min-width: 0; padding: 24px; }
   html[data-theme] .contact-card:last-child { grid-column: 1 / -1; }
