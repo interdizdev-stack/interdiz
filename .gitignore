@@ -1,0 +1,14 @@
+# Installed dependencies and local caches
+node_modules/
+.cache/
+*.log
+*.pid
+
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Separate repository with its own history
+/site-source/
