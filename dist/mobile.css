@@ -213,8 +213,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .footer-bottom > .footer-clock { grid-column: 2; grid-row: 1; justify-self: start; transform: none; font-size: 12px; }
   html[data-theme] .footer-bottom > .back-to-top { grid-column: 3; grid-row: 1; display: flex; align-items: center; min-height: 44px; font-size: 12px; }
   html[data-theme] .footer-bottom > .footer-copyright { grid-column: 1 / -1; grid-row: 2; justify-self: center; font-size: 12px; }
-  html[data-theme] .mobile-display-settings { margin-top: 24px; padding-top: 16px; border-top: var(--outline-width) solid var(--line); }
-  html[data-theme] .mobile-display-settings > p { margin-bottom: 12px; font-size: 14px; font-weight: 600; }
+  html[data-theme] .mobile-display-settings { margin-top: 24px; }
   html[data-theme] .display-controls { display: none; }
   html[data-theme] .mobile-display-settings .display-controls { display: flex; position: static; flex-wrap: wrap; gap: 8px; }
   html[data-theme] .display-controls .quick-home { width: 44px; height: 44px; flex: 0 0 44px; }
