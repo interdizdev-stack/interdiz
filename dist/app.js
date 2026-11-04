@@ -18,6 +18,7 @@ let updateProjectsHint;
 const pageScroll = () => smoother?.scrollTop() ?? scrollY;
 const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
 const isCompactLayout = () => compactMedia.matches;
+if (isCompactLayout()) $('.faq-list .faq-item[open]')?.removeAttribute('open');
 let closeMobileNavigation;
 
 // Desktop uses a separate rail. On mobile the caption follows the heading's layout and animation.
