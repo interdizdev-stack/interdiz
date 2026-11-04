@@ -272,7 +272,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .contact-card { padding: 22px; }
   html[data-theme] .contact-card-top > span { max-width: 100%; }
   html[data-theme] .footer-bottom { grid-template-columns: minmax(0, 1fr); }
-  html[data-theme] .footer-bottom > .footer-clock { top: -5px; grid-column: 1 / -1; grid-row: 2; }
+  html[data-theme] .footer-bottom > .footer-clock { top: -8px; grid-column: 1 / -1; grid-row: 2; }
   html[data-theme] .footer-bottom > .footer-copyright { grid-row: 3; }
   html[data-theme] .dialog-inner { padding: 24px 20px; }
   html[data-theme] .service-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
