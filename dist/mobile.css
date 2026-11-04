@@ -255,6 +255,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .gallery-footer .gallery-all { width: 100%; }
   html[data-theme] .expertise-layout { gap: 24px; }
   html[data-theme] .approach-testimonial { padding: 24px 0 0; border-left: 0; border-top: var(--outline-width) solid var(--line-lime); }
+  html[data-theme] .expertise-testimonial { border-top: 0; }
   html[data-theme] :is(.review-card, .reviews-column) { width: calc(100% - 16px); }
   html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: 100%; }
   html[data-theme] .reviews-heading { flex-direction: column; }
