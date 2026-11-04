@@ -825,26 +825,29 @@ function setupAnimations() {
       }
 
       if (dark || compact) {
-        // Keep the scene almost stationary while the foreground slides over it.
-        if (!compact) {
-          const transition = gsap.timeline({
-            defaults: { ease: 'none', duration: 1 },
-            scrollTrigger: {
-              id: 'hero-solutions-parallax',
-              trigger: '.manifesto',
-              start: 'top bottom',
-              end: 'top top',
-              scrub: smoother ? true : 0.6,
-              invalidateOnRefresh: true
-            }
-          });
-          transition
-            .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0)
-            .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.42, immediateRender: false }, 0)
-            .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
-            .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (mobile ? 0.07 : 0.1) }, { y: 0 }, 0)
-            .fromTo('.manifesto-inner', { y: () => innerHeight * (mobile ? 0.22 : 0.32) }, { y: 0 }, 0);
+        // Move the visible layers independently of the pinned hero and canvas container.
+        const transition = gsap.timeline({
+          defaults: { ease: 'none', duration: 1 },
+          scrollTrigger: {
+            id: 'hero-solutions-parallax',
+            trigger: '.manifesto',
+            start: 'top bottom',
+            end: 'top top',
+            scrub: smoother || compact ? true : 0.6,
+            invalidateOnRefresh: true
+          }
+        });
+        if (compact) {
+          const canvas = $('.hero .webgl canvas');
+          if (canvas) transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * 0.72, immediateRender: false }, 0);
+        } else {
+          transition.fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0);
         }
+        transition
+          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * (compact ? 0.35 : 0.42), immediateRender: false }, 0)
+          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * (compact ? 0.5 : 0.64), immediateRender: false }, 0)
+          .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (compact ? 0.06 : 0.1) }, { y: 0 }, 0)
+          .fromTo('.manifesto-inner', { y: () => innerHeight * (compact ? 0.16 : 0.32) }, { y: 0 }, 0);
 
         // Use the section's layout coordinates: its inner content already has
         // a parallax transform, which must not shift these trigger positions.
