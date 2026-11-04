@@ -8,15 +8,14 @@ export function setupReviews(isReduced) {
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const compact = () => compactLayout.matches;
   const heading = document.querySelector('.reviews-heading');
-  const filtersContainer = document.querySelector('.reviews-filters');
+  const navigation = document.querySelector('.review-navigation');
   const syncPausePosition = () => {
-    if (compact()) filtersContainer.after(button);
+    if (compact()) navigation.prepend(button);
     else heading.append(button);
   };
   compactLayout.addEventListener('change', syncPausePosition);
   syncPausePosition();
   const cards = [...track.children];
-  const navigation = document.querySelector('.review-navigation');
   const previous = navigation.querySelector('[data-review-prev]');
   const next = navigation.querySelector('[data-review-next]');
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
