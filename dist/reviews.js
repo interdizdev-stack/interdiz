@@ -13,15 +13,35 @@ export function setupReviews(isReduced) {
   const next = navigation.querySelector('[data-review-next]');
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
-  cards.forEach(card => {
+  cards.forEach((card, index) => {
     const placeholder = card.querySelector('.review-card__author-icon[src$="/placeholder.webp"]');
-    if (!placeholder) return;
-    const initials = document.createElement('span');
-    initials.className = 'review-card__initials compact-only';
-    initials.setAttribute('aria-hidden', 'true');
-    initials.textContent = card.querySelector('.review-card__author-name').textContent.trim().split(/\s+/).slice(0, 2).map(name => name[0]).join('').toUpperCase();
-    placeholder.after(initials);
+    if (placeholder) {
+      const initials = document.createElement('span');
+      initials.className = 'review-card__initials compact-only';
+      initials.setAttribute('aria-hidden', 'true');
+      initials.textContent = card.querySelector('.review-card__author-name').textContent.trim().split(/\s+/).slice(0, 2).map(name => name[0]).join('').toUpperCase();
+      placeholder.after(initials);
+    }
+    const quote = card.querySelector('.review-card__text');
+    quote.id = `review-text-${index + 1}`;
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'review-card__more compact-only';
+    more.hidden = true;
+    more.textContent = 'Читать полностью';
+    more.setAttribute('aria-controls', quote.id);
+    more.setAttribute('aria-expanded', 'false');
+    card.append(more);
+    more.addEventListener('click', () => {
+      const expanded = card.classList.toggle('is-expanded');
+      more.textContent = expanded ? 'Свернуть' : 'Читать полностью';
+      more.setAttribute('aria-expanded', String(expanded));
+      if (expanded) quote.tabIndex = 0;
+      else { quote.removeAttribute('tabindex'); quote.scrollTop = 0; }
+      update();
+    });
   });
+  wall.classList.add('reviews-enhanced');
   let source = 'all';
   let visible = false;
   let paused = false;
@@ -38,6 +58,31 @@ export function setupReviews(isReduced) {
   let suppressClick = false;
   let resumeTimer;
   let layoutFrame = 0;
+
+  function updateReviewTruncation() {
+    if (!compact()) return;
+    cards.forEach(card => {
+      if (card.hidden || !card.isConnected) return;
+      const quote = card.querySelector('.review-card__text');
+      const more = card.querySelector('.review-card__more');
+      const expanded = card.classList.contains('is-expanded');
+      card.classList.remove('is-truncated', 'is-expanded');
+      more.hidden = true;
+      const truncated = quote.scrollHeight > quote.clientHeight + 1;
+      card.classList.toggle('is-truncated', truncated);
+      more.hidden = !truncated;
+      if (truncated) {
+        const lineHeight = parseFloat(getComputedStyle(quote).lineHeight);
+        quote.style.setProperty('--review-visible-lines', Math.max(1, Math.floor(quote.clientHeight / lineHeight)));
+      }
+      const showFull = truncated && expanded;
+      card.classList.toggle('is-expanded', showFull);
+      more.textContent = showFull ? 'Свернуть' : 'Читать полностью';
+      more.setAttribute('aria-expanded', String(showFull));
+      if (showFull) quote.tabIndex = 0;
+      else { quote.removeAttribute('tabindex'); quote.scrollTop = 0; }
+    });
+  }
 
   function updateCompactHeight() {
     if (!compact() || layoutFrame) return;
@@ -103,6 +148,7 @@ export function setupReviews(isReduced) {
     if (compact()) {
       wall.tabIndex = 0;
       track.replaceChildren(...ordered);
+      updateReviewTruncation();
       loopItems = ordered.filter(card => !card.hidden);
       columnStep = loopItems[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
       canLoop = source === 'all' && loopItems.length > 1 && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
@@ -149,13 +195,14 @@ export function setupReviews(isReduced) {
     const reduced = isReduced();
     const filtered = source !== 'all';
     const focused = wall.contains(document.activeElement);
+    const reading = compact() && Boolean(wall.querySelector('.review-card.is-expanded:not([hidden])'));
     button.disabled = reduced || filtered;
     button.setAttribute('aria-pressed', String(paused));
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
-    wall.classList.toggle('is-paused', paused || reduced || touching);
-    const moving = visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden;
+    wall.classList.toggle('is-paused', paused || reduced || touching || reading);
+    const moving = visible && !paused && !reduced && !filtered && !focused && !touching && !reading && !document.hidden;
     wall.classList.toggle('is-auto-moving', compact() && moving);
     if (moving) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
@@ -196,6 +243,7 @@ export function setupReviews(isReduced) {
   }, { passive: true });
   wall.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;
+    if (event.target.closest('.review-card__more')) return;
     clearTimeout(resumeTimer);
     touching = true;
     update();

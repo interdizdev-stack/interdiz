@@ -2,6 +2,7 @@
 .hero-region-mark-mobile { display: none; }
 .hero-chapter-caption-text { text-transform: uppercase; }
 .compact-only, [hidden].compact-only { display: none; }
+.review-card__more { display: none; }
 .project-preview { display: contents; }
 html[data-theme] .mobile-menu {
   width: min(520px, calc(100% - 24px));
@@ -191,6 +192,11 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .reviews { padding-bottom: 0; }
   html[data-theme] .review-card { padding: 20px; scroll-snap-align: start; }
   html[data-theme] .review-card__text { font-size: 16px; line-height: 1.5; text-align: left; letter-spacing: 0; }
+  html[data-theme] .reviews-enhanced .review-card { display: flex; flex-direction: column; height: 360px; }
+  html[data-theme] .reviews-enhanced .review-card__text { flex: 1 1 auto; min-height: 0; overflow: hidden; }
+  html[data-theme] .reviews-enhanced .review-card.is-truncated:not(.is-expanded) .review-card__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--review-visible-lines); }
+  html[data-theme] .reviews-enhanced .review-card.is-expanded .review-card__text { overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
+  html[data-theme] .reviews-enhanced .review-card__more:not([hidden]) { display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; padding: 6px 10px; border-radius: 6px; border-color: var(--line-strong); background: var(--bg-surface); color: var(--fg); font-size: 14px; }
   html[data-theme] :is(.review-card__author, .review-card__info) { justify-content: flex-start; text-align: left; }
   html[data-theme] .review-card__info { align-items: flex-start; }
   html[data-theme] .review-card__author-name { font-size: 16px; font-weight: 600; text-transform: none; }
