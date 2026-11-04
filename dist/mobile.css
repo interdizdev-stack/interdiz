@@ -150,7 +150,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .marquee { display: none; }
 
   html[data-theme] .expertise h2 { margin-top: 30px; }
-  html[data-theme] .expertise-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 32px; }
+  html[data-theme] .expertise-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 37px; }
   html[data-theme] .expertise-sidebar { display: contents; }
   html[data-theme] .studio-badge { order: 0; width: fit-content; max-width: 100%; margin: 0; font-size: 14.4px; }
   html[data-theme] .service-list { order: 1; min-width: 0; }
