@@ -664,7 +664,7 @@ function setupProjectGallery() {
   const cards = $$('.project-card', track);
   const previous = $('[data-project-prev]');
   const next = $('[data-project-next]');
-  const counter = $('[data-gallery-count]');
+  const counter = $('[data-gallery-current]');
   let frame = 0;
   let drag = null;
   let suppressClick = false;
@@ -686,7 +686,7 @@ function setupProjectGallery() {
     });
     const first = visible[0] ?? 1;
     const last = visible.at(-1) ?? first;
-    const label = `${first} из ${cards.length}`;
+    const label = String(first);
     if (counter.textContent !== label) counter.textContent = label;
     $('.gallery-progress>span').style.transform = `scaleX(${(last / cards.length)})`;
     previous.disabled = viewport.scrollLeft <= 2;
