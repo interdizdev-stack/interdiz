@@ -75,6 +75,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] :is(.manifesto-line, .expertise-line, .approach-line, .reviews-line) { white-space: normal; }
   html[data-theme] .hero h1 { padding-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] :is(.hero-description, .solutions-note, .projects-heading p, .expertise-caption, .approach-description, .reviews-caption) { margin-top: 18px; max-width: 560px; font-size: var(--mobile-section-intro-size); line-height: 1.5; }
+  html[data-theme] .solutions-note { position: relative; inset-block-start: -10px; }
   html[data-theme] .hero .hero-description { margin-top: 8px; padding-inline: calc(var(--outline-width) + 5px); font-size: 15px; line-height: calc(1.6em - 0.6px); }
   html[data-theme] .hero-actions { width: calc(100% - var(--outline-width) - 5px); max-width: 470px; flex-wrap: wrap; gap: 4px 8px; margin-top: 32px; margin-inline-start: calc(var(--outline-width) + 5px); }
   html[data-theme] .hero-actions .contact-pill { min-height: 44px; padding: 9px 12px; gap: 10px; font-size: 14px; line-height: 1.2; }
