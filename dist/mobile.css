@@ -97,7 +97,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .scroll-cue { visibility: hidden; pointer-events: none; gap: 10px; font-size: 10px; letter-spacing: .5px; }
   html[data-theme] .scroll-circle { width: 44px; height: 44px; flex: 0 0 44px; }
 
-  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 72px; padding-block-start: 92px; }
+  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 72px; padding-block-start: 112px; }
   html[data-theme] .section-kicker { gap: 16px; align-items: flex-start; font-size: 12px; line-height: 1.4; letter-spacing: .5px; }
   html[data-theme] .section-kicker > span { min-width: 0; }
   html[data-theme] .section-kicker .kicker-index { align-items: flex-start; gap: 4px; }
@@ -211,7 +211,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .review-card__initials { display: grid; place-items: center; border: var(--outline-width) solid var(--line-strong); border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 14px; font-weight: 600; }
 
   html[data-theme] .contact { padding-top: 56px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
-  html[data-theme] .reviews + .contact { padding-top: 70px; }
+  html[data-theme] .reviews + .contact { padding-top: 90px; }
   html[data-theme] .contact-hero h2 { line-height: 1.11; margin: 30px 0 24px; }
   html[data-theme] .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
   html[data-theme] .contact-card { display: flex; grid-row: auto; min-width: 0; padding: 24px; }
@@ -261,7 +261,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .floating-nav .float-cta { padding-inline: 12px; font-size: 13px; }
   html[data-theme] .hero { gap: 20px; }
   html[data-theme] .hero-topline:not(.hero-chapter-topline) { font-size: 12px; gap: 16px; }
-  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; padding-block-start: 76px; }
+  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; padding-block-start: 96px; }
   html[data-theme] .section-kicker { gap: 12px; }
   html[data-theme] .section-kicker .kicker-meta { max-width: 46%; }
   html[data-theme] .solution-card { flex-basis: calc(100% - 20px); padding: 22px; }
