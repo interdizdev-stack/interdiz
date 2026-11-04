@@ -108,6 +108,7 @@
         <div class="hero-actions">
           <a class="contact-pill contact-pill--filled" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
           <a class="contact-pill" href="#projects">Проекты</a>
+          <a class="hero-services-link compact-only" href="#manifesto">К услугам <span aria-hidden="true">↓</span></a>
         </div>
       </div>
 
@@ -141,7 +142,7 @@
     <section class="manifesto" id="manifesto" aria-labelledby="manifesto-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 01 // РЕШЕНИЯ ДЛЯ БИЗНЕСА</span>
-        <span class="kicker-meta">ОТ ЗАДАЧИ ДО ЗАПУСКА <span class="crosshair">+</span></span>
+        <span class="kicker-meta">ОТ ЗАДАЧИ ДО <span class="kicker-tail">ЗАПУСКА <span class="crosshair">+</span></span></span>
       </div>
       <div class="manifesto-inner">
         <h2 id="manifesto-title">
@@ -203,7 +204,7 @@
         </div>
         </div>
         <div class="solutions-toolbar">
-          <span class="solutions-count mono-meta" aria-live="polite" aria-atomic="true"><span data-solution-current>01</span><span> / 07</span></span>
+          <span class="solutions-count mono-meta" aria-live="polite" aria-atomic="true"><span data-solution-current>01</span><span class="compact-only"> из 7</span><span class="desktop-only"> / 07</span></span>
           <div class="solutions-progress" role="progressbar" aria-label="Текущая услуга" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"><span></span></div>
           <div class="solutions-navigation">
             <p class="solutions-hint" id="solutions-hint">Листайте и найдите своё решение</p>
@@ -219,7 +220,7 @@
     <section class="projects" id="projects" aria-labelledby="projects-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 02 // НАШИ ПРОЕКТЫ</span>
-        <span class="kicker-meta">РАБОТА В ДЕЙСТВИИ <span class="crosshair">+</span></span>
+        <span class="kicker-meta">РАБОТА В <span class="kicker-tail">ДЕЙСТВИИ <span class="crosshair">+</span></span></span>
         <span class="projects-line-effect" aria-hidden="true"><span class="projects-line-pulse"></span></span>
       </div>
       <div class="projects-heading">
@@ -231,12 +232,15 @@
           <!-- Project 01: Mama -->
           <article class="project-card" data-project="mama">
             <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама">
-              <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 01 / 09 ]</span>
-                <span class="project-year mono-meta">2025</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 01 / 09 ]</span>
+                  <span class="project-year mono-meta">2025</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -253,12 +257,15 @@
           <!-- Project 02: Poplavok -->
           <article class="project-card" data-project="poplavok">
             <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок">
-              <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 02 / 09 ]</span>
-                <span class="project-year mono-meta">2025</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 02 / 09 ]</span>
+                  <span class="project-year mono-meta">2025</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -275,12 +282,15 @@
           <!-- Project 03: Health Culture -->
           <article class="project-card" data-project="health">
             <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture">
-              <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 03 / 09 ]</span>
-                <span class="project-year mono-meta">2024</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 03 / 09 ]</span>
+                  <span class="project-year mono-meta">2024</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -296,12 +306,15 @@
 
           <article class="project-card" data-project="pierre-magnol">
             <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol">
-              <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 04 / 09 ]</span>
-                <span class="project-year mono-meta">WEB</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 04 / 09 ]</span>
+                  <span class="project-year mono-meta">WEB</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -318,12 +331,15 @@
 
           <article class="project-card" data-project="home30">
             <button class="project-image" type="button" data-open-project="home30" aria-label="Открыть проект HOME30">
-              <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 05 / 09 ]</span>
-                <span class="project-year mono-meta">WEB</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 05 / 09 ]</span>
+                  <span class="project-year mono-meta">WEB</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -340,12 +356,15 @@
 
           <article class="project-card" data-project="shogun-auto">
             <button class="project-image" type="button" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto">
-              <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 06 / 09 ]</span>
-                <span class="project-year mono-meta">BRAND</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 06 / 09 ]</span>
+                  <span class="project-year mono-meta">BRAND</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -362,12 +381,15 @@
 
           <article class="project-card" data-project="kyrilka">
             <button class="project-image" type="button" data-open-project="kyrilka" aria-label="Открыть проект Kyrilka">
-              <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 07 / 09 ]</span>
-                <span class="project-year mono-meta">WEB</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 07 / 09 ]</span>
+                  <span class="project-year mono-meta">WEB</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -384,12 +406,15 @@
 
           <article class="project-card" data-project="ivan-grozny">
             <button class="project-image" type="button" data-open-project="ivan-grozny" aria-label="Открыть проект Иван Грозный — Перезагрузка">
-              <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 08 / 09 ]</span>
-                <span class="project-year mono-meta">CAMPAIGN</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 08 / 09 ]</span>
+                  <span class="project-year mono-meta">CAMPAIGN</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -406,12 +431,15 @@
 
           <article class="project-card" data-project="divo-dental">
             <button class="project-image" type="button" data-open-project="divo-dental" aria-label="Открыть проект Divo Dental">
-              <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
-              <div class="project-badges">
-                <span class="project-number">[ 09 / 09 ]</span>
-                <span class="project-year mono-meta">BRAND</span>
-              </div>
-              <span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span>
+              <span class="project-preview">
+                <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
+                <span class="project-badges">
+                  <span class="project-number">[ 09 / 09 ]</span>
+                  <span class="project-year mono-meta">BRAND</span>
+                </span>
+              </span>
+
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -428,6 +456,7 @@
       </div>
       <div class="gallery-footer">
         <div class="gallery-progress" aria-hidden="true"><span></span></div>
+        <span class="gallery-count compact-only" data-gallery-count>1 из 9</span>
         <a class="gallery-all" href="https://interdiz.ru/portfolio.html" target="_blank" rel="noopener noreferrer">Все проекты <span aria-hidden="true">↗</span></a>
         <div class="gallery-navigation">
           <p class="gallery-hint" aria-hidden="true">Листайте, чтобы увидеть больше</p>
@@ -450,9 +479,9 @@
     <section class="expertise" id="expertise" aria-labelledby="expertise-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 03 // ТОЧКА СБОРКИ</span>
-        <span class="kicker-meta">ОТ ИДЕИ ДО ЗАПУСКА <span class="crosshair">+</span></span>
+        <span class="kicker-meta">ОТ ИДЕИ ДО <span class="kicker-tail">ЗАПУСКА <span class="crosshair">+</span></span></span>
       </div>
-      <h2 id="expertise-title"><span class="expertise-line">ОТ ПЕРВОЙ ЗАДАЧИ</span><span class="expertise-line outline">ДО РАБОТАЮЩЕГО</span><span class="expertise-line outline">РЕШЕНИЯ</span></h2>
+      <h2 id="expertise-title"><span class="desktop-only"><span class="expertise-line">ОТ ПЕРВОЙ ЗАДАЧИ</span><span class="expertise-line outline">ДО РАБОТАЮЩЕГО</span><span class="expertise-line outline">РЕШЕНИЯ</span></span><span class="compact-only"><span class="expertise-line">ОТ ЗАДАЧИ</span><span class="expertise-line outline">ДО ГОТОВОГО РЕШЕНИЯ</span></span></h2>
       <p class="expertise-caption">От первого «а что, если» до последнего пикселя.</p>
       <div class="expertise-layout">
         <div class="expertise-sidebar">
@@ -532,7 +561,7 @@
     <section class="approach" id="approach" aria-labelledby="approach-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 04 // ВОПРОСЫ ПЕРЕД СТАРТОМ</span>
-        <span class="kicker-meta">ЯСНОСТЬ С ПЕРВОГО ШАГА <span class="crosshair">+</span></span>
+        <span class="kicker-meta">ЯСНОСТЬ С ПЕРВОГО <span class="kicker-tail">ШАГА <span class="crosshair">+</span></span></span>
       </div>
       <h2 id="approach-title"><span class="approach-line">СНАЧАЛА ЯСНОСТЬ.</span><span class="approach-line outline">ПОТОМ <span class="faq-short-dash">—</span> СТАРТ<span class="title-dot">.</span></span></h2>
       <p class="approach-description">Бюджет, сроки, правки и жизнь проекта после запуска <span class="faq-short-dash">—</span> проясним всё, что важно для спокойного старта.</p>
@@ -579,7 +608,7 @@
     <section class="reviews" id="reviews" aria-labelledby="reviews-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 05 // ОТЗЫВЫ КЛИЕНТОВ</span>
-        <span class="kicker-meta">ЯНДЕКС КАРТЫ, 2ГИС И АВИТО <span class="crosshair">+</span></span>
+        <span class="kicker-meta">ЯНДЕКС КАРТЫ, 2ГИС И <span class="kicker-tail">АВИТО <span class="crosshair">+</span></span></span>
       </div>
       <div class="reviews-heading">
         <h2 id="reviews-title"><span class="reviews-line">ОТЗЫВЫ</span><span class="reviews-line outline">КЛИЕНТОВ<span class="title-dot">.</span></span></h2>
@@ -589,6 +618,10 @@
       <div class="reviews-filters" role="group" aria-label="Источник отзывов" hidden>
         <button class="reviews-filter" type="button" data-reviews-filter="all" aria-pressed="true" aria-controls="reviews-wall">Все отзывы · 19</button>
         <button class="reviews-filter" type="button" data-reviews-filter="avito" aria-pressed="false" aria-controls="reviews-wall">Авито · 2</button>
+      </div>
+      <div class="review-navigation compact-only" aria-label="Листание отзывов" role="group" hidden>
+        <button type="button" data-review-prev aria-label="Предыдущий отзыв" aria-controls="reviews-wall">←</button>
+        <button type="button" data-review-next aria-label="Следующий отзыв" aria-controls="reviews-wall">→</button>
       </div>
       <div class="reviews-carousel">
       <div class="reviews-wall" id="reviews-wall" role="region" aria-label="Лента отзывов клиентов">
@@ -735,11 +768,12 @@
     <footer class="contact" id="contact">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair">+</span> 06 // СЛЕДУЮЩИЙ ШАГ</span>
-        <span class="kicker-meta">НАЧИНАЕТСЯ С РАЗГОВОРА <span class="crosshair">+</span></span>
+        <span class="kicker-meta">НАЧИНАЕТСЯ С <span class="kicker-tail">РАЗГОВОРА <span class="crosshair">+</span></span></span>
       </div>
 
       <div class="contact-hero">
         <h2>ЕСТЬ ИДЕЯ?<br><a href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">ДАДИМ ЕЙ<br><span class="contact-glow">ИЗМЕРЕНИЕ. ↗</span></a></h2>
+        <a class="contact-pill contact-pill--filled contact-telegram compact-only" href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">Написать в Telegram <span aria-hidden="true">↗</span></a>
       </div>
 
       <!-- Modular Swiss Contact Grid with 1-click clipboard -->
@@ -747,7 +781,7 @@
         <div class="contact-card">
           <div class="contact-card-top mono-meta">
             <span>[ EMAIL ]</span>
-            <span class="copy-tag">КЛИК ДЛЯ КОПИРОВАНИЯ</span>
+            <span class="copy-tag"><span class="desktop-only">КЛИК ДЛЯ КОПИРОВАНИЯ</span><span class="compact-only">Скопировать email</span></span>
           </div>
           <button type="button" class="contact-val copy-email-btn" data-copy="interdiz@internet.ru" aria-label="Скопировать interdiz@internet.ru">
             interdiz@internet.ru <span class="copy-icon">📋</span>
@@ -769,7 +803,7 @@
         <div class="contact-card">
           <div class="contact-card-top mono-meta">
             <span>[ ТЕЛЕФОН ]</span>
-            <span class="location-tag">СПб · UTC+3 // РАБОТАЕМ ВЕЗДЕ</span>
+            <span class="location-tag"><span class="desktop-only">СПб · UTC+3 // РАБОТАЕМ ВЕЗДЕ</span><span class="compact-only">СПб · UTC+3</span></span>
           </div>
           <a class="contact-val" href="tel:+79275881990">
             +7 927 588-19-90 <span>↗</span>
@@ -809,11 +843,14 @@
       <a href="#manifesto"><span>[02]</span> Услуги <span aria-hidden="true">↗</span></a>
       <a href="#projects"><span>[03]</span> Проекты <span aria-hidden="true">↗</span></a>
       <a href="#expertise"><span>[04]</span> Как работаем <span aria-hidden="true">↗</span></a>
-      <a href="#approach"><span>[05]</span> FAQ <span aria-hidden="true">↗</span></a>
+      <a href="#approach"><span>[05]</span> Вопросы и ответы <span aria-hidden="true">↗</span></a>
       <a href="#reviews"><span>[06]</span> Отзывы <span aria-hidden="true">↗</span></a>
       <a href="#contact"><span>[07]</span> Контакты <span aria-hidden="true">↗</span></a>
     </nav>
     <a class="contact-pill contact-pill--filled mobile-menu-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+    <div class="mobile-display-settings" role="group" aria-label="Настройки отображения">
+      <p>Настройки</p>
+    </div>
   </dialog>
 
   <dialog class="project-dialog service-dialog" id="service-dialog" aria-labelledby="service-dialog-title" aria-describedby="service-dialog-description">
@@ -861,6 +898,7 @@
     <a class="theme-switch" href="?theme=dark" aria-label="Включить чёрную версию сайта" title="Переключить на чёрную версию">
       <span class="theme-switch-face" aria-hidden="true"></span>
       <span class="theme-switch-orbit" aria-hidden="true"><span></span></span>
+      <span class="compact-only" aria-hidden="true">Тема</span>
     </a>
     <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Уменьшить движение">
       <span class="motion-icon">Ⅱ</span>

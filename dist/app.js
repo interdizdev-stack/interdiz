@@ -4,19 +4,6 @@ import { setupReviews } from './reviews.js';
 const $ = (selector, root=document) => root.querySelector(selector);
 const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
 
-// Keep the dark chapter caption on the same top rail as the opening caption.
-if (['dark', 'light'].includes(document.documentElement.dataset.theme)) {
-  const caption = $('.hero-chapter > .mono-meta');
-  if (caption) {
-    const spacer = caption.cloneNode(true);
-    spacer.style.visibility = 'hidden';
-    spacer.setAttribute('aria-hidden', 'true');
-    caption.replaceWith(spacer);
-    caption.classList.add('hero-topline', 'hero-chapter-topline');
-    caption.setAttribute('aria-hidden', 'true');
-    $('.hero').append(caption);
-  }
-}
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let userReduced = null;
 try { const saved=sessionStorage.getItem('interdiz-reduced'); if(saved!==null) userReduced=saved==='true'; } catch {}
@@ -33,15 +20,54 @@ const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max
 const isCompactLayout = () => compactMedia.matches;
 let closeMobileNavigation;
 
+// Desktop uses a separate rail. On mobile the caption follows the heading's layout and animation.
+const chapterCaption = $('.hero-chapter > .mono-meta');
+const chapterSpacer = chapterCaption.cloneNode(true);
+chapterSpacer.style.visibility = 'hidden';
+chapterSpacer.setAttribute('aria-hidden', 'true');
+chapterCaption.setAttribute('aria-hidden', 'true');
+function syncChapterCaption() {
+  if (isCompactLayout()) {
+    chapterCaption.classList.remove('hero-topline', 'hero-chapter-topline');
+    if (chapterSpacer.isConnected) chapterSpacer.replaceWith(chapterCaption);
+  } else {
+    chapterCaption.replaceWith(chapterSpacer);
+    chapterCaption.classList.add('hero-topline', 'hero-chapter-topline');
+    $('.hero').append(chapterCaption);
+  }
+}
+syncChapterCaption();
+compactMedia.addEventListener('change', syncChapterCaption);
+
 function setupMobileNavigation() {
   const menu = $('#mobile-menu');
   const toggles = $$('[data-mobile-menu]');
   if (!menu) return;
+  const controls = $('.display-controls');
+  const controlsAnchor = controls.previousElementSibling;
+  const settings = $('.mobile-display-settings', menu);
+  const home = $('.quick-home', controls);
+  const marquee = $('.marquee');
   let opener;
   menu.hidden = false;
   const sync = () => {
-    toggles.forEach(button => { button.hidden = !isCompactLayout(); });
-    if (!isCompactLayout()) closeMobileNavigation(false);
+    const compact = isCompactLayout();
+    toggles.forEach(button => { button.hidden = !compact; });
+    if (compact) {
+      settings.append(controls);
+      marquee.removeAttribute('aria-hidden');
+      marquee.setAttribute('role', 'region');
+      marquee.setAttribute('aria-label', 'Технологии студии');
+      marquee.tabIndex = 0;
+    } else {
+      closeMobileNavigation(false);
+      controlsAnchor.after(controls);
+      home.hidden = false;
+      marquee.setAttribute('aria-hidden', 'true');
+      marquee.removeAttribute('role');
+      marquee.removeAttribute('aria-label');
+      marquee.removeAttribute('tabindex');
+    }
   };
   closeMobileNavigation = (restoreFocus = true) => {
     if (!restoreFocus) opener = null;
@@ -51,6 +77,7 @@ function setupMobileNavigation() {
     if (!isCompactLayout()) return;
     opener = button;
     const links = $$('.mobile-menu-links a', menu);
+    home.hidden = $('#manifesto').getBoundingClientRect().top > innerHeight * .35;
     const current = links.findLast(link => $(link.getAttribute('href')).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
     links.forEach(link => {
       link.classList.toggle('is-current', link === current);
@@ -480,7 +507,7 @@ function setupSolutionsCarousel() {
   function render(index) {
     activeIndex = index;
     cards.forEach((card, i) => card.classList.toggle('is-active', i === index));
-    const label = String(index + 1).padStart(2, '0');
+    const label = String(index + 1).padStart(isCompactLayout() ? 1 : 2, '0');
     if (counter.textContent !== label) counter.textContent = label;
     progress.setAttribute('aria-valuenow', String(index + 1));
     progress.setAttribute('aria-valuetext', cards[index].querySelector('h3').textContent);
@@ -637,6 +664,7 @@ function setupProjectGallery() {
   const cards = $$('.project-card', track);
   const previous = $('[data-project-prev]');
   const next = $('[data-project-next]');
+  const counter = $('[data-gallery-count]');
   let frame = 0;
   let drag = null;
   let suppressClick = false;
@@ -658,6 +686,8 @@ function setupProjectGallery() {
     });
     const first = visible[0] ?? 1;
     const last = visible.at(-1) ?? first;
+    const label = `${first} из ${cards.length}`;
+    if (counter.textContent !== label) counter.textContent = label;
     $('.gallery-progress>span').style.transform = `scaleX(${(last / cards.length)})`;
     previous.disabled = viewport.scrollLeft <= 2;
     next.disabled = maximum() - viewport.scrollLeft <= 2;

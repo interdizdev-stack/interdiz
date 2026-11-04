@@ -8,8 +8,20 @@ export function setupReviews(isReduced) {
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const compact = () => compactLayout.matches;
   const cards = [...track.children];
+  const navigation = document.querySelector('.review-navigation');
+  const previous = navigation.querySelector('[data-review-prev]');
+  const next = navigation.querySelector('[data-review-next]');
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
+  cards.forEach(card => {
+    const placeholder = card.querySelector('.review-card__author-icon[src$="/placeholder.webp"]');
+    if (!placeholder) return;
+    const initials = document.createElement('span');
+    initials.className = 'review-card__initials compact-only';
+    initials.setAttribute('aria-hidden', 'true');
+    initials.textContent = card.querySelector('.review-card__author-name').textContent.trim().split(/\s+/).slice(0, 2).map(name => name[0]).join('').toUpperCase();
+    placeholder.after(initials);
+  });
   let source = 'all';
   let visible = false;
   let paused = false;
@@ -17,7 +29,7 @@ export function setupReviews(isReduced) {
   let touching = false;
   let frame = 0;
   let previousTime = 0;
-  let speed = compact() ? 28 : 60;
+  let speed = 60;
   let columnStep = 0;
   let position = 0;
   let loopItems = [];
@@ -25,6 +37,33 @@ export function setupReviews(isReduced) {
   let drag = null;
   let suppressClick = false;
   let resumeTimer;
+  let layoutFrame = 0;
+
+  function updateCompactHeight() {
+    if (!compact() || layoutFrame) return;
+    layoutFrame = requestAnimationFrame(() => {
+      layoutFrame = 0;
+      if (!compact()) return;
+      const bounds = wall.getBoundingClientRect();
+      const visible = cards.filter(card => {
+        if (card.hidden) return false;
+        const rect = card.getBoundingClientRect();
+        const overlap = Math.min(rect.right, bounds.right) - Math.max(rect.left, bounds.left);
+        return overlap >= Math.min(rect.width / 2, bounds.width / 4);
+      });
+      if (visible.length) {
+        const height = Math.ceil(Math.max(...visible.map(card => card.getBoundingClientRect().height)));
+        track.style.setProperty('--compact-review-height', `${height}px`);
+      }
+      previous.disabled = wall.scrollLeft <= 2;
+      next.disabled = wall.scrollWidth - wall.clientWidth - wall.scrollLeft <= 2;
+    });
+  }
+
+  function moveCompact(direction) {
+    const step = (cards.find(card => !card.hidden)?.offsetWidth ?? 0) + parseFloat(getComputedStyle(track).columnGap);
+    wall.scrollBy({ left: direction * step, behavior: isReduced() ? 'instant' : 'smooth' });
+  }
 
   function setPosition(value) {
     if (canLoop) {
@@ -55,45 +94,30 @@ export function setupReviews(isReduced) {
     const anchorLeft = anchor?.getBoundingClientRect().left;
     track.style.transform = '';
     track.classList.remove('is-looping');
-    track.replaceChildren(...ordered);
+    button.hidden = compact();
+    navigation.hidden = !compact();
     if (compact()) {
-      // Reserve the tallest full review even when a source filter is active.
-      // Measuring synchronously avoids a flash and keeps all text readable.
-      const hidden = ordered.map(card => card.hidden);
-      wall.classList.remove('is-filtered');
-      ordered.forEach(card => { card.hidden = false; });
-      const height = Math.max(...ordered.map(card => card.offsetHeight));
-      ordered.forEach((card, index) => { card.hidden = hidden[index]; });
-      wall.classList.toggle('is-filtered', source !== 'all');
-      track.style.setProperty('--compact-review-height', `${Math.ceil(height)}px`);
-    } else track.style.removeProperty('--compact-review-height');
-    if (source === 'all') {
-      // Read the existing masonry positions before changing the DOM. Wrapping
-      // these exact groups prevents vertical jumps when the last column moves first.
-      const groups = [];
-      ordered.forEach(card => {
-        const left = card.offsetLeft;
-        let group = groups[groups.length - 1];
-        if (!group || Math.abs(group.left - left) > 2) {
-          group = { left, cards: [] };
-          groups.push(group);
-        }
-        group.cards.push(card);
-      });
-      if (!compact()) {
-        // Cap each desktop column at two reviews; compact layouts stay single-row.
-        groups.length = 0;
-        for (let index = 0; index < ordered.length; index += 2) {
-          groups.push({ cards: ordered.slice(index, index + 2) });
-        }
+      wall.tabIndex = 0;
+      canLoop = false;
+      if (track.firstElementChild?.classList.contains('reviews-column')) {
+        track.replaceChildren(...cards);
+        if (anchor) wall.scrollLeft += anchor.getBoundingClientRect().left - anchorLeft;
       }
-      loopItems = groups.map(group => {
+      updateCompactHeight();
+      return;
+    }
+    wall.removeAttribute('tabindex');
+    track.style.removeProperty('--compact-review-height');
+    track.replaceChildren(...ordered);
+    if (source === 'all') {
+      loopItems = [];
+      for (let index = 0; index < ordered.length; index += 2) {
         const column = document.createElement('div');
         column.className = 'reviews-column';
         column.setAttribute('role', 'presentation');
-        column.append(...group.cards);
-        return column;
-      });
+        column.append(...ordered.slice(index, index + 2));
+        loopItems.push(column);
+      }
       track.classList.add('is-looping');
       track.replaceChildren(...loopItems);
     } else loopItems = ordered.filter(card => !card.hidden);
@@ -112,7 +136,7 @@ export function setupReviews(isReduced) {
     frame = requestAnimationFrame(tick);
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0;
     previousTime = time;
-    speed += ((hovering ? 10 : compact() ? 28 : 60) - speed) * (1 - Math.exp(-7 * delta));
+    speed += ((hovering ? 10 : 60) - speed) * (1 - Math.exp(-7 * delta));
     setPosition(position + speed * delta);
   }
   function update() {
@@ -124,8 +148,8 @@ export function setupReviews(isReduced) {
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
-    wall.classList.toggle('is-paused', paused || reduced || touching);
-    if (visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
+    wall.classList.toggle('is-paused', compact() || paused || reduced || touching);
+    if (visible && !compact() && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
@@ -143,6 +167,11 @@ export function setupReviews(isReduced) {
     update();
   }));
   button.addEventListener('click', () => { paused = !paused; update(); });
+  previous.addEventListener('click', () => moveCompact(-1));
+  next.addEventListener('click', () => moveCompact(1));
+  wall.addEventListener('scroll', updateCompactHeight, { passive: true });
+  const cardSizes = new ResizeObserver(updateCompactHeight);
+  cards.forEach(card => cardSizes.observe(card));
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });
   wall.addEventListener('focusin', update);
@@ -196,6 +225,7 @@ export function setupReviews(isReduced) {
   addEventListener('pointerup', finish);
   document.addEventListener('visibilitychange', update);
   addEventListener('resize', () => { measure(); update(); });
+  compactLayout.addEventListener('change', () => { measure(); update(); });
   addEventListener('pagehide', stop);
   addEventListener('pageshow', update);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }, { rootMargin: '200px' }).observe(wall);
