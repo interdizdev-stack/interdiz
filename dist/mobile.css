@@ -219,10 +219,10 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .copy-email-btn .copy-icon { display: none; }
   html[data-theme] :is(.contact-card:nth-child(2), .contact-card:last-child) .contact-val { white-space: nowrap; overflow-wrap: normal; }
   html[data-theme] .contact-desc { font-size: 15px; line-height: 1.55; }
-  html[data-theme] .footer-bottom { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 16px; padding-top: 26px; }
+  html[data-theme] .footer-bottom { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px 16px; padding-top: 26px; }
   html[data-theme] .footer-bottom > .wordmark { grid-column: 1; grid-row: 1; margin: 0; }
   html[data-theme] .footer-bottom > .footer-clock { position: relative; top: -15px; grid-column: 2; grid-row: 1; justify-self: start; transform: none; font-size: 12px; }
-  html[data-theme] .footer-bottom > .back-to-top { grid-column: 3; grid-row: 1; display: flex; align-items: center; min-height: 44px; font-size: 12px; }
+  html[data-theme] .footer-bottom > .back-to-top { display: none; }
   html[data-theme] .footer-bottom > .footer-copyright { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: 30px; font-size: 12px; }
   html[data-theme] .display-controls { display: flex; position: fixed; right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom), var(--footer-clearance, 0px)); gap: 6px; transform: scale(.9); transform-origin: bottom right; }
   html[data-theme] .display-controls .quick-home { width: 44px; height: 44px; flex: 0 0 44px; }
@@ -271,8 +271,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .contact-card:last-child { grid-column: auto; }
   html[data-theme] .contact-card { padding: 22px; }
   html[data-theme] .contact-card-top > span { max-width: 100%; }
-  html[data-theme] .footer-bottom { grid-template-columns: minmax(0, 1fr) auto; }
-  html[data-theme] .footer-bottom > .back-to-top { grid-column: 2; }
+  html[data-theme] .footer-bottom { grid-template-columns: minmax(0, 1fr); }
   html[data-theme] .footer-bottom > .footer-clock { grid-column: 1 / -1; grid-row: 2; }
   html[data-theme] .footer-bottom > .footer-copyright { grid-row: 3; }
   html[data-theme] .dialog-inner { padding: 24px 20px; }
