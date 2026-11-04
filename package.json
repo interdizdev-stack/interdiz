@@ -1,0 +1,7 @@
+{
+  "name": "interdiz-local",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

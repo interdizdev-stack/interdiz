@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101210">
+  <meta name="description" content="InterDIZ — дизайн, разработка и новые измерения цифрового опыта. Превращаем сложное в ясное.">
+  <title>InterDIZ — за пределами плоскости</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101210'/%3E%3Cpath d='M16 14h10v36H16zm17 0h9q15 0 15 18T42 50h-9V40h9q5 0 5-8t-5-8h-9z' fill='%23c2ff43'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./vendor/gsap.min.js"></script>
+  <script defer src="./vendor/ScrollTrigger.min.js"></script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержимому</a>
+  <header class="header">
+    <a class="wordmark" href="#top" aria-label="InterDIZ — в начало">inter<span>diz</span><sup>®</sup></a>
+    <span class="header-caption">Независимая <span style="white-space:nowrap">digital-студия</span></span>
+    <nav aria-label="Главная навигация"><a href="#projects">Проекты <span>03</span></a><a href="#expertise">Подход</a></nav>
+    <a class="contact-pill" href="#contact">Обсудим проект <span>↗</span></a>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div id="webgl" class="webgl" aria-hidden="true"></div>
+      <div class="hero-topline"><span>ДИЗАЙН .  РАЗРАБОТКА .  РАЗВИТИЕ</span><span>САНКТ-ПЕТЕРБУРГ — РАБОТАЕМ ВЕЗДЕ</span></div>
+      <h1 id="hero-title"><span class="hero-line">ЗА ПРЕДЕЛАМИ</span><span class="hero-line outline">ПЛОСКОСТИ<span class="title-dot">.</span></span></h1>
+      <div class="hero-subtitle">
+        <h2>Дизайн и разработка, продвижение, техническая поддержка и безопасность. Подключаемся на любом этапе: от первого запуска до развития работающего сайта.<span style="display:block">Нужен новый сайт или помощь с существующим — начнём с вашей задачи.</span></h2>
+        <div class="hero-actions">
+          <a class="contact-pill hero-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+          <a class="contact-pill" href="#projects">Наши проекты</a>
+        </div>
+      </div>
+      <div class="hero-object-label"><span class="cross">+</span><span>INTERDIZ OBJECT — 001<br>ИДЕЯ ОБРЕТАЕТ ФОРМУ</span></div>
+      <div class="hero-bottom" style="justify-content:flex-end"><a href="#projects" class="round-link" aria-label="Смотреть проекты">↗</a></div>
+      <span class="side-note">SCROLL TO EXPLORE — 01 / 05</span>
+      <div class="hero-chapter" aria-hidden="true"><span>ИЗ ХАОСА — В СИСТЕМУ</span><p>разрабатываем<br>любые <em>IT-продукты.</em></p></div>
+      <div class="hero-end" aria-hidden="true">ПОДДЕРЖИВАЕМ<br><span>И РАЗВИВАЕМ.</span></div>
+      <div class="scene-stages" aria-hidden="true"><span class="active">01 — ФОРМА</span><i></i><span>02 — ДВИЖЕНИЕ</span><i></i><span>03 — ГЛУБИНА</span></div>
+    </section>
+    <section class="manifesto" id="manifesto" aria-labelledby="manifesto-title">
+      <div class="section-kicker"><span>01 / НАШ ВЗГЛЯД</span><span>СМЫСЛ ПРИНИМАЕТ ФОРМУ</span></div>
+      <h2 id="manifesto-title"><span class="manifesto-line">ХОРОШИЙ ДИЗАЙН</span><span class="manifesto-line">НЕ ПРОСТО ВИДНО.</span><span class="manifesto-line final-line">ЕГО ЧУВСТВУЮТ.</span></h2>
+      <p>Мы соединяем стратегию, эстетику и технологии.<br>Чтобы каждый элемент работал на вашу идею.</p>
+      <div class="manifesto-orbit" aria-hidden="true"><span>ИДЕЯ</span><span>ФОРМА</span><span>РЕЗУЛЬТАТ</span></div>
+    </section>
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-kicker"><span>02 / ИЗБРАННЫЕ ПРОЕКТЫ</span><span>ДИЗАЙН В ДЕЙСТВИИ</span></div>
+      <div class="projects-heading"><h2 id="projects-title">РАБОТЫ<span class="lime">↘</span></h2><p>Каждый проект —<br>отдельная вселенная.</p></div>
+      <div class="gallery-window"><div class="project-track">
+        <article class="project-card" data-project="mama">
+          <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама"><img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async"><span class="project-number">01 / 03</span><span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span></button>
+          <div class="project-info"><div><h3>Я — мама</h3><p>Цифровая забота, которую чувствуешь.</p></div><span>WEB DESIGN / UX·UI</span></div>
+        </article>
+        <article class="project-card" data-project="poplavok">
+          <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок"><img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="lazy" decoding="async"><span class="project-number">02 / 03</span><span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span></button>
+          <div class="project-info"><div><h3>Поплавок</h3><p>Новая digital-глава ресторана у воды.</p></div><span>WEB DESIGN / DEVELOPMENT</span></div>
+        </article>
+        <article class="project-card" data-project="health">
+          <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture"><img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async"><span class="project-number">03 / 03</span><span class="project-open">СМОТРЕТЬ ПРОЕКТ ↗</span></button>
+          <div class="project-info"><div><h3>Health Culture</h3><p>Айдентика с ощущением чистоты.</p></div><span>IDENTITY / BRAND BOOK</span></div>
+        </article>
+      </div></div>
+      <div class="gallery-footer"><span class="gallery-counter">01 <span>/ 03</span></span><div class="gallery-progress" aria-hidden="true"><span></span></div><a href="https://interdiz.ru/portfolio.html" target="_blank" rel="noopener noreferrer">Все проекты ↗</a></div>
+    </section>
+    <div class="marquee" aria-hidden="true"><div>СМЫСЛ × ФОРМА × ДВИЖЕНИЕ × ХАРАКТЕР × СМЫСЛ × ФОРМА × ДВИЖЕНИЕ × ХАРАКТЕР ×</div></div>
+    <section class="expertise" id="expertise" aria-labelledby="expertise-title">
+      <div class="section-kicker"><span>03 / ТОЧКА СБОРКИ</span><span>ОТ ИДЕИ ДО ЗАПУСКА</span></div>
+      <h2 id="expertise-title">СЛОЖНОЕ.<br><span class="lime">СТАЛО ЯСНЫМ.</span></h2>
+      <div class="expertise-layout"><p class="expertise-intro">Одна команда.<br>Целостный взгляд.<br><span>От первого «а что, если»<br>до последнего пикселя.</span></p><div class="service-list">
+        <details class="service" open><summary><span class="service-index">01</span><h3>Дизайн</h3><span class="service-plus">+</span></summary><div class="service-content"><p>Находим визуальный язык, который передаёт характер бренда. Продумываем путь пользователя до каждого взаимодействия.</p><div class="tags"><span>UX / UI</span><span>АЙДЕНТИКА</span><span>АРТ-ДИРЕКШН</span></div></div></details>
+        <details class="service"><summary><span class="service-index">02</span><h3>Разработка</h3><span class="service-plus">+</span></summary><div class="service-content"><p>Превращаем идею в работающий цифровой продукт: от выразительного лендинга до интернет-магазина и сложного веб-интерфейса.</p><div class="tags"><span>САЙТЫ</span><span>WEBGL / 3D</span><span>ИНТЕГРАЦИИ</span></div></div></details>
+        <details class="service"><summary><span class="service-index">03</span><h3>Развитие</h3><span class="service-plus">+</span></summary><div class="service-content"><p>Остаёмся рядом после запуска. Поддерживаем, развиваем и помогаем вашему проекту находить свою аудиторию.</p><div class="tags"><span>ПОДДЕРЖКА</span><span>SEO</span><span>АНАЛИТИКА</span></div></div></details>
+      </div></div>
+    </section>
+    <footer class="contact" id="contact">
+      <div class="section-kicker"><span>04 / СЛЕДУЮЩИЙ ШАГ</span><span>НАЧИНАЕТСЯ С РАЗГОВОРА</span></div>
+      <h2>ЕСТЬ ИДЕЯ?<br><a href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">ДАДИМ ЕЙ<br><span>ИЗМЕРЕНИЕ. ↗</span></a></h2>
+      <div class="contact-links"><a href="mailto:interdiz@internet.ru">interdiz@internet.ru ↗</a><a href="tel:+79275881990">+7 927 588-19-90</a><a href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">Telegram ↗</a></div>
+      <div class="footer-bottom"><a class="wordmark" href="#top">inter<span>diz</span><sup>®</sup></a><span>© 2026 INTERDIZ</span><span>ДИЗАЙН, КОТОРЫЙ ИМЕЕТ ЗНАЧЕНИЕ</span><a href="#top">Наверх ↑</a></div>
+    </footer>
+  </main>
+  <dialog class="project-dialog" aria-labelledby="dialog-title"><button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button><div class="dialog-inner"><span class="dialog-kicker">ПРОЕКТ INTERDIZ</span><h2 id="dialog-title"></h2><p class="dialog-description"></p><img class="dialog-image" alt="" width="1920" height="1280"><a class="dialog-link" href="https://interdiz.ru/portfolio.html" target="_blank" rel="noopener noreferrer">Полное портфолио InterDIZ ↗</a></div></dialog>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Уменьшить движение"><span class="motion-icon">Ⅱ</span><span class="motion-label">Меньше движения</span></button>
+  <noscript><p class="noscript">Для 3D-анимаций включите JavaScript. Контакты и информация доступны ниже.</p></noscript>
+</body>
+</html>
