@@ -19,9 +19,8 @@ html[data-theme] .mobile-menu::backdrop { background: rgba(0, 0, 0, .8); backdro
 html[data-theme] .mobile-menu-heading { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg); color: var(--fg-muted); font-size: 12px; }
 html[data-theme] .mobile-menu-close { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 30px; line-height: 1; }
 html[data-theme] .mobile-menu-links { margin-top: 16px; }
-html[data-theme] .mobile-menu-links a { display: grid; grid-template-columns: 32px minmax(0, 1fr) 24px; align-items: baseline; gap: 10px; min-height: 58px; padding: 16px 0; border-top: var(--outline-width) solid var(--line); font-size: clamp(20px, 5.6vw, 22px); font-weight: 600; letter-spacing: -.04em; }
-html[data-theme] .mobile-menu-links a > span { font-size: 12px; font-weight: 400; color: var(--lime); letter-spacing: 0; }
-html[data-theme] .mobile-menu-links a > span:last-child { font-size: 24px; }
+html[data-theme] .mobile-menu-links a { display: grid; grid-template-columns: minmax(0, 1fr) 24px; align-items: baseline; gap: 10px; min-height: 58px; padding: 16px 0; border-top: var(--outline-width) solid var(--line); font-size: clamp(20px, 5.6vw, 22px); font-weight: 600; letter-spacing: -.04em; }
+html[data-theme] .mobile-menu-links a > span { font-size: 24px; font-weight: 400; color: var(--lime); letter-spacing: 0; }
 html[data-theme] .mobile-menu-links a:is(:hover, .is-current) { color: var(--lime); }
 html[data-theme] .mobile-menu-contact { display: flex; justify-content: space-between; width: 100%; min-height: 48px; margin: 24px 0 0; padding: 14px 18px; font-size: 15px; }
 html[data-theme="light"] .mobile-menu::backdrop { background: rgba(232, 236, 226, .82); }
