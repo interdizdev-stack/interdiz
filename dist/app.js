@@ -976,7 +976,7 @@ function setupAnimations() {
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
       if (compact) gsap.from('.contact-hero h2', { y: 24, opacity: 0, duration: .65, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact', start: 'top 90%', once: true } });
       else gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
-      gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
+      gsap.from('.contact-card', { ...(compact ? {} : { y: 40 }), opacity: 0, stagger: 0.12, duration: 0.7, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
     });
 
     // Native sticky handles normal scrolling; pin its wrapper inside the
