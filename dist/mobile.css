@@ -55,7 +55,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero-topline > span { max-width: 50%; min-width: 0; }
   html[data-theme] .hero-topline > span:last-child { text-align: right; }
   html[data-theme] .hero-topline > :is(.hero-studio-caption, .hero-region-caption) { display: grid; grid-template-columns: auto auto; align-items: baseline; column-gap: .25em; }
-  html[data-theme] .hero-topline > .hero-region-caption { min-width: max-content; }
+  html[data-theme] .hero-topline > .hero-region-caption { min-width: max-content; align-content: start; line-height: 1.5em; }
   :is(.hero-studio-caption, .hero-region-caption) > span:not(.crosshair) { font-size: calc(1em + 2px); -webkit-text-stroke: 0.5px currentColor; }
   .hero-region-mark-mobile { display: inline-block; }
   .hero-region-mark-desktop { display: none; }
