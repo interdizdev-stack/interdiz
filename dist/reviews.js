@@ -7,6 +7,14 @@ export function setupReviews(isReduced) {
   if (!wall || !track || !button) return;
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const compact = () => compactLayout.matches;
+  const heading = document.querySelector('.reviews-heading');
+  const filtersContainer = document.querySelector('.reviews-filters');
+  const syncPausePosition = () => {
+    if (compact()) filtersContainer.after(button);
+    else heading.append(button);
+  };
+  compactLayout.addEventListener('change', syncPausePosition);
+  syncPausePosition();
   const cards = [...track.children];
   const navigation = document.querySelector('.review-navigation');
   const previous = navigation.querySelector('[data-review-prev]');
