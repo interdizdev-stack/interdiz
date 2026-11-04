@@ -55,14 +55,19 @@ export function setupReviews(isReduced) {
         const height = Math.ceil(Math.max(...visible.map(card => card.getBoundingClientRect().height)));
         track.style.setProperty('--compact-review-height', `${height}px`);
       }
-      previous.disabled = wall.scrollLeft <= 2;
-      next.disabled = wall.scrollWidth - wall.clientWidth - wall.scrollLeft <= 2;
+      previous.disabled = !canLoop && wall.scrollLeft <= 2;
+      next.disabled = !canLoop && wall.scrollWidth - wall.clientWidth - wall.scrollLeft <= 2;
     });
   }
 
   function moveCompact(direction) {
     const step = (cards.find(card => !card.hidden)?.offsetWidth ?? 0) + parseFloat(getComputedStyle(track).columnGap);
-    wall.scrollBy({ left: direction * step, behavior: isReduced() ? 'instant' : 'smooth' });
+    if (canLoop) {
+      setPosition(wall.scrollLeft + direction * step);
+      updateCompactHeight();
+    } else {
+      wall.scrollBy({ left: direction * step, behavior: isReduced() ? 'instant' : 'smooth' });
+    }
   }
 
   function setPosition(value) {
@@ -94,15 +99,16 @@ export function setupReviews(isReduced) {
     const anchorLeft = anchor?.getBoundingClientRect().left;
     track.style.transform = '';
     track.classList.remove('is-looping');
-    button.hidden = compact();
     navigation.hidden = !compact();
     if (compact()) {
       wall.tabIndex = 0;
-      canLoop = false;
-      if (track.firstElementChild?.classList.contains('reviews-column')) {
-        track.replaceChildren(...cards);
-        if (anchor) wall.scrollLeft += anchor.getBoundingClientRect().left - anchorLeft;
-      }
+      track.replaceChildren(...ordered);
+      loopItems = ordered.filter(card => !card.hidden);
+      columnStep = loopItems[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
+      canLoop = source === 'all' && loopItems.length > 1 && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
+      const target = anchor ? wall.scrollLeft + anchor.getBoundingClientRect().left - anchorLeft : wall.scrollLeft;
+      const placed = setPosition(target);
+      if (drag) drag.left += placed - target;
       updateCompactHeight();
       return;
     }
@@ -148,8 +154,10 @@ export function setupReviews(isReduced) {
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
     button.querySelector('.reviews-pause-icon').textContent = reduced || filtered ? '○' : paused ? '▷' : 'Ⅱ';
     button.querySelector('.reviews-pause-label').textContent = reduced || filtered ? 'Без движения' : paused ? 'Продолжить' : 'Пауза';
-    wall.classList.toggle('is-paused', compact() || paused || reduced || touching);
-    if (visible && !compact() && !paused && !reduced && !filtered && !focused && !touching && !document.hidden) {
+    wall.classList.toggle('is-paused', paused || reduced || touching);
+    const moving = visible && !paused && !reduced && !filtered && !focused && !touching && !document.hidden;
+    wall.classList.toggle('is-auto-moving', compact() && moving);
+    if (moving) {
       if (!frame) { position = wall.scrollLeft; frame = requestAnimationFrame(tick); }
     } else stop();
   }
@@ -169,7 +177,10 @@ export function setupReviews(isReduced) {
   button.addEventListener('click', () => { paused = !paused; update(); });
   previous.addEventListener('click', () => moveCompact(-1));
   next.addEventListener('click', () => moveCompact(1));
-  wall.addEventListener('scroll', updateCompactHeight, { passive: true });
+  wall.addEventListener('scroll', () => {
+    if (compact() && !frame && !drag) position = wall.scrollLeft;
+    updateCompactHeight();
+  }, { passive: true });
   const cardSizes = new ResizeObserver(updateCompactHeight);
   cards.forEach(card => cardSizes.observe(card));
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
