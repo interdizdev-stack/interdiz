@@ -18,13 +18,12 @@ html[data-theme] .mobile-menu {
 html[data-theme] .mobile-menu::backdrop { background: rgba(0, 0, 0, .8); backdrop-filter: blur(12px); }
 html[data-theme] .mobile-menu-heading { position: sticky; top: 0; z-index: 1; display: flex; justify-content: flex-end; background: var(--bg); }
 html[data-theme] .mobile-menu-close { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 30px; line-height: 1; }
-html[data-theme] .mobile-menu > :is(.mobile-menu-links, .mobile-menu-contact) { position: relative; inset-block-start: -10px; }
-html[data-theme] .mobile-menu-links { margin-top: 16px; }
+html[data-theme] .mobile-menu-links { position: relative; inset-block-start: -10px; margin-top: 16px; }
 html[data-theme] .mobile-menu-links a { display: grid; grid-template-columns: minmax(0, 1fr) 24px; align-items: baseline; gap: 10px; min-height: 58px; padding: 16px 0; border-top: var(--outline-width) solid var(--line); font-size: clamp(20px, 5.6vw, 22px); font-weight: 600; letter-spacing: -.04em; }
 html[data-theme] .mobile-menu-links a:first-child { border-top: 0; }
 html[data-theme] .mobile-menu-links a > span { font-size: 24px; font-weight: 400; color: var(--lime); letter-spacing: 0; }
 html[data-theme] .mobile-menu-links a:is(:hover, .is-current) { color: var(--lime); }
-html[data-theme] .mobile-menu-contact { display: flex; justify-content: space-between; width: 100%; min-height: 48px; margin: 24px 0 0; padding: 14px 18px; font-size: 15px; }
+html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -15px; display: flex; justify-content: space-between; width: 100%; min-height: 48px; margin: 24px 0 0; padding: 14px 18px; font-size: 15px; }
 html[data-theme="light"] .mobile-menu::backdrop { background: rgba(232, 236, 226, .82); }
 html[data-theme="light"] .mobile-menu-links a { padding-inline: 10px; }
 html[data-theme="light"] .mobile-menu-links a > span { color: var(--fg); }
