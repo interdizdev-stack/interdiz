@@ -101,6 +101,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .section-kicker > span { min-width: 0; }
   html[data-theme] .section-kicker .kicker-meta { text-align: right; }
   html[data-theme] .kicker-tail { white-space: nowrap; }
+  html[data-theme] .manifesto .kicker-meta { position: relative; padding-inline-end: 1.4em; }
+  html[data-theme] .manifesto .kicker-meta .crosshair { position: absolute; inset-block-start: 0; inset-inline-end: 0; line-height: 16.8px; }
   html[data-theme] .manifesto-inner { margin-top: 30px; }
   html[data-theme] .solutions-stage { margin-top: 24px; }
   html[data-theme].motion-enabled .solutions-stage { --solution-parallax-space: 72px; display: flow-root; }
