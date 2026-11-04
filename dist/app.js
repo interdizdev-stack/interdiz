@@ -133,6 +133,24 @@ const updateProgress = () => {
 };
 addEventListener('scroll', updateProgress, { passive: true });
 
+function setupMobileControlsClearance() {
+  const controls = $('.display-controls');
+  const wordmark = $('.footer-bottom > .wordmark');
+  let previous = '';
+  const update = () => {
+    const clearance = isCompactLayout() ? `${Math.max(0, innerHeight - wordmark.getBoundingClientRect().top + 8)}px` : '';
+    if (clearance === previous) return;
+    previous = clearance;
+    if (clearance) controls.style.setProperty('--footer-clearance', clearance);
+    else controls.style.removeProperty('--footer-clearance');
+  };
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  compactMedia.addEventListener('change', update);
+  if (window.gsap) window.gsap.ticker.add(update);
+  update();
+}
+
 const projects = {
   mama: { title: 'Я — мама', description: 'Лендинг и ASO-креативы для мобильного приложения. Мягкий визуальный язык, передающий заботу и эмоциональное доверие.', image: './assets/mama.webp', link: 'https://interdiz.ru/portfolio.html' },
   poplavok: { title: 'Поплавок', description: 'Новая digital-глава ресторана у воды в Астрахани. Веб-дизайн, UX/UI, разработка на WordPress и интеграция Telegram / MAX.', image: './assets/poplavok.webp', link: 'https://interdiz.ru/portfolio.html' },
@@ -1150,6 +1168,7 @@ async function init() {
   updateReviewsMotion = setupReviews(() => reduced);
   setupTestimonialStickySize();
   setupMobileNavigation();
+  setupMobileControlsClearance();
   setupAnimations();
   compactMedia.addEventListener('change', () => {
     // Rebuild smoothing only when switching between touch and desktop layouts.
