@@ -166,7 +166,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .faq-answer { padding: 0 8px 20px 4px; }
   html[data-theme] .faq-answer p { font-size: 16px; line-height: 1.55; }
   html[data-theme] .faq-contact { gap: 18px; margin-top: 32px; }
-  html[data-theme] .faq-contact > .contact-pill { min-height: 48px; font-size: 15px; }
+  html[data-theme] .faq-contact > .contact-pill { position: relative; inset-block-start: -5px; min-height: 48px; font-size: 15px; }
   html[data-theme] .approach-testimonial { gap: 20px; }
   html[data-theme] .approach-testimonial blockquote p { font-size: 16px; line-height: 1.55; }
 
