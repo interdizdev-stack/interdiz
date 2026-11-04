@@ -218,7 +218,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .contact-card:first-child { container-type: inline-size; }
   html[data-theme] .contact-card .copy-email-btn { font-size: clamp(14px, 9cqi, clamp(20px, 4vw, 22px)); white-space: nowrap; overflow-wrap: normal; }
   html[data-theme] .copy-email-btn .copy-icon { display: none; }
-  html[data-theme] .contact-card:nth-child(2) .contact-val { white-space: nowrap; overflow-wrap: normal; }
+  html[data-theme] :is(.contact-card:nth-child(2), .contact-card:last-child) .contact-val { white-space: nowrap; overflow-wrap: normal; }
   html[data-theme] .contact-desc { font-size: 15px; line-height: 1.55; }
   html[data-theme] .footer-bottom { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 16px; padding-top: 26px; }
   html[data-theme] .footer-bottom > .wordmark { grid-column: 1; grid-row: 1; margin: 0; }
