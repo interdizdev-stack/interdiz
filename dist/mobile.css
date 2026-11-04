@@ -165,7 +165,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme="light"] .service[open] h3 { color: var(--fg); -webkit-text-stroke-width: 0; }
   html[data-theme="light"] .service[open] .service-plus { background: var(--lime); color: var(--fg); -webkit-text-stroke-width: 0; }
   html[data-theme] .approach h2 { margin-top: 30px; }
-  html[data-theme] .approach-content { width: 100%; margin-top: 32px; }
+  html[data-theme] .approach-content { width: 100%; margin-top: 37px; }
   html[data-theme] .faq-list.faq-enhanced { min-height: 0; }
   html[data-theme] .faq-item:last-child { border-bottom: 0; }
   html[data-theme] .faq-item summary { gap: 14px; min-height: 72px; padding: 18px 4px; grid-template-columns: minmax(0, 1fr) 24px; }
