@@ -138,7 +138,7 @@ function setupMobileControlsClearance() {
   const copyright = $('.footer-bottom > .footer-copyright');
   let previous = '';
   const update = () => {
-    const clearance = isCompactLayout() ? `${Math.max(0, innerHeight - copyright.getBoundingClientRect().top + 40)}px` : '';
+    const clearance = isCompactLayout() ? `${Math.max(0, innerHeight - copyright.getBoundingClientRect().top + 10)}px` : '';
     if (clearance === previous) return;
     previous = clearance;
     if (clearance) controls.style.setProperty('--footer-clearance', clearance);
