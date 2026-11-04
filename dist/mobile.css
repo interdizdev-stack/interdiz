@@ -54,7 +54,8 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero-topline:not(.hero-chapter-topline) { position: relative; inset: 15px auto auto; grid-row: 1; gap: 20px; padding-inline: calc(var(--outline-width) + 5px); font-size: 13px; line-height: 1.5; }
   html[data-theme] .hero-topline > span { max-width: 50%; min-width: 0; }
   html[data-theme] .hero-topline > span:last-child { text-align: right; }
-  html[data-theme] .hero-topline > .hero-region-caption { display: grid; grid-template-columns: auto auto; align-items: baseline; column-gap: .25em; min-width: max-content; }
+  html[data-theme] .hero-topline > :is(.hero-studio-caption, .hero-region-caption) { display: grid; grid-template-columns: auto auto; align-items: baseline; column-gap: .25em; }
+  html[data-theme] .hero-topline > .hero-region-caption { min-width: max-content; }
   .hero-region-mark-mobile { display: inline-block; }
   .hero-region-mark-desktop { display: none; }
   html[data-theme] .hero-intro { position: relative; inset: auto; grid-row: 2; width: 100%; margin-block-start: calc(40px + var(--hero-opening-offset)); }
