@@ -138,7 +138,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
   html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
   html[data-theme] .gallery-footer { display: block; margin-top: 28px; padding: 0 0 24px; border-top: 0; border-bottom: var(--outline-width) solid var(--line); }
-  html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -10px; min-height: 48px; margin: 0; font-size: 14px; }
+  html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -20px; min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
   html[data-theme] .marquee { overflow-x: auto; margin-top: 32px; overscroll-behavior-x: contain; box-shadow: none; }
   html[data-theme] .marquee > div { padding-inline: var(--pad); animation: none; font-size: 14px; letter-spacing: 0; }
