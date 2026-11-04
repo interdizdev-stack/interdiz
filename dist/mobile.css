@@ -179,7 +179,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .reviews-pause { display: inline-flex; width: auto; min-width: 112px; min-height: 44px; margin: 0; padding: 10px 14px; }
   html[data-theme] .review-navigation > .reviews-pause { margin-right: auto; }
   html[data-theme] .reviews-filter { min-height: 44px; padding: 10px 14px; font-size: 14px; }
-  html[data-theme] .review-navigation:not([hidden]) { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 26px; }
+  html[data-theme] .review-navigation:not([hidden]) { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 41px; }
   html[data-theme] .review-navigation > button:not(.reviews-pause) { border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 24px; }
   html[data-theme] .review-navigation > button:not(.reviews-pause):disabled { opacity: .4; }
   html[data-theme] .reviews-carousel { margin-top: 16px; padding-inline: var(--pad); }
