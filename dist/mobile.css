@@ -98,7 +98,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .scroll-circle { width: 44px; height: 44px; flex: 0 0 44px; }
 
   html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 72px; padding-block-start: 112px; }
-  html[data-theme] .expertise { padding-block-start: 122px; }
+  html[data-theme] .expertise { padding-block-start: 102px; }
   html[data-theme] .section-kicker { gap: 16px; align-items: flex-start; font-size: 12px; line-height: 1.4; letter-spacing: .5px; }
   html[data-theme] .section-kicker > span { min-width: 0; }
   html[data-theme] .section-kicker .kicker-index { align-items: flex-start; gap: 4px; }
@@ -261,7 +261,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .hero { gap: 20px; }
   html[data-theme] .hero-topline:not(.hero-chapter-topline) { font-size: 12px; gap: 16px; }
   html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; padding-block-start: 96px; }
-  html[data-theme] .expertise { padding-block-start: 106px; }
+  html[data-theme] .expertise { padding-block-start: 86px; }
   html[data-theme] .section-kicker { gap: 12px; }
   html[data-theme] .section-kicker .kicker-meta { max-width: 46%; }
   html[data-theme] .solution-card { flex-basis: calc(100% - 20px); padding: 22px; }
