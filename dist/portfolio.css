@@ -130,7 +130,15 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
   opacity: .7;
 }
 
-.portfolio-count { font-variant-numeric: tabular-nums; }
+/* Announce filter results to screen readers without a visible counter. */
+.portfolio-count {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .portfolio-grid {
   display: grid;
