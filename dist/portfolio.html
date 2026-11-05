@@ -12,11 +12,12 @@
   <link rel="stylesheet" href="./theme.css">
   <link rel="stylesheet" href="./outlines.css">
   <link rel="stylesheet" href="./mobile.css">
+  <link rel="stylesheet" href="./inner-page.css">
   <link rel="stylesheet" href="./portfolio.css">
   <script src="./theme.js"></script>
   <script type="module" src="./portfolio.js"></script>
 </head>
-<body class="portfolio-page">
+<body class="inner-page portfolio-page">
   <a class="skip-link" href="#main">К содержимому</a>
 
   <nav class="floating-nav" id="floating-nav" aria-label="Быстрая навигация" inert aria-hidden="true">
@@ -35,20 +36,20 @@
     <a class="float-cta contact-pill contact-pill--filled" href="./#contact">Обсудить <span aria-hidden="true">↗</span></a>
   </nav>
 
-  <header class="header portfolio-header">
+  <header class="header page-header portfolio-header">
     <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
     <span class="header-caption">Независимая digital&#8209;студия</span>
     <a class="contact-pill" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="portfolio-intro" aria-labelledby="portfolio-title">
+    <section class="page-intro portfolio-intro" aria-labelledby="portfolio-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair" aria-hidden="true">+</span> ПОРТФОЛИО INTERDIZ</span>
         <span class="kicker-meta">ДИЗАЙН / РАЗРАБОТКА / ПРОДВИЖЕНИЕ / AI&#8209;РАЗРАБОТКА</span>
       </div>
-      <div class="portfolio-intro-layout">
-        <div class="portfolio-heading">
+      <div class="page-intro-layout">
+        <div class="page-heading">
           <nav class="page-switch" aria-label="Страницы сайта">
             <a href="./#top"><span aria-hidden="true">←</span> Главная</a>
             <span class="page-switch-accent" aria-current="page">Портфолио</span>
@@ -79,7 +80,7 @@
           <button class="portfolio-reset" type="button" data-reset-filters hidden>Сбросить фильтры <span aria-hidden="true">↺</span></button>
         </div>
       </div>
-      <div class="portfolio-grid" id="portfolio-grid">
+      <div class="page-project-grid portfolio-grid" id="portfolio-grid">
         <article class="project-card" data-topic="apps" data-categories="web advertising">
           <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама" aria-haspopup="dialog">
             <span class="project-preview">
@@ -90,7 +91,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Сервисы и приложения</p>
+              <p class="project-topic mono-meta">Сервисы и приложения</p>
               <h3>Я — мама</h3>
               <p>Цифровая забота, которую чувствуешь.</p>
             </div>
@@ -106,7 +107,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Рестораны и отели</p>
+              <p class="project-topic mono-meta">Рестораны и отели</p>
               <h3>Поплавок</h3>
               <p>Новая digital-глава ресторана у воды.</p>
             </div>
@@ -122,7 +123,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Здоровье</p>
+              <p class="project-topic mono-meta">Здоровье</p>
               <h3>Health Culture</h3>
               <p>Айдентика с ощущением чистоты.</p>
             </div>
@@ -138,7 +139,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <p class="project-topic mono-meta">Торговля и авто</p>
               <h3>Pierre Magnol</h3>
               <p>Цифровая витрина цветочного бутика.</p>
             </div>
@@ -154,7 +155,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Рестораны и отели</p>
+              <p class="project-topic mono-meta">Рестораны и отели</p>
               <h3>HOME30</h3>
               <p>Сайт хостела в чёрно-оранжевых тонах.</p>
             </div>
@@ -170,7 +171,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <p class="project-topic mono-meta">Торговля и авто</p>
               <h3>Shogun Auto</h3>
               <p>С Востока на весь мир — фирменный стиль.</p>
             </div>
@@ -186,7 +187,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Торговля и авто</p>
+              <p class="project-topic mono-meta">Торговля и авто</p>
               <h3>Kyrilka</h3>
               <p>Контрастный дизайн цифровой витрины.</p>
             </div>
@@ -202,7 +203,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Культура</p>
+              <p class="project-topic mono-meta">Культура</p>
               <h3>Иван Грозный — Перезагрузка</h3>
               <p>ТВ-реклама и афиши, в которых оживает история.</p>
             </div>
@@ -218,7 +219,7 @@
           </button>
           <div class="project-info">
             <div>
-              <p class="portfolio-topic mono-meta">Здоровье</p>
+              <p class="project-topic mono-meta">Здоровье</p>
               <h3>Divo Dental</h3>
               <p>Логотип для современной стоматологии.</p>
             </div>
@@ -233,11 +234,11 @@
     </section>
   </main>
 
-  <footer class="portfolio-footer">
+  <footer class="page-footer">
     <p>Обсудим ваш проект?</p>
-    <div class="portfolio-footer-links">
+    <div class="page-footer-links">
       <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
-      <a class="portfolio-home" href="./#top"><span aria-hidden="true">←</span> На главную</a>
+      <a class="page-text-link" href="./#top"><span aria-hidden="true">←</span> На главную</a>
     </div>
   </footer>
 

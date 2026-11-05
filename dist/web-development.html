@@ -12,11 +12,12 @@
   <link rel="stylesheet" href="./theme.css">
   <link rel="stylesheet" href="./outlines.css">
   <link rel="stylesheet" href="./mobile.css">
+  <link rel="stylesheet" href="./inner-page.css">
   <link rel="stylesheet" href="./service.css">
   <script src="./theme.js"></script>
   <script type="module" src="./service.js"></script>
 </head>
-<body class="service-page">
+<body class="inner-page service-page">
   <a class="skip-link" href="#main">К содержимому</a>
 
   <nav class="floating-nav" id="floating-nav" aria-label="Быстрая навигация" inert aria-hidden="true">
@@ -35,35 +36,39 @@
     <a class="float-cta contact-pill contact-pill--filled" href="./#contact">Обсудить <span aria-hidden="true">↗</span></a>
   </nav>
 
-  <header class="header service-header">
+  <header class="header page-header service-header">
     <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
     <span class="header-caption">Независимая digital&#8209;студия</span>
     <a class="contact-pill" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="service-intro" aria-labelledby="service-title">
+    <section class="page-intro service-intro" aria-labelledby="service-title">
       <div class="section-kicker">
         <span class="kicker-index"><span class="crosshair" aria-hidden="true">+</span> УСЛУГИ INTERDIZ</span>
         <span class="kicker-meta">[ 01 / WEB ]</span>
       </div>
-      <nav class="page-switch" aria-label="Страницы сайта">
-        <a href="./#top"><span aria-hidden="true">←</span> Главная</a>
-        <a class="page-switch-accent" href="./portfolio.html">Портфолио</a>
-      </nav>
-      <h1 class="service-title" id="service-title">
-        <span class="hero-line">САЙТЫ И</span>
-        <span class="hero-line outline">ВЕБ-<wbr>СЕРВИСЫ<span class="title-dot">.</span></span>
-      </h1>
-      <div class="service-intro-bottom">
-        <div>
-          <p class="hero-description">Разрабатываем лендинги, интернет-магазины, корпоративные сайты и веб-приложения. От структуры и дизайна до запуска.</p>
-          <div class="service-actions">
-            <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
-            <a class="service-text-link" href="#work">Смотреть проекты <span aria-hidden="true">↓</span></a>
+      <div class="page-intro-layout">
+        <div class="page-heading">
+          <nav class="page-switch" aria-label="Страницы сайта">
+            <a href="./#top"><span aria-hidden="true">←</span> Главная</a>
+            <a class="page-switch-accent" href="./portfolio.html">Портфолио</a>
+          </nav>
+          <h1 class="service-title" id="service-title">
+            <span class="hero-line">САЙТЫ И</span>
+            <span class="hero-line outline">ВЕБ-<wbr>СЕРВИСЫ<span class="title-dot">.</span></span>
+          </h1>
+          <div class="service-intro-bottom">
+            <div>
+              <p class="hero-description">Разрабатываем лендинги, интернет-магазины, корпоративные сайты и веб-приложения. От структуры и дизайна до запуска.</p>
+              <div class="service-actions">
+                <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+                <a class="page-text-link" href="#work">Смотреть проекты <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+            <p class="service-intro-note">Ваш продукт.<br>Его цифровое продолжение.</p>
           </div>
         </div>
-        <p class="service-intro-note">Ваш продукт.<br>Его цифровое продолжение.</p>
       </div>
     </section>
 
@@ -129,20 +134,20 @@
       </div>
       <h2 class="service-title" id="work-title"><span class="hero-line">ОТ ИДЕИ</span><span class="hero-line outline">К ОПЫТУ<span class="title-dot">.</span></span></h2>
       <p class="hero-description">Разные продукты, аудитории и визуальные языки. Посмотрите, как задачи превращаются в интерфейсы.</p>
-      <div class="service-projects">
+      <div class="page-project-grid service-projects">
         <article class="project-card">
           <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок" aria-haspopup="dialog">
             <span class="project-preview"><img src="./assets/poplavok.webp" alt="Дизайн сайта ресторана Поплавок" width="1920" height="1280" loading="lazy" decoding="async"><span class="project-badges" aria-hidden="true"><span class="project-number">[ 01 ]</span></span></span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
           </button>
-          <div class="project-info"><div><h3>Поплавок</h3><p>Сайт ресторана у воды. Дизайн и разработка.</p></div></div>
+          <div class="project-info"><div><p class="project-topic mono-meta">Рестораны и отели</p><h3>Поплавок</h3><p>Сайт ресторана у воды. Дизайн и разработка.</p></div></div>
         </article>
         <article class="project-card">
           <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" aria-haspopup="dialog">
             <span class="project-preview"><img src="./assets/pierre-magnol.webp" alt="Цифровая витрина цветочного бутика Pierre Magnol" width="2800" height="1868" loading="lazy" decoding="async"><span class="project-badges" aria-hidden="true"><span class="project-number">[ 02 ]</span></span></span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
           </button>
-          <div class="project-info"><div><h3>Pierre Magnol</h3><p>Цифровая витрина цветочного бутика.</p></div></div>
+          <div class="project-info"><div><p class="project-topic mono-meta">Торговля и авто</p><h3>Pierre Magnol</h3><p>Цифровая витрина цветочного бутика.</p></div></div>
         </article>
       </div>
       <a class="contact-pill service-all-projects" href="./portfolio.html?category=web">Все проекты сайтов <span aria-hidden="true">↗</span></a>
@@ -171,10 +176,10 @@
     </section>
   </main>
 
-  <footer class="service-footer">
-    <a class="service-text-link" href="./#top"><span aria-hidden="true">←</span> На главную</a>
+  <footer class="page-footer service-footer">
+    <a class="page-text-link" href="./#top"><span aria-hidden="true">←</span> На главную</a>
     <span class="mono-meta">INTERDIZ / ДИЗАЙН И РАЗРАБОТКА</span>
-    <a class="service-text-link" href="./#manifesto">Все услуги <span aria-hidden="true">↗</span></a>
+    <a class="page-text-link" href="./#manifesto">Все услуги <span aria-hidden="true">↗</span></a>
   </footer>
 
   <dialog class="mobile-menu" id="mobile-menu" aria-label="Меню студии" hidden>
