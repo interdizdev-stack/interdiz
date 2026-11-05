@@ -101,7 +101,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .expertise { padding-block-start: 62px; }
   html[data-theme] .section-kicker { gap: 16px; align-items: flex-start; font-size: 12px; line-height: 1.4; letter-spacing: .5px; }
   html[data-theme] .section-kicker > span { min-width: 0; }
-  html[data-theme] .section-kicker .kicker-index { align-items: flex-start; gap: 4px; }
+  html[data-theme] .section-kicker .kicker-index { align-items: flex-start; }
   html[data-theme] .section-kicker .kicker-index .crosshair { line-height: 16.8px; }
   html[data-theme] .section-kicker .kicker-meta { position: relative; padding-inline-end: 1.4em; text-align: right; }
   html[data-theme="dark"] .section-kicker .kicker-meta { padding-inline-end: 1.1em; }
