@@ -1,6 +1,7 @@
 import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
 import { setupMobileMenu } from './navigation.js';
+import { setupClock } from './footer.js';
 
 // Content and links are usable without animation or WebGL.
 const $ = (selector, root=document) => root.querySelector(selector);
@@ -1049,25 +1050,8 @@ function setupCardTilt() {
 }
 
 /* ========================================================
-   Astrakhan Live Clock & Copy to Clipboard
+   Copy to Clipboard
    ======================================================== */
-function setupClock() {
-  function tick() {
-    try {
-      const now = new Date();
-      const timeStr = new Intl.DateTimeFormat('ru-RU', {
-        timeZone: 'Europe/Moscow',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      }).format(now);
-      $$('.ast-clock').forEach(el => el.textContent = `${timeStr} UTC+3`);
-    } catch {}
-  }
-  setInterval(tick, 1000);
-  tick();
-}
-
 function setupCopyClipboard() {
   const toast = $('#copy-toast');
   let timer;

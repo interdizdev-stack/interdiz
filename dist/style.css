@@ -58,6 +58,7 @@
   --bg: #0c0e0c;
   --bg-surface: #141713;
   --bg-surface-hover: #1b201a;
+  --footer-bg: var(--bg);
   --fg: #f2f3ed;
   --fg-muted: #abb1a4;
   --lime: #c2ff43;
@@ -1634,7 +1635,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
    11. Contact & Footer (Swiss Editorial Redesign)
    ======================================================== */
 .contact {
-  background: #090b09;
+  background: var(--footer-bg);
   color: var(--fg);
   padding: 90px var(--pad) 30px;
   border-top: var(--outline-width) solid var(--line-strong);
