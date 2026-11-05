@@ -1,4 +1,5 @@
 .service-section { margin-inline: var(--pad); }
+.service-intro .page-intro-layout { margin-top: -20px; }
 .service-intro .page-switch { margin-bottom: 49px; }
 .service-intro + .service-section { padding-top: 72px; }
 .service-intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; }
