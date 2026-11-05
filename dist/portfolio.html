@@ -19,6 +19,22 @@
 <body class="portfolio-page">
   <a class="skip-link" href="#main">К содержимому</a>
 
+  <nav class="floating-nav" id="floating-nav" aria-label="Быстрая навигация" inert aria-hidden="true">
+    <a class="float-logo" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
+    <div class="float-divider" aria-hidden="true"></div>
+    <div class="float-links">
+      <a href="./#top"><span class="nav-num">[01]</span> Главная</a>
+      <a href="./#manifesto"><span class="nav-num">[02]</span> Услуги</a>
+      <a href="#portfolio-catalog" class="is-current" aria-current="page"><span class="nav-num">[03]</span> Проекты</a>
+      <a href="./#expertise"><span class="nav-num">[04]</span> FAQ</a>
+      <a href="./#reviews"><span class="nav-num">[05]</span> Отзывы</a>
+      <a href="./#contact"><span class="nav-num">[06]</span> Контакты</a>
+    </div>
+    <div class="float-divider" aria-hidden="true"></div>
+    <button class="mobile-menu-toggle" type="button" data-mobile-menu aria-controls="mobile-menu" aria-haspopup="dialog" aria-expanded="false" hidden>Меню <span class="mobile-menu-icon" aria-hidden="true"><i></i><i></i></span></button>
+    <a class="float-cta contact-pill contact-pill--filled" href="./#contact">Обсудить <span aria-hidden="true">↗</span></a>
+  </nav>
+
   <header class="header portfolio-header">
     <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
     <span class="header-caption">Независимая digital&#8209;студия</span>
@@ -224,6 +240,22 @@
       <a class="portfolio-home" href="./#top"><span aria-hidden="true">←</span> На главную</a>
     </div>
   </footer>
+
+  <dialog class="mobile-menu" id="mobile-menu" aria-label="Меню студии" hidden>
+    <div class="mobile-menu-heading">
+      <button class="mobile-menu-close" type="button" aria-label="Закрыть меню">×</button>
+    </div>
+    <nav class="mobile-menu-links" aria-label="Разделы сайта">
+      <a href="./#top">Главная <span aria-hidden="true">↗</span></a>
+      <a href="./#manifesto">Услуги <span aria-hidden="true">↗</span></a>
+      <a href="#portfolio-catalog" class="is-current" aria-current="page">Проекты <span aria-hidden="true">↗</span></a>
+      <a href="./#expertise">Как работаем <span aria-hidden="true">↗</span></a>
+      <a href="./#approach">Вопросы и ответы <span aria-hidden="true">↗</span></a>
+      <a href="./#reviews">Отзывы <span aria-hidden="true">↗</span></a>
+      <a href="./#contact">Контакты <span aria-hidden="true">↗</span></a>
+    </nav>
+    <a class="contact-pill contact-pill--filled mobile-menu-contact" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+  </dialog>
 
   <dialog class="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
     <button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button>

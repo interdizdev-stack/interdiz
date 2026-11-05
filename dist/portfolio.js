@@ -1,4 +1,5 @@
 import { setupProjectDialog } from './projects.js';
+import { setupMobileMenu } from './navigation.js';
 
 setupProjectDialog();
 
@@ -65,3 +66,25 @@ document.querySelectorAll('[data-reset-filters]').forEach(button => button.addEv
 window.addEventListener('popstate', readURL);
 readURL();
 controls.hidden = false;
+
+const floatingNav = document.querySelector('#floating-nav');
+const mobileMenu = document.querySelector('#mobile-menu');
+const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
+setupMobileMenu({
+  menu: mobileMenu,
+  toggles: [...document.querySelectorAll('[data-mobile-menu]')],
+  compactMedia
+});
+
+function updateFloatingNavigation() {
+  const visible = scrollY > 260 || mobileMenu.open || floatingNav.contains(document.activeElement);
+  floatingNav.classList.toggle('visible', visible);
+  floatingNav.inert = !visible;
+  floatingNav.setAttribute('aria-hidden', String(!visible));
+}
+addEventListener('scroll', updateFloatingNavigation, { passive: true });
+addEventListener('resize', updateFloatingNavigation, { passive: true });
+addEventListener('pageshow', updateFloatingNavigation);
+floatingNav.addEventListener('focusout', () => requestAnimationFrame(updateFloatingNavigation));
+mobileMenu.addEventListener('close', updateFloatingNavigation);
+updateFloatingNavigation();

@@ -1,5 +1,6 @@
 import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
+import { setupMobileMenu } from './navigation.js';
 
 // Content and links are usable without animation or WebGL.
 const $ = (selector, root=document) => root.querySelector(selector);
@@ -43,62 +44,35 @@ compactMedia.addEventListener('change', syncChapterCaption);
 
 function setupMobileNavigation() {
   const menu = $('#mobile-menu');
-  const toggles = $$('[data-mobile-menu]');
   if (!menu) return;
   const marquee = $('.marquee');
   $('.marquee-group + .marquee-group', marquee).setAttribute('aria-hidden', 'true');
-  let opener;
-  menu.hidden = false;
-  const sync = () => {
-    const compact = isCompactLayout();
-    toggles.forEach(button => { button.hidden = !compact; });
-    if (compact) {
-      marquee.removeAttribute('aria-hidden');
-      marquee.setAttribute('role', 'region');
-      marquee.setAttribute('aria-label', 'Технологии студии');
-    } else {
-      closeMobileNavigation(false);
-      marquee.setAttribute('aria-hidden', 'true');
-      marquee.removeAttribute('role');
-      marquee.removeAttribute('aria-label');
-      marquee.removeAttribute('tabindex');
+  closeMobileNavigation = setupMobileMenu({
+    menu,
+    toggles: $$('[data-mobile-menu]'),
+    compactMedia,
+    onOpen() {
+      const links = $$('.mobile-menu-links a', menu);
+      const current = links.findLast(link => $(link.dataset.section ?? link.hash).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
+      links.forEach(link => {
+        link.classList.toggle('is-current', link === current);
+        if (link === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    },
+    onLayoutChange(compact) {
+      if (compact) {
+        marquee.removeAttribute('aria-hidden');
+        marquee.setAttribute('role', 'region');
+        marquee.setAttribute('aria-label', 'Технологии студии');
+      } else {
+        marquee.setAttribute('aria-hidden', 'true');
+        marquee.removeAttribute('role');
+        marquee.removeAttribute('aria-label');
+        marquee.removeAttribute('tabindex');
+      }
     }
-  };
-  closeMobileNavigation = (restoreFocus = true) => {
-    if (!restoreFocus) opener = null;
-    if (menu.open) menu.close();
-  };
-  toggles.forEach(button => button.addEventListener('click', () => {
-    if (!isCompactLayout()) return;
-    opener = button;
-    const links = $$('.mobile-menu-links a', menu);
-    const current = links.findLast(link => $(link.dataset.section ?? link.hash).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
-    links.forEach(link => {
-      link.classList.toggle('is-current', link === current);
-      if (link === current) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    });
-    menu.showModal();
-    menu.scrollTop = 0;
-    toggles.forEach(toggle => toggle.setAttribute('aria-expanded', 'true'));
-    document.body.classList.add('dialog-open');
-  }));
-  $('.mobile-menu-close', menu).addEventListener('click', () => closeMobileNavigation());
-  menu.addEventListener('click', event => {
-    if (event.target.closest('.mobile-menu-links a[data-section]') &&
-        !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) closeMobileNavigation(false);
-    if (event.target !== menu) return;
-    const bounds = menu.getBoundingClientRect();
-    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeMobileNavigation();
   });
-  menu.addEventListener('close', () => {
-    toggles.forEach(button => button.setAttribute('aria-expanded', 'false'));
-    if (!$('dialog[open]')) document.body.classList.remove('dialog-open');
-    opener?.focus({ preventScroll: true });
-    opener = null;
-  });
-  compactMedia.addEventListener('change', sync);
-  sync();
 }
 
 const menuSections = $$('.floating-nav .float-links a').map(link => ({

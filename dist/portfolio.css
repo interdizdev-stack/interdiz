@@ -1,6 +1,5 @@
 .portfolio-page .portfolio-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   background: var(--bg);
   border-bottom: var(--outline-width) solid var(--line);
 }
