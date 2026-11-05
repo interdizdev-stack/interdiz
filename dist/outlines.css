@@ -227,10 +227,13 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   color: var(--lime);
   border: var(--outline-width) solid var(--line-strong);
   font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1;
   transition: background .2s, color .2s;
 }
 .quick-home:hover { background: var(--lime); color: #0c0e0c; }
+html[data-theme="light"] .quick-home { font-weight: 450; }
 
 .approach .faq-cta { font-weight: 700; }
 
