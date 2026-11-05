@@ -529,6 +529,37 @@ h1, h2, h3, h4, h5, h6,
   z-index: 2;
 }
 
+/* Shared navigation pill for inner pages. */
+.page-switch {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 19px;
+  border-radius: 32px;
+  background: var(--bg-surface);
+}
+.page-switch > :is(a, span) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: var(--outline-width) solid transparent;
+  border-radius: 28px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.page-switch a:hover { background: var(--bg-surface-hover); }
+.page-switch a > span { font-size: 18px; }
+.page-switch-accent { background: var(--lime); color: #0c0e0c; }
+.page-switch a.page-switch-accent:hover { background: #d3ff7a; }
+html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
+
 .hero h1,
 .portfolio-intro h1,
 .service-title,
