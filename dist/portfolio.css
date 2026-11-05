@@ -111,7 +111,7 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
   justify-content: space-between;
   gap: 10px;
   min-height: 44px;
-  margin-top: 24px;
+  margin-top: 14px;
   font-size: 13px;
   color: var(--fg-muted);
 }
