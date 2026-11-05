@@ -41,6 +41,34 @@
 .service-footer { padding: 0 var(--pad) 30px; background: var(--footer-bg); color: var(--fg); }
 .service-footer .footer-up { grid-column: 3; justify-self: end; }
 
+/* Decorative motion uses the existing rules and never changes section spacing. */
+.service-section > .section-kicker { position: relative; }
+.service-line-effect {
+  position: absolute;
+  inset: auto 0 calc(-1 * var(--outline-width));
+  height: var(--outline-width);
+  overflow: hidden;
+  pointer-events: none;
+}
+.service-line-pulse {
+  display: block;
+  width: clamp(72px, 20vw, 240px);
+  height: 100%;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--lime) 45%, var(--lime) 75%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.reduced-motion) .service-page :is(.contact-pill, .page-text-link) > span { transition: translate .25s ease; }
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.reduced-motion) .service-page .contact-pill:hover > span { translate: 2px -2px; }
+    html:not(.reduced-motion) .service-page .page-text-link:hover > span { translate: 3px -3px; }
+  }
+}
+html.reduced-motion:has(.service-page) { scroll-behavior: auto; }
+.reduced-motion .service-page *, .reduced-motion .service-page *::before, .reduced-motion .service-page *::after { transition: none; }
+.reduced-motion .service-line-effect { display: none; }
+
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
   .service-footer { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
   .service-intro .page-intro-layout { margin-top: -40px; }
