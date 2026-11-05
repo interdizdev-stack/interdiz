@@ -1,4 +1,4 @@
-// Shared dialog interactions for the home page and portfolio.
+// Shared dialog interactions for the home page and inner pages.
 export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutChange }) {
   if (!menu) return () => {};
   let opener;
@@ -42,4 +42,29 @@ export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutC
   compactMedia.addEventListener('change', sync);
   sync();
   return close;
+}
+
+// Inner pages use native scrolling rather than the home page's GSAP timeline.
+export function setupPageNavigation() {
+  const floatingNav = document.querySelector('#floating-nav');
+  const mobileMenu = document.querySelector('#mobile-menu');
+  const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
+  setupMobileMenu({
+    menu: mobileMenu,
+    toggles: [...document.querySelectorAll('[data-mobile-menu]')],
+    compactMedia
+  });
+
+  function updateFloatingNavigation() {
+    const visible = scrollY > 260 || mobileMenu.open || floatingNav.contains(document.activeElement);
+    floatingNav.classList.toggle('visible', visible);
+    floatingNav.inert = !visible;
+    floatingNav.setAttribute('aria-hidden', String(!visible));
+  }
+  addEventListener('scroll', updateFloatingNavigation, { passive: true });
+  addEventListener('resize', updateFloatingNavigation, { passive: true });
+  addEventListener('pageshow', updateFloatingNavigation);
+  floatingNav.addEventListener('focusout', () => requestAnimationFrame(updateFloatingNavigation));
+  mobileMenu.addEventListener('close', updateFloatingNavigation);
+  updateFloatingNavigation();
 }
