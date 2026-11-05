@@ -1161,6 +1161,15 @@ async function init() {
   setupCopyClipboard();
   await document.fonts.ready;
   window.ScrollTrigger?.refresh();
+  // Cross-page links need the final layout, including the pinned opening scene.
+  const initialSection = document.getElementById(location.hash.slice(1));
+  if (initialSection) {
+    let top = smoother ? smoother.offset(initialSection, 'top top') : initialSection.getBoundingClientRect().top + scrollY;
+    if (isCompactLayout() && initialSection.id !== 'top') top -= 82;
+    if (initialSection.id === 'top' && heroTrigger) top = heroTrigger.start;
+    if (smoother) smoother.scrollTo(Math.max(0, top), false);
+    else scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+  }
   updateProgress();
   // Project images have reserved dimensions; loading them does not change layout
   // and must not rebuild the pinned hero while the gallery is being scrolled.

@@ -5,7 +5,12 @@
   border-bottom: var(--outline-width) solid var(--line);
 }
 
-.portfolio-header .theme-switch { margin-inline-start: auto; width: 44px; height: 44px; }
+html[data-theme] .portfolio-header > .contact-pill {
+  display: inline-flex;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
 
 .portfolio-home {
   display: inline-flex;
@@ -210,6 +215,7 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
 @media (max-width: 360px) {
   html[data-theme] .portfolio-header { gap: 8px; }
   html[data-theme] .portfolio-header > .wordmark { font-size: 25px; }
+  html[data-theme] .portfolio-header > .contact-pill { min-height: 44px; padding: 10px 12px; gap: 8px; font-size: 12px; }
   .portfolio-intro .section-kicker { gap: 12px; font-size: 10px; }
 }
 

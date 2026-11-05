@@ -8,7 +8,6 @@ const cards = [...document.querySelectorAll('.portfolio-grid .project-card')];
 const count = controls.querySelector('.portfolio-count');
 const reset = controls.querySelector('[data-reset-filters]');
 const empty = document.querySelector('.portfolio-empty');
-const themeSwitch = document.querySelector('.theme-switch');
 let selectedCategory = 'all';
 
 function matches(card, category) {
@@ -43,7 +42,6 @@ function render() {
   count.textContent = `Показано ${visible} из ${cards.length}`;
   reset.hidden = selectedCategory === 'all';
   empty.hidden = visible !== 0;
-  themeSwitch.href = setCategoryParameter(new URL(themeSwitch.href)).href;
   history.replaceState(history.state, '', setCategoryParameter(new URL(location.href)));
 }
 

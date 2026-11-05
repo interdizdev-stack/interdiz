@@ -24,6 +24,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     if (!dark) document.querySelector('#lime-contour-outline feMorphology')?.setAttribute('radius', '1.5');
     const toggle = document.querySelector('.theme-switch');
+    if (!toggle) return;
     const destination = new URL(location.href);
     destination.searchParams.set('theme', dark ? 'light' : 'dark');
     destination.hash = '';
