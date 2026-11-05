@@ -32,7 +32,7 @@
 .portfolio-intro .section-kicker { position: relative; top: -20px; font-size: 13px; border-bottom: 0; }
 
 .portfolio-intro-layout {
-  padding-block: calc(clamp(24px, 3vw, 48px) - 10px) clamp(24px, 4vw, 64px);
+  padding-block: calc(clamp(24px, 3vw, 48px) - 10px) calc(clamp(24px, 4vw, 64px) - 10px);
 }
 
 .portfolio-heading { min-width: 0; }
