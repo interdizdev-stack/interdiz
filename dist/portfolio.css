@@ -29,7 +29,7 @@
 }
 
 .portfolio-intro { padding-top: clamp(26px, 4vw, 66px); }
-.portfolio-intro .section-kicker { position: relative; top: -10px; font-size: 13px; border-bottom: 0; }
+.portfolio-intro .section-kicker { position: relative; top: -20px; font-size: 13px; border-bottom: 0; }
 
 .portfolio-intro-layout {
   padding-block: clamp(24px, 3vw, 48px) clamp(24px, 4vw, 64px);
