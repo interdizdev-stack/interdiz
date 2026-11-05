@@ -1,4 +1,5 @@
 .service-section { margin-inline: var(--pad); }
+.service-intro .page-switch { margin-bottom: 39px; }
 .service-intro + .service-section { padding-top: 12px; }
 .service-intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; }
 .service-intro-note { padding-bottom: 10px; color: var(--muted); line-height: 1.6; font-size: 14px; text-align: right; }
