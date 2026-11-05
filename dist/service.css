@@ -36,7 +36,6 @@
 .service-questions summary > span { flex-shrink: 0; font-size: 30px; font-weight: 400; line-height: 1; transition: transform .2s; }
 .service-questions details[open] summary > span { transform: rotate(45deg); }
 .service-questions details p { max-width: 760px; padding-bottom: 24px; color: var(--fg-muted); font-size: 16px; line-height: 1.65; }
-.service-contact { padding-top: clamp(30px, 4vw, 60px); border-top: var(--outline-width) solid var(--line); }
 .service-contact > .service-title { margin-top: 28px; }
 .service-contact > .contact-pill { display: inline-flex; margin-top: 28px; }
 .service-footer > .mono-meta { font-size: 11px; color: var(--muted); }
