@@ -5,8 +5,7 @@
   border-bottom: var(--outline-width) solid var(--line);
 }
 
-.portfolio-header .portfolio-home { margin-inline-start: auto; }
-.portfolio-header .theme-switch { width: 44px; height: 44px; }
+.portfolio-header .theme-switch { margin-inline-start: auto; width: 44px; height: 44px; }
 
 .portfolio-home {
   display: inline-flex;
@@ -211,7 +210,6 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
 @media (max-width: 360px) {
   html[data-theme] .portfolio-header { gap: 8px; }
   html[data-theme] .portfolio-header > .wordmark { font-size: 25px; }
-  .portfolio-header .portfolio-home { gap: 5px; font-size: 13px; }
   .portfolio-intro .section-kicker { gap: 12px; font-size: 10px; }
 }
 
