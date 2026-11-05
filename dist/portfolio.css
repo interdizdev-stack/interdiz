@@ -43,7 +43,6 @@
 .portfolio-filter-row {
   min-width: 0;
 }
-.portfolio-filter-row + .portfolio-filter-row { margin-top: 22px; }
 .portfolio-categories { display: flex; flex-wrap: wrap; gap: 8px 28px; }
 .portfolio-categories button {
   position: relative;
@@ -93,25 +92,6 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
 .portfolio-empty p { margin-block: 12px 24px; color: var(--fg-muted); line-height: 1.6; }
 .portfolio-empty .contact-pill { margin: 0; }
 
-.portfolio-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.portfolio-filters button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 8px 15px;
-  border: var(--outline-width) solid #000;
-  border-radius: 30px;
-  background: var(--bg-surface);
-  font-size: 14px;
-  font-weight: 600;
-}
-
 .portfolio-filter-count {
   font-size: 11px;
   font-weight: 500;
@@ -120,13 +100,6 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
 }
 
 .portfolio-count { font-variant-numeric: tabular-nums; }
-
-.portfolio-filters button:hover { background: var(--bg-surface-hover); }
-
-.portfolio-filters button[aria-pressed="true"] {
-  background: var(--lime);
-  color: #0c0e0c;
-}
 
 .portfolio-grid {
   display: grid;
@@ -193,7 +166,6 @@ html[data-theme="light"] .portfolio-categories button[aria-pressed="true"]::afte
   .portfolio-intro .kicker-meta { text-align: right; }
   .portfolio-grid { grid-template-columns: minmax(0, 1fr); }
   .portfolio-categories { gap: 6px 18px; }
-  .portfolio-filters button { padding-inline: 12px; font-size: 13px; }
 }
 
 @media (max-width: 360px) {
