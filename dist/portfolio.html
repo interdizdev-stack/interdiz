@@ -43,31 +43,37 @@
           </h1>
           <p class="hero-description">Сайты, фирменные стили и рекламные кампании. Посмотрите, как мы решаем задачи в разных отраслях.</p>
         </div>
-        <div class="portfolio-index" aria-hidden="true">
-          <span class="crosshair">+</span>
-          <span class="portfolio-index-number">09<span>/</span></span>
-          <span>КЕЙСОВ СТУДИИ</span>
-        </div>
+        <a class="portfolio-explore" href="#portfolio-catalog">Смотреть работы <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
-    <section class="portfolio-catalog" aria-label="Каталог проектов">
+    <section class="portfolio-catalog" id="portfolio-catalog" aria-label="Каталог проектов">
       <div class="portfolio-toolbar" hidden>
-        <div class="portfolio-toolbar-heading">
-          <p class="mono-meta" id="portfolio-filter-label">По тематикам</p>
-          <p class="portfolio-count mono-meta" role="status"></p>
+        <div class="portfolio-filter-row">
+          <div class="portfolio-categories" role="group" aria-label="Направление">
+            <button type="button" data-category="all" aria-controls="portfolio-grid" aria-pressed="true">Все работы</button>
+            <button type="button" data-category="web" aria-controls="portfolio-grid" aria-pressed="false">Сайты</button>
+            <button type="button" data-category="identity" aria-controls="portfolio-grid" aria-pressed="false">Айдентика</button>
+            <button type="button" data-category="advertising" aria-controls="portfolio-grid" aria-pressed="false">Реклама</button>
+          </div>
         </div>
-        <div class="portfolio-filters" role="group" aria-labelledby="portfolio-filter-label">
-          <button type="button" data-filter="all" aria-controls="portfolio-grid" aria-pressed="true">Все проекты</button>
-          <button type="button" data-filter="apps" aria-controls="portfolio-grid" aria-pressed="false">Сервисы и приложения</button>
-          <button type="button" data-filter="hospitality" aria-controls="portfolio-grid" aria-pressed="false">Рестораны и отели</button>
-          <button type="button" data-filter="health" aria-controls="portfolio-grid" aria-pressed="false">Здоровье</button>
-          <button type="button" data-filter="commerce" aria-controls="portfolio-grid" aria-pressed="false">Торговля и авто</button>
-          <button type="button" data-filter="culture" aria-controls="portfolio-grid" aria-pressed="false">Культура</button>
+        <div class="portfolio-filter-row">
+          <div class="portfolio-filters" role="group" aria-label="Тематика">
+            <button type="button" data-filter="all" aria-controls="portfolio-grid" aria-pressed="true">Все тематики</button>
+            <button type="button" data-filter="apps" aria-controls="portfolio-grid" aria-pressed="false">Сервисы и приложения</button>
+            <button type="button" data-filter="hospitality" aria-controls="portfolio-grid" aria-pressed="false">Рестораны и отели</button>
+            <button type="button" data-filter="health" aria-controls="portfolio-grid" aria-pressed="false">Здоровье</button>
+            <button type="button" data-filter="commerce" aria-controls="portfolio-grid" aria-pressed="false">Торговля и авто</button>
+            <button type="button" data-filter="culture" aria-controls="portfolio-grid" aria-pressed="false">Культура</button>
+          </div>
+        </div>
+        <div class="portfolio-results">
+          <p class="portfolio-count mono-meta" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="portfolio-reset" type="button" data-reset-filters hidden>Сбросить фильтры <span aria-hidden="true">↺</span></button>
         </div>
       </div>
       <div class="portfolio-grid" id="portfolio-grid">
-        <article class="project-card" data-topic="apps">
+        <article class="project-card" data-topic="apps" data-categories="web advertising">
           <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
@@ -83,7 +89,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="hospitality">
+        <article class="project-card" data-topic="hospitality" data-categories="web">
           <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="eager" decoding="async">
@@ -99,7 +105,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="health">
+        <article class="project-card" data-topic="health" data-categories="identity">
           <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
@@ -115,7 +121,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="commerce">
+        <article class="project-card" data-topic="commerce" data-categories="web">
           <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
@@ -131,7 +137,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="hospitality">
+        <article class="project-card" data-topic="hospitality" data-categories="web">
           <button class="project-image" type="button" data-open-project="home30" aria-label="Открыть проект HOME30" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
@@ -147,7 +153,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="commerce">
+        <article class="project-card" data-topic="commerce" data-categories="identity">
           <button class="project-image" type="button" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
@@ -163,7 +169,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="commerce">
+        <article class="project-card" data-topic="commerce" data-categories="web">
           <button class="project-image" type="button" data-open-project="kyrilka" aria-label="Открыть проект Kyrilka" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
@@ -179,7 +185,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="culture">
+        <article class="project-card" data-topic="culture" data-categories="advertising">
           <button class="project-image" type="button" data-open-project="ivan-grozny" aria-label="Открыть проект Иван Грозный — Перезагрузка" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
@@ -195,7 +201,7 @@
             </div>
           </div>
         </article>
-        <article class="project-card" data-topic="health">
+        <article class="project-card" data-topic="health" data-categories="identity">
           <button class="project-image" type="button" data-open-project="divo-dental" aria-label="Открыть проект Divo Dental" aria-haspopup="dialog">
             <span class="project-preview">
               <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
@@ -211,6 +217,11 @@
             </div>
           </div>
         </article>
+      </div>
+      <div class="portfolio-empty" hidden>
+        <h2>Пока нет работ в этой подборке</h2>
+        <p>Попробуйте другое направление или тематику.</p>
+        <button class="contact-pill contact-pill--filled" type="button" data-reset-filters>Показать все работы <span aria-hidden="true">↗</span></button>
       </div>
     </section>
   </main>
