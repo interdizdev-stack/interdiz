@@ -13,7 +13,6 @@ html[data-theme] .page-header > .contact-pill {
 }
 
 .page-intro { margin-inline: var(--pad); padding-top: clamp(26px, 4vw, 66px); }
-.inner-page .section-kicker { font-size: 13px; }
 .page-intro .section-kicker { position: relative; top: -20px; border-bottom: 0; }
 .page-intro-layout {
   margin-top: 0;
@@ -69,8 +68,6 @@ html[data-theme] .page-header > .contact-pill {
 }
 
 @media (max-width: 699px) {
-  .inner-page .section-kicker { padding-bottom: 14px; font-size: 11px; letter-spacing: .04em; }
-  .inner-page .kicker-meta { text-align: right; }
   .page-project-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -78,7 +75,6 @@ html[data-theme] .page-header > .contact-pill {
   html[data-theme] .page-header { gap: 8px; }
   html[data-theme] .page-header > .wordmark { font-size: 25px; }
   html[data-theme] .page-header > .contact-pill { min-height: 44px; padding: 10px 12px; gap: 8px; font-size: 12px; }
-  .inner-page .section-kicker { gap: 12px; font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
