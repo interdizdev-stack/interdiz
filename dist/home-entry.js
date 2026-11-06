@@ -1,20 +1,26 @@
 // Run in the head, before the home page can paint at the start of the hero.
 (() => {
   const navigation = performance.getEntriesByType('navigation')[0];
-  let returningFromService = false;
+  let returnTarget = null;
   try {
-    returningFromService = navigation?.type === 'back_forward' && sessionStorage.getItem('interdiz-services-return') === 'true';
+    if (navigation?.type === 'back_forward') {
+      returnTarget = sessionStorage.getItem('interdiz-home-return');
+      if (!returnTarget && sessionStorage.getItem('interdiz-services-return') === 'true') returnTarget = 'services';
+    }
+    sessionStorage.removeItem('interdiz-home-return');
     sessionStorage.removeItem('interdiz-services-return');
   } catch {}
-  if (!returningFromService && !['#services', '#solutions-track'].includes(location.hash)) return;
+  const hashTarget = ({ '#services': 'services', '#solutions-track': 'services', '#projects': 'projects' })[location.hash];
+  const targetId = (['services', 'projects'].includes(returnTarget) ? returnTarget : null) || hashTarget;
+  if (!targetId) return;
   // Own the initial position: native fragment scrolling can also scroll clipped
   // containers while the pinned layout is being created before window.load.
-  const destination = `${location.pathname}${location.search}#services`;
+  const destination = `${location.pathname}${location.search}#${targetId}`;
   history.replaceState(history.state, '', `${location.pathname}${location.search}`);
   history.scrollRestoration = 'manual';
 
   const root = document.documentElement;
-  root.classList.add('services-entry-pending');
+  root.classList.add('home-entry-pending');
   let pending = true;
   let finishing;
   let failing = false;
@@ -22,7 +28,7 @@
   function reveal() {
     pending = false;
     history.replaceState(history.state, '', destination);
-    root.classList.remove('services-entry-pending');
+    root.classList.remove('home-entry-pending');
     removeEventListener('error', onError, true);
     removeEventListener('unhandledrejection', fallback);
   }
@@ -33,7 +39,7 @@
     if (document.readyState === 'loading') await new Promise(resolve => addEventListener('DOMContentLoaded', resolve, { once: true }));
     await document.fonts.ready;
     if (!pending) return;
-    document.getElementById('services').scrollIntoView({ block: 'start', behavior: 'instant' });
+    document.getElementById(targetId)?.scrollIntoView({ block: 'start', behavior: 'instant' });
     reveal();
   }
 
@@ -41,7 +47,8 @@
     if (event.error || event.target?.matches?.('script[type="module"]')) fallback();
   }
 
-  window.interdizServicesEntry = {
+  window.interdizHomeEntry = {
+    targetId,
     get pending() { return pending; },
     finish(place) {
       if (!pending) return Promise.resolve();

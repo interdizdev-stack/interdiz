@@ -13,7 +13,10 @@ try { const saved=sessionStorage.getItem('interdiz-reduced'); if(saved!==null) u
 let reduced = userReduced ?? motionPreference.matches;
 let scene, animationContext, smoother;
 const sceneState = { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 };
-const servicesEntry = window.interdizServicesEntry?.pending === true;
+const homeEntry = window.interdizHomeEntry;
+const sectionEntry = homeEntry?.pending === true;
+const servicesEntry = sectionEntry && homeEntry.targetId === 'services';
+const projectsEntry = sectionEntry && homeEntry.targetId === 'projects';
 let sceneLoading;
 let disposed = false;
 let heroTrigger;
@@ -700,6 +703,7 @@ function setupProjectGallery() {
   $('.gallery-controls').hidden = false;
   render();
   swipeHint = setupCarouselSwipeHint(viewport, cards[0]);
+  if (projectsEntry) swipeHint?.dismiss();
   updateProjectsHint = swipeHint?.sync;
 }
 
@@ -741,7 +745,7 @@ function setupAnimations() {
       // Return layout is measured explicitly after fonts; avoid the observer's
       // delayed smoother-only refresh replaying the jump. Window resize still
       // refreshes all triggers together, and dynamic blocks reserve their height.
-      autoResize: !servicesEntry,
+      autoResize: !sectionEntry,
       onUpdate: () => {
         updateProgress();
         updateProcessOnScroll?.();
@@ -842,50 +846,55 @@ function setupAnimations() {
           }
         });
 
-        const pulse = $('.projects-line-pulse');
-        const line = $('.projects-line-effect');
-        const projectsReveal = gsap.timeline({
-          scrollTrigger: {
-            id: 'projects-pulse-horizontal-reveal',
-            trigger: '.projects',
-            start: 'top 95%',
-            once: true,
-            invalidateOnRefresh: true
-          }
-        });
-        // Reveal the content with the accent as soon as the section enters.
-        projectsReveal
-          .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
-            x: () => line.clientWidth,
-            duration: 0.55, ease: 'power2.inOut'
-          }, 0)
-          .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
-          .to(pulse, { opacity: 0, duration: 0.15 }, 0.4)
-          .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
-            y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
-            immediateRender: true, clearProps: 'transform,opacity'
-          }, 0);
+        // Returning to the gallery shows its settled layout immediately.
+        if (!projectsEntry) {
+          const pulse = $('.projects-line-pulse');
+          const line = $('.projects-line-effect');
+          const projectsReveal = gsap.timeline({
+            scrollTrigger: {
+              id: 'projects-pulse-horizontal-reveal',
+              trigger: '.projects',
+              start: 'top 95%',
+              once: true,
+              invalidateOnRefresh: true
+            }
+          });
+          // Reveal the content with the accent as soon as the section enters.
+          projectsReveal
+            .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
+              x: () => line.clientWidth,
+              duration: 0.55, ease: 'power2.inOut'
+            }, 0)
+            .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
+            .to(pulse, { opacity: 0, duration: 0.15 }, 0.4)
+            .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
+              immediateRender: true, clearProps: 'transform,opacity'
+            }, 0);
 
-        // Start the sideways entrance when the cases themselves enter view.
-        gsap.fromTo('.gallery-window', {
-          x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
-          opacity: 1
-        }, {
-          x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
-          immediateRender: true, clearProps: 'transform,opacity',
-          scrollTrigger: {
-            id: 'projects-cases-side-reveal',
-            trigger: '.gallery-window',
-            start: 'top 98%',
-            once: true,
-            invalidateOnRefresh: true
-          }
-        });
+          // Start the sideways entrance when the cases themselves enter view.
+          gsap.fromTo('.gallery-window', {
+            x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+            opacity: 1
+          }, {
+            x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
+            immediateRender: true, clearProps: 'transform,opacity',
+            scrollTrigger: {
+              id: 'projects-cases-side-reveal',
+              trigger: '.gallery-window',
+              start: 'top 98%',
+              once: true,
+              invalidateOnRefresh: true
+            }
+          });
+        }
       } else {
         gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
         gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
-        gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
-        gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
+        if (!projectsEntry) {
+          gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
+          gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
+        }
       }
 
       gsap.from('.service', { y: compact ? 18 : 35, opacity: 0, stagger: compact ? .05 : .08, duration: compact ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
@@ -1085,7 +1094,14 @@ function loadScene() {
 }
 
 async function init() {
-  if (!servicesEntry) await loadScene();
+  // The first visible cases must be ready before revealing a return to projects.
+  const projectImagesReady = projectsEntry ? Promise.all(
+    $$('.project-track .project-image img').slice(0, isCompactLayout() ? 1 : 2).map(image => {
+      image.loading = 'eager';
+      return image.decode().catch(() => {});
+    })
+  ) : null;
+  if (!sectionEntry) await loadScene();
   const restoreServiceCard = setupSolutionsCarousel();
   setupProjectGallery();
   setupProcessAccordion();
@@ -1115,27 +1131,28 @@ async function init() {
   setupCardTilt();
   await document.fonts.ready;
   restoreServiceCard?.();
+  await projectImagesReady;
   window.ScrollTrigger?.refresh();
   // Cross-page links need the final layout, including the pinned opening scene.
-  const initialSection = document.getElementById(servicesEntry ? 'services' : location.hash.slice(1));
+  const initialSection = document.getElementById(sectionEntry ? homeEntry.targetId : location.hash.slice(1));
   if (initialSection) {
     const place = () => {
       const top = anchorScrollTop(initialSection);
       if (smoother) smoother.scrollTo(top, false);
       else scrollTo({ top, behavior: 'instant' });
       window.ScrollTrigger?.update();
-      if (window.interdizServicesEntry?.pending) {
+      if (homeEntry?.pending) {
         smoother?.scrollTrigger.getTween()?.progress(1);
-        window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
+        if (servicesEntry) window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
       }
       updateProgress();
       updateActiveMenu();
     };
-    if (window.interdizServicesEntry?.pending) await window.interdizServicesEntry.finish(place);
+    if (homeEntry?.pending) await homeEntry.finish(place);
     else place();
   }
   updateProgress();
-  if (servicesEntry) {
+  if (sectionEntry) {
     // Let the cards paint before any offscreen WebGL construction can block the UI.
     requestAnimationFrame(() => {
       if ('requestIdleCallback' in window) requestIdleCallback(() => { void loadScene(); }, { timeout: 1500 });
@@ -1146,7 +1163,7 @@ async function init() {
   // and must not rebuild the pinned hero while the gallery is being scrolled.
 }
 
-if (servicesEntry) {
+if (sectionEntry) {
   if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 } else if (document.readyState === 'complete') init();
