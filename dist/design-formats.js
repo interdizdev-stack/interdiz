@@ -25,8 +25,8 @@ export function setupDesignFormats({ page, gsap, compact, pointer }) {
         transformOrigin: '50% 50%',
       }, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 }, pieceIndex * .12);
     });
-    gsap.fromTo(card.querySelector('.design-art-drift'), { y: compact ? 10 : 24 }, {
-      y: compact ? -10 : -24, ease: 'none',
+    gsap.fromTo(card.querySelector('.design-art-drift'), { y: compact ? 7 : 16.8 }, {
+      y: compact ? -7 : -16.8, ease: 'none',
       scrollTrigger: { trigger: visual, start: 'top bottom', end: 'bottom top', scrub: true },
     });
     gsap.fromTo(card.querySelector('.design-format-meter'), { scaleX: 0 }, {

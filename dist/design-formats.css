@@ -4,7 +4,7 @@
   --design-ink: #12160f;
   --design-soft: #d7ddcc;
   grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
+  gap: 16.8px;
 }
 .design-formats .design-format {
   position: relative;
@@ -12,7 +12,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   padding: 0;
   border: var(--outline-width) solid var(--line-strong);
-  border-radius: 12px;
+  border-radius: 8.4px;
   background: var(--bg-surface);
   overflow: clip;
   isolation: isolate;
@@ -21,34 +21,34 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: clamp(24px, 3.6vw, 60px);
+  padding: clamp(16.8px, 2.52vw, 42px);
   min-width: 0;
 }
 .design-format-topline {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
   width: 100%;
 }
 .design-format-number {
   color: var(--fg);
-  font-size: clamp(48px, 5.8vw, 88px);
+  font-size: clamp(33.6px, 4.06vw, 61.6px);
   line-height: .9;
   font-weight: 600;
   letter-spacing: -.075em;
   font-variant-numeric: tabular-nums;
 }
 .design-formats .service-eyebrow { text-align: right; }
-.design-formats .service-format h3 { margin-top: 36px; font-size: clamp(30px, 3.2vw, 48px); }
-.design-formats .service-format p { max-width: 560px; margin-bottom: 28px; }
+.design-formats .service-format h3 { margin-top: 25.2px; font-size: clamp(24px, 2.24vw, 33.6px); }
+.design-formats .service-format p { max-width: 560px; margin-top: 9.8px; margin-bottom: 19.6px; }
 .design-formats .service-format-note {
   display: flex;
   align-items: baseline;
   gap: 10px;
   width: 100%;
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: 14px;
   border-top: var(--outline-width) solid var(--line);
   color: var(--fg-muted);
   line-height: 1.6;
@@ -66,8 +66,8 @@
   display: grid;
   place-items: center;
   min-width: 0;
-  min-height: 380px;
-  padding: 16px;
+  min-height: 266px;
+  padding: 11.2px;
   border-left: var(--outline-width) solid var(--line);
   background: var(--bg);
   overflow: hidden;
@@ -85,7 +85,8 @@
 }
 .design-format-visual::before { top: 20px; left: 20px; border-width: var(--outline-width) 0 0 var(--outline-width); }
 .design-format-visual::after { bottom: 20px; right: 20px; border-width: 0 var(--outline-width) var(--outline-width) 0; }
-.design-art-drift { width: 100%; max-width: 660px; }
+/* Account for the smaller canvas padding as well as the artwork itself. */
+.design-art-drift { width: 68.75%; max-width: 462px; }
 .design-art {
   --design-tilt-x: 0;
   --design-tilt-y: 0;
@@ -117,20 +118,20 @@
 }
 
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
-  .design-format-copy { padding: 28px; }
-  .design-formats .service-format h3 { font-size: 32px; }
-  .design-format-visual { min-height: 340px; padding: 10px; }
+  .design-format-copy { padding: 19.6px; }
+  .design-formats .service-format h3 { font-size: 24px; }
+  .design-format-visual { min-height: 238px; padding: 7px; }
 }
 @media (max-width: 699px) {
-  .design-formats { gap: 24px; }
+  .design-formats { gap: 16.8px; }
   .design-formats .design-format { grid-template-columns: minmax(0, 1fr); }
-  .design-format-copy { padding: 24px; }
-  .design-format-number { font-size: 52px; }
-  .design-formats .service-format h3 { margin-top: 28px; font-size: 30px; }
-  .design-formats .service-format p { margin-bottom: 24px; font-size: 15px; }
-  .design-formats .service-format-note { padding-top: 18px; }
-  .design-format-visual { min-height: 0; padding: 16px 8px; border-left: 0; border-top: var(--outline-width) solid var(--line); }
-  .design-art-drift { max-width: 480px; }
+  .design-format-copy { padding: 14px; }
+  .design-format-number { font-size: 36.4px; }
+  .design-formats .service-format h3 { margin-top: 16px; font-size: 23px; }
+  .design-formats .service-format p { margin-bottom: 14px; font-size: 14.5px; line-height: 1.5; }
+  .design-formats .service-format-note { padding-top: 10px; }
+  .design-format-visual { min-height: 0; padding: 11.2px 5.6px; border-left: 0; border-top: var(--outline-width) solid var(--line); }
+  .design-art-drift { max-width: 336px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .design-art { transform: none; }
