@@ -6,8 +6,11 @@
 .inner-page .page-header::after {
   content: '';
   position: absolute;
-  inset: 100% var(--pad) auto;
-  border-top: var(--outline-width) solid var(--line);
+  inset: 100% 0 auto;
+  height: var(--outline-width);
+  padding-inline: inherit;
+  background: var(--line);
+  background-clip: content-box;
   pointer-events: none;
 }
 
