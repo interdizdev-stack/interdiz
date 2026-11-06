@@ -373,6 +373,47 @@ function setupSolutionsCarousel() {
   let settleTimer;
   let drag = null;
   let swipeHint;
+  let returnIndex = null;
+  // Store the service route, so another viewport or card order stays correct.
+  const returnKey = 'interdiz-service-card';
+  const servicePaths = cards.map(card => new URL($('.service-open', card).href).pathname);
+
+  function rememberCard(index) {
+    const path = servicePaths[index];
+    history.replaceState({ ...history.state, interdizServiceCard: path }, '');
+    try { sessionStorage.setItem(returnKey, path); } catch {}
+  }
+
+  function savedCardIndex() {
+    // Each history entry owns its selection; a newer visit may change storage.
+    const candidates = [history.state?.interdizServiceCard];
+    if (document.referrer) {
+      const referrer = new URL(document.referrer);
+      if (referrer.origin === location.origin) candidates.push(referrer.pathname);
+    }
+    try { candidates.push(sessionStorage.getItem(returnKey)); } catch {}
+    return candidates.map(path => servicePaths.indexOf(path)).find(index => index >= 0) ?? -1;
+  }
+
+  function restoreCard() {
+    if (returnIndex === null) return;
+    swipeHint?.dismiss();
+    clearTimeout(settleTimer);
+    requestedIndex = null;
+    const card = cards[returnIndex];
+    const centered = getComputedStyle(card).scrollSnapAlign === 'center';
+    const left = card.offsetLeft - cards[0].offsetLeft + (centered ? (card.offsetWidth - track.clientWidth) / 2 : 0);
+    track.scrollTo({ left: Math.max(0, Math.min(track.scrollWidth - track.clientWidth, left)), behavior: 'instant' });
+    render(returnIndex);
+  }
+
+  function beginReturn() {
+    const index = savedCardIndex();
+    if (index < 0) return;
+    returnIndex = index;
+    rememberCard(index);
+    restoreCard();
+  }
 
   function nearestIndex() {
     const maximum = track.scrollWidth - track.clientWidth;
@@ -401,6 +442,7 @@ function setupSolutionsCarousel() {
   }
 
   function goTo(index) {
+    returnIndex = null;
     swipeHint?.dismiss();
     const target = Math.max(0, Math.min(cards.length - 1, index));
     const card = cards[target];
@@ -416,13 +458,13 @@ function setupSolutionsCarousel() {
   track.addEventListener('scroll', () => {
     if (!frame) frame = requestAnimationFrame(() => {
       frame = 0;
-      render(requestedIndex ?? nearestIndex());
+      render(returnIndex ?? requestedIndex ?? nearestIndex());
     });
     clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => { requestedIndex = null; render(nearestIndex()); }, 180);
+    settleTimer = setTimeout(() => { requestedIndex = null; render(returnIndex ?? nearestIndex()); }, 180);
   }, { passive: true });
-  track.addEventListener('wheel', () => { requestedIndex = null; }, { passive: true });
-  track.addEventListener('touchstart', () => { requestedIndex = null; }, { passive: true });
+  track.addEventListener('wheel', () => { returnIndex = null; requestedIndex = null; }, { passive: true });
+  track.addEventListener('touchstart', () => { returnIndex = null; requestedIndex = null; }, { passive: true });
   previous.addEventListener('click', () => goTo(activeIndex - 1));
   next.addEventListener('click', () => goTo(activeIndex + 1));
   track.addEventListener('keydown', event => {
@@ -435,6 +477,7 @@ function setupSolutionsCarousel() {
   track.addEventListener('pointerdown', event => {
     if (event.pointerType !== 'mouse' || event.button !== 0) return;
     if (event.target.closest('button, a')) return;
+    returnIndex = null;
     requestedIndex = null;
     drag = { id: event.pointerId, x: event.clientX, left: track.scrollLeft, moved: false };
     track.setPointerCapture(event.pointerId);
@@ -467,6 +510,7 @@ function setupSolutionsCarousel() {
   track.addEventListener('click', event => {
     const link = event.target.closest('a.service-open');
     if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    rememberCard(cards.indexOf(link.closest('.solution-card')));
     const destination = new URL(location.href);
     destination.hash = 'services';
     history.replaceState(history.state, '', destination);
@@ -488,6 +532,7 @@ function setupSolutionsCarousel() {
   });
   const sizing = new ResizeObserver(() => {
     swipeHint?.sync();
+    if (returnIndex !== null) { restoreCard(); return; }
     requestedIndex = null;
     render(nearestIndex());
   });
@@ -496,6 +541,11 @@ function setupSolutionsCarousel() {
   render(0);
   swipeHint = setupCarouselSwipeHint(track, cards[0]);
   updateSolutionsHint = swipeHint?.sync;
+  if (servicesEntry) beginReturn();
+  addEventListener('pageshow', event => {
+    if (event.persisted && location.hash === '#services') beginReturn();
+  });
+  return restoreCard;
 }
 
 function setupCarouselSwipeHint(track, firstCard) {
@@ -1036,7 +1086,7 @@ function loadScene() {
 
 async function init() {
   if (!servicesEntry) await loadScene();
-  setupSolutionsCarousel();
+  const restoreServiceCard = setupSolutionsCarousel();
   setupProjectGallery();
   setupProcessAccordion();
   setupFAQ();
@@ -1064,6 +1114,7 @@ async function init() {
   setupCursor();
   setupCardTilt();
   await document.fonts.ready;
+  restoreServiceCard?.();
   window.ScrollTrigger?.refresh();
   // Cross-page links need the final layout, including the pinned opening scene.
   const initialSection = document.getElementById(servicesEntry ? 'services' : location.hash.slice(1));
