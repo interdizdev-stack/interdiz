@@ -202,7 +202,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   .footer-bottom > * { grid-row: 1; }
   .footer-bottom > .wordmark { grid-column: 1; justify-self: start; }
   .footer-bottom > .footer-clock { grid-column: 2; justify-self: center; }
-  .footer-bottom > .back-to-top { grid-column: 3; justify-self: end; }
+  .footer-bottom > .quick-home { grid-column: 3; justify-self: end; }
   .footer-bottom .footer-copyright {
     position: static;
     grid-column: 1 / -1;
