@@ -13,7 +13,6 @@ if (flow) {
   const icon = button.querySelector('.crm-run-icon');
   const status = flow.querySelector('.crm-flow-status');
   const reduceQuery = matchMedia('(prefers-reduced-motion: reduce)');
-  const compactQuery = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const pieces = [...track.querySelectorAll('.crm-piece')];
   let points = [];
   let distances = [];
@@ -21,12 +20,35 @@ if (flow) {
   let timeline;
   let userPaused = false;
   let visible = false;
-  let autoStarted = false;
+  let viewStarted = false;
+  let viewportFrame = 0;
   let layoutFrame = 0;
   let layoutWidth = 0;
   let layoutHeight = 0;
   let wasReduced;
-  const reduced = () => reduceQuery.matches || document.documentElement.classList.contains('reduced-motion');
+  const reduced = () => {
+    let saved = false;
+    try { saved = sessionStorage.getItem('interdiz-reduced') === 'true'; } catch {}
+    return reduceQuery.matches || saved || document.documentElement.classList.contains('reduced-motion');
+  };
+
+  function updateViewport() {
+    viewportFrame = 0;
+    const bounds = track.getBoundingClientRect();
+    visible = bounds.top < innerHeight && bounds.bottom > 0;
+    // Start at the screenshot's framing, rather than the first visible pixel.
+    // Rearm only after a full exit, so small scroll reversals do not restart it.
+    if (!visible) viewStarted = false;
+    const framed = bounds.top <= innerHeight * .65 && bounds.bottom >= innerHeight * .35;
+    if (visible && framed && !viewStarted && !userPaused && !reduced() && gsap && !document.hidden) {
+      viewStarted = true;
+      start();
+    } else syncPlayback();
+  }
+
+  function queueViewport() {
+    if (!viewportFrame) viewportFrame = requestAnimationFrame(updateViewport);
+  }
 
   function select(index) {
     cards.forEach((card, i) => {
@@ -93,6 +115,11 @@ if (flow) {
     label.textContent = 'Приостановить';
     icon.textContent = 'Ⅱ';
     gsap.set(pieces, { clearProps: 'transform,opacity' });
+    cards.forEach(card => {
+      seen.delete(card);
+      const bounds = card.getBoundingClientRect();
+      if (bounds.top < innerHeight && bounds.bottom > 0) revealCard(card);
+    });
     gsap.set(packet, { attr: { cx: points[0].x, cy: points[0].y }, opacity: 1 });
     progress.style.strokeDashoffset = String(length);
     timeline = gsap.timeline({ onComplete: complete });
@@ -127,34 +154,40 @@ if (flow) {
   }
 
   button.addEventListener('click', () => {
-    autoStarted = true;
+    viewStarted = true;
     if (timeline && timeline.progress() < 1) { userPaused = !userPaused; syncPlayback(); }
     else start();
   });
   const seen = new WeakSet();
+  function revealCard(card) {
+    if (seen.has(card) || !gsap || reduced()) return;
+    seen.add(card);
+    gsap.fromTo(card.querySelector('.crm-visual'), { y: 26, opacity: .25 }, {
+      y: 0, opacity: 1, duration: .8, ease: 'power3.out',
+      clearProps: 'transform,opacity', overwrite: true
+    });
+  }
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
-      if (entry.target === track) {
-        visible = entry.isIntersecting;
-        if (visible && !autoStarted && !compactQuery.matches && !reduced() && gsap) { autoStarted = true; start(); }
-        else syncPlayback();
-      } else if (entry.isIntersecting && !seen.has(entry.target)) {
-        seen.add(entry.target);
-        if (gsap && !reduced()) gsap.fromTo(entry.target.querySelector('.crm-visual'), { y: 26, opacity: .25 }, { y: 0, opacity: 1, duration: .8, ease: 'power3.out', clearProps: 'transform,opacity' });
-      }
+      if (!entry.isIntersecting) seen.delete(entry.target);
+      else if (viewStarted) revealCard(entry.target);
     }
   }, { threshold: .15 });
-  observer.observe(track);
   cards.forEach(card => observer.observe(card));
-  const resize = new ResizeObserver(() => { if (!layoutFrame) layoutFrame = requestAnimationFrame(measure); });
+  const resize = new ResizeObserver(() => {
+    if (!layoutFrame) layoutFrame = requestAnimationFrame(() => { measure(); updateViewport(); });
+  });
   resize.observe(track);
   const rootObserver = new MutationObserver(syncMotion);
   rootObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   reduceQuery.addEventListener('change', syncMotion);
-  document.addEventListener('visibilitychange', syncPlayback);
-  addEventListener('pageshow', () => { measure(); syncMotion(); syncPlayback(); });
-  document.fonts.ready.then(measure);
+  document.addEventListener('visibilitychange', updateViewport);
+  addEventListener('scroll', queueViewport, { passive: true });
+  addEventListener('resize', queueViewport, { passive: true });
+  addEventListener('pageshow', () => { measure(); syncMotion(); updateViewport(); });
+  document.fonts.ready.then(() => { measure(); updateViewport(); });
   measure();
   syncMotion();
+  updateViewport();
   button.hidden = false;
 }
