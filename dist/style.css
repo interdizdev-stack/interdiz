@@ -86,6 +86,10 @@ html {
   overflow-x: clip;
 }
 
+/* app.js handles home-page anchor motion after measuring the pinned hero.
+   Native CSS smoothing would keep moving an incoming link to its old position. */
+html:has(#smooth-wrapper) { scroll-behavior: auto; }
+
 body {
   margin: 0;
   overflow-x: clip;
