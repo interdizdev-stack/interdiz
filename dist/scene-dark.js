@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 import { measureCompactFraming } from './scene-framing.js';
 
 // A segmented trefoil sculpture: a single geometric language, three scroll states.
-export function createScene(container, reduced = false) {
+export function createScene(container, reduced = false, state = { explosion:0, rotation:0, zoom:0, portal:0, opacity:1, framing:0 }) {
   let mobile = matchMedia('(max-width: 700px)').matches;
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !mobile, powerPreference: 'high-performance' });
@@ -95,7 +95,6 @@ export function createScene(container, reduced = false) {
     ring.position.z = -i*1.5; ring.rotation.z=i*.15; portal.add(ring);
   }
   scene.add(portal);
-  const state = { explosion:0, rotation:0, zoom:0, portal:0, opacity:1, framing:0 };
   const pointer = { x:0, y:0 };
   const smoothed = { x:0, y:0 };
   let active = true, disposed = false, raf = 0, last = 0, aliveTime = 0;

@@ -7,8 +7,10 @@
     sessionStorage.removeItem('interdiz-services-return');
   } catch {}
   if (!returningFromService && !['#services', '#solutions-track'].includes(location.hash)) return;
-  // Normalize old history entries as well as links, without focusing the carousel.
-  if (location.hash !== '#services') history.replaceState(history.state, '', `${location.pathname}${location.search}#services`);
+  // Own the initial position: native fragment scrolling can also scroll clipped
+  // containers while the pinned layout is being created before window.load.
+  const destination = `${location.pathname}${location.search}#services`;
+  history.replaceState(history.state, '', `${location.pathname}${location.search}`);
   history.scrollRestoration = 'manual';
 
   const root = document.documentElement;
@@ -19,6 +21,7 @@
 
   function reveal() {
     pending = false;
+    history.replaceState(history.state, '', destination);
     root.classList.remove('services-entry-pending');
     removeEventListener('error', onError, true);
     removeEventListener('unhandledrejection', fallback);

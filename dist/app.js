@@ -12,6 +12,10 @@ let userReduced = null;
 try { const saved=sessionStorage.getItem('interdiz-reduced'); if(saved!==null) userReduced=saved==='true'; } catch {}
 let reduced = userReduced ?? motionPreference.matches;
 let scene, animationContext, smoother;
+const sceneState = { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 };
+const servicesEntry = window.interdizServicesEntry?.pending === true;
+let sceneLoading;
+let disposed = false;
 let heroTrigger;
 let updateProcessOnScroll;
 let finishProcessAnimations;
@@ -669,7 +673,7 @@ function setupAnimations() {
     clearProps: 'transform,opacity,visibility'
   });
   scene?.setReduced(reduced);
-  if (scene) Object.assign(scene.state, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 });
+  Object.assign(sceneState, { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 });
   document.documentElement.classList.toggle('motion-enabled', !reduced);
   updateMotionButton();
   if (reduced) { scene?.refresh(); ScrollTrigger.refresh(); return; }
@@ -684,6 +688,10 @@ function setupAnimations() {
       smooth: 1,
       smoothTouch: 0.15,
       effects: false,
+      // Return layout is measured explicitly after fonts; avoid the observer's
+      // delayed smoother-only refresh replaying the jump. Window resize still
+      // refreshes all triggers together, and dynamic blocks reserve their height.
+      autoResize: !servicesEntry,
       onUpdate: () => {
         updateProgress();
         updateProcessOnScroll?.();
@@ -733,12 +741,10 @@ function setupAnimations() {
             .to(chapterCaption, { autoAlpha: 0, duration: 0.16 }, 0.57);
         }
 
-        if (scene) {
-          if (compact) heroTimeline.to(scene.state, { framing: 1, duration: .26 }, .18);
-          heroTimeline.to(scene.state, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
-            .to(scene.state, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
-            .to(scene.state, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
-        }
+        if (compact) heroTimeline.to(sceneState, { framing: 1, duration: .26 }, .18);
+        heroTimeline.to(sceneState, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
+          .to(sceneState, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
+          .to(sceneState, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
         gsap.from('.hero-intro', { y: compact ? 24 : 45, opacity: 0, duration: compact ? .65 : 1.3, ease: 'power3.out', clearProps: compact ? 'transform,opacity' : 'opacity' });
         if (!compact) gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
       }
@@ -1003,16 +1009,33 @@ function setupCardTilt() {
   });
 }
 
-// Import failure or lack of WebGL never hides the page or its links.
+// The renderer can join an already-running timeline without rebuilding page layout.
+function loadScene() {
+  if (sceneLoading || disposed) return sceneLoading;
+  sceneLoading = (async () => {
+    try {
+      const { createScene } = await import(document.documentElement.dataset.theme === 'dark' ? './scene-dark.js' : './scene.js');
+      if (disposed) return;
+      scene = createScene($('#webgl'), reduced, sceneState);
+      document.documentElement.classList.add('webgl-ready');
+      const transition = window.ScrollTrigger?.getById('hero-solutions-parallax')?.animation;
+      const canvas = $('#webgl canvas');
+      if (isCompactLayout() && transition && canvas) {
+        const progress = transition.progress();
+        transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * .72, immediateRender: false }, 0);
+        window.gsap.set(canvas, { y: innerHeight * .72 * progress });
+      }
+      scene.refresh();
+    } catch (error) {
+      document.documentElement.classList.add('webgl-unavailable');
+      console.warn('3D unavailable; the complete static page remains available.', error.message);
+    }
+  })();
+  return sceneLoading;
+}
+
 async function init() {
-  try {
-    const { createScene } = await import(document.documentElement.dataset.theme === 'dark' ? './scene-dark.js' : './scene.js');
-    scene = createScene($('#webgl'), reduced);
-    document.documentElement.classList.add('webgl-ready');
-  } catch (error) {
-    document.documentElement.classList.add('webgl-unavailable');
-    console.warn('3D unavailable; the complete static page remains available.', error.message);
-  }
+  if (!servicesEntry) await loadScene();
   setupSolutionsCarousel();
   setupProjectGallery();
   setupProcessAccordion();
@@ -1043,7 +1066,7 @@ async function init() {
   await document.fonts.ready;
   window.ScrollTrigger?.refresh();
   // Cross-page links need the final layout, including the pinned opening scene.
-  const initialSection = document.getElementById(location.hash.slice(1));
+  const initialSection = document.getElementById(servicesEntry ? 'services' : location.hash.slice(1));
   if (initialSection) {
     const place = () => {
       const top = anchorScrollTop(initialSection);
@@ -1061,9 +1084,20 @@ async function init() {
     else place();
   }
   updateProgress();
+  if (servicesEntry) {
+    // Let the cards paint before any offscreen WebGL construction can block the UI.
+    requestAnimationFrame(() => {
+      if ('requestIdleCallback' in window) requestIdleCallback(() => { void loadScene(); }, { timeout: 1500 });
+      else setTimeout(() => { void loadScene(); }, 0);
+    });
+  }
   // Project images have reserved dimensions; loading them does not change layout
   // and must not rebuild the pinned hero while the gallery is being scrolled.
 }
 
-if (document.readyState === 'complete') init(); else addEventListener('load', init, { once: true });
-addEventListener('pagehide', e => { if (!e.persisted) { scene?.dispose(); animationContext?.revert(); smoother?.kill(); } });
+if (servicesEntry) {
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+} else if (document.readyState === 'complete') init();
+else addEventListener('load', init, { once: true });
+addEventListener('pagehide', e => { if (!e.persisted) { disposed = true; scene?.dispose(); animationContext?.revert(); smoother?.kill(); } });
