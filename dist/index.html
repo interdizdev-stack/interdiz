@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0c0e0c">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="stylesheet" href="./style.css">
-  <link id="white-theme" rel="stylesheet" href="./white.css">
   <link rel="stylesheet" href="./theme.css">
   <link rel="stylesheet" href="./outlines.css">
   <link rel="stylesheet" href="./reviews.css">
@@ -475,11 +474,6 @@
         <feFlood flood-color="#000" result="ink" />
         <feComposite in="ink" in2="expanded" operator="in" result="outline" />
         <feMerge><feMergeNode in="outline" /><feMergeNode in="SourceGraphic" /></feMerge>
-      </filter>
-      <filter id="white-service-outline" x="-25%" y="-25%" width="150%" height="150%">
-        <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded" />
-        <feFlood flood-color="#000" result="ink" />
-        <feComposite in="ink" in2="expanded" operator="in" />
       </filter>
     </defs>
   </svg>
@@ -1323,11 +1317,6 @@
   <!-- Reduced Motion Toggle -->
   <div class="display-controls" role="group" aria-label="Настройки отображения">
     <a class="quick-home" href="#top" aria-label="Вернуться на главный экран" title="На главный экран">↑</a>
-    <a class="theme-switch" href="?theme=dark" aria-label="Включить чёрную версию сайта" title="Переключить на чёрную версию">
-      <span class="theme-switch-face" aria-hidden="true"></span>
-      <span class="theme-switch-orbit" aria-hidden="true"><span></span></span>
-      <span class="compact-only" aria-hidden="true">Тема</span>
-    </a>
     <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Уменьшить движение">
       <span class="motion-icon">Ⅱ</span>
       <span class="motion-label">Меньше движения</span>

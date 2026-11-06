@@ -743,7 +743,7 @@ function setupAnimations() {
   gsap.registerPlugin(ScrollTrigger);
   // Smooth the page and parallax together, rather than letting scrub lag
   // fight immediate native scrolling at the edge of the pinned hero.
-  if (document.documentElement.dataset.theme === 'dark' && !isCompactLayout() && ScrollSmoother) {
+  if (!isCompactLayout() && ScrollSmoother) {
     gsap.registerPlugin(ScrollSmoother);
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
@@ -764,7 +764,6 @@ function setupAnimations() {
 
   animationContext = gsap.context(() => {
     const media = gsap.matchMedia();
-    const dark = document.documentElement.dataset.theme === 'dark';
     media.add({ desktop: '(min-width: 1101px)', mobile: compactMedia.media }, context => {
       const mobile = context.conditions.mobile;
       const compact = mobile;
@@ -807,103 +806,94 @@ function setupAnimations() {
         if (compact) heroTimeline.to(sceneState, { framing: 1, duration: .26 }, .18);
         heroTimeline.to(sceneState, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
           .to(sceneState, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
-          .to(sceneState, { zoom: 1, rotation: 3.1, opacity: document.documentElement.dataset.theme === 'dark' ? 0.24 : 0.1, duration: 0.25 }, 0.75);
+          .to(sceneState, { zoom: 1, rotation: 3.1, opacity: 0.24, duration: 0.25 }, 0.75);
         gsap.from('.hero-intro', { y: compact ? 24 : 45, opacity: 0, duration: compact ? .65 : 1.3, ease: 'power3.out', clearProps: compact ? 'transform,opacity' : 'opacity' });
         if (!compact) gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
       }
 
-      if (dark || compact) {
-        // Move the visible layers independently of the pinned hero and canvas container.
-        const transition = gsap.timeline({
-          defaults: { ease: 'none', duration: 1 },
-          scrollTrigger: {
-            id: 'hero-solutions-parallax',
-            trigger: '.manifesto',
-            start: 'top bottom',
-            end: 'top top',
-            scrub: smoother || compact ? true : 0.6,
-            invalidateOnRefresh: true
-          }
-        });
-        if (compact) {
-          const canvas = $('.hero .webgl canvas');
-          if (canvas) transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * 0.72, immediateRender: false }, 0);
-        } else {
-          transition.fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0);
+      // Move the visible layers independently of the pinned hero and canvas container.
+      const transition = gsap.timeline({
+        defaults: { ease: 'none', duration: 1 },
+        scrollTrigger: {
+          id: 'hero-solutions-parallax',
+          trigger: '.manifesto',
+          start: 'top bottom',
+          end: 'top top',
+          scrub: smoother || compact ? true : 0.6,
+          invalidateOnRefresh: true
         }
-        transition
-          .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * (compact ? 0.35 : 0.42), immediateRender: false }, 0)
-          .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * (compact ? 0.5 : 0.64), immediateRender: false }, 0)
-          .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (compact ? 0.06 : 0.1) }, { y: 0 }, 0)
-          .fromTo('.manifesto-inner', { y: () => innerHeight * (compact ? 0.16 : 0.32) }, { y: 0 }, 0);
-
-        // Use the section's layout coordinates: its inner content already has
-        // a parallax transform, which must not shift these trigger positions.
-        const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
-        gsap.fromTo('.solution-card', {
-          '--solution-parallax-y': i => `${(compact ? 24 : mobile ? 70 : 140) + (i % 3) * (compact ? 8 : mobile ? 18 : 48)}px`
-        }, {
-          '--solution-parallax-y': '0px',
-          ease: 'none',
-          scrollTrigger: {
-            id: 'solutions-cards-parallax',
-            trigger: '.manifesto',
-            start: () => `top+=${cardsTop()} bottom`,
-            end: () => `top+=${cardsTop()} ${compact ? '85%' : mobile ? '45%' : '50%'}`,
-            scrub: smoother || compact ? true : 0.6,
-            invalidateOnRefresh: true
-          }
-        });
-
-        // Returning to the gallery shows its settled layout immediately.
-        if (!projectsEntry) {
-          const pulse = $('.projects-line-pulse');
-          const line = $('.projects-line-effect');
-          const projectsReveal = gsap.timeline({
-            scrollTrigger: {
-              id: 'projects-pulse-horizontal-reveal',
-              trigger: '.projects',
-              start: 'top 95%',
-              once: true,
-              invalidateOnRefresh: true
-            }
-          });
-          // Reveal the content with the accent as soon as the section enters.
-          projectsReveal
-            .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
-              x: () => line.clientWidth,
-              duration: 0.55, ease: 'power2.inOut'
-            }, 0)
-            .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
-            .to(pulse, { opacity: 0, duration: 0.15 }, 0.4)
-            .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
-              immediateRender: true, clearProps: 'transform,opacity'
-            }, 0);
-
-          // Start the sideways entrance when the cases themselves enter view.
-          gsap.fromTo('.gallery-window', {
-            x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
-            opacity: 1
-          }, {
-            x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
-            immediateRender: true, clearProps: 'transform,opacity',
-            scrollTrigger: {
-              id: 'projects-cases-side-reveal',
-              trigger: '.gallery-window',
-              start: 'top 98%',
-              once: true,
-              invalidateOnRefresh: true
-            }
-          });
-        }
+      });
+      if (compact) {
+        const canvas = $('.hero .webgl canvas');
+        if (canvas) transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * 0.72, immediateRender: false }, 0);
       } else {
-        gsap.from('.manifesto-line', { x: (i) => i % 2 ? 45 : -45, opacity: 0.2, stagger: 0.1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.manifesto', start: 'top 85%', once: true } });
-        gsap.from('.solution-card', { y: 45, rotationY: -8, transformPerspective: 1000, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.solutions-stage', start: 'top 90%', once: true } });
-        if (!projectsEntry) {
-          gsap.from('.projects-heading', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.projects', start: 'top 85%', once: true } });
-          gsap.from('.project-card', { y: 55, rotationY: -6, opacity: 0, transformPerspective: 1200, stagger: 0.14, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.gallery-window', start: 'top 90%', once: true } });
+        transition.fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0);
+      }
+      transition
+        .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * (compact ? 0.35 : 0.42), immediateRender: false }, 0)
+        .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * (compact ? 0.5 : 0.64), immediateRender: false }, 0)
+        .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (compact ? 0.06 : 0.1) }, { y: 0 }, 0)
+        .fromTo('.manifesto-inner', { y: () => innerHeight * (compact ? 0.16 : 0.32) }, { y: 0 }, 0);
+
+      // Use the section's layout coordinates: its inner content already has
+      // a parallax transform, which must not shift these trigger positions.
+      const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
+      gsap.fromTo('.solution-card', {
+        '--solution-parallax-y': i => `${(compact ? 24 : mobile ? 70 : 140) + (i % 3) * (compact ? 8 : mobile ? 18 : 48)}px`
+      }, {
+        '--solution-parallax-y': '0px',
+        ease: 'none',
+        scrollTrigger: {
+          id: 'solutions-cards-parallax',
+          trigger: '.manifesto',
+          start: () => `top+=${cardsTop()} bottom`,
+          end: () => `top+=${cardsTop()} ${compact ? '85%' : mobile ? '45%' : '50%'}`,
+          scrub: smoother || compact ? true : 0.6,
+          invalidateOnRefresh: true
         }
+      });
+
+      // Returning to the gallery shows its settled layout immediately.
+      if (!projectsEntry) {
+        const pulse = $('.projects-line-pulse');
+        const line = $('.projects-line-effect');
+        const projectsReveal = gsap.timeline({
+          scrollTrigger: {
+            id: 'projects-pulse-horizontal-reveal',
+            trigger: '.projects',
+            start: 'top 95%',
+            once: true,
+            invalidateOnRefresh: true
+          }
+        });
+        // Reveal the content with the accent as soon as the section enters.
+        projectsReveal
+          .fromTo(pulse, { x: () => -pulse.offsetWidth }, {
+            x: () => line.clientWidth,
+            duration: 0.55, ease: 'power2.inOut'
+          }, 0)
+          .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0)
+          .to(pulse, { opacity: 0, duration: 0.15 }, 0.4)
+          .fromTo('.projects-heading', { y: 32, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.55, ease: 'power3.out',
+            immediateRender: true, clearProps: 'transform,opacity'
+          }, 0);
+
+        // Start the sideways entrance when the cases themselves enter view.
+        gsap.fromTo('.gallery-window', {
+          x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+          opacity: 1
+        }, {
+          x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
+          immediateRender: true, clearProps: 'transform,opacity',
+          scrollTrigger: {
+            id: 'projects-cases-side-reveal',
+            trigger: '.gallery-window',
+            start: 'top 98%',
+            once: true,
+            invalidateOnRefresh: true
+          }
+        });
       }
 
       gsap.from('.service', { y: compact ? 18 : 35, opacity: 0, stagger: compact ? .05 : .08, duration: compact ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
@@ -1082,7 +1072,7 @@ function loadScene() {
   if (sceneLoading || disposed) return sceneLoading;
   sceneLoading = (async () => {
     try {
-      const { createScene } = await import(document.documentElement.dataset.theme === 'dark' ? './scene-dark.js' : './scene.js');
+      const { createScene } = await import('./scene-dark.js');
       if (disposed) return;
       scene = createScene($('#webgl'), reduced, sceneState);
       document.documentElement.classList.add('webgl-ready');

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, readdir } from 'node:fs/promises';
 import vm from 'node:vm';
 import { pages, site } from '../seo.config.mjs';
 import { absolute, extractFAQ, extractProjects, textContent, syncSEO } from './sync-seo.mjs';
@@ -36,10 +36,12 @@ for (const [index, page] of pages.entries()) {
     assert.match(head, /max-image-preview:large/);
     assert.doesNotMatch(head, /noindex|nofollow|nosnippet|noai|data-theme-title/i);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    assert.match(html, /<html lang="ru">/);
+    assert.match(html, /<html lang="ru" data-theme="dark">/);
+    assert.match(head, /name="theme-color" content="#0c0e0c"/);
+    assert.match(head, /rel="icon"[^>]*href="\.\/favicon\.svg"/);
+    assert.doesNotMatch(html, /white-theme|white\.css|theme-switch|data-theme="light"/);
     await access(new URL(page.image, root));
     await access(new URL('favicon.svg', root));
-    await access(new URL('favicon-dark.svg', root));
   });
 
   test(`${page.file}: schema entities and references resolve`, () => {
@@ -204,24 +206,44 @@ test('robots allows search/AI crawlers and render resources; llms references can
   for (const page of pages) assert.ok(llms.includes(absolute(page.path)));
 });
 
-test('theme switching keeps the title stable and preserves both favicon colors', async () => {
+test('legacy theme links retain filters, anchors and history state without selecting a theme', async () => {
   const source = await read('theme.js');
-  for (const theme of ['light', 'dark']) {
-    const icon = { href: './favicon.svg' };
-    const white = { disabled: false };
-    const color = { content: '#ffffff' };
-    const toggle = { setAttribute() {} };
-    const document = {
-      title: pages[0].title, documentElement: { dataset: {} },
-      querySelector(selector) { return ({ '#white-theme': white, 'meta[name="theme-color"]': color, 'link[rel="icon"]': icon, '.theme-switch': toggle })[selector]; },
-      addEventListener(event, callback) { if (event === 'DOMContentLoaded') callback(); },
-    };
-    vm.runInNewContext(source, { document, location: { search: `?theme=${theme}`, href: `${site.url}?theme=${theme}` }, localStorage: { getItem: () => null, setItem() {} }, URL, URLSearchParams });
-    assert.equal(document.title, pages[0].title);
-    assert.equal(document.documentElement.dataset.theme, theme);
-    assert.equal(white.disabled, theme === 'dark');
-    assert.equal(color.content, theme === 'dark' ? '#0c0e0c' : '#ffffff');
-    assert.equal(icon.href, theme === 'dark' ? './favicon-dark.svg' : './favicon.svg');
-    assert.equal(toggle.href, `/?theme=${theme === 'dark' ? 'light' : 'dark'}`);
+  for (const theme of ['light', 'dark', 'unknown']) {
+    let destination;
+    let removed;
+    const state = { visit: 3 };
+    vm.runInNewContext(source, {
+      URL, location: { href: `${site.url}portfolio.html?category=design&theme=${theme}&utm_source=test#projects` },
+      localStorage: { removeItem(key) { removed = key; } },
+      history: { state, replaceState(nextState, _, url) { assert.equal(nextState, state); destination = url; } }
+    });
+    assert.equal(destination, '/portfolio.html?category=design&utm_source=test#projects');
+    assert.equal(removed, 'interdiz-theme');
   }
+});
+
+test('legacy theme cleanup tolerates blocked storage and leaves ordinary URLs untouched', async () => {
+  const source = await read('theme.js');
+  for (const search of ['', '?theme=light']) {
+    let destination;
+    vm.runInNewContext(source, {
+      URL, location: { href: `${site.url}${search}#projects` },
+      localStorage: { removeItem() { throw new Error('Storage blocked'); } },
+      history: { state: null, replaceState(_, __, url) { destination = url; } }
+    });
+    assert.equal(destination, search ? '/#projects' : undefined);
+  }
+});
+
+test('the shipped site has only dark styling, scene and favicon', async () => {
+  assert.match(await read('favicon.svg'), /fill="#0c0e0c"/);
+  for (const file of ['white.css', 'scene.js', 'favicon-dark.svg']) {
+    await assert.rejects(access(new URL(file, root)), { code: 'ENOENT' });
+  }
+  for (const file of (await readdir(root)).filter(file => file.endsWith('.css'))) {
+    assert.doesNotMatch(await read(file), /data-theme=["']light["']|theme-switch/, file);
+  }
+  const app = await read('app.js');
+  assert.match(app, /import\('\.\/scene-dark\.js'\)/);
+  assert.doesNotMatch(app, /dataset\.theme/);
 });

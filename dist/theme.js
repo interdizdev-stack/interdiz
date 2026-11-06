@@ -1,32 +1,9 @@
+// Compatibility for bookmarks made before the site became dark-only.
+// The theme, browser color and favicon are already defined in static HTML.
 (() => {
-  const requested = new URLSearchParams(location.search).get('theme');
-  let theme = 'light';
-  try {
-    if (localStorage.getItem('interdiz-theme') === 'dark') theme = 'dark';
-  } catch {}
-  if (requested === 'light' || requested === 'dark') {
-    theme = requested;
-    try { localStorage.setItem('interdiz-theme', theme); } catch {}
-  }
-
-  const dark = theme === 'dark';
-  document.documentElement.dataset.theme = theme;
-  document.querySelector('#white-theme').disabled = dark;
-  document.querySelector('meta[name="theme-color"]').content = dark ? '#0c0e0c' : '#ffffff';
-  if (dark) {
-    const icon = document.querySelector('link[rel="icon"]');
-    icon.href = './favicon-dark.svg';
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!dark) document.querySelector('#lime-contour-outline feMorphology')?.setAttribute('radius', '1.5');
-    const toggle = document.querySelector('.theme-switch');
-    if (!toggle) return;
-    const destination = new URL(location.href);
-    destination.searchParams.set('theme', dark ? 'light' : 'dark');
-    destination.hash = '';
-    toggle.href = destination.pathname + destination.search;
-    toggle.setAttribute('aria-label', dark ? 'Включить белую версию сайта' : 'Включить чёрную версию сайта');
-    toggle.title = dark ? 'Переключить на белую версию' : 'Переключить на чёрную версию';
-  });
+  try { localStorage.removeItem('interdiz-theme'); } catch {}
+  const url = new URL(location.href);
+  if (!url.searchParams.has('theme')) return;
+  url.searchParams.delete('theme');
+  history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
 })();

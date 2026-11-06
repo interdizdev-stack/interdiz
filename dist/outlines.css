@@ -3,7 +3,7 @@
 
 /* Include borderless buttons and link-based buttons in every interaction state. */
 :is(button, [role="button"], summary, .contact-pill, .float-cta, .round-link,
-  .gallery-all, .project-open, .theme-switch, .scroll-circle) {
+  .gallery-all, .project-open, .scroll-circle) {
   border-width: var(--outline-width) !important;
   border-style: solid !important;
 }
@@ -103,7 +103,7 @@ html[data-theme="dark"] .scene-stages > span {
 /* Hide button frames without changing their size or keyboard focus indicator. */
 html[data-theme="dark"] :is(button, [role="button"], summary,
   .contact-pill, .float-cta, .round-link, .gallery-all,
-  .project-open, .theme-switch, .scroll-circle) {
+  .project-open, .scroll-circle) {
   border-color: transparent !important;
 }
 
@@ -234,7 +234,6 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   transition: background .2s, color .2s;
 }
 .quick-home:hover { background: var(--lime); color: #0c0e0c; }
-html[data-theme="light"] .quick-home { font-weight: 450; }
 
 .approach .faq-cta { font-weight: 700; }
 
@@ -284,136 +283,4 @@ html[data-theme="light"] .quick-home { font-weight: 450; }
   min-height: 42px;
   line-height: 1.35;
   align-self: start;
-}
-
-/* Uniform button contours exclusively in the white edition, in every state. */
-html[data-theme="light"] :is(button, [role="button"], summary,
-  .contact-pill, .float-cta, .round-link, .gallery-all, .project-open,
-  .theme-switch, .scroll-circle, .quick-home, .back-to-top, .dialog-link) {
-  border-width: 2px !important;
-  border-style: solid !important;
-  border-color: #000 !important;
-}
-
-/* Explicit contour width for the white edition's IT-products caption. */
-html[data-theme="light"] .hero-chapter em {
-  -webkit-text-stroke: 5px #000;
-  paint-order: stroke fill;
-}
-
-/* Thin contours for the white hero stage labels. */
-html[data-theme="light"] .scene-stages > span.active {
-  -webkit-text-stroke-width: 1px;
-}
-
-/* Match the white hero closing caption to the two-pixel headline contour. */
-html[data-theme="light"] .hero-end span {
-  -webkit-text-stroke: 5px #000;
-  paint-order: stroke fill;
-}
-
-/* Match the opening headline dot to the word's contour in the white edition. */
-html[data-theme="light"] .hero-line.outline .title-dot {
-  -webkit-text-stroke: 5px #000;
-  paint-order: stroke fill;
-  filter: none;
-}
-
-/* Two-pixel logo contours exclusively in the white edition. */
-html[data-theme="light"] :is(.wordmark, .float-logo) > span {
-  -webkit-text-stroke: 2px #000;
-  paint-order: stroke fill;
-}
-
-/* Black navigation labels, numbers and separators in the white edition. */
-html[data-theme="light"] .floating-nav .float-links a,
-html[data-theme="light"] .floating-nav .float-links a:is(:hover, .is-current),
-html[data-theme="light"] .floating-nav .float-links .nav-num {
-  color: #000;
-  text-shadow: none !important;
-}
-html[data-theme="light"] .floating-nav .float-divider { background: #000; }
-
-/* Match the question mark to the white business headline contour. */
-html[data-theme="light"] .manifesto-line.outline .title-dot {
-  -webkit-text-stroke: 5px #000;
-  paint-order: stroke fill;
-  filter: none;
-}
-
-/* Five-pixel contours for service labels in the white edition. */
-html[data-theme="light"] .solution-type,
-html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
-  -webkit-text-stroke: 5px #000;
-  paint-order: stroke fill;
-  filter: none;
-}
-
-/* Use a single clean five-pixel contour in both service-card states. */
-html[data-theme="light"] .solution-card .solution-type,
-html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
-  font-family: var(--display);
-  -webkit-text-stroke: 5px #000 !important;
-  paint-order: stroke fill;
-  filter: none !important;
-}
-
-/* Unioned outline glyphs avoid internal overlaps in inactive white cards. */
-html[data-theme="light"] .solution-card .solution-type {
-  letter-spacing: calc(-0.085em + 1px);
-  font-family: 'Studio Outline', var(--display);
-  color: #000;
-  -webkit-text-stroke: 0 !important;
-  filter: url(#white-service-outline) !important;
-}
-html[data-theme="light"] .solution-card:is(.is-active, :hover) .solution-type {
-  font-family: var(--display);
-  color: var(--lime);
-  -webkit-text-stroke: 5px #000 !important;
-  filter: none !important;
-}
-
-/* White edition: larger service carousel hint with a fine contour. */
-html[data-theme="light"] .solutions-hint {
-  font-size: 18px;
-  -webkit-text-stroke-width: 1px;
-}
-
-/* Center carousel arrows and show navigation cues in the brand green. */
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
-  display: grid;
-  place-items: center;
-  padding: 0;
-  line-height: 1;
-  color: var(--lime);
-}
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:hover:not(:disabled) {
-  color: #000;
-}
-html[data-theme="light"] :is(.solutions-hint, .gallery-hint) { color: var(--lime); }
-
-/* Green circular outlines for the white carousel controls. */
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
-  border-color: var(--lime) !important;
-}
-
-/* Black arrows and circular outlines in the white edition. */
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button {
-  color: #000;
-  border-color: #000 !important;
-}
-
-/* White edition: black previous control and green next control. */
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child {
-  color: var(--lime);
-  border-color: var(--lime) !important;
-}
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child:hover:not(:disabled) {
-  color: #000;
-}
-
-/* Fine black outline for the green next control in the white edition. */
-html[data-theme="light"] :is(.solutions-controls, .gallery-controls) button:last-child {
-  border-width: 1px !important;
-  border-color: #000 !important;
 }

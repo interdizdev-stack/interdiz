@@ -55,7 +55,6 @@
 .support-lime { fill: var(--lime); stroke: var(--line-strong); }
 .support-ink { stroke: #0c0e0c; stroke-linecap: round; }
 .support-accent, .support-trace { stroke: var(--lime); stroke-linecap: round; }
-html[data-theme="light"] :is(.support-accent, .support-trace) { stroke: var(--fg); }
 .support-accent-fill { fill: var(--lime); }
 .support-dot { fill: var(--muted); }
 .support-visual-note { color: var(--muted); font-size: 10px; line-height: 1.5; text-align: right; }

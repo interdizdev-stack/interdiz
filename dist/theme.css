@@ -1,4 +1,4 @@
-/* Display controls share a fixed corner in both versions. */
+/* Dark site styling and fixed display controls. */
 html[data-theme="dark"] { color-scheme: dark; }
 html[data-theme="dark"] .header-caption { margin-inline-start: -20px; }
 html[data-theme="dark"] .header nav a span { font-size: 12px; }
@@ -72,59 +72,6 @@ html[data-theme="dark"].motion-enabled .solution-card {
   font-size: 12px;
 }
 .display-controls .motion-icon { font-size: 11px; }
-.theme-switch {
-  --theme-orbit-angle: 45deg;
-  position: relative;
-  display: block;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border: var(--outline-width) solid currentColor;
-  border-radius: 50%;
-  color: var(--fg);
-  background: var(--bg);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, .12);
-  transition: transform .25s;
-}
-html[data-theme="dark"] .theme-switch { --theme-orbit-angle: 225deg; }
-.theme-switch:hover { transform: translateY(-2px) scale(1.04); }
-.theme-switch-face {
-  position: absolute;
-  inset: 4px;
-  border: var(--outline-width) solid #000;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #101010 50%, #fff 50%);
-}
-.theme-switch-face::after {
-  content: '';
-  position: absolute;
-  inset: 7px;
-  border: var(--outline-width) solid #000;
-  border-radius: 50%;
-  background: var(--lime);
-}
-.theme-switch-orbit {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  transform: rotate(var(--theme-orbit-angle));
-  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
-  pointer-events: none;
-}
-.theme-switch-orbit > span {
-  position: absolute;
-  top: -3px;
-  left: calc(50% - 3.5px);
-  width: 7px;
-  height: 7px;
-  border: var(--outline-width) solid #000;
-  border-radius: 50%;
-  background: var(--lime);
-}
-.theme-switch:hover .theme-switch-orbit { transform: rotate(calc(var(--theme-orbit-angle) + 45deg)); }
-.reduced-motion .theme-switch, .reduced-motion .theme-switch-orbit { transition: none; }
-.reduced-motion .theme-switch:hover { transform: none; }
-.reduced-motion .theme-switch:hover .theme-switch-orbit { transform: rotate(var(--theme-orbit-angle)); }
 @media (max-width: 600px) {
   .display-controls { right: 12px; bottom: 12px; }
   .display-controls .motion-toggle { width: 36px; padding: 0; justify-content: center; }

@@ -57,8 +57,6 @@ html[data-theme] .journal-motion[hidden] { display: none; }
 .journal-topics li { display: flex; justify-content: space-between; gap: 15px; padding-block: 14px; border-bottom: var(--divider-width) solid var(--line); font-size: clamp(16px, 1.5vw, 22px); letter-spacing: -.03em; }
 .journal-topics li > span { color: var(--muted); font-size: 10px; letter-spacing: 0; }
 .journal-article-list:empty { display: none; }
-html[data-theme="light"] .journal-paper--front { box-shadow: 0 18px 35px #0001; }
-html[data-theme="light"] .journal-empty-bracket { color: var(--fg); }
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
   .journal-hero-layout { grid-template-columns: 1.1fr 1fr; gap: 18px; padding-top: 30px; }
   .journal-art { height: 360px; }
