@@ -7,7 +7,7 @@
   content: '';
   position: absolute;
   inset: 100% 0 auto;
-  height: var(--outline-width);
+  height: var(--divider-width);
   padding-inline: inherit;
   background: var(--line);
   background-clip: content-box;

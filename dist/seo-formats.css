@@ -1,5 +1,5 @@
 /* A search workbench: one canvas, four lenses. Both themes share all geometry. */
-.seo-lab { margin-top: 48px; border-block: var(--outline-width) solid var(--line-strong); }
+.seo-lab { margin-top: 48px; border-block: var(--divider-width) solid var(--line-strong); }
 .seo-lab-top, .seo-lab-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 20px; }
 .seo-lab-top { font-size: 11px; letter-spacing: .1em; }
 .seo-lab-top > span:first-child { display: flex; align-items: center; gap: 10px; }
@@ -28,7 +28,7 @@ html[data-theme="dark"] .seo-tabs > button::after { background: var(--lime); }
   .seo-tabs > button:hover:not([aria-selected="true"]) .seo-tab-arrow { translate: 3px -3px; }
 }
 .seo-lab-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: var(--bg-surface); border: var(--outline-width) solid var(--line-strong); }
-.seo-visual { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 28px; border-right: var(--outline-width) solid var(--line-strong); overflow: hidden; }
+.seo-visual { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 28px; border-right: var(--divider-width) solid var(--line-strong); overflow: hidden; }
 .seo-visual-label, .seo-visual-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .seo-visual-label { font-size: 10px; letter-spacing: .08em; }
 .seo-visual-label > span:first-child { color: var(--muted); }
@@ -91,8 +91,8 @@ html[data-theme="light"].service-motion-enabled .seo-service .service-title .out
 .service-motion-enabled .seo-service .seo-lab::before {
   content: '';
   position: absolute;
-  inset: calc(-1 * var(--outline-width)) 0 auto;
-  height: var(--outline-width);
+  inset: calc(-1 * var(--divider-width)) 0 auto;
+  height: var(--divider-width);
   background: var(--lime);
   transform: scaleX(var(--seo-edge-progress, 0));
   transform-origin: left;
@@ -130,7 +130,7 @@ html[data-theme="light"].service-motion-enabled .seo-service .seo-lab::before { 
   .seo-lab.is-enhanced .seo-lab-top { flex-wrap: wrap; gap: 12px 20px; }
   .seo-lab.is-enhanced .seo-lab-caption { display: block; order: 1; flex-basis: 100%; font-size: 12px; }
   .seo-lab-body { grid-template-columns: minmax(0, 1fr); }
-  .seo-visual { border-right: 0; border-bottom: var(--outline-width) solid var(--line-strong); padding: 20px; }
+  .seo-visual { border-right: 0; border-bottom: var(--divider-width) solid var(--line-strong); padding: 20px; }
   .seo-canvas { max-height: 320px; margin-block: 8px; }
   .seo-visual-label { font-size: 9px; }
   .seo-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }

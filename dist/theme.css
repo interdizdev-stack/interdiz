@@ -22,8 +22,8 @@ html[data-theme="dark"].motion-enabled .projects-line-effect {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(-1 * var(--outline-width));
-  height: var(--outline-width);
+  bottom: calc(-1 * var(--divider-width));
+  height: var(--divider-width);
   overflow: hidden;
   pointer-events: none;
 }

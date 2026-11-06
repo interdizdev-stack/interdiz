@@ -1,6 +1,7 @@
 /* White edition. Layout, type, interactions and image assets stay shared. */
 :root {
   color-scheme: light;
+  --divider-width: .5px;
   --bg: #ffffff;
   --bg-surface: #f1f3ee;
   --bg-surface-hover: #e7f6d6;
@@ -19,7 +20,7 @@
 body { font-weight: 450; }
 .hero { background: #fff; }
 .hero-grid {
-  --hero-grid-line-width: .5px;
+  --hero-grid-line-width: var(--divider-width);
   background-image: none;
   /* Keep the original border box used by the initial grid. */
   border: var(--outline-width) solid transparent;
@@ -51,12 +52,12 @@ body { font-weight: 450; }
 .solution-card-meta, .solutions-hint, .gallery-hint, .tags > span { font-weight: 500; }
 .contact-pill { font-weight: 600; }
 .section-kicker, .gallery-footer, .footer-bottom, .service,
-.faq-item, .approach, .contact, .manifesto, .marquee { border-width: var(--outline-width); }
+.faq-item, .approach, .contact, .manifesto, .marquee { border-width: var(--divider-width); }
 .solution-card, .project-image, .contact-card, .contact-pill,
 .floating-nav, .project-dialog, .dialog-close, .scroll-circle,
 .solutions-controls button, .gallery-controls button, .motion-toggle { border-width: var(--outline-width); }
 .scene-stages { color: var(--muted); }
-.scene-stages i { height: var(--outline-width); background: var(--line-strong); }
+.scene-stages i { height: var(--divider-width); background: var(--line-strong); }
 .wordmark span, .float-logo span { color: var(--lime); }
 .hero-line.outline, .manifesto .manifesto-line.outline,
 .expertise-line.outline, .approach-line.outline, .reviews-line.outline {
@@ -212,7 +213,7 @@ html[data-theme="light"] .header-caption::before {
   position: absolute;
   left: -20px;
   top: 50%;
-  width: 1.5px;
+  width: var(--divider-width);
   height: 100%;
   background: #000;
   transform: translate(-50%, -50%);

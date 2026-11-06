@@ -1,5 +1,5 @@
 /* One continuous workflow, with the site's shared palette and line weight. */
-.crm-flow { margin-top: 52px; border-block: var(--outline-width) solid var(--line-strong); }
+.crm-flow { margin-top: 52px; border-block: var(--divider-width) solid var(--line-strong); }
 .crm-flow-top, .crm-flow-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .crm-flow-top { min-height: 92px; padding-block: 20px; }
 .crm-flow-label { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .1em; }
@@ -16,7 +16,7 @@
 .crm-wire-progress { stroke: var(--lime); }
 .crm-packet { fill: var(--lime); stroke: var(--bg); stroke-width: var(--outline-width); opacity: 0; }
 .crm-track .crm-format { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 62px clamp(18px, 2vw, 32px) 28px; border: 0; background: var(--bg-surface); }
-.crm-format::after { content: ''; position: absolute; top: 62px; bottom: 28px; right: 0; width: var(--outline-width); background: var(--line); }
+.crm-format::after { content: ''; position: absolute; top: 62px; bottom: 28px; right: 0; width: var(--divider-width); background: var(--line); }
 .crm-format:last-child::after { display: none; }
 .crm-port { position: absolute; z-index: 3; top: 28px; left: 50%; width: 14px; height: 14px; transform: translate(-50%, -50%); border: var(--outline-width) solid var(--line-strong); border-radius: 50%; background: var(--bg-surface); transition: background .25s, border-color .25s, box-shadow .25s; }
 .crm-format:is(.is-current, .is-complete) .crm-port { background: var(--lime); border-color: var(--lime); }
@@ -38,7 +38,7 @@
 .crm-art .crm-art-ink { fill: #0c0e0c; font-size: 9px; }
 .crm-track .crm-copy h3 { margin: 0; min-height: 2.24em; font-size: clamp(24px, 2.15vw, 34px); letter-spacing: -.045em; line-height: 1.12; }
 .crm-track .crm-copy p { margin-block: 18px 28px; max-width: none; font-size: 15px; line-height: 1.65; }
-.crm-track .service-format-note { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 18px; border-top: var(--outline-width) solid var(--line); font-size: 12px; line-height: 1.6; color: var(--fg-muted); }
+.crm-track .service-format-note { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 18px; border-top: var(--divider-width) solid var(--line); font-size: 12px; line-height: 1.6; color: var(--fg-muted); }
 .crm-track .service-format-note::before { content: '↗'; color: var(--fg); font-size: 16px; }
 .crm-flow-bottom { min-height: 72px; padding-block: 20px; }
 .crm-flow-status { font-size: 13px; color: var(--fg-muted); }
@@ -66,7 +66,7 @@
   .crm-track .crm-copy h3 { min-height: 0; font-size: 30px; }
   .crm-track .crm-copy p { margin-bottom: 22px; }
   .crm-track .service-format-note { grid-column: 2; }
-  .crm-format::after { inset: auto 28px 0 50px; width: auto; height: var(--outline-width); }
+  .crm-format::after { inset: auto 28px 0 50px; width: auto; height: var(--divider-width); }
 }
 @media (max-width: 699px) {
   .crm-flow { margin-top: 32px; }

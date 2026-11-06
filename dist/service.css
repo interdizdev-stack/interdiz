@@ -15,13 +15,13 @@
 .service-actions > .contact-pill { margin-left: 0; }
 .service-section > .service-title { margin-top: 36px; }
 .service-formats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 60px; margin-top: 48px; }
-.service-format { padding-block: 22px 4px; border-top: var(--outline-width) solid var(--line); }
+.service-format { padding-block: 22px 4px; border-top: var(--divider-width) solid var(--line); }
 .service-eyebrow { display: block; color: var(--muted); font-size: 12px; letter-spacing: .08em; line-height: 1.5; }
 .service-format h3 { margin-top: 22px; font-size: clamp(25px, 3vw, 40px); font-weight: 600; letter-spacing: -.045em; line-height: 1.12; }
 .service-format p { max-width: 490px; margin-top: 14px; color: var(--fg-muted); line-height: 1.65; font-size: 16px; }
 .service-format-note { display: block; margin-top: 24px; font-size: 13px; color: var(--muted); }
 .service-process { margin-top: 48px; padding: 0; list-style: none; }
-.service-process li { display: grid; grid-template-columns: 55px minmax(180px, 1fr) minmax(0, 1.35fr) minmax(0, .8fr); align-items: baseline; gap: 24px; padding-block: 26px; border-top: var(--outline-width) solid var(--line); }
+.service-process li { display: grid; grid-template-columns: 55px minmax(180px, 1fr) minmax(0, 1.35fr) minmax(0, .8fr); align-items: baseline; gap: 24px; padding-block: 26px; border-top: var(--divider-width) solid var(--line); }
 .service-step-number { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
 .service-process h3 { font-size: clamp(22px, 2.1vw, 30px); font-weight: 600; letter-spacing: -.04em; }
 .service-process p { color: var(--fg-muted); font-size: 15px; line-height: 1.65; }
@@ -33,7 +33,7 @@
 .service-projects { margin-top: 42px; }
 .service-all-projects { display: inline-flex; margin-top: 32px; }
 .service-questions { margin-top: 36px; }
-.service-questions details { border-bottom: var(--outline-width) solid var(--line); }
+.service-questions details { border-bottom: var(--divider-width) solid var(--line); }
 .service-questions summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; list-style: none; cursor: pointer; min-height: 80px; padding: 22px 0; border-color: transparent; font-weight: 600; font-size: clamp(18px, 2vw, 24px); letter-spacing: -.035em; }
 .service-questions summary::-webkit-details-marker { display: none; }
 .service-questions summary > span { flex-shrink: 0; font-size: 30px; font-weight: 400; line-height: 1; transition: transform .2s; }
@@ -50,8 +50,8 @@
 .service-format-content { display: flow-root; }
 .service-row-trace {
   position: absolute;
-  inset: calc(-1 * var(--outline-width)) 0 auto;
-  height: var(--outline-width);
+  inset: calc(-1 * var(--divider-width)) 0 auto;
+  height: var(--divider-width);
   background: var(--lime);
   transform: scaleX(0);
   transform-origin: left center;
@@ -60,8 +60,8 @@
 .service-section > .section-kicker, .service-page .contact > .section-kicker { position: relative; }
 .service-line-effect {
   position: absolute;
-  inset: auto 0 calc(-1 * var(--outline-width));
-  height: var(--outline-width);
+  inset: auto 0 calc(-1 * var(--divider-width));
+  height: var(--divider-width);
   overflow: hidden;
   pointer-events: none;
 }

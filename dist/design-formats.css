@@ -49,7 +49,7 @@
   width: 100%;
   margin-top: auto;
   padding-top: 14px;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
   color: var(--fg-muted);
   line-height: 1.6;
 }
@@ -68,7 +68,7 @@
   min-width: 0;
   min-height: 266px;
   padding: 11.2px;
-  border-left: var(--outline-width) solid var(--line);
+  border-left: var(--divider-width) solid var(--line);
   background: var(--bg);
   overflow: hidden;
   perspective: 1100px;
@@ -111,7 +111,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: var(--outline-width);
+  height: var(--divider-width);
   background: var(--lime);
   transform-origin: left center;
   pointer-events: none;
@@ -130,7 +130,7 @@
   .design-formats .service-format h3 { margin-top: 16px; font-size: 23px; }
   .design-formats .service-format p { margin-bottom: 14px; font-size: 14.5px; line-height: 1.5; }
   .design-formats .service-format-note { padding-top: 10px; }
-  .design-format-visual { min-height: 0; padding: 11.2px 5.6px; border-left: 0; border-top: var(--outline-width) solid var(--line); }
+  .design-format-visual { min-height: 0; padding: 11.2px 5.6px; border-left: 0; border-top: var(--divider-width) solid var(--line); }
   .design-art-drift { max-width: 336px; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -68,6 +68,7 @@
   border-color: var(--contour-ink, #000);
   border-width: var(--outline-width);
 }
+.marquee { border-width: var(--divider-width); }
 .solutions-progress > span, .gallery-progress > span,
 .scroll-progress > span {
   box-shadow: 0 0 0 var(--outline-width) var(--contour-ink, #000);

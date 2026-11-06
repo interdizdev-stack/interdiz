@@ -4,8 +4,8 @@
 .support-desk-top { font-size: 11px; letter-spacing: .09em; }
 .support-desk-top > span:last-child { color: var(--fg-muted); font-size: 13px; letter-spacing: 0; }
 .support-desk-top > span:last-child > span { display: inline-block; margin-left: 10px; }
-.support-rack { border-top: var(--outline-width) solid var(--line-strong); }
-.support-rack .support-format { padding: 0; border-top: 0; border-bottom: var(--outline-width) solid var(--line-strong); }
+.support-rack { border-top: var(--divider-width) solid var(--line-strong); }
+.support-rack .support-format { padding: 0; border-top: 0; border-bottom: var(--divider-width) solid var(--line-strong); }
 .support-drawer { position: relative; background: var(--bg); transition: background .3s; }
 .support-desk:not(.is-enhanced) .support-drawer[open], .support-drawer.is-active { background: var(--bg-surface); }
 .support-drawer > summary {
@@ -37,7 +37,7 @@
 .support-output { display: flex; align-items: center; gap: 16px; padding-top: 30px; }
 .support-output > span:first-child { display: grid; place-items: center; flex: 0 0 38px; height: 38px; background: var(--lime); color: #0c0e0c; border-radius: 50%; font-size: 24px; }
 .support-output .service-format-note { max-width: 300px; margin: 0; font-size: 13px; line-height: 1.6; color: var(--fg); }
-.support-visual { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; border-left: var(--outline-width) solid var(--line); padding-left: 28px; }
+.support-visual { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; border-left: var(--divider-width) solid var(--line); padding-left: 28px; }
 .support-visual-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; }
 .support-visual-top > span { max-width: 260px; color: var(--muted); font-size: 9px; letter-spacing: .06em; line-height: 1.5; }
 .support-replay { display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0; min-height: 44px; padding: 6px 12px; border: var(--outline-width) solid var(--line-strong); border-radius: 30px; background: var(--bg); color: var(--fg); font: inherit; font-size: 10px; cursor: pointer; }
@@ -91,7 +91,7 @@ html[data-theme="light"] :is(.support-accent, .support-trace) { stroke: var(--fg
   .support-copy p { font-size: 15px; line-height: 1.65; }
   .support-output { padding-top: 18px; gap: 12px; }
   .support-output .service-format-note { font-size: 12px; }
-  .support-visual { border-left: 0; border-top: var(--outline-width) solid var(--line); padding: 12px 0 0; }
+  .support-visual { border-left: 0; border-top: var(--divider-width) solid var(--line); padding: 12px 0 0; }
   .support-art { height: 185px; }
   .support-visual-top > span { font-size: 8px; }
   .support-replay { padding-inline: 10px; }

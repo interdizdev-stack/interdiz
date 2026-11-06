@@ -55,6 +55,7 @@
 
 :root {
   --outline-width: 2px;
+  --divider-width: 2px;
   --bg: #0c0e0c;
   --bg-surface: #141713;
   --bg-surface-hover: #1b201a;
@@ -312,7 +313,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .float-divider {
-  width: var(--outline-width);
+  width: var(--divider-width);
   height: 18px;
   background: var(--line);
 }
@@ -440,7 +441,7 @@ h1, h2, h3, h4, h5, h6,
   max-width: 140px;
   line-height: 1.5;
   color: #b7bcb0;
-  border-left: var(--outline-width) solid var(--line);
+  border-left: var(--divider-width) solid var(--line);
   padding-left: 16px;
 }
 
@@ -506,11 +507,11 @@ h1, h2, h3, h4, h5, h6,
 .hero-grid {
   position: absolute;
   inset: 96px var(--pad) 0;
-  background: linear-gradient(90deg, transparent calc(100% - var(--outline-width)), rgba(255, 255, 255, 0.04) 0);
+  background: linear-gradient(90deg, transparent calc(100% - var(--divider-width)), rgba(255, 255, 255, 0.04) 0);
   background-size: 25% 100%;
-  border-top: var(--outline-width) solid var(--line);
-  border-left: var(--outline-width) solid var(--line);
-  border-right: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
+  border-left: var(--divider-width) solid var(--line);
+  border-right: var(--divider-width) solid var(--line);
   z-index: -1;
 }
 
@@ -824,7 +825,7 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 }
 .scene-stages i {
   width: 35px;
-  height: var(--outline-width);
+  height: var(--divider-width);
   background: #3c4236;
 }
 
@@ -838,7 +839,7 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
   font-size: 16px;
   letter-spacing: 1.5px;
   padding-bottom: 24px;
-  border-bottom: var(--outline-width) solid var(--line);
+  border-bottom: var(--divider-width) solid var(--line);
   font-family: var(--text);
   color: var(--fg-muted);
 }
@@ -863,8 +864,8 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
   color: var(--fg);
   overflow: hidden;
   isolation: isolate;
-  border-top: var(--outline-width) solid var(--line);
-  border-bottom: var(--outline-width) solid transparent;
+  border-top: var(--divider-width) solid var(--line);
+  border-bottom: var(--divider-width) solid transparent;
 }
 
 .manifesto-inner {
@@ -1288,7 +1289,7 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
   gap: 24px;
   margin-top: 10px;
   font-size: 12px;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
   padding-top: 24px;
 }
 
@@ -1350,8 +1351,8 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 .marquee {
   overflow: hidden;
   padding: 13px 0;
-  border-top: var(--outline-width) solid var(--line);
-  border-bottom: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
+  border-bottom: var(--divider-width) solid var(--line);
   color: var(--lime);
   margin: 60px 0 0;
   width: 100%;
@@ -1441,13 +1442,13 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 
 .service {
   position: relative;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
   padding: 0 0 24px;
   transition: background 0.3s;
 }
 
 .service:last-child {
-  border-bottom: var(--outline-width) solid var(--line);
+  border-bottom: var(--divider-width) solid var(--line);
 }
 
 .service summary {
@@ -1519,10 +1520,10 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 
 .service-scan {
   position: absolute;
-  top: calc(-1 * var(--outline-width));
+  top: calc(-1 * var(--divider-width));
   left: 0;
   right: 0;
-  height: var(--outline-width);
+  height: var(--divider-width);
   overflow: hidden;
   pointer-events: none;
 }
@@ -1572,7 +1573,7 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 /* Approach */
 .approach {
   padding: 90px var(--pad) 110px;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
   background: radial-gradient(ellipse at 100% 0, rgba(194, 255, 67, 0.035), transparent 55%), var(--bg);
 }
 
@@ -1585,8 +1586,8 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 
 .faq-list { position: relative; overflow-anchor: none; }
 .faq-list.faq-enhanced { min-height: var(--faq-list-height); }
-.faq-item { border-top: var(--outline-width) solid var(--line); }
-.faq-item:last-child { border-bottom: var(--outline-width) solid var(--line); }
+.faq-item { border-top: var(--divider-width) solid var(--line); }
+.faq-item:last-child { border-bottom: var(--divider-width) solid var(--line); }
 .faq-item[open] { border-top-color: var(--line-lime); }
 .faq-item summary {
   display: grid;
@@ -1621,7 +1622,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   min-width: 0;
   margin: 0;
   padding: 20px 0 0 40px;
-  border-left: var(--outline-width) solid var(--line-lime);
+  border-left: var(--divider-width) solid var(--line-lime);
 }
 .expertise-testimonial-anchor { margin-top: 32px; }
 .expertise-testimonial { margin-top: 0; }
@@ -1646,7 +1647,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   background: var(--footer-bg);
   color: var(--fg);
   padding: 90px var(--pad) 30px;
-  border-top: var(--outline-width) solid var(--line-strong);
+  border-top: var(--divider-width) solid var(--line-strong);
   position: relative;
 }
 
@@ -1756,7 +1757,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
   padding-top: 30px;
   font-size: 16px;
   letter-spacing: 0.8px;
@@ -1888,7 +1889,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   gap: 28px 36px;
   margin: 30px 0;
   padding-top: 26px;
-  border-top: var(--outline-width) solid var(--line);
+  border-top: var(--divider-width) solid var(--line);
 }
 .service-detail-scope { grid-row: span 2; }
 .service-detail-grid h3 {
@@ -2280,7 +2281,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   .faq-item summary { grid-template-columns: minmax(0, 1fr) 22px; gap: 12px; padding: 22px 6px; }
   .faq-answer { padding: 0 16px 24px 8px; }
   .faq-contact { align-items: flex-start; flex-direction: column; gap: 16px; }
-  .approach-testimonial { padding: 28px 0 0; border-left: 0; border-top: var(--outline-width) solid var(--line-lime); }
+  .approach-testimonial { padding: 28px 0 0; border-left: 0; border-top: var(--divider-width) solid var(--line-lime); }
   .service summary {
     gap: 16px;
     padding-top: 22px;
