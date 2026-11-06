@@ -37,8 +37,24 @@
 .service-questions details[open] summary > span { transform: rotate(45deg); }
 .service-questions details p { max-width: 760px; padding-bottom: 24px; color: var(--fg-muted); font-size: 16px; line-height: 1.65; }
 
-/* Decorative motion uses the existing rules and never changes section spacing. */
-.service-section > .section-kicker { position: relative; }
+/* Motion layers preserve the approved grid and section spacing. */
+.service-page #main { overflow-x: clip; }
+.service-motion-enabled .service-intro .hero-line { translate: var(--service-hero-x, 0px) var(--service-hero-y, 0px); }
+.service-motion-enabled .service-projects .project-image img { translate: 0 var(--service-image-y, 0px); }
+.service-format, .service-process li { position: relative; }
+.service-format-body { display: flow-root; }
+.service-motion-enabled .service-format-body { overflow: clip; }
+.service-format-content { display: flow-root; }
+.service-row-trace {
+  position: absolute;
+  inset: calc(-1 * var(--outline-width)) 0 auto;
+  height: var(--outline-width);
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+.service-section > .section-kicker, .service-page .contact > .section-kicker { position: relative; }
 .service-line-effect {
   position: absolute;
   inset: auto 0 calc(-1 * var(--outline-width));
@@ -64,6 +80,7 @@
 html.reduced-motion:has(.service-page) { scroll-behavior: auto; }
 .reduced-motion .service-page *, .reduced-motion .service-page *::before, .reduced-motion .service-page *::after { transition: none; }
 .reduced-motion .service-line-effect { display: none; }
+.reduced-motion .service-row-trace { display: none; }
 
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
   .service-intro .page-intro-layout { margin-top: -40px; }
