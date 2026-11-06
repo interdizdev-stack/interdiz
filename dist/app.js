@@ -888,17 +888,31 @@ $('.motion-toggle')?.addEventListener('click', () => {
 });
 motionPreference.addEventListener('change', e => { if (userReduced === null) { reduced = e.matches; setupAnimations(); } });
 
+function anchorScrollTop(target) {
+  const serviceCards = target.id === 'solutions-track';
+  const anchor = serviceCards ? target.closest('.manifesto') : target;
+  let top = smoother ? smoother.offset(anchor, 'top top') : anchor.getBoundingClientRect().top + scrollY;
+  // Return directly to the service cards, with clearance for the floating menu.
+  // Layout offsets exclude the entrance transform on .manifesto-inner.
+  if (serviceCards) {
+    for (let element = target; element && element !== anchor; element = element.offsetParent) top += element.offsetTop;
+    top += anchor.clientTop;
+    top -= parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+  }
+  else if (isCompactLayout() && target.id !== 'top') top -= 82;
+  if (target.id === 'top' && heroTrigger) top = heroTrigger.start;
+  return Math.max(0, top);
+}
+
 // Native links remain useful in the non-script version; account for pinned sections here.
 $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
   const target = $(link.getAttribute('href')); if (!target) return;
   event.preventDefault();
   if (link.closest('.mobile-menu')) closeMobileNavigation?.(false);
-  let top = smoother ? smoother.offset(target, 'top top') : target.getBoundingClientRect().top + scrollY;
-  if (isCompactLayout() && target.id !== 'top') top -= 82;
-  if (target.id === 'top' && heroTrigger) top = heroTrigger.start;
+  const top = anchorScrollTop(target);
   history.replaceState(null, '', link.getAttribute('href'));
-  if (smoother) smoother.scrollTo(Math.max(0, top), true);
-  else scrollTo({ top: Math.max(0, top), behavior: reduced ? 'instant' : 'smooth' });
+  if (smoother) smoother.scrollTo(top, true);
+  else scrollTo({ top, behavior: reduced ? 'instant' : 'smooth' });
   if (target.id === 'main') target.focus({ preventScroll: true });
 }));
 
@@ -1022,11 +1036,9 @@ async function init() {
   // Cross-page links need the final layout, including the pinned opening scene.
   const initialSection = document.getElementById(location.hash.slice(1));
   if (initialSection) {
-    let top = smoother ? smoother.offset(initialSection, 'top top') : initialSection.getBoundingClientRect().top + scrollY;
-    if (isCompactLayout() && initialSection.id !== 'top') top -= 82;
-    if (initialSection.id === 'top' && heroTrigger) top = heroTrigger.start;
-    if (smoother) smoother.scrollTo(Math.max(0, top), false);
-    else scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    const top = anchorScrollTop(initialSection);
+    if (smoother) smoother.scrollTo(top, false);
+    else scrollTo({ top, behavior: 'instant' });
   }
   updateProgress();
   // Project images have reserved dimensions; loading them does not change layout
