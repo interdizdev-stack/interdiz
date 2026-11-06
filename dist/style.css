@@ -90,6 +90,10 @@ html {
    Native CSS smoothing would keep moving an incoming link to its old position. */
 html:has(#smooth-wrapper) { scroll-behavior: auto; }
 
+/* Reveal a return to services only after its final, unanimated scroll position. */
+html.services-entry-pending { background: var(--bg); }
+.services-entry-pending body { visibility: hidden; opacity: 0; }
+
 body {
   margin: 0;
   overflow-x: clip;

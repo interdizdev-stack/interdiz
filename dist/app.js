@@ -889,7 +889,7 @@ $('.motion-toggle')?.addEventListener('click', () => {
 motionPreference.addEventListener('change', e => { if (userReduced === null) { reduced = e.matches; setupAnimations(); } });
 
 function anchorScrollTop(target) {
-  const serviceCards = target.id === 'solutions-track';
+  const serviceCards = target.id === 'services' || target.id === 'solutions-track';
   const anchor = serviceCards ? target.closest('.manifesto') : target;
   let top = smoother ? smoother.offset(anchor, 'top top') : anchor.getBoundingClientRect().top + scrollY;
   // Return directly to the service cards, with clearance for the floating menu.
@@ -1036,9 +1036,20 @@ async function init() {
   // Cross-page links need the final layout, including the pinned opening scene.
   const initialSection = document.getElementById(location.hash.slice(1));
   if (initialSection) {
-    const top = anchorScrollTop(initialSection);
-    if (smoother) smoother.scrollTo(top, false);
-    else scrollTo({ top, behavior: 'instant' });
+    const place = () => {
+      const top = anchorScrollTop(initialSection);
+      if (smoother) smoother.scrollTo(top, false);
+      else scrollTo({ top, behavior: 'instant' });
+      window.ScrollTrigger?.update();
+      if (window.interdizServicesEntry?.pending) {
+        smoother?.scrollTrigger.getTween()?.progress(1);
+        window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
+      }
+      updateProgress();
+      updateActiveMenu();
+    };
+    if (window.interdizServicesEntry?.pending) await window.interdizServicesEntry.finish(place);
+    else place();
   }
   updateProgress();
   // Project images have reserved dimensions; loading them does not change layout
