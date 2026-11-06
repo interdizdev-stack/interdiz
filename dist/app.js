@@ -139,7 +139,16 @@ function setupMobileControlsClearance() {
   update();
 }
 
-setupProjectDialog();
+setupProjectDialog({
+  onOpen() {
+    const activeSmoother = smoother;
+    const wasPaused = activeSmoother?.paused();
+    activeSmoother?.paused(true);
+    return () => {
+      if (activeSmoother === smoother) activeSmoother?.paused(wasPaused);
+    };
+  }
+});
 
 // Keep native summary keyboard activation while animating both directions.
 function setupProcessAccordion() {

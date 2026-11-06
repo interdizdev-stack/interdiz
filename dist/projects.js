@@ -10,45 +10,54 @@ const projects = {
   "divo-dental": {"title": "Divo Dental", "description": "Divo Dental — разработка логотипа для современной стоматологии", "image": "./assets/divo-dental.webp", "link": "https://www.behance.net/gallery/249932083/The-Geometry-of-Trust-A-Logo-for-a-Modern-Dental-Brand"}
 };
 
-export function setupProjectDialog() {
+export function setupProjectDialog({ onOpen } = {}) {
   const dialog = document.querySelector('.project-dialog:not(.service-dialog)');
+  if (!dialog) return;
   const title = dialog.querySelector('#dialog-title');
   const description = dialog.querySelector('.dialog-description');
   const image = dialog.querySelector('.dialog-image');
   const link = dialog.querySelector('.dialog-link');
-  const fallbackLink = link.getAttribute('href');
-  const fallbackLabel = link.textContent;
+  const fallbackLink = link?.getAttribute('href');
+  const fallbackLabel = link?.textContent;
   let opener;
+  let restorePage;
 
   document.querySelectorAll('[data-open-project]').forEach(button => {
-    button.addEventListener('click', () => {
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.addEventListener('click', event => {
       const project = projects[button.dataset.openProject];
-      if (!project) return;
+      if (!project || dialog.open) return;
+      event.preventDefault();
 
       opener = button;
       title.textContent = project.title;
       description.textContent = project.description;
       image.src = project.image;
       image.alt = `Проект ${project.title}`;
-      const destination = project.link ?? fallbackLink;
-      link.hidden = !destination;
-      link.setAttribute('href', destination ?? '');
-      link.textContent = project.link ? 'Смотреть кейс на Behance ↗' : fallbackLabel;
-      if (project.link) {
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-      } else {
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
+      if (link) {
+        const destination = project.link ?? fallbackLink;
+        link.hidden = !destination;
+        link.setAttribute('href', destination ?? '');
+        link.textContent = project.link ? 'Смотреть кейс на Behance ↗' : fallbackLabel;
+        if (project.link) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        } else {
+          link.removeAttribute('target');
+          link.removeAttribute('rel');
+        }
       }
 
+      restorePage = onOpen?.();
       dialog.showModal();
       dialog.scrollTop = 0;
       document.body.classList.add('dialog-open');
     });
   });
 
-  dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.querySelectorAll('.dialog-close, [data-close-project]').forEach(button => {
+    button.addEventListener('click', () => dialog.close());
+  });
   dialog.addEventListener('click', event => {
     if (event.target !== dialog) return;
     const bounds = dialog.getBoundingClientRect();
@@ -57,6 +66,9 @@ export function setupProjectDialog() {
   });
   dialog.addEventListener('close', () => {
     if (!document.querySelector('dialog[open]')) document.body.classList.remove('dialog-open');
+    restorePage?.();
+    restorePage = null;
     opener?.focus({ preventScroll: true });
+    opener = null;
   });
 }

@@ -244,6 +244,12 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .dialog-close { top: 12px; width: 48px; height: 48px; margin: 12px 12px -60px 0; }
   html[data-theme] .dialog-inner { padding: 28px; }
   html[data-theme] .project-dialog .dialog-inner h2 { padding-right: 32px; font-size: clamp(28px, 7.7vw, 30px); line-height: 1.1; }
+  html[data-theme] .project-case-toolbar { padding: 12px 16px; gap: 8px; }
+  html[data-theme] .project-case-toolbar .dialog-kicker { max-width: none; font-size: 10px; letter-spacing: 1px; }
+  html[data-theme] .project-case-close { padding-inline: 12px; gap: 10px; font-size: 13px; }
+  html[data-theme] .project-case .dialog-inner { padding: 24px 20px; }
+  html[data-theme] .project-case .dialog-inner h2 { padding-right: 0; }
+  html[data-theme] .project-case-return { width: 100%; min-height: 48px; justify-content: space-between; font-size: 14px; }
   html[data-theme] .dialog-kicker,
   html[data-theme] .service-dialog-kicker { display: block; max-width: calc(100% - 48px); font-size: 12px; line-height: 1.45; }
   html[data-theme] :is(.dialog-description, .service-detail-grid p, .service-scope-list) { font-size: 16px; line-height: 1.55; }

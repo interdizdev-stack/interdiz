@@ -1302,14 +1302,16 @@
 
 
   <!-- Project Dialog Modal -->
-  <dialog class="project-dialog" aria-labelledby="dialog-title">
-    <button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button>
+  <dialog class="project-dialog project-case" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="project-case-toolbar">
+      <span class="dialog-kicker mono-meta">[ КЕЙС INTERDIZ ]</span>
+      <button type="button" class="project-case-close" data-close-project autofocus>Закрыть кейс <span aria-hidden="true">✕</span></button>
+    </div>
     <div class="dialog-inner">
-      <span class="dialog-kicker mono-meta">[ ПРОЕКТ INTERDIZ ]</span>
       <h2 id="dialog-title"></h2>
-      <p class="dialog-description"></p>
+      <p class="dialog-description" id="dialog-description"></p>
       <img class="dialog-image" alt="" width="1920" height="1280">
-      <a class="dialog-link" href="./portfolio.html">Полное портфолио InterDIZ ↗</a>
+      <button type="button" class="contact-pill contact-pill--filled project-case-return" data-close-project>Вернуться на главную <span aria-hidden="true">↩</span></button>
     </div>
   </dialog>
 
