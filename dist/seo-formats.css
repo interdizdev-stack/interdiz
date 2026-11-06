@@ -14,10 +14,19 @@ html[data-theme="light"] .seo-status-dot { background: var(--fg); }
 html[data-theme="dark"] .seo-tabs > button { border-color: transparent; }
 .seo-tabs > button[aria-selected="true"] { background: var(--lime); color: #0c0e0c; }
 .seo-tabs > button:hover:not([aria-selected="true"]) { background: var(--bg-surface-hover); }
+.seo-tabs > button::before, .seo-tabs > button::after { content: ''; position: absolute; pointer-events: none; opacity: var(--seo-tab-hint, 0); }
+.seo-tabs > button::before { inset: 0; background: linear-gradient(110deg, transparent, color-mix(in srgb, var(--lime) 20%, transparent), transparent); }
+.seo-tabs > button::after { inset: auto 14px 8px; height: var(--outline-width); background: var(--fg); transform: scaleX(var(--seo-tab-hint, 0)); transform-origin: left; }
+html[data-theme="dark"] .seo-tabs > button::after { background: var(--lime); }
+.seo-tabs > button > span { position: relative; }
+.seo-lab.is-enhanced .seo-lab-caption { color: var(--fg-muted); }
 .seo-tab-index { font-size: 11px; font-weight: 400; letter-spacing: 0; opacity: .65; }
-.seo-tab-arrow { margin-left: auto; font-size: 23px; transition: transform .3s; }
+.seo-tab-arrow { margin-left: auto; font-size: 23px; transition: transform .3s, translate .25s; }
 .seo-tabs > button[aria-selected="true"] .seo-tab-arrow { transform: rotate(45deg); }
 .seo-tabs > button:focus-visible { z-index: 2; outline: var(--outline-width) solid var(--fg); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .seo-tabs > button:hover:not([aria-selected="true"]) .seo-tab-arrow { translate: 3px -3px; }
+}
 .seo-lab-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: var(--bg-surface); border: var(--outline-width) solid var(--line-strong); }
 .seo-visual { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 28px; border-right: var(--outline-width) solid var(--line-strong); overflow: hidden; }
 .seo-visual-label, .seo-visual-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
@@ -78,6 +87,8 @@ html[data-theme="light"] .seo-accent-stroke { stroke: var(--fg); }
 @media (max-width: 760px) {
   .seo-lab { margin-top: 32px; }
   .seo-lab-caption { display: none; }
+  .seo-lab.is-enhanced .seo-lab-top { flex-wrap: wrap; gap: 12px 20px; }
+  .seo-lab.is-enhanced .seo-lab-caption { display: block; order: 1; flex-basis: 100%; font-size: 12px; }
   .seo-lab-body { grid-template-columns: minmax(0, 1fr); }
   .seo-visual { border-right: 0; border-bottom: var(--outline-width) solid var(--line-strong); padding: 20px; }
   .seo-canvas { max-height: 320px; margin-block: 8px; }

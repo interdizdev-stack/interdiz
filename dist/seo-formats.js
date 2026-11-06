@@ -8,9 +8,12 @@ if (lab) {
   const details = ['Находим то, что мешает поиску.', 'Каждому запросу — своё место.', 'Собираем страницу вокруг ответа.', 'Наблюдаем. Сравниваем. Уточняем.'];
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const compact = matchMedia('(max-width: 760px)');
+  const tablist = lab.querySelector('.seo-tabs');
   let active = 0;
   let animation;
   let seen = false;
+  let hintAnimation;
+  let hintSeen = false;
 
   const reduced = () => {
     let saved = false;
@@ -23,6 +26,42 @@ if (lab) {
     animation?.revert();
     animation = null;
   }
+
+  function stopHint() {
+    hintAnimation?.revert();
+    hintAnimation = null;
+  }
+
+  function dismissHint() {
+    hintSeen = true;
+    stopHint();
+  }
+
+  // Demonstrate that the other tabs respond, without changing the reader's selection.
+  // One short pass, only while the controls are visible; any intentional input cancels it.
+  function showHint() {
+    if (hintSeen || reduced() || !window.gsap || document.hidden) return;
+    hintSeen = true;
+    hintAnimation = window.gsap.context(() => {
+      const timeline = window.gsap.timeline({ delay: .65, onComplete: stopHint });
+      tabs.filter((_, index) => index !== active).forEach((tab, index) => {
+        const arrow = tab.querySelector('.seo-tab-arrow');
+        const label = tab.children[1];
+        const start = index * .55;
+        timeline.fromTo(tab, { '--seo-tab-hint': 0 }, {
+          '--seo-tab-hint': 1, duration: .25, ease: 'power2.out'
+        }, start).to(tab, { '--seo-tab-hint': 0, duration: .5, ease: 'power2.inOut' }, start + .3);
+        timeline.to(label, { x: 4, duration: .25, ease: 'power2.out' }, start)
+          .to(label, { x: 0, duration: .5, ease: 'power2.inOut' }, start + .3);
+        // Animate translate so the active arrow's CSS rotation is never overwritten.
+        timeline.fromTo(arrow, { translate: '0px 0px' }, {
+          translate: '5px -5px', duration: .25, ease: 'power2.out'
+        }, start).to(arrow, { translate: '0px 0px', duration: .5, ease: 'power2.inOut' }, start + .3);
+      });
+    }, tablist);
+  }
+
+  function stopMotion() { stopAnimation(); stopHint(); }
 
   function animate() {
     stopAnimation();
@@ -98,9 +137,20 @@ if (lab) {
       if (active !== next) select(next);
     });
   });
+  ['pointerdown', 'pointerover', 'focusin', 'keydown', 'click'].forEach(type => {
+    tablist.addEventListener(type, dismissHint);
+  });
   lab.classList.add('is-enhanced');
-  lab.querySelector('.seo-tabs').hidden = false;
+  lab.querySelector('.seo-lab-caption').textContent = 'Нажмите на вкладку — раскройте детали';
+  tablist.setAttribute('aria-describedby', 'seo-tabs-hint');
+  tablist.hidden = false;
   select(0, false);
+
+  const hintObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && entries[0].intersectionRatio >= .75) showHint();
+    else stopHint();
+  }, { threshold: .75, rootMargin: '-110px 0px -20px 0px' });
+  hintObserver.observe(tablist);
 
   // Overlapping grid panels reserve the tallest text, including after font/width changes.
   // Switching tabs never shifts the page or refreshes the shared scroll animations.
@@ -109,11 +159,11 @@ if (lab) {
     if (!seen) { seen = true; animate(); }
   }, { threshold: .15 });
   observer.observe(lab);
-  preference.addEventListener('change', stopAnimation);
-  compact.addEventListener('change', stopAnimation);
-  const rootObserver = new MutationObserver(() => { if (reduced()) stopAnimation(); });
+  preference.addEventListener('change', stopMotion);
+  compact.addEventListener('change', stopMotion);
+  const rootObserver = new MutationObserver(() => { if (reduced()) stopMotion(); });
   rootObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stopAnimation(); });
-  addEventListener('pagehide', stopAnimation);
-  addEventListener('pageshow', () => { if (reduced()) stopAnimation(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopMotion(); });
+  addEventListener('pagehide', stopMotion);
+  addEventListener('pageshow', () => { if (reduced()) stopMotion(); });
 }
