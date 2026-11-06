@@ -1,3 +1,4 @@
+import './scripts/sync-header.mjs';
 import './scripts/sync-footer.mjs';
 import { syncSEO } from './scripts/sync-seo.mjs';
 import http from 'node:http';
