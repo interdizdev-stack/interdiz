@@ -1178,8 +1178,19 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
   color: var(--fg);
   cursor: pointer;
   border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Animate only the artwork; the button and its hit area stay in one plane. */
+.project-preview {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
   transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card:hover .project-image {
@@ -1229,6 +1240,8 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
 
 .project-open {
   position: absolute;
+  z-index: 1;
+  pointer-events: none;
   right: 20px;
   bottom: 20px;
   background: var(--fg);
@@ -1239,12 +1252,12 @@ html[data-theme="light"] .page-switch > :is(a, span) { border-color: #000; }
   font-weight: 700;
   letter-spacing: 0.5px;
   font-family: var(--text);
-  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.project-image:hover .project-open {
+.project-image:is(:hover, :focus-visible, :active) .project-open {
   background: var(--lime);
-  transform: translateY(-3px);
+  color: #0c0e0c;
   box-shadow: 0 4px 15px rgba(194, 255, 67, 0.4);
 }
 
@@ -2052,6 +2065,7 @@ html[data-theme="light"] .project-case-close { border-color: var(--fg); }
   display: none;
 }
 .reduced-motion .project-image,
+.reduced-motion .project-preview,
 .reduced-motion .project-image img { transform: none; }
 .reduced-motion .webgl {
   opacity: 1 !important;

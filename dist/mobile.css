@@ -135,7 +135,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .project-track { gap: 16px; }
   html[data-theme] .project-card { flex-basis: calc((100% - 16px) / 2); }
   html[data-theme] .project-image { height: auto; min-height: 0; aspect-ratio: auto; overflow: visible; border-color: transparent !important; border-radius: 0; background: none; box-shadow: none; }
-  html[data-theme] .project-preview { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: var(--outline-width) solid var(--line); border-radius: 8px; background: var(--bg-surface); }
+  html[data-theme] .project-preview { display: block; position: relative; inset: auto; aspect-ratio: 4 / 3; overflow: hidden; border: var(--outline-width) solid var(--line); border-radius: 8px; background: var(--bg-surface); transform: none; }
   html[data-theme] .project-image:is(:hover, :focus-visible) .project-preview { border-color: var(--line-strong); }
   html[data-theme] .project-info { gap: 12px; margin-top: 16px; }
   html[data-theme] .project-info h3 { font-size: 24px; line-height: 1.17; }
@@ -144,6 +144,7 @@ html[data-theme="light"] .mobile-menu-links a:is(:hover, .is-current) { color: v
   html[data-theme] .project-badges { top: 12px; left: 12px; gap: 6px; }
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
   html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
+  html[data-theme] .project-image:is(:hover, :focus-visible, :active) .project-open { background: var(--lime); color: #0c0e0c; }
   html[data-theme] .gallery-footer { position: relative; display: block; margin-top: 28px; padding: 0 0 24px; border: 0; }
   html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -30px; min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
