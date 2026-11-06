@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="./service.css">
   <script src="./theme.js"></script>
   <script type="module" src="./service.js"></script>
+  <script type="module" src="./footer.js"></script>
 </head>
 <body class="inner-page service-page">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -29,17 +30,17 @@
       <a href="#work"><span class="nav-num">[03]</span> Проекты</a>
       <a href="#process"><span class="nav-num">[04]</span> Этапы</a>
       <a href="#questions"><span class="nav-num">[05]</span> FAQ</a>
-      <a href="./#contact"><span class="nav-num">[06]</span> Контакты</a>
+      <a href="#contact"><span class="nav-num">[06]</span> Контакты</a>
     </div>
     <div class="float-divider" aria-hidden="true"></div>
     <button class="mobile-menu-toggle" type="button" data-mobile-menu aria-controls="mobile-menu" aria-haspopup="dialog" aria-expanded="false" hidden>Меню <span class="mobile-menu-icon" aria-hidden="true"><i></i><i></i></span></button>
-    <a class="float-cta contact-pill contact-pill--filled" href="./#contact">Обсудить <span aria-hidden="true">↗</span></a>
+    <a class="float-cta contact-pill contact-pill--filled" href="#contact">Обсудить <span aria-hidden="true">↗</span></a>
   </nav>
 
   <header class="header page-header service-header" id="top">
     <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
     <span class="header-caption">Независимая digital&#8209;студия</span>
-    <a class="contact-pill" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+    <a class="contact-pill" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="main" tabindex="-1">
@@ -62,7 +63,7 @@
             <div>
               <p class="hero-description">Разрабатываем лендинги, интернет-магазины, корпоративные сайты и веб-приложения. От структуры и дизайна до запуска.</p>
               <div class="service-actions">
-                <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+                <a class="contact-pill contact-pill--filled" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
               </div>
             </div>
             <p class="service-intro-note">Ваш продукт.<br>Его цифровое продолжение.</p>
@@ -167,24 +168,76 @@
       </div>
     </section>
 
-    <section class="service-section service-contact" aria-labelledby="service-contact-title">
-      <span class="service-eyebrow">СЛЕДУЮЩИЙ ШАГ — ВАШ</span>
-      <h2 class="service-title" id="service-contact-title"><span class="hero-line">ЕСТЬ</span><span class="hero-line outline">ЗАДАЧА<span class="title-dot">?</span></span></h2>
-      <p class="hero-description">Расскажите, что вы хотите создать или изменить. Обсудим идею и определим, с чего начать.</p>
-      <a class="contact-pill contact-pill--filled" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
-    </section>
   </main>
 
-  <footer class="service-footer">
-    <div class="footer-bottom">
-      <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
-      <div class="footer-clock mono-meta">
-        <span>САНКТ-ПЕТЕРБУРГ:</span> <span class="ast-clock">--:--:-- UTC+3</span>
+  <footer class="contact" id="contact">
+      <div class="section-kicker">
+        <span class="kicker-index"><span class="crosshair">+</span> 06 // СЛЕДУЮЩИЙ ШАГ</span>
+        <span class="kicker-meta">НАЧИНАЕТСЯ С <span class="kicker-tail">РАЗГОВОРА <span class="crosshair">+</span></span></span>
       </div>
-      <span class="mono-meta footer-copyright">© 2026 INTERDIZ</span>
-      <a href="#top" class="quick-home footer-up" aria-label="Наверх" title="Наверх">↑</a>
-    </div>
-  </footer>
+
+      <div class="contact-hero">
+        <h2>ЕСТЬ ИДЕЯ?<br><a href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">ДАДИМ ЕЙ<br><span class="contact-glow">ИЗМЕРЕНИЕ. ↗</span></a></h2>
+      </div>
+
+      <!-- Modular Swiss Contact Grid with 1-click clipboard -->
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-card-top mono-meta">
+            <span>[ EMAIL ]</span>
+            <span class="copy-tag"><span class="desktop-only">КЛИК ДЛЯ КОПИРОВАНИЯ</span><span class="compact-only">Скопировать email</span></span>
+          </div>
+          <button type="button" class="contact-val copy-email-btn" data-copy="interdiz@internet.ru" aria-label="Скопировать interdiz@internet.ru">
+            interdiz@internet.ru <span class="copy-icon">📋</span>
+          </button>
+          <p class="contact-desc">Отвечаем в течение 24 часов с анализом вашей задачи.</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-top mono-meta">
+            <span>[ TELEGRAM / MAX ]</span>
+            <span class="online-tag">● БЫСТРЫЙ ОТВЕТ</span>
+          </div>
+          <div class="contact-messengers">
+            <a class="contact-val" href="https://t.me/interdizdev" target="_blank" rel="noopener noreferrer">
+              @interdizdev <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-val" href="https://max.ru/u/f9LHodD0cOKVBz1rslMimzq4G1qYJX3k6ynyu5wlRaD4KRM9nas0hIBU6MY" target="_blank" rel="noopener noreferrer" aria-label="Написать в MAX">
+              MAX <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <p class="contact-desc">Связаться с нами напрямую</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-top mono-meta">
+            <span>[ ТЕЛЕФОН ]</span>
+            <span class="location-tag"><span class="desktop-only">СПб · UTC+3 // РАБОТАЕМ ВЕЗДЕ</span><span class="compact-only">СПб · UTC+3</span></span>
+          </div>
+          <a class="contact-val" href="tel:+79275881990">
+            +7 927 588-19-90 <span>↗</span>
+          </a>
+          <p class="contact-desc">Звонки по будням с 11:00 до 20:00 по МСК.</p>
+        </div>
+      </div>
+
+      <!-- Hidden standard container for GSAP compatibility -->
+      <div class="contact-links" style="display:none;" aria-hidden="true">
+        <a href="mailto:interdiz@internet.ru">interdiz@internet.ru</a>
+        <a href="tel:+79275881990">+7 927 588-19-90</a>
+        <a href="https://t.me/interdizdev">Telegram</a>
+      </div>
+
+      <!-- Precision Footer Bottom with Live Astrakhan Clock -->
+      <div class="footer-bottom">
+        <a class="wordmark" href="./#top" aria-label="InterDIZ — на главную">inter<span>diz</span><sup>®</sup></a>
+        <div class="footer-clock mono-meta">
+          <span>САНКТ-ПЕТЕРБУРГ:</span> <span class="ast-clock">--:--:-- UTC+3</span>
+        </div>
+        <span class="mono-meta footer-copyright">© 2026 INTERDIZ</span>
+        <a href="#top" class="back-to-top mono-meta">НАВЕРХ ↑</a>
+      </div>
+    </footer>
 
   <dialog class="mobile-menu" id="mobile-menu" aria-label="Меню студии" hidden>
     <div class="mobile-menu-heading"><button class="mobile-menu-close" type="button" aria-label="Закрыть меню">×</button></div>
@@ -195,9 +248,9 @@
       <a href="#process">Как работаем <span aria-hidden="true">↓</span></a>
       <a href="#work">Проекты <span aria-hidden="true">↓</span></a>
       <a href="#questions">Вопросы и ответы <span aria-hidden="true">↓</span></a>
-      <a href="./#contact">Контакты <span aria-hidden="true">↗</span></a>
+      <a href="#contact">Контакты <span aria-hidden="true">↗</span></a>
     </nav>
-    <a class="contact-pill contact-pill--filled mobile-menu-contact" href="./#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
+    <a class="contact-pill contact-pill--filled mobile-menu-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </dialog>
 
   <dialog class="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">

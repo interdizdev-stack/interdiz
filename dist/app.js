@@ -1,7 +1,7 @@
 import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
 import { setupMobileMenu } from './navigation.js';
-import { setupClock } from './footer.js';
+import './footer.js';
 
 // Content and links are usable without animation or WebGL.
 const $ = (selector, root=document) => root.querySelector(selector);
@@ -1049,30 +1049,6 @@ function setupCardTilt() {
   });
 }
 
-/* ========================================================
-   Copy to Clipboard
-   ======================================================== */
-function setupCopyClipboard() {
-  const toast = $('#copy-toast');
-  let timer;
-  $$('[data-copy]').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const text = btn.dataset.copy;
-      try {
-        await navigator.clipboard.writeText(text);
-        if (toast) {
-          toast.textContent = `✓ ${text} скопирован в буфер!`;
-          toast.classList.add('toast-show');
-          clearTimeout(timer);
-          timer = setTimeout(() => toast.classList.remove('toast-show'), 2500);
-        }
-      } catch {
-        location.href = `mailto:${text}`;
-      }
-    });
-  });
-}
-
 // Import failure or lack of WebGL never hides the page or its links.
 async function init() {
   try {
@@ -1110,8 +1086,6 @@ async function init() {
   addEventListener('resize', updateActiveMenu, { passive: true });
   setupCursor();
   setupCardTilt();
-  setupClock();
-  setupCopyClipboard();
   await document.fonts.ready;
   window.ScrollTrigger?.refresh();
   // Cross-page links need the final layout, including the pinned opening scene.

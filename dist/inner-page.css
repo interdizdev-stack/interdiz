@@ -49,18 +49,6 @@ html[data-theme] .page-header > .contact-pill {
 .page-text-link:hover { text-decoration-thickness: var(--outline-width); }
 .page-text-link span { font-size: 1.25em; }
 
-.page-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px 24px;
-  padding: clamp(28px, 4vw, 56px) var(--pad);
-  border-top: var(--outline-width) solid var(--line);
-}
-.page-footer p { font-size: clamp(22px, 3vw, 38px); font-weight: 700; letter-spacing: -.04em; }
-.page-footer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 20px; }
-
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
   html[data-theme] :is(.page-intro h1, .service-title) { font-size: var(--mobile-hero-heading-size); line-height: 1.06; }
   html[data-theme] .inner-page .hero-description { margin-top: 8px; font-size: 15px; line-height: 1.6; }
