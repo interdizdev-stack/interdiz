@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "sync:footer": "node scripts/sync-footer.mjs",
+    "sync:seo": "node scripts/sync-seo.mjs",
+    "check:seo": "node scripts/sync-seo.mjs --check && node --test scripts/seo.test.mjs",
+    "prepare:site": "npm run sync:footer && npm run sync:seo",
     "start": "node server.mjs",
-    "check": "node scripts/sync-footer.mjs --check && node --check scripts/sync-footer.mjs && node --check dist/app.js && node --check dist/navigation.js && node --check dist/projects.js && node --check dist/portfolio.js && node --check dist/service.js && node --check dist/service-motion.js && node --check dist/footer.js && node --check dist/reviews.js && node --check dist/scene.js && node --check dist/scene-dark.js && node --check dist/scene-framing.js && node --check dist/theme.js && node --check server.mjs"
+    "check": "npm run check:seo && node scripts/sync-footer.mjs --check && node --check scripts/sync-footer.mjs && node --check dist/app.js && node --check dist/navigation.js && node --check dist/projects.js && node --check dist/portfolio.js && node --check dist/service.js && node --check dist/service-motion.js && node --check dist/footer.js && node --check dist/reviews.js && node --check dist/scene.js && node --check dist/scene-dark.js && node --check dist/scene-framing.js && node --check dist/theme.js && node --check server.mjs"
   }
 }

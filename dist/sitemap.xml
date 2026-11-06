@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://interdiz.ru/</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/mama.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/health-culture.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/pierre-magnol.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/home30.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/shogun-auto.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/kyrilka.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/portfolio.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/mama.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/health-culture.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/pierre-magnol.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/home30.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/shogun-auto.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/kyrilka.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/web-development.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/pierre-magnol.webp</image:loc></image:image>
+  </url>
+</urlset>

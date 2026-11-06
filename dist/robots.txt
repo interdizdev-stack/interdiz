@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /AGENTS.md
+
+# Yandex: theme and retired topic do not change the page content.
+Clean-param: theme&topic /
+
+Sitemap: https://interdiz.ru/sitemap.xml
