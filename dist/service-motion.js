@@ -18,7 +18,7 @@ export function setupServiceMotion() {
   let userReduced = savedPreference();
 
   // Outer elements remain stable scroll triggers; only their contents move.
-  all('.service-format:not(.design-format)').forEach(card => {
+  all('.service-format:not(.design-format, .crm-format)').forEach(card => {
     const body = document.createElement('div');
     body.className = 'service-format-body';
     const content = document.createElement('div');
@@ -36,7 +36,7 @@ export function setupServiceMotion() {
     line.append(pulse);
     kicker.append(line);
   });
-  all('.service-format:not(.design-format), .service-process li').forEach(item => {
+  all('.service-format:not(.design-format, .crm-format), .service-process li').forEach(item => {
     const trace = document.createElement('span');
     trace.className = 'service-row-trace';
     trace.setAttribute('aria-hidden', 'true');
@@ -111,7 +111,7 @@ export function setupServiceMotion() {
       all('.service-section > .hero-description').forEach(element => rise(element));
 
       // Different depths in each column echo the home page's services rail.
-      all('.service-format:not(.design-format)').forEach((card, index) => {
+      all('.service-format:not(.design-format, .crm-format)').forEach((card, index) => {
         gsap.fromTo(card.querySelector('.service-format-content'), {
           y: compact ? 30 : 90 + index % 2 * 55,
           rotationX: compact ? 0 : 7, transformPerspective: 1100, opacity: .35
