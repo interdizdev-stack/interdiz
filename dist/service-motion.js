@@ -1,4 +1,5 @@
 import { setupDesignFormats } from './design-formats.js';
+import { revealSEOHeading, setupSEOPageMotion } from './seo-motion.js';
 
 const compactQuery = '(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)';
 
@@ -9,6 +10,7 @@ export function setupServiceMotion() {
   gsap.registerPlugin(ScrollTrigger);
   const page = document.querySelector('.service-page');
   const web = page.classList.contains('web-service');
+  const seo = page.classList.contains('seo-service');
   const root = document.documentElement;
   const seen = new WeakSet();
   const media = gsap.matchMedia();
@@ -95,17 +97,20 @@ export function setupServiceMotion() {
       const heroLines = all('.service-title .hero-line', intro);
       pulse(intro.querySelector('.section-kicker'));
       rise(intro.querySelector('.page-switch'));
-      entrance(intro.querySelector('.service-title'), tl => tl.from(heroLines, web ? {
-        x: compact ? 14 : 48, rotationX: compact ? 0 : -18,
-        transformPerspective: 1400, transformOrigin: '50% 100%',
-        clipPath: 'inset(-20% 100% -20% -15%)', opacity: .15,
-        stagger: .16, duration: compact ? .9 : 1.25, ease: 'power4.out',
-        clearProps: 'transform,transformOrigin,opacity,clipPath'
-      } : {
-        x: i => (i ? 1 : -1) * (compact ? 22 : 68), y: compact ? 32 : 70,
-        rotationX: compact ? 0 : 10, transformPerspective: 1200, opacity: 0,
-        stagger: .12, duration: compact ? .75 : 1.15, ease: 'power4.out'
-      }));
+      entrance(intro.querySelector('.service-title'), tl => {
+        if (seo) return revealSEOHeading(tl, heroLines, compact);
+        tl.from(heroLines, web ? {
+          x: compact ? 14 : 48, rotationX: compact ? 0 : -18,
+          transformPerspective: 1400, transformOrigin: '50% 100%',
+          clipPath: 'inset(-20% 100% -20% -15%)', opacity: .15,
+          stagger: .16, duration: compact ? .9 : 1.25, ease: 'power4.out',
+          clearProps: 'transform,transformOrigin,opacity,clipPath'
+        } : {
+          x: i => (i ? 1 : -1) * (compact ? 22 : 68), y: compact ? 32 : 70,
+          rotationX: compact ? 0 : 10, transformPerspective: 1200, opacity: 0,
+          stagger: .12, duration: compact ? .75 : 1.15, ease: 'power4.out'
+        });
+      });
       all('.hero-description, .service-actions, .service-intro-note', intro).forEach(element => rise(element));
       // Entrance owns transform; scroll separation uses independent translate.
       gsap.to(heroLines, {
@@ -116,15 +121,18 @@ export function setupServiceMotion() {
 
       all('.service-section > .section-kicker, .contact > .section-kicker').forEach(pulse);
       all('.service-section > .service-title').forEach(title => {
-        entrance(title, tl => tl.from(all('.hero-line', title), web ? {
-          x: i => (i ? 1 : -1) * (compact ? 8 : 36),
-          rotationX: compact ? 0 : -12, transformPerspective: 1200,
-          clipPath: 'inset(-20% 100% -20% -15%)', opacity: .25,
-          stagger: .13, duration: compact ? .75 : 1.05, ease: 'power4.out'
-        } : {
-          x: i => (i ? 1 : -1) * (compact ? 18 : 52), y: compact ? 24 : 44,
-          opacity: .1, stagger: .09, duration: compact ? .6 : .85
-        }));
+        entrance(title, tl => {
+          if (seo) return revealSEOHeading(tl, all('.hero-line', title), compact);
+          tl.from(all('.hero-line', title), web ? {
+            x: i => (i ? 1 : -1) * (compact ? 8 : 36),
+            rotationX: compact ? 0 : -12, transformPerspective: 1200,
+            clipPath: 'inset(-20% 100% -20% -15%)', opacity: .25,
+            stagger: .13, duration: compact ? .75 : 1.05, ease: 'power4.out'
+          } : {
+            x: i => (i ? 1 : -1) * (compact ? 18 : 52), y: compact ? 24 : 44,
+            opacity: .1, stagger: .09, duration: compact ? .6 : .85
+          });
+        });
       });
       all('.service-section > .hero-description').forEach(element => rise(element));
 
@@ -216,6 +224,7 @@ export function setupServiceMotion() {
         scrollTrigger: { id: 'service-faq-depth', trigger: '#questions', start: 'top bottom', end: 'top 35%', scrub, invalidateOnRefresh: true }
       }));
       const stopFAQ = setupAnimatedFAQ(gsap, ScrollTrigger, questions, compact);
+      const stopSEO = seo ? setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) : () => {};
       if (web) all('details', questions).forEach(row => {
         entrance(row, tl => tl.from(row, {
           x: compact ? 14 : 36, opacity: .15, duration: compact ? .5 : .7
@@ -261,6 +270,7 @@ export function setupServiceMotion() {
       return () => {
         stopDesignFormats();
         stopWebPointer();
+        stopSEO();
         stopFAQ();
         page.removeEventListener('focusin', finishFocused);
         tilts.forEach(stop => stop());
