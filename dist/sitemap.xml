@@ -25,6 +25,10 @@
     <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
   </url>
   <url>
+    <loc>https://interdiz.ru/articles.html</loc>
+
+  </url>
+  <url>
     <loc>https://interdiz.ru/web-development.html</loc>
     <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/pierre-magnol.webp</image:loc></image:image>

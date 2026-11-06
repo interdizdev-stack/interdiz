@@ -77,7 +77,7 @@ export function structuredData(page, html, home) {
   const url = absolute(page.path);
   const pageId = `${url}#webpage`;
   const webpage = {
-    '@type': page.kind === 'portfolio' ? 'CollectionPage' : 'WebPage', '@id': pageId,
+    '@type': ['portfolio', 'articles'].includes(page.kind) ? 'CollectionPage' : 'WebPage', '@id': pageId,
     url, name: page.title, description: page.description, inLanguage: site.language,
     isPartOf: ref(websiteId), about: ref(orgId), publisher: ref(orgId),
     primaryImageOfPage: { '@type': 'ImageObject', url: absolute(page.image), caption: page.imageAlt },

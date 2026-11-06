@@ -62,8 +62,8 @@ for (const [index, page] of pages.entries()) {
     const webpage = graph.find(entity => entity['@id'] === `${url}#webpage`);
     assert.equal(webpage.url, url);
     assert.equal(webpage.inLanguage, 'ru-RU');
-    assert.equal(webpage['@type'], page.kind === 'portfolio' ? 'CollectionPage' : 'WebPage');
-    assert.ok(webpage.mainEntity);
+    assert.equal(webpage['@type'], ['portfolio', 'articles'].includes(page.kind) ? 'CollectionPage' : 'WebPage');
+    if (page.kind !== 'articles') assert.ok(webpage.mainEntity);
     const organization = graph.find(entity => entity['@type'] === 'Organization');
     assert.ok(html.includes(organization.email));
     assert.ok(html.includes(`tel:${organization.telephone}`));
@@ -154,6 +154,31 @@ test('every home service card links directly to its own registered service page 
   assert.equal(linkedPages.size, cards.length);
   assert.deepEqual([...linkedPages].sort(), pages.filter(page => page.kind === 'service').map(page => page.file).sort());
   assert.doesNotMatch(home, /data-open-service|id="service-dialog"/);
+});
+
+test('the journal is an empty collection, without invented article metadata', () => {
+  const index = pages.findIndex(page => page.kind === 'articles');
+  assert.ok(index >= 0);
+  const html = htmlPages[index];
+  const graph = getGraph(html);
+  assert.equal(graph.find(entity => entity['@id'].endsWith('#webpage'))['@type'], 'CollectionPage');
+  assert.match(html, /id="article-list">\s*<\/div>/);
+  assert.match(html, /Пока здесь нет опубликованных статей/);
+  assert.doesNotMatch(html, /<article\b/);
+  assert.doesNotMatch(JSON.stringify(graph), /"(?:Article|BlogPosting|NewsArticle|ItemList|datePublished|dateModified)"/);
+});
+
+test('all desktop headers and mobile menus link to articles before projects', () => {
+  for (const html of htmlPages) {
+    for (const fragment of [html.match(/<header\b[^]*?<\/header>/)?.[0], html.match(/<nav class="mobile-menu-links"[^]*?<\/nav>/)?.[0]]) {
+      assert.ok(fragment);
+      const links = [...fragment.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^]*?)<\/a>/g)];
+      const articlesIndex = links.findIndex(link => textContent(link[2]) === 'Статьи');
+      const projectsIndex = links.findIndex(link => textContent(link[2]).startsWith('Проекты'));
+      assert.ok(articlesIndex >= 0 && articlesIndex + 1 === projectsIndex);
+      assert.equal(absolute(links[articlesIndex][1]), absolute('articles.html'));
+    }
+  }
 });
 
 test('sitemap contains exactly the canonical pages and valid local images', async () => {

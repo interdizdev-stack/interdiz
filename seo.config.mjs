@@ -25,6 +25,12 @@ export const pages = [
     projectSection: 'portfolio-catalog',
   },
   {
+    file: 'articles.html', path: 'articles.html', kind: 'articles', name: 'Статьи',
+    title: 'Статьи InterDIZ — дизайн, разработка и цифровые продукты',
+    description: 'Журнал InterDIZ о дизайне, веб-разработке и цифровых продуктах. Будущие публикации студии: идеи, подходы и практические разборы. Первые статьи готовятся.',
+    image: 'assets/og-articles.png', imageAlt: 'Журнал InterDIZ — идеи в деталях: дизайн, технологии, опыт',
+  },
+  {
     file: 'web-development.html', path: 'web-development.html', kind: 'service', name: 'Сайты и веб-приложения',
     title: 'Разработка сайтов и веб-приложений — InterDIZ',
     description: 'Разработка лендингов, корпоративных сайтов, интернет-магазинов и веб-приложений в InterDIZ. Структура, дизайн, интеграции и запуск. Этапы, проекты и ответы на вопросы.',

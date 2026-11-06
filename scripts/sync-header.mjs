@@ -12,6 +12,21 @@ if (headers.length !== 1) throw new Error('Expected a single home page header.')
 const contents = headers[0].replace(/^<header\b[^>]*>/, '').replace(/<\/header>$/, '');
 const check = process.argv.includes('--check');
 
+// Keep the new destination available where the desktop header becomes a menu.
+function syncArticlesLink(html, prefix, current = false) {
+  return html.replace(/(<nav class="mobile-menu-links"[^>]*>)([\s\S]*?)(<\/nav>)/, (_, open, links, close) => {
+    const withoutArticles = links.replace(/\s*<a\b[^>]*href="[^"]*articles\.html"[^>]*>[\s\S]*?<\/a>/g, '');
+    const articleLink = `<a href="${prefix}/articles.html"${current ? ' class="is-current" aria-current="page"' : ''}>Статьи <span aria-hidden="true">↗</span></a>`;
+    return open + withoutArticles.replace(/([ \t]*)(<a\b[^>]*>Проекты\s)/, `$1${articleLink}\n$1$2`) + close;
+  });
+}
+
+const updatedHome = syncArticlesLink(source, '.');
+if (updatedHome !== source) {
+  if (check) { console.error('Articles link needs synchronization: index.html'); process.exitCode = 1; }
+  else await writeFile(home, updatedHome);
+}
+
 async function syncDirectory(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const filename = path.join(directory, entry.name);
@@ -37,9 +52,10 @@ async function syncDirectory(directory) {
       `class="${[...new Set([...classes.split(/\s+/), 'page-header'])].join(' ')}"`);
     if (!/\bid="top"/.test(html)) opening = opening.replace(/>$/, ' id="top">');
     const sharedHeader = `${opening}${sharedContents}</header>`;
-    const updated = existing.length
+    let updated = existing.length
       ? html.replace(headerPattern, () => sharedHeader)
       : html.replace(/<main\b/, `${sharedHeader}\n\n  <main`);
+    updated = syncArticlesLink(updated, prefix, filename === path.join(root, 'articles.html'));
     if (updated === html && !existing.length) throw new Error(`Cannot place header: ${filename}`);
     if (!/id="mobile-menu"/.test(html)) throw new Error(`The shared header requires the mobile menu: ${filename}`);
     if (updated === html) continue;

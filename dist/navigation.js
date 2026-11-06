@@ -47,8 +47,12 @@ export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutC
 // Inner pages use native scrolling rather than the home page's GSAP timeline.
 export function setupPageNavigation() {
   const rememberHomeReturn = () => {
-    const target = document.body.classList.contains('portfolio-page') ? 'projects' : 'services';
-    try { sessionStorage.setItem('interdiz-home-return', target); } catch {}
+    const target = document.body.classList.contains('portfolio-page') ? 'projects'
+      : document.body.classList.contains('service-page') ? 'services' : null;
+    try {
+      if (target) sessionStorage.setItem('interdiz-home-return', target);
+      else sessionStorage.removeItem('interdiz-home-return');
+    } catch {}
   };
   rememberHomeReturn();
   addEventListener('pageshow', rememberHomeReturn);
