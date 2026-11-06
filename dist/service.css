@@ -25,8 +25,10 @@
 .service-process h3 { font-size: clamp(22px, 2.1vw, 30px); font-weight: 600; letter-spacing: -.04em; }
 .service-process p { color: var(--fg-muted); font-size: 15px; line-height: 1.65; }
 .service-step-output { color: var(--muted); font-size: 13px; line-height: 1.6; }
-.service-handover { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; padding: 28px; margin-top: 12px; background: var(--bg-surface); border-radius: 8px; }
-.service-handover p { max-width: 730px; font-size: 16px; line-height: 1.65; color: var(--fg-muted); }
+.service-handover-stage { margin-top: 12px; }
+.service-handover { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; padding: 28px; background: var(--lime); color: #0c0e0c; border-radius: 8px; }
+.service-handover .service-eyebrow { color: inherit; }
+.service-handover p { max-width: 730px; font-size: 16px; line-height: 1.65; color: inherit; }
 .service-projects { margin-top: 42px; }
 .service-all-projects { display: inline-flex; margin-top: 32px; }
 .service-questions { margin-top: 36px; }

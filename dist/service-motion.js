@@ -132,7 +132,16 @@ export function setupServiceMotion() {
           scrollTrigger: { id: `service-stage-line-${index}`, trigger: row, start: 'top 80%', end: 'top 40%', scrub }
         });
       });
-      rise(page.querySelector('.service-handover'));
+      const handover = page.querySelector('.service-handover');
+      scrollEffects.set(handover, gsap.fromTo(handover, {
+        y: compact ? 24 : 80, scale: compact ? .98 : .96, opacity: .4
+      }, {
+        y: 0, scale: 1, opacity: 1, ease: 'none',
+        scrollTrigger: {
+          id: 'service-handover-parallax', trigger: '.service-handover-stage',
+          start: 'top 98%', end: 'top 62%', scrub, invalidateOnRefresh: true
+        }
+      }));
 
       all('.service-projects .project-card').forEach((card, index) => {
         entrance(card, tl => tl.from(card, {
