@@ -72,6 +72,33 @@
   background: linear-gradient(90deg, transparent, var(--lime) 45%, var(--lime) 75%, transparent);
 }
 
+/* WEB motion accents are overlays: the existing typography and layout stay intact. */
+.web-project-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: right center;
+  pointer-events: none;
+}
+.service-motion-enabled .web-service .service-projects img { scale: var(--web-image-scale, 1); }
+.service-motion-enabled .web-service :is(.service-actions > .contact-pill, .service-all-projects, .page-header > .contact-pill) {
+  translate: calc(var(--web-button-x, 0) * 1px) calc(var(--web-button-y, 0) * 1px);
+}
+.service-motion-enabled .web-service .service-format::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at var(--web-light-x, 50%) var(--web-light-y, 50%), var(--line-lime), transparent 70%);
+  opacity: var(--web-light-opacity, 0);
+  pointer-events: none;
+}
+.web-service .service-format-content { position: relative; }
+.service-motion-enabled .web-service .service-format h3 { translate: calc(var(--web-copy-x, 0) * 1px) 0; }
+.service-motion-enabled .web-service .service-process h3 { translate: calc(var(--web-row-x, 0) * 1px) 0; }
+
 @media (prefers-reduced-motion: no-preference) {
   html:not(.reduced-motion) .service-page :is(.contact-pill, .page-text-link) > span { transition: translate .25s ease; }
   @media (hover: hover) and (pointer: fine) {
