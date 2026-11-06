@@ -1,3 +1,5 @@
+import { setupDesignFormats } from './design-formats.js';
+
 const compactQuery = '(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)';
 
 // The home page's local GSAP engine and easing, with native page scrolling.
@@ -16,7 +18,7 @@ export function setupServiceMotion() {
   let userReduced = savedPreference();
 
   // Outer elements remain stable scroll triggers; only their contents move.
-  all('.service-format').forEach(card => {
+  all('.service-format:not(.design-format)').forEach(card => {
     const body = document.createElement('div');
     body.className = 'service-format-body';
     const content = document.createElement('div');
@@ -34,7 +36,7 @@ export function setupServiceMotion() {
     line.append(pulse);
     kicker.append(line);
   });
-  all('.service-format, .service-process li').forEach(item => {
+  all('.service-format:not(.design-format), .service-process li').forEach(item => {
     const trace = document.createElement('span');
     trace.className = 'service-row-trace';
     trace.setAttribute('aria-hidden', 'true');
@@ -109,7 +111,7 @@ export function setupServiceMotion() {
       all('.service-section > .hero-description').forEach(element => rise(element));
 
       // Different depths in each column echo the home page's services rail.
-      all('.service-format').forEach((card, index) => {
+      all('.service-format:not(.design-format)').forEach((card, index) => {
         gsap.fromTo(card.querySelector('.service-format-content'), {
           y: compact ? 30 : 90 + index % 2 * 55,
           rotationX: compact ? 0 : 7, transformPerspective: 1100, opacity: .35
@@ -121,6 +123,8 @@ export function setupServiceMotion() {
           scaleX: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top 88%', end: 'top 45%', scrub }
         });
       });
+
+      const stopDesignFormats = setupDesignFormats({ page, gsap, compact, pointer });
 
       // The content assembles in reading order and the rule tracks scroll progress.
       all('.service-process li').forEach((row, index) => {
@@ -202,6 +206,7 @@ export function setupServiceMotion() {
         tilts.push(() => { card.removeEventListener('pointermove', move); card.removeEventListener('pointerleave', reset); reset(); });
       });
       return () => {
+        stopDesignFormats();
         stopFAQ();
         page.removeEventListener('focusin', finishFocused);
         tilts.forEach(stop => stop());
