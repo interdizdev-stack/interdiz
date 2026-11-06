@@ -69,6 +69,7 @@ export function setupServiceMotion() {
         entrances.set(trigger, timeline);
       }
       function rise(element, trigger = element, distance = compact ? 24 : 42) {
+        if (!element || !trigger) return;
         entrance(trigger, tl => tl.from(element, { y: distance, opacity: 0 }));
       }
       function pulse(kicker) {

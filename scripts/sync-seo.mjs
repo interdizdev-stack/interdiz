@@ -52,7 +52,9 @@ export function extractProjects(html) {
 
 function serviceItems(html, className, url) {
   return articles(html, className).map((card, index) => ({
-    '@type': 'Service', '@id': `${url}#service-${index + 1}`, url,
+    '@type': 'Service',
+    '@id': className === 'solution-card' ? `${absolute(required(card.match(/class="contact-pill service-open" href="([^"]+)"/)?.[1], 'service page link'))}#service` : `${url}#service-${index + 1}`,
+    url: className === 'solution-card' ? absolute(card.match(/class="contact-pill service-open" href="([^"]+)"/)[1]) : `${url}#formats`,
     name: required(textContent(contents(card, 'h3')[0] || ''), 'service title'),
     description: required(textContent(contents(card, 'p')[0] || ''), 'service description'),
     provider: ref(orgId), areaServed: site.areaServed,
@@ -97,36 +99,35 @@ export function structuredData(page, html, home) {
     webpage.hasPart = [ref(faqId)];
     graph.push({ '@type': 'FAQPage', '@id': faqId, url: `${url}#${page.faqSection}`, inLanguage: site.language, isPartOf: ref(pageId), mainEntity: extractFAQ(html, page.faqSection) });
   }
-  const projects = extractProjects(html);
-  const projectList = {
-    '@type': 'ItemList', '@id': `${url}#project-list`, name: 'Проекты студии InterDIZ',
-    url: `${url}#${page.projectSection}`, numberOfItems: projects.length,
-    itemListElement: projects.map((project, index) => ({
-      '@type': 'ListItem', position: index + 1,
-      item: { '@type': 'CreativeWork', '@id': absolute(`portfolio.html#project-${project.key}`), name: project.name, description: project.description, image: project.image, creator: ref(orgId) },
-    })),
-  };
-  required(projects.length, 'project cards');
-  webpage.mentions = [ref(projectList['@id'])];
-  graph.push(projectList);
-  if (page.kind === 'portfolio') webpage.mainEntity = ref(projectList['@id']);
+  if (page.projectSection) {
+    const projects = extractProjects(html);
+    section(html, page.projectSection);
+    const projectList = {
+      '@type': 'ItemList', '@id': `${url}#project-list`, name: 'Проекты студии InterDIZ',
+      url: `${url}#${page.projectSection}`, numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => ({
+        '@type': 'ListItem', position: index + 1,
+        item: { '@type': 'CreativeWork', '@id': absolute(`portfolio.html#project-${project.key}`), name: project.name, description: project.description, image: project.image, creator: ref(orgId) },
+      })),
+    };
+    required(projects.length, 'project cards');
+    webpage.mentions = [ref(projectList['@id'])];
+    graph.push(projectList);
+    if (page.kind === 'portfolio') webpage.mainEntity = ref(projectList['@id']);
+  }
   if (page.kind === 'home' || page.kind === 'service') {
     const services = serviceItems(html, page.kind === 'home' ? 'solution-card' : 'service-format', url);
     required(services.length, 'services');
     const catalogId = `${url}#services`;
-    const catalog = { '@type': 'OfferCatalog', '@id': catalogId, name: page.kind === 'home' ? 'Услуги InterDIZ' : 'Форматы сайтов', itemListElement: services.map(service => ({ '@type': 'Offer', itemOffered: service })) };
+    const catalog = { '@type': 'OfferCatalog', '@id': catalogId, name: page.kind === 'home' ? 'Услуги InterDIZ' : page.catalogName, itemListElement: services.map(service => ({ '@type': 'Offer', itemOffered: service })) };
     graph.push(catalog);
     if (page.kind === 'home') {
       graph[0].hasOfferCatalog = ref(catalogId);
       webpage.mainEntity = ref(orgId);
-      services[0]['@id'] = absolute('web-development.html#service');
-      services[0].url = absolute('web-development.html');
-      services.slice(1).forEach(service => { service.url = `${url}#manifesto`; });
     } else {
       const serviceId = `${url}#service`;
       webpage.mainEntity = ref(serviceId);
-      graph.push({ '@type': 'Service', '@id': serviceId, url, name: page.name, serviceType: 'Разработка сайтов и веб-приложений', description: textContent(required(html.match(/<p class="hero-description">([^]*?)<\/p>/)?.[1], 'service introduction')), provider: ref(orgId), areaServed: site.areaServed, hasOfferCatalog: ref(catalogId), mainEntityOfPage: ref(pageId) });
-      services.forEach(service => { service.url = `${url}#formats`; });
+      graph.push({ '@type': 'Service', '@id': serviceId, url, name: page.name, serviceType: page.serviceType || page.name, description: textContent(required(html.match(/<p class="hero-description">([^]*?)<\/p>/)?.[1], 'service introduction')), provider: ref(orgId), areaServed: site.areaServed, hasOfferCatalog: ref(catalogId), mainEntityOfPage: ref(pageId) });
     }
   }
   return { '@context': 'https://schema.org', '@graph': graph };
@@ -143,7 +144,7 @@ export function renderHead(page, html, home) {
     meta('property', 'og:type', 'website'), meta('property', 'og:site_name', site.name),
     meta('property', 'og:locale', site.locale), meta('property', 'og:url', url),
     meta('property', 'og:title', page.title), meta('property', 'og:description', page.description),
-    meta('property', 'og:image', absolute(page.image)), meta('property', 'og:image:type', 'image/webp'), meta('property', 'og:image:alt', page.imageAlt),
+    meta('property', 'og:image', absolute(page.image)), meta('property', 'og:image:type', page.image.endsWith('.png') ? 'image/png' : 'image/webp'), meta('property', 'og:image:alt', page.imageAlt),
     meta('name', 'twitter:card', 'summary_large_image'), meta('name', 'twitter:title', page.title),
     meta('name', 'twitter:description', page.description), meta('name', 'twitter:image', absolute(page.image)), meta('name', 'twitter:image:alt', page.imageAlt),
     '  <link rel="preload" href="./assets/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>',

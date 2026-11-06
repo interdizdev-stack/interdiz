@@ -79,14 +79,20 @@ for (const [index, page] of pages.entries()) {
   test(`${page.file}: projects and FAQ match the visible HTML`, () => {
     const list = graph.find(entity => entity['@type'] === 'ItemList');
     const projects = extractProjects(html);
-    assert.equal(list.numberOfItems, projects.length);
-    assert.deepEqual(list.itemListElement.map(entry => entry.item.name), projects.map(project => project.name));
-    assert.deepEqual(list.itemListElement.map(entry => entry.item.description), projects.map(project => project.description));
-    assert.deepEqual(list.itemListElement.map(entry => entry.position), projects.map((_, i) => i + 1));
+    if (page.projectSection) {
+      assert.ok(projects.length > 0);
+      assert.equal(list.numberOfItems, projects.length);
+      assert.deepEqual(list.itemListElement.map(entry => entry.item.name), projects.map(project => project.name));
+      assert.deepEqual(list.itemListElement.map(entry => entry.item.description), projects.map(project => project.description));
+      assert.deepEqual(list.itemListElement.map(entry => entry.position), projects.map((_, i) => i + 1));
+    } else {
+      assert.equal(projects.length, 0);
+      assert.equal(list, undefined, 'do not invent projects for a service');
+    }
     const faq = graph.find(entity => entity['@type'] === 'FAQPage');
     if (page.faqSection) {
       assert.deepEqual(faq.mainEntity, extractFAQ(html, page.faqSection));
-      assert.equal(faq.mainEntity.length, page.kind === 'home' ? 8 : 5);
+      assert.ok(faq.mainEntity.length > 0);
       for (const question of faq.mainEntity) {
         assert.ok(question.name.endsWith('?'));
         assert.ok(question.acceptedAnswer.text.length > 50);
@@ -95,11 +101,18 @@ for (const [index, page] of pages.entries()) {
     } else assert.equal(faq, undefined);
     const catalog = graph.find(entity => entity['@type'] === 'OfferCatalog');
     if (catalog) {
-      assert.equal(catalog.itemListElement.length, page.kind === 'home' ? 7 : 4);
+      assert.ok(catalog.itemListElement.length > 0);
+      assert.ok(catalog.name);
       for (const offer of catalog.itemListElement) {
         assert.ok(textContent(html).includes(offer.itemOffered.name));
         assert.ok(textContent(html).includes(offer.itemOffered.description));
       }
+    }
+    if (page.kind === 'service') {
+      const service = graph.find(entity => entity['@id'] === `${url}#service`);
+      assert.equal(service.name, page.name);
+      assert.equal(service.serviceType, page.serviceType || page.name);
+      assert.equal(service.description, textContent(html.match(/<p class="hero-description">([^]*?)<\/p>/)[1]));
     }
   });
 
@@ -118,6 +131,30 @@ for (const [index, page] of pages.entries()) {
     }
   });
 }
+
+test('every home service card links directly to its own registered service page and schema entity', () => {
+  const home = htmlPages[0];
+  const cards = [...home.matchAll(/<article class="solution-card\b[^]*?<\/article>/g)].map(match => match[0]);
+  const catalog = getGraph(home).find(entity => entity['@type'] === 'OfferCatalog');
+  const linkedPages = new Set();
+  assert.equal(cards.length, 7);
+  assert.equal(catalog.itemListElement.length, cards.length);
+  cards.forEach((card, index) => {
+    const link = card.match(/<a class="contact-pill service-open" href="([^"]+)"/);
+    assert.ok(link, 'a service must be reachable without JavaScript');
+    const url = absolute(link[1]);
+    const destination = pages.find(page => absolute(page.path) === url);
+    assert.ok(destination, `unregistered service: ${url}`);
+    assert.equal(destination.kind, 'service');
+    assert.equal(destination.name, textContent(card.match(/<h3>([^]*?)<\/h3>/)[1]));
+    assert.equal(catalog.itemListElement[index].itemOffered['@id'], `${url}#service`);
+    assert.equal(catalog.itemListElement[index].itemOffered.url, url);
+    linkedPages.add(destination.file);
+  });
+  assert.equal(linkedPages.size, cards.length);
+  assert.deepEqual([...linkedPages].sort(), pages.filter(page => page.kind === 'service').map(page => page.file).sort());
+  assert.doesNotMatch(home, /data-open-service|id="service-dialog"/);
+});
 
 test('sitemap contains exactly the canonical pages and valid local images', async () => {
   const xml = await read('sitemap.xml');

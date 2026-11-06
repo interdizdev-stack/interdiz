@@ -29,4 +29,29 @@
     <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/pierre-magnol.webp</image:loc></image:image>
   </url>
+  <url>
+    <loc>https://interdiz.ru/design.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/health-culture.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/shogun-auto.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/ai-assistants.html</loc>
+
+  </url>
+  <url>
+    <loc>https://interdiz.ru/automation-crm.html</loc>
+
+  </url>
+  <url>
+    <loc>https://interdiz.ru/seo.html</loc>
+
+  </url>
+  <url>
+    <loc>https://interdiz.ru/yandex-direct.html</loc>
+
+  </url>
+  <url>
+    <loc>https://interdiz.ru/website-support.html</loc>
+
+  </url>
 </urlset>

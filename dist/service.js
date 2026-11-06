@@ -3,7 +3,7 @@ import { setupProjectDialog } from './projects.js';
 import { setupServiceMotion } from './service-motion.js';
 
 setupPageNavigation();
-setupProjectDialog();
+if (document.querySelector('[data-open-project]')) setupProjectDialog();
 
 async function initMotion() {
   await document.fonts.ready;
