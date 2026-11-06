@@ -1,29 +1,35 @@
 // Run in the head, before the home page can paint at the start of the hero.
 (() => {
-  if (!['#services', '#solutions-track'].includes(location.hash)) return;
-  // Old return links must not give the keyboard-focusable carousel native focus.
-  if (location.hash === '#solutions-track') history.replaceState(history.state, '', `${location.pathname}${location.search}#services`);
+  const navigation = performance.getEntriesByType('navigation')[0];
+  let returningFromService = false;
+  try {
+    returningFromService = navigation?.type === 'back_forward' && sessionStorage.getItem('interdiz-services-return') === 'true';
+    sessionStorage.removeItem('interdiz-services-return');
+  } catch {}
+  if (!returningFromService && !['#services', '#solutions-track'].includes(location.hash)) return;
+  // Normalize old history entries as well as links, without focusing the carousel.
+  if (location.hash !== '#services') history.replaceState(history.state, '', `${location.pathname}${location.search}#services`);
+  history.scrollRestoration = 'manual';
 
   const root = document.documentElement;
   root.classList.add('services-entry-pending');
   let pending = true;
   let finishing;
-  let fallbackTimer;
+  let failing = false;
 
   function reveal() {
     pending = false;
-    clearTimeout(fallbackTimer);
     root.classList.remove('services-entry-pending');
     removeEventListener('error', onError, true);
     removeEventListener('unhandledrejection', fallback);
   }
 
-  function fallback() {
+  async function fallback() {
+    if (!pending || failing) return;
+    failing = true;
+    if (document.readyState === 'loading') await new Promise(resolve => addEventListener('DOMContentLoaded', resolve, { once: true }));
+    await document.fonts.ready;
     if (!pending) return;
-    if (!document.getElementById('services')) {
-      addEventListener('DOMContentLoaded', fallback, { once: true });
-      return;
-    }
     document.getElementById('services').scrollIntoView({ block: 'start', behavior: 'instant' });
     reveal();
   }
@@ -45,8 +51,8 @@
     }
   };
 
-  // A missing application module must never leave the static page hidden.
+  // Release the static page on a real initialization failure, never on a timer
+  // while a slow application is still loading and can rebuild the pinned hero.
   addEventListener('error', onError, true);
   addEventListener('unhandledrejection', fallback);
-  fallbackTimer = setTimeout(fallback, 8000);
 })();

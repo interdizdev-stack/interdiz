@@ -46,6 +46,11 @@ export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutC
 
 // Inner pages use native scrolling rather than the home page's GSAP timeline.
 export function setupPageNavigation() {
+  const rememberServicesReturn = () => {
+    try { sessionStorage.setItem('interdiz-services-return', 'true'); } catch {}
+  };
+  rememberServicesReturn();
+  addEventListener('pageshow', rememberServicesReturn);
   const floatingNav = document.querySelector('#floating-nav');
   const mobileMenu = document.querySelector('#mobile-menu');
   const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');

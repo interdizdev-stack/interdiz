@@ -459,6 +459,15 @@ function setupSolutionsCarousel() {
   track.addEventListener('pointercancel', finishDrag);
   track.addEventListener('lostpointercapture', finishDrag);
 
+  // Browser Back must restore the cards even if this visit began at the hero.
+  track.addEventListener('click', event => {
+    const link = event.target.closest('a.service-open');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const destination = new URL(location.href);
+    destination.hash = 'services';
+    history.replaceState(history.state, '', destination);
+  });
+
   cards.forEach(card => {
     card.addEventListener('pointermove', event => {
       if (reduced || event.pointerType !== 'mouse' || drag?.moved) return;
