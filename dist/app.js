@@ -974,12 +974,16 @@ function anchorScrollTop(target) {
   const serviceCards = target.id === 'services' || target.id === 'solutions-track';
   const anchor = serviceCards ? target.closest('.manifesto') : target;
   let top = smoother ? smoother.offset(anchor, 'top top') : anchor.getBoundingClientRect().top + scrollY;
+  const menuClearance = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
   // Return directly to the service cards, with clearance for the floating menu.
   // Layout offsets exclude the entrance transform on .manifesto-inner.
   if (serviceCards) {
     for (let element = target; element && element !== anchor; element = element.offsetParent) top += element.offsetTop;
     top += anchor.clientTop;
-    top -= parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    top -= menuClearance;
+  }
+  else if (target.querySelector(':scope > .section-kicker')) {
+    top -= Math.max(0, menuClearance - parseFloat(getComputedStyle(target).paddingTop));
   }
   else if (isCompactLayout() && target.id !== 'top') top -= 82;
   if (target.id === 'top' && heroTrigger) top = heroTrigger.start;

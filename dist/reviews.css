@@ -1,7 +1,5 @@
 /* Card-wall layout and masking adapted from interdiz.ru's reviews module. */
 .reviews {
-  padding: 90px var(--pad) 110px;
-  border-top: var(--divider-width) solid var(--line);
   background: var(--bg);
 }
 .reviews-heading { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-top: 40px; }
@@ -67,7 +65,6 @@
   .reviews-wall.is-filtered .review-card { flex-basis: 100%; }
 }
 @media (max-width: 600px) {
-  .reviews { padding: 65px var(--pad); }
   .reviews-heading { gap: 18px; }
   .reviews-pause { width: 146px; padding: 10px 14px; font-size: 13px; }
   .reviews-carousel { margin-top: 28px; }

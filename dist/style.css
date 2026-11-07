@@ -69,6 +69,7 @@
   --line-strong: rgba(255, 255, 255, 0.22);
   --line-lime: rgba(194, 255, 67, 0.35);
   --pad: clamp(22px, 4.2vw, 80px);
+  --section-gap: 70px;
   --display: Inter, Arial, sans-serif;
   --text: Inter, Arial, sans-serif;
   font-family: var(--text);
@@ -862,15 +863,16 @@ h1, h2, h3, h4, h5, h6,
 /* ========================================================
    7. Business Solutions
    ======================================================== */
+.manifesto, .projects, .expertise, .approach, .reviews {
+  padding: var(--section-gap) var(--pad) 0;
+}
+
 .manifesto {
   position: relative;
-  padding: 100px var(--pad) 130px;
   background: var(--bg);
   color: var(--fg);
   overflow: hidden;
   isolation: isolate;
-  border-top: var(--divider-width) solid var(--line);
-  border-bottom: var(--divider-width) solid transparent;
 }
 
 .manifesto-inner {
@@ -1122,7 +1124,6 @@ h1, h2, h3, h4, h5, h6,
    8. Projects Gallery Section
    ======================================================== */
 .projects {
-  padding: 80px var(--pad) 50px;
   overflow: hidden;
   background: var(--bg);
 }
@@ -1373,7 +1374,7 @@ h1, h2, h3, h4, h5, h6,
   border-top: var(--divider-width) solid var(--line);
   border-bottom: var(--divider-width) solid var(--line);
   color: var(--lime);
-  margin: 60px 0 0;
+  margin: var(--section-gap) 0 0;
   width: 100%;
   background: #0f120e;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -1419,7 +1420,6 @@ h1, h2, h3, h4, h5, h6,
    10. Expertise / Services Section
    ======================================================== */
 .expertise {
-  padding: 100px var(--pad) 130px;
   background: var(--bg);
 }
 
@@ -1591,8 +1591,6 @@ h1, h2, h3, h4, h5, h6,
 
 /* Approach */
 .approach {
-  padding: 90px var(--pad) 110px;
-  border-top: var(--divider-width) solid var(--line);
   background: radial-gradient(ellipse at 100% 0, rgba(194, 255, 67, 0.035), transparent 55%), var(--bg);
 }
 
@@ -1665,8 +1663,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 .contact {
   background: var(--footer-bg);
   color: var(--fg);
-  padding: 90px var(--pad) 30px;
-  border-top: var(--divider-width) solid var(--line-strong);
+  padding: var(--section-gap) var(--pad) 30px;
   position: relative;
 }
 
@@ -2086,11 +2083,6 @@ html.reduced-motion { scroll-behavior: auto; }
 /* ========================================================
    15. Responsive Adaptations
    ======================================================== */
-/* On laptops the floating menu spans the section labels when an anchor opens. */
-@media (min-width: 1101px) and (max-width: 1500px) and (pointer: fine) {
-  #smooth-content :is(.projects, .approach, .reviews, .contact) { padding-top: 104px; }
-}
-
 @media (max-width: 1100px) {
   .approach-content { width: 100%; }
   .gallery-navigation { grid-column: 1 / -1; justify-self: end; }
@@ -2136,9 +2128,6 @@ html.reduced-motion { scroll-behavior: auto; }
     top: 65%;
   }
 
-  .projects {
-    padding-top: 70px;
-  }
   .project-track {
     gap: 18px;
   }
@@ -2163,9 +2152,6 @@ html.reduced-motion { scroll-behavior: auto; }
   }
   .hero-chapter {
     top: 35%;
-  }
-  .marquee {
-    margin-top: 25px;
   }
 
   .floating-nav .float-links {
@@ -2259,9 +2245,6 @@ html.reduced-motion { scroll-behavior: auto; }
     width: 16px;
   }
 
-  .manifesto {
-    padding: 60px var(--pad) 80px;
-  }
   .manifesto-inner {
     margin-top: 44px;
   }
@@ -2293,9 +2276,6 @@ html.reduced-motion { scroll-behavior: auto; }
     height: 44px;
   }
 
-  .projects, .expertise, .approach {
-    padding: 65px var(--pad);
-  }
   .project-card { flex-basis: 88%; }
   .gallery-window { margin-top: 24px; }
   .gallery-footer { display: flex; flex-direction: column; gap: 20px; padding-top: 18px; }
@@ -2345,7 +2325,7 @@ html.reduced-motion { scroll-behavior: auto; }
   }
 
   .contact {
-    padding: 60px var(--pad) 25px;
+    padding-bottom: 25px;
   }
   .contact h2 {
     font-size: 9vw;

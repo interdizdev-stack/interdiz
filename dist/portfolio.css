@@ -1,4 +1,4 @@
-.portfolio-catalog { margin-inline: var(--pad); padding-block: 12px clamp(30px, 5vw, 80px); }
+.portfolio-catalog { margin-inline: var(--pad); }
 .portfolio-toolbar { margin-bottom: 6px; }
 
 .portfolio-filter-row {
@@ -49,7 +49,7 @@ html[data-theme="dark"] .portfolio-categories button[aria-pressed="true"] { colo
 .portfolio-reset { padding: 8px 0; min-height: 44px; font-size: 13px; border-color: transparent; text-decoration: underline; text-underline-offset: .25em; }
 .portfolio-reset span { margin-left: 6px; }
 .portfolio-reset[hidden], .portfolio-empty[hidden] { display: none; }
-.portfolio-empty { padding-block: 30px 50px; }
+.portfolio-empty { padding-top: 30px; }
 .portfolio-empty h2 { font-size: clamp(24px, 3vw, 36px); letter-spacing: -.04em; }
 .portfolio-empty p { margin-block: 12px 24px; color: var(--fg-muted); line-height: 1.6; }
 .portfolio-empty .contact-pill { margin: 0; }

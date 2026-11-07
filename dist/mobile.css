@@ -39,6 +39,7 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .header-caption,
   html[data-theme] .header > nav { display: none; }
   html[data-theme] .header > .contact-pill { margin-left: 0; min-height: 48px; padding: 12px 18px; font-size: 14px; }
+  html[data-theme] .header > .mobile-menu-toggle[hidden] + .contact-pill { margin-left: auto; }
   html[data-theme] .mobile-menu-toggle:not([hidden]) { display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: 0 0 auto; min-width: 80px; min-height: 44px; padding: 10px 12px; border-radius: 99px; background: var(--bg-surface); color: var(--fg); font-size: var(--mobile-caption-size); line-height: 1.2; }
   html[data-theme] .header > .mobile-menu-toggle { margin-left: auto; }
   html[data-theme] .mobile-menu-icon { display: grid; gap: 5px; width: 16px; }
@@ -90,8 +91,6 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .scroll-cue { visibility: hidden; pointer-events: none; gap: 10px; font-size: 10px; letter-spacing: .5px; }
   html[data-theme] .scroll-circle { width: 44px; height: 44px; flex: 0 0 44px; }
 
-  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 72px; padding-block-start: 112px; }
-  html[data-theme] .expertise { padding-block-start: 62px; }
   html[data-theme] .section-kicker { gap: 16px; align-items: flex-start; font-size: 12px; line-height: 1.4; letter-spacing: .5px; }
   html[data-theme] .section-kicker > span { min-width: 0; }
   html[data-theme] .section-kicker .kicker-index { align-items: flex-start; }
@@ -137,8 +136,8 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
   html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
   html[data-theme] .project-image:is(:hover, :focus-visible, :active) .project-open { background: var(--lime); color: #0c0e0c; }
-  html[data-theme] .gallery-footer { position: relative; display: block; margin-top: 28px; padding: 0 0 24px; border: 0; }
-  html[data-theme] .gallery-footer .gallery-all { position: relative; inset-block-start: -30px; min-height: 48px; margin: 0; font-size: 14px; }
+  html[data-theme] .gallery-footer { display: flex; align-items: flex-start; margin-top: 16px; padding: 0; border: 0; }
+  html[data-theme] .gallery-footer .gallery-all { min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
   html[data-theme] .marquee { display: none; }
 
@@ -163,8 +162,8 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .faq-item h3 { font-size: clamp(18px, 5.2vw, 20px); line-height: 1.35; }
   html[data-theme] .faq-answer { padding: 0 8px 20px 4px; }
   html[data-theme] .faq-answer p { font-size: 16px; line-height: 1.55; }
-  html[data-theme] .faq-contact { gap: 18px; margin-top: 32px; }
-  html[data-theme] .faq-contact > .contact-pill { position: relative; inset-block-start: -5px; min-height: 48px; font-size: 15px; }
+  html[data-theme] .faq-contact { gap: 13px; margin-top: 32px; }
+  html[data-theme] .faq-contact > .contact-pill { min-height: 48px; font-size: 15px; }
   html[data-theme] .approach-testimonial { gap: 20px; }
   html[data-theme] .approach-testimonial blockquote p { font-size: 16px; line-height: 1.55; }
 
@@ -184,7 +183,6 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] :is(.review-card, .reviews-column) { width: calc((100% - 16px) / 2); min-width: 0; }
   html[data-theme] .reviews-column > .review-card { width: 100%; }
   html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: calc((100% - 16px) / 2); }
-  html[data-theme] .reviews { padding-bottom: 0; }
   html[data-theme] .review-card { padding: 20px; scroll-snap-align: start; }
   html[data-theme] .review-card__text { font-size: 16px; line-height: 1.5; text-align: left; letter-spacing: 0; }
   html[data-theme] .reviews-enhanced .review-card { display: flex; flex-direction: column; height: 360px; }
@@ -200,7 +198,7 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .review-card__author-icon:has(+ .review-card__initials) { display: none; }
   html[data-theme] .review-card__initials { display: grid; place-items: center; border: var(--outline-width) solid var(--line-strong); border-radius: 50%; background: var(--bg-surface); color: var(--fg); font-size: 14px; font-weight: 600; }
 
-  html[data-theme] .contact { padding-top: 100px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+  html[data-theme] .contact { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
   html[data-theme] .contact-hero h2 { line-height: 1.11; margin: 30px 0 24px; }
   html[data-theme] .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
   html[data-theme] .contact-card { display: flex; grid-row: auto; min-width: 0; padding: 24px; }
@@ -251,8 +249,6 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .floating-nav .float-cta { padding-inline: 12px; font-size: 13px; }
   html[data-theme] .hero { gap: 20px; }
   html[data-theme] .hero-topline:not(.hero-chapter-topline) { font-size: 12px; gap: 16px; }
-  html[data-theme] :is(.manifesto, .projects, .expertise, .approach, .reviews) { padding-block: 56px; padding-block-start: 96px; }
-  html[data-theme] .expertise { padding-block-start: 46px; }
   html[data-theme] .section-kicker { gap: 12px; }
   html[data-theme] .section-kicker .kicker-meta { max-width: 46%; }
   html[data-theme] .solution-card { flex-basis: calc(100% - 20px); padding: 22px; }

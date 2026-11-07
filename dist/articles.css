@@ -26,7 +26,7 @@
 .journal-cover-rule { height: var(--divider-width); background: currentColor; margin-block: 24px 16px; transform-origin: left; }
 .journal-cover-bottom { display: flex; justify-content: space-between; align-items: end; gap: 18px; font-size: 9px; line-height: 1.5; letter-spacing: .02em; }
 .journal-cover-bottom > span:last-child { font-size: 42px; line-height: 1; }
-.journal-hero-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 28px 38px; color: var(--fg-muted); font-size: 12px; }
+.journal-hero-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 28px; color: var(--fg-muted); font-size: 12px; }
 html[data-theme] .journal-motion { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; padding: 8px 0; border: 0 !important; background: none; color: var(--fg-muted); font-size: 12px; }
 html[data-theme] .journal-motion[hidden] { display: none; }
 .journal-motion:hover { color: var(--fg); }
@@ -34,7 +34,7 @@ html[data-theme] .journal-motion[hidden] { display: none; }
 .journal-ribbon-track { display: flex; width: max-content; font-size: clamp(28px, 3.8vw, 62px); font-weight: 600; letter-spacing: -.055em; line-height: 1.2; }
 .journal-ribbon-track > span { flex: 0 0 auto; padding-right: 26px; }
 .journal-ribbon-track i { padding-inline: 24px; font-style: normal; color: var(--lime); }
-.journal-catalog { margin-inline: var(--pad); padding-block: clamp(65px, 8vw, 130px); }
+.journal-catalog { margin-inline: var(--pad); }
 .journal-catalog-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; margin-block: 44px 46px; }
 .journal-edition { color: var(--muted); font-size: 11px; padding-bottom: 8px; }
 .journal-empty { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 90px); align-items: center; border-block: var(--divider-width) solid var(--line); padding-block: clamp(36px, 4vw, 68px); }
@@ -77,7 +77,7 @@ html[data-theme] .journal-motion[hidden] { display: none; }
   .journal-scroll { margin-top: 24px; }
   .journal-art { width: min(100%, 400px); height: 370px; margin: 30px auto 0; }
   .journal-cover-title { font-size: 58px; }
-  .journal-hero-foot { align-items: start; padding-block: 20px 28px; gap: 12px; }
+  .journal-hero-foot { align-items: start; padding-top: 20px; gap: 12px; }
   .journal-hero-foot > span { max-width: 170px; line-height: 1.5; padding-top: 11px; }
   .journal-ribbon { padding-block: 16px; }
   .journal-ribbon-track i { padding-inline: 16px; }

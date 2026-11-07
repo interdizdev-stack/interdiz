@@ -1,12 +1,4 @@
-.service-page { --service-block-gap: calc(clamp(30px, 5vw, 80px) + 80px); }
-.service-page #main {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  row-gap: var(--service-block-gap);
-  padding-bottom: var(--service-block-gap);
-}
 .service-section { margin-inline: var(--pad); }
-.service-intro .page-intro-layout { margin-top: -50px; padding-bottom: 0; }
 .service-intro .page-switch { margin-bottom: 79px; }
 .service-intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; }
 .service-intro--ads .service-intro-bottom { padding-top: 23px; }
@@ -112,7 +104,6 @@
 .reduced-motion .service-row-trace { display: none; }
 
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
-  .service-intro .page-intro-layout { margin-top: -40px; }
   .service-title { max-width: 100%; }
   .service-title .hero-line { white-space: normal; }
   .service-intro-note { display: none; }
