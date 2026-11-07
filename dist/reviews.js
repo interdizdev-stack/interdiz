@@ -67,7 +67,7 @@ export function setupReviews(isReduced, pausePage) {
   let touching = false;
   let frame = 0;
   let previousTime = 0;
-  let speed = 60;
+  let speed = compact() ? 48 : 60;
   let columnStep = 0;
   let cardsPerColumn = 1;
   let position = 0;
@@ -155,7 +155,8 @@ export function setupReviews(isReduced, pausePage) {
     frame = requestAnimationFrame(tick);
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0;
     previousTime = time;
-    speed += ((hovering ? 10 : 60) - speed) * (1 - Math.exp(-7 * delta));
+    const targetSpeed = (hovering ? 10 : 60) * (compact() ? .8 : 1);
+    speed += (targetSpeed - speed) * (1 - Math.exp(-7 * delta));
     setPosition(position + speed * delta);
   }
   function update() {
