@@ -269,6 +269,10 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   html[data-theme] .service-detail-scope { grid-row: auto; }
 }
 
+@media (max-width: 699px), (max-width: 1100px) and (max-height: 500px) and (pointer: coarse) {
+  html[data-theme] .manifesto { padding-top: calc(var(--section-gap) - 50px); }
+}
+
 @media (max-width: 600px) and (orientation: portrait) {
   html[data-theme] .hero-intro { container-type: inline-size; }
   html[data-theme] .hero h1 { font-size: min(var(--mobile-hero-heading-size), calc(13.3cqi - 1px)); }
