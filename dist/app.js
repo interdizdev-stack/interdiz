@@ -14,7 +14,7 @@ let reduced = userReduced ?? motionPreference.matches;
 let scene, animationContext, smoother;
 const sceneState = { explosion: 0, rotation: 0, zoom: 0, portal: 0, opacity: 1, framing: 0 };
 const homeEntry = window.interdizHomeEntry;
-const sectionEntry = homeEntry?.pending === true;
+const sectionEntry = homeEntry?.pending === true && Boolean(homeEntry.targetId);
 const servicesEntry = sectionEntry && homeEntry.targetId === 'services';
 const projectsEntry = sectionEntry && homeEntry.targetId === 'projects';
 let sceneLoading;
@@ -561,7 +561,7 @@ function setupSolutionsCarousel() {
   render(0);
   swipeHint = setupCarouselSwipeHint(track, cards[0]);
   updateSolutionsHint = swipeHint?.sync;
-  if (servicesEntry) beginReturn();
+  if (servicesEntry || homeEntry?.restoreScroll) beginReturn();
   addEventListener('pageshow', event => {
     if (event.persisted && location.hash === '#services') beginReturn();
   });
@@ -759,10 +759,9 @@ function setupAnimations() {
       smooth: 1,
       smoothTouch: 0.15,
       effects: false,
-      // Return layout is measured explicitly after fonts; avoid the observer's
-      // delayed smoother-only refresh replaying the jump. Window resize still
-      // refreshes all triggers together, and dynamic blocks reserve their height.
-      autoResize: !sectionEntry,
+      // Dynamic blocks reserve their height and viewport resize is handled by
+      // ScrollTrigger. A second observer refresh would rebuild the pinned hero.
+      autoResize: false,
       onUpdate: () => {
         updateProgress();
         updateProcessOnScroll?.();
@@ -1107,6 +1106,7 @@ function loadScene() {
 }
 
 async function init() {
+  await document.fonts.ready;
   // The first visible cases must be ready before revealing a return to projects.
   const projectImagesReady = projectsEntry ? Promise.all(
     $$('.project-track .project-image img').slice(0, isCompactLayout() ? 1 : 2).map(image => {
@@ -1115,6 +1115,10 @@ async function init() {
     })
   ) : null;
   if (!sectionEntry) await loadScene();
+  if (!sectionEntry && document.readyState !== 'complete') {
+    await new Promise(resolve => addEventListener('load', resolve, { once: true }));
+  }
+  const initialScroll = homeEntry?.scrollTop ?? scrollY;
   const restoreServiceCard = setupSolutionsCarousel();
   setupProjectGallery();
   setupProcessAccordion();
@@ -1142,21 +1146,30 @@ async function init() {
   addEventListener('resize', updateActiveMenu, { passive: true });
   setupCursor();
   setupCardTilt();
-  await document.fonts.ready;
   restoreServiceCard?.();
   await projectImagesReady;
   window.ScrollTrigger?.refresh();
   // Cross-page links need the final layout, including the pinned opening scene.
-  const initialSection = document.getElementById(sectionEntry ? homeEntry.targetId : location.hash.slice(1));
-  if (initialSection) {
+  const initialTarget = homeEntry?.targetId || (homeEntry?.restoreScroll ? '' : location.hash.slice(1));
+  const initialSection = document.getElementById(initialTarget);
+  if (initialSection || homeEntry?.pending) {
     const place = () => {
-      const top = anchorScrollTop(initialSection);
+      const top = initialSection ? anchorScrollTop(initialSection) : initialScroll;
       if (smoother) {
         // Rechecking the return position must not rearm a jump at the same offset.
         if (Math.abs(smoother.scrollTop() - top) > 1 || Math.abs(scrollY - top) > 1) smoother.scrollTo(top, false);
       }
       else scrollTo({ top, behavior: 'instant' });
       window.ScrollTrigger?.update();
+      // A restored scroll position must show its final scene immediately.
+      if (homeEntry?.pending) {
+        window.ScrollTrigger?.getAll().forEach(trigger => {
+          trigger.getTween()?.progress?.(1);
+          if (homeEntry.restoreScroll && initialScroll > 0 && !trigger.vars.scrub && trigger.start <= top) {
+            trigger.animation?.progress(1);
+          }
+        });
+      }
       if (homeEntry?.pending && servicesEntry) window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
       updateProgress();
       updateActiveMenu();
@@ -1176,9 +1189,7 @@ async function init() {
   // and must not rebuild the pinned hero while the gallery is being scrolled.
 }
 
-if (sectionEntry) {
-  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init, { once: true });
-  else init();
-} else if (document.readyState === 'complete') init();
-else addEventListener('load', init, { once: true });
-addEventListener('pagehide', e => { if (!e.persisted) { disposed = true; scene?.dispose(); animationContext?.revert(); smoother?.kill(); } });
+if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init, { once: true });
+else init();
+// Keep pin spacers and scroll geometry intact while the browser saves history.
+addEventListener('pagehide', e => { if (!e.persisted) { disposed = true; scene?.dispose(); } });

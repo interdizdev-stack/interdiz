@@ -1,4 +1,4 @@
-// Run in the head, before the home page can paint at the start of the hero.
+// Prepare the pinned layout before showing the home page, including on reload.
 (() => {
   const navigation = performance.getEntriesByType('navigation')[0];
   let returnTarget = null;
@@ -10,14 +10,23 @@
     sessionStorage.removeItem('interdiz-home-return');
     sessionStorage.removeItem('interdiz-services-return');
   } catch {}
-  const hashTarget = ({ '#services': 'services', '#solutions-track': 'services', '#projects': 'projects' })[location.hash];
-  const targetId = (['services', 'projects'].includes(returnTarget) ? returnTarget : null) || hashTarget;
-  if (!targetId) return;
+  const restoreScroll = navigation?.type === 'reload';
+  const scrollKey = 'interdiz-home-scroll';
+  let savedScroll = null;
+  try {
+    if (restoreScroll) {
+      const saved = JSON.parse(sessionStorage.getItem(scrollKey));
+      const url = `${location.pathname}${location.search}${location.hash}`;
+      if (saved?.url === url && Number.isFinite(saved.top)) savedScroll = saved.top;
+    } else sessionStorage.removeItem(scrollKey);
+  } catch {}
+  const hashTarget = restoreScroll ? null : ({ '#services': 'services', '#solutions-track': 'services', '#projects': 'projects' })[location.hash];
+  const targetId = (['services', 'projects'].includes(returnTarget) ? returnTarget : null) || hashTarget || null;
   // Own the initial position: native fragment scrolling can also scroll clipped
   // containers while the pinned layout is being created before window.load.
-  const destination = `${location.pathname}${location.search}#${targetId}`;
-  history.replaceState(history.state, '', `${location.pathname}${location.search}`);
-  history.scrollRestoration = 'manual';
+  const destination = targetId ? `${location.pathname}${location.search}#${targetId}` : null;
+  if (targetId) history.replaceState(history.state, '', `${location.pathname}${location.search}`);
+  history.scrollRestoration = targetId || savedScroll !== null ? 'manual' : 'auto';
 
   const root = document.documentElement;
   root.classList.add('home-entry-pending');
@@ -27,7 +36,8 @@
 
   function reveal() {
     pending = false;
-    history.replaceState(history.state, '', destination);
+    if (destination) history.replaceState(history.state, '', destination);
+    history.scrollRestoration = 'auto';
     root.classList.remove('home-entry-pending');
     removeEventListener('error', onError, true);
     removeEventListener('unhandledrejection', fallback);
@@ -39,7 +49,8 @@
     if (document.readyState === 'loading') await new Promise(resolve => addEventListener('DOMContentLoaded', resolve, { once: true }));
     await document.fonts.ready;
     if (!pending) return;
-    document.getElementById(targetId)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    if (targetId) document.getElementById(targetId)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    else if (savedScroll !== null) scrollTo({ top: savedScroll, behavior: 'instant' });
     reveal();
   }
 
@@ -49,6 +60,8 @@
 
   window.interdizHomeEntry = {
     targetId,
+    restoreScroll,
+    scrollTop: savedScroll,
     get pending() { return pending; },
     finish(place) {
       if (!pending) return Promise.resolve();
@@ -65,4 +78,14 @@
   // while a slow application is still loading and can rebuild the pinned hero.
   addEventListener('error', onError, true);
   addEventListener('unhandledrejection', fallback);
+  // Keep the unclamped position before an unpinned loading document can shorten it.
+  addEventListener('pagehide', () => {
+    if (pending) return;
+    const top = window.ScrollSmoother?.get()?.scrollTop() ?? scrollY;
+    try {
+      sessionStorage.setItem(scrollKey, JSON.stringify({
+        url: `${location.pathname}${location.search}${location.hash}`, top
+      }));
+    } catch {}
+  });
 })();
