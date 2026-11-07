@@ -69,7 +69,7 @@
   --line-strong: rgba(255, 255, 255, 0.22);
   --line-lime: rgba(194, 255, 67, 0.35);
   --pad: clamp(22px, 4.2vw, 80px);
-  --section-gap: 150px;
+  --section-gap: 200px;
   --display: Inter, Arial, sans-serif;
   --text: Inter, Arial, sans-serif;
   font-family: var(--text);
