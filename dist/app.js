@@ -255,7 +255,6 @@ function setupProcessAccordion() {
 
   function revealOnScroll() {
     scrollFrame = 0;
-    if (isCompactLayout()) return;
     if (document.body.classList.contains('dialog-open')) return;
     if (performance.now() < interactionUntil) return;
     // Keyboard users keep control of the step they are interacting with.
