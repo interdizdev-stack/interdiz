@@ -96,6 +96,40 @@ html:has(#smooth-wrapper) { scroll-behavior: auto; }
 html.home-entry-pending { background: var(--bg); }
 .home-entry-pending body { visibility: hidden; opacity: 0; }
 
+/* One diagonal curtain bridges all full-page navigations. */
+html:is(.page-transition-in, .page-transition-out)::before {
+  --curtain-overscan: max(25vw, 15vh);
+  content: '';
+  position: fixed;
+  inset-block: 0;
+  left: calc(-1 * var(--curtain-overscan));
+  width: calc(100vw + 2 * var(--curtain-overscan));
+  box-sizing: border-box;
+  z-index: 10000;
+  pointer-events: none;
+  border-inline: clamp(12px, 2.4vw, 40px) solid var(--lime);
+  background: linear-gradient(110deg, #0c0e0c 25%, #171e12 75%, #0c0e0c);
+  transform: skewX(-12deg);
+  will-change: transform;
+}
+html.page-transition-out::before {
+  animation: page-curtain-cover .24s cubic-bezier(.76, 0, .24, 1) both;
+}
+html.page-transition-reveal::before {
+  animation: page-curtain-reveal .42s cubic-bezier(.76, 0, .24, 1) both;
+}
+@keyframes page-curtain-cover {
+  from { transform: translate3d(-110%, 0, 0) skewX(-12deg); }
+  to { transform: translate3d(0, 0, 0) skewX(-12deg); }
+}
+@keyframes page-curtain-reveal {
+  from { transform: translate3d(0, 0, 0) skewX(-12deg); }
+  to { transform: translate3d(110%, 0, 0) skewX(-12deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:is(.page-transition-in, .page-transition-out)::before { display: none; animation: none; }
+}
+
 body {
   margin: 0;
   overflow-x: clip;
