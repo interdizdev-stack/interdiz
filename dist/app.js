@@ -129,15 +129,17 @@ const updateProgress = () => {
 addEventListener('scroll', updateProgress, { passive: true });
 
 function setupMobileControlsClearance() {
-  const controls = $('.display-controls');
+  const controls = $$('.display-controls');
   const copyright = $('.footer-bottom > .footer-copyright');
   let previous = '';
   const update = () => {
     const clearance = isCompactLayout() ? `${Math.max(0, innerHeight - copyright.getBoundingClientRect().top + 10)}px` : '';
     if (clearance === previous) return;
     previous = clearance;
-    if (clearance) controls.style.setProperty('--footer-clearance', clearance);
-    else controls.style.removeProperty('--footer-clearance');
+    controls.forEach(control => {
+      if (clearance) control.style.setProperty('--footer-clearance', clearance);
+      else control.style.removeProperty('--footer-clearance');
+    });
   };
   addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update, { passive: true });

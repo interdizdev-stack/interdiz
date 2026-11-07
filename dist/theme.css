@@ -63,6 +63,10 @@ html[data-theme="dark"].motion-enabled .solution-card {
   align-items: center;
   gap: 6px;
 }
+.display-controls.display-controls--motion {
+  left: 22px;
+  right: auto;
+}
 .display-controls .motion-toggle {
   position: static;
   min-height: 36px;
