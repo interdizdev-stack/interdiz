@@ -5,9 +5,9 @@
 html[data-theme] .mobile-menu {
   /* Keep 90% of the original panel width, including the native dialog gutters. */
   width: min(468px, calc(.9 * (100% - 2em - 6px)));
-  max-height: calc(.9 * (100dvh - 24px));
+  max-height: min(calc(.9 * (100dvh - 24px)), calc(100dvh - 60px));
   margin: auto;
-  transform: translateY(-10px);
+  transform: translateY(-30px);
   padding: 21.6px;
   overflow: auto;
   overscroll-behavior: contain;
