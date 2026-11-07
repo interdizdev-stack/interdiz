@@ -112,6 +112,8 @@ html[data-theme="dark"] .seo-tabs > button::after { background: var(--lime); }
 }
 
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
+  .seo-service .page-heading { container-type: inline-size; }
+  html[data-theme] .seo-service .page-intro h1 { font-size: min(var(--mobile-hero-heading-size), 12.6cqi); }
   .seo-tabs > button { min-height: 68px; gap: 12px; padding: 16px; font-size: 16px; }
   .seo-visual { padding: 20px; }
   .seo-panels .seo-format { padding: 26px; }
