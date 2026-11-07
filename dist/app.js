@@ -50,6 +50,11 @@ function syncChapterCaption() {
 syncChapterCaption();
 compactMedia.addEventListener('change', syncChapterCaption);
 
+function sectionForMenuLink(link) {
+  const hash = link.dataset.section ?? link.hash;
+  return hash ? document.getElementById(hash.slice(1)) : null;
+}
+
 function setupMobileNavigation() {
   const menu = $('#mobile-menu');
   if (!menu) return;
@@ -61,7 +66,10 @@ function setupMobileNavigation() {
     compactMedia,
     onOpen() {
       const links = $$('.mobile-menu-links a', menu);
-      const current = links.findLast(link => $(link.dataset.section ?? link.hash).getBoundingClientRect().top <= innerHeight * .35) ?? links[0];
+      const current = links.findLast(link => {
+        const section = sectionForMenuLink(link);
+        return section && section.getBoundingClientRect().top <= innerHeight * .35;
+      }) ?? links[0];
       links.forEach(link => {
         link.classList.toggle('is-current', link === current);
         if (link === current) link.setAttribute('aria-current', 'location');
@@ -84,7 +92,7 @@ function setupMobileNavigation() {
 }
 
 const menuSections = $$('.floating-nav .float-links a').map(link => ({
-  link, section: $(link.dataset.section ?? link.hash)
+  link, section: sectionForMenuLink(link)
 })).filter(item => item.section);
 let activeMenuLink = null;
 function updateActiveMenu() {
@@ -113,7 +121,9 @@ const updateProgress = () => {
 
   const floatNav = $('#floating-nav');
   if (floatNav) {
-    floatNav.classList.toggle('visible', pageScroll() > 260);
+    const visible = pageScroll() > 260;
+    floatNav.classList.toggle('visible', visible);
+    floatNav.inert = !visible;
   }
 };
 addEventListener('scroll', updateProgress, { passive: true });
