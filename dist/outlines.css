@@ -23,9 +23,9 @@
 }
 
 .contact-pill.contact-pill--filled,
-.contact-pill:hover, .contact-pill.contact-pill--filled:hover,
+.contact-pill:is(:hover, :active), .contact-pill.contact-pill--filled:is(:hover, :active),
 .float-cta, .round-link,
-.gallery-footer .gallery-all, .gallery-footer .gallery-all:hover,
+.gallery-footer .gallery-all, .gallery-footer .gallery-all:is(:hover, :active),
 .scroll-cue:hover .scroll-circle,
 .solutions-controls button:hover:not(:disabled),
 .gallery-controls button:hover:not(:disabled),
@@ -38,11 +38,11 @@
 .lime, .crosshair, .cross, .hero-chapter em, .hero-end span,
 .scene-stages > span.active, .solution-card-meta, .solutions-hint, .gallery-hint,
 .solutions-count, .studio-badge, .service-index, .service-plus,
-.service[open] h3, .tags > span:hover, .approach-index, .approach-step,
+.service[open] h3, .tags > span:is(:hover, :active), .approach-index, .approach-step,
 .testimonial-emphasis, .contact-glow, .copy-tag, .online-tag, .location-tag,
 .footer-clock, .dialog-kicker, .dialog-link, .motion-icon, .nav-num,
-.float-status, .float-links a:hover, .header nav a:hover, .contact-val:hover,
-.back-to-top:hover, .approach-testimonial figcaption a:hover {
+.float-status, .float-links a:hover, .header nav a:hover, .contact-val:is(:hover, :active),
+.back-to-top:is(:hover, :active), .approach-testimonial figcaption a:hover {
   -webkit-text-stroke: var(--outline-width) var(--contour-ink, #000);
   paint-order: stroke fill;
 }
@@ -55,7 +55,7 @@
 .solution-type {
   filter: url(#lime-contour-outline);
 }
-.solution-card.is-active .solution-type, .solution-card:hover .solution-type {
+.solution-card.is-active .solution-type, .solution-card:is(:hover, :active) .solution-type {
   -webkit-text-stroke: var(--outline-width) var(--contour-ink, #000);
   paint-order: stroke fill;
   filter: none;
@@ -63,7 +63,7 @@
 .status-pulse, .swiss-cursor-dot {
   border: var(--outline-width) solid var(--contour-ink, #000);
 }
-.studio-badge, .tags > span:hover, .marquee,
+.studio-badge, .tags > span:is(:hover, :active), .marquee,
 .copy-toast {
   border-color: var(--contour-ink, #000);
   border-width: var(--outline-width);
@@ -89,7 +89,7 @@ html[data-theme="dark"] .solution-type {
   -webkit-text-stroke: var(--outline-width) rgba(242, 243, 237, 0.32);
   filter: none;
 }
-html[data-theme="dark"] .solution-card:is(.is-active, :hover) .solution-type {
+html[data-theme="dark"] .solution-card:is(.is-active, :hover, :active) .solution-type {
   color: var(--lime);
   -webkit-text-stroke-color: var(--lime);
 }
@@ -113,7 +113,7 @@ html[data-theme="dark"] .solution-card .service-open {
   border-color: var(--fg) !important;
   border-width: 1.5px !important;
 }
-html[data-theme="dark"] .solution-card .service-open:hover {
+html[data-theme="dark"] .solution-card .service-open:is(:hover, :active) {
   border-color: transparent !important;
 }
 
@@ -167,7 +167,7 @@ html body :is(.manifesto, .projects, .marquee, .expertise, .approach, .reviews, 
 }
 
 /* The header CTA fills green on hover without a visible outline. */
-html[data-theme="dark"] .header > .contact-pill:hover {
+html[data-theme="dark"] .header > .contact-pill:is(:hover, :active) {
   background: var(--lime);
   color: #0c0e0c;
   border-color: transparent !important;
@@ -285,7 +285,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 
 /* Keep the contact headline crisp without a glow in any interaction state. */
 .contact .contact-glow,
-.contact .contact-hero h2 > a:hover .contact-glow {
+.contact .contact-hero h2 > a:is(:hover, :active) .contact-glow {
   text-shadow: none;
 }
 

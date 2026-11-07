@@ -33,8 +33,6 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   .desktop-only { display: none; }
   html[data-theme] :is(a, button, summary) { -webkit-tap-highlight-color: rgba(194, 255, 67, .16); }
   html[data-theme] :is(button, .contact-pill, .gallery-all, .back-to-top) { touch-action: manipulation; }
-  html[data-theme] .swiss-cursor-dot,
-  html[data-theme] .swiss-cursor-ring { display: none; }
 
   html[data-theme] .header { height: 80px; gap: 12px; }
   html[data-theme] .header > .wordmark { font-size: 30px; }
@@ -103,7 +101,6 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   html[data-theme] .kicker-tail { white-space: nowrap; }
   html[data-theme] .manifesto-inner { margin-top: 30px; }
   html[data-theme] .solutions-stage { margin-top: 24px; }
-  html[data-theme].motion-enabled .solutions-stage { --solution-parallax-space: 72px; display: flow-root; }
   html[data-theme].motion-enabled .solutions-track { padding-bottom: calc(28px + var(--solution-parallax-space)); margin-bottom: calc(-1 * var(--solution-parallax-space)); overflow-y: hidden; }
   html[data-theme].motion-enabled .solution-card { translate: 0 var(--solution-parallax-y, 0px); }
   html[data-theme] .solutions-track { gap: 16px; }
@@ -128,8 +125,8 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   html[data-theme] .project-track { gap: 16px; }
   html[data-theme] .project-card { flex-basis: calc((100% - 16px) / 2); }
   html[data-theme] .project-image { height: auto; min-height: 0; aspect-ratio: auto; overflow: visible; border-color: transparent !important; border-radius: 0; background: none; box-shadow: none; }
-  html[data-theme] .project-preview { display: block; position: relative; inset: auto; aspect-ratio: 4 / 3; overflow: hidden; border: var(--outline-width) solid var(--line); border-radius: 8px; background: var(--bg-surface); transform: none; }
-  html[data-theme] .project-image:is(:hover, :focus-visible) .project-preview { border-color: var(--line-strong); }
+  html[data-theme] .project-preview { display: block; position: relative; inset: auto; aspect-ratio: 4 / 3; overflow: hidden; border: var(--outline-width) solid var(--line); border-radius: 8px; background: var(--bg-surface); }
+  html[data-theme] .project-image:is(:hover, :focus-visible, :active) .project-preview { border-color: var(--line-strong); }
   html[data-theme] .project-info { gap: 12px; margin-top: 16px; }
   html[data-theme] .project-info h3 { font-size: 24px; line-height: 1.17; }
   html[data-theme] .project-info p { font-size: 16px; line-height: 1.5; max-width: none; }
@@ -141,7 +138,6 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   html[data-theme] .gallery-footer { display: flex; align-items: flex-start; margin-top: 16px; padding: 0; border: 0; }
   html[data-theme] .gallery-footer .gallery-all { min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
-  html[data-theme] .marquee { display: none; }
 
   html[data-theme] .expertise h2 { margin-top: 30px; }
   html[data-theme] .expertise-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 37px; }

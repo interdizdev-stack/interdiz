@@ -23,6 +23,7 @@ html[data-theme="dark"] .seo-tabs > button::after { background: var(--lime); }
 .seo-tab-arrow { margin-left: auto; font-size: 23px; transition: transform .3s, translate .25s; }
 .seo-tabs > button[aria-selected="true"] .seo-tab-arrow { transform: rotate(45deg); }
 .seo-tabs > button:focus-visible { z-index: 2; outline: var(--outline-width) solid var(--fg); outline-offset: 3px; }
+.seo-tabs > button:active:not([aria-selected="true"]) .seo-tab-arrow { translate: 3px -3px; }
 @media (hover: hover) and (pointer: fine) {
   .seo-tabs > button:hover:not([aria-selected="true"]) .seo-tab-arrow { translate: 3px -3px; }
 }

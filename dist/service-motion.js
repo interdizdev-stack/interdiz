@@ -1,3 +1,4 @@
+import { trackPointerMotion } from './pointer-motion.js';
 import { setupDesignFormats } from './design-formats.js';
 import { setupSEOPageMotion } from './seo-motion.js';
 
@@ -56,30 +57,28 @@ export function setupServiceMotion() {
     media.revert();
     media.add({
       always: 'all', compact: compactQuery,
-      reduce: '(prefers-reduced-motion: reduce)',
-      pointer: '(hover: hover) and (pointer: fine)'
+      reduce: '(prefers-reduced-motion: reduce)'
     }, context => {
-      const { compact, pointer, reduce } = context.conditions;
+      const { compact, reduce } = context.conditions;
       const reduced = reduce || userReduced;
       root.classList.toggle('reduced-motion', reduced);
       root.classList.toggle('service-motion-enabled', !reduced);
       if (reduced) return;
       const entrances = new Map();
       const scrollEffects = new Map();
-      const duration = compact ? .6 : .9;
-      const scrub = compact ? true : .55;
+      const scrub = .55;
 
       function entrance(trigger, compose, start = 'top 96%') {
         if (seen.has(trigger) || trigger.getBoundingClientRect().bottom < 0) return;
         const timeline = gsap.timeline({
-          defaults: { duration, ease: 'power3.out', clearProps: 'transform,opacity,visibility,clipPath' },
+          defaults: { duration: .9, ease: 'power3.out', clearProps: 'transform,opacity,visibility,clipPath' },
           scrollTrigger: { trigger, start, once: true },
           onComplete: () => seen.add(trigger)
         });
         compose(timeline);
         entrances.set(trigger, timeline);
       }
-      function rise(element, trigger = element, distance = compact ? 24 : 42) {
+      function rise(element, trigger = element, distance = 42) {
         if (!element || !trigger) return;
         entrance(trigger, tl => tl.from(element, { y: distance, opacity: 0 }));
       }
@@ -99,18 +98,18 @@ export function setupServiceMotion() {
       rise(intro.querySelector('.page-switch'));
       entrance(intro.querySelector('.service-title'), tl => {
         tl.from(heroLines, {
-          x: compact ? 14 : 48, rotationX: compact ? 0 : -18,
+          x: 48, rotationX: -18,
           transformPerspective: 1400, transformOrigin: '50% 100%',
           clipPath: 'inset(-20% 100% -20% -15%)', opacity: .15,
-          stagger: .16, duration: compact ? .9 : 1.25, ease: 'power4.out',
+          stagger: .16, duration: 1.25, ease: 'power4.out',
           clearProps: 'transform,transformOrigin,opacity,clipPath'
         });
       });
       all('.hero-description, .service-actions, .service-intro-note', intro).forEach(element => rise(element));
       // Entrance owns transform; scroll separation uses independent translate.
       gsap.to(heroLines, {
-        '--service-hero-x': i => `${(i ? 1 : -1) * (compact ? 22 : web ? 140 : 100)}px`,
-        '--service-hero-y': i => `${compact ? (i ? -4 : -10) : web ? (i ? -20 : -55) : (i ? -14 : -30)}px`, ease: 'none',
+        '--service-hero-x': i => `${(i ? 1 : -1) * (web ? 140 : 100)}px`,
+        '--service-hero-y': i => `${web ? (i ? -20 : -55) : (i ? -14 : -30)}px`, ease: 'none',
         scrollTrigger: { id: 'service-hero-separation', trigger: intro, start: 'top top', end: 'bottom top', scrub, invalidateOnRefresh: true }
       });
 
@@ -118,10 +117,10 @@ export function setupServiceMotion() {
       all('.service-section > .service-title').forEach(title => {
         entrance(title, tl => {
           tl.from(all('.hero-line', title), {
-            x: i => (i ? 1 : -1) * (compact ? 8 : 36),
-            rotationX: compact ? 0 : -12, transformPerspective: 1200,
+            x: i => (i ? 1 : -1) * 36,
+            rotationX: -12, transformPerspective: 1200,
             clipPath: 'inset(-20% 100% -20% -15%)', opacity: .25,
-            stagger: .13, duration: compact ? .75 : 1.05, ease: 'power4.out'
+            stagger: .13, duration: 1.05, ease: 'power4.out'
           });
         });
       });
@@ -138,13 +137,13 @@ export function setupServiceMotion() {
             }
           });
           assembly.fromTo(all('.service-eyebrow, h3, p, .service-format-note', content), {
-            y: i => (compact ? 18 : 36) + i * (compact ? 5 : 12),
-            x: (index % 2 ? 1 : -1) * (compact ? 8 : 28), opacity: .12
+            y: i => 36 + i * 12,
+            x: (index % 2 ? 1 : -1) * 28, opacity: .12
           }, { y: 0, x: 0, opacity: 1, duration: 1, stagger: .14, ease: 'power2.out' });
           scrollEffects.set(card, assembly);
         } else gsap.fromTo(content, {
-          y: compact ? 30 : 90 + index % 2 * 55,
-          rotationX: compact ? 0 : 7, transformPerspective: 1100, opacity: .35
+          y: 90 + index % 2 * 55,
+          rotationX: 7, transformPerspective: 1100, opacity: .35
         }, {
           y: 0, rotationX: 0, opacity: 1, ease: 'none',
           scrollTrigger: { id: `service-format-depth-${index}`, trigger: card, start: 'top 98%', end: 'top 58%', scrub, invalidateOnRefresh: true }
@@ -154,13 +153,13 @@ export function setupServiceMotion() {
         });
       });
 
-      const stopDesignFormats = setupDesignFormats({ page, gsap, compact, pointer });
+      const stopDesignFormats = setupDesignFormats({ page, gsap });
 
       // The content assembles in reading order and the rule tracks scroll progress.
       all('.service-process li').forEach((row, index) => {
         entrance(row, tl => tl.from(all('.service-step-number, h3, p, .service-step-output', row), {
-          x: compact ? 12 : web ? 48 : 28, y: compact ? 10 : web ? 28 : 18, opacity: 0,
-          stagger: compact ? .035 : web ? .1 : .07, duration: web ? .8 : .6,
+          x: web ? 48 : 28, y: web ? 28 : 18, opacity: 0,
+          stagger: web ? .1 : .07, duration: web ? .8 : .6,
           ...(web ? { clipPath: 'inset(0 -8% 100% -8%)' } : {})
         }));
         gsap.fromTo(row.querySelector('.service-row-trace'), { scaleX: 0 }, {
@@ -171,7 +170,7 @@ export function setupServiceMotion() {
       const handover = page.querySelector('.service-handover');
       if (handover) {
         scrollEffects.set(handover, gsap.fromTo(handover, {
-          y: compact ? 24 : 80, scale: compact ? .98 : .96, opacity: .4
+          y: 80, scale: .96, opacity: .4
         }, {
           y: 0, scale: 1, opacity: 1, ease: 'none',
           scrollTrigger: {
@@ -185,23 +184,23 @@ export function setupServiceMotion() {
         const image = card.querySelector('.project-preview img');
         entrance(card, tl => {
           tl.from(card, {
-            x: compact ? Math.min(innerWidth * .18, 70) : 220 + index * 160,
-            rotationY: compact ? 0 : -7, transformPerspective: 1200,
-            opacity: 1, duration: compact ? .65 : 1, clearProps: 'transform,opacity'
+            x: () => compact ? Math.min(innerWidth, 220 + index * 160) : 220 + index * 160,
+            rotationY: -7, transformPerspective: 1200,
+            opacity: 1, duration: 1, clearProps: 'transform,opacity'
           }, 0);
           if (web) {
             tl.fromTo(card.querySelector('.web-project-curtain'), { scaleX: 1 }, {
-              scaleX: 0, duration: compact ? .8 : 1.15, ease: 'power4.inOut', clearProps: 'transform'
+              scaleX: 0, duration: 1.15, ease: 'power4.inOut', clearProps: 'transform'
             }, .08);
             tl.fromTo(image, { '--web-image-scale': 1.15 }, {
-              '--web-image-scale': 1, duration: compact ? 1 : 1.4, ease: 'power3.out'
+              '--web-image-scale': 1, duration: 1.4, ease: 'power3.out'
             }, .12);
             tl.from(all('.project-topic, .project-info h3, .project-info h3 + p', card), {
-              y: compact ? 14 : 26, opacity: 0, stagger: .08, duration: .6
+              y: 26, opacity: 0, stagger: .08, duration: .6
             }, .35);
           }
         }, 'top 98%');
-        const travel = () => Math.min(compact ? 8 : 20, image.clientHeight * .025);
+        const travel = () => Math.min(20, image.clientHeight * .025);
         gsap.fromTo(image, { '--service-image-y': () => `${travel()}px` }, {
           '--service-image-y': () => `${-travel()}px`, ease: 'none',
           scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub, invalidateOnRefresh: true }
@@ -210,22 +209,22 @@ export function setupServiceMotion() {
       rise(page.querySelector('.service-all-projects'));
 
       const questions = page.querySelector('.service-questions');
-      scrollEffects.set(questions, gsap.fromTo(questions, { y: compact ? 20 : 80 }, {
+      scrollEffects.set(questions, gsap.fromTo(questions, { y: 80 }, {
         y: 0, ease: 'none',
         scrollTrigger: { id: 'service-faq-depth', trigger: '#questions', start: 'top bottom', end: 'top 35%', scrub, invalidateOnRefresh: true }
       }));
-      const stopFAQ = setupAnimatedFAQ(gsap, ScrollTrigger, questions, compact);
-      const stopSEO = seo ? setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) : () => {};
+      const stopFAQ = setupAnimatedFAQ(gsap, ScrollTrigger, questions);
+      const stopSEO = seo ? setupSEOPageMotion({ page, gsap, entrance }) : () => {};
       if (web) all('details', questions).forEach(row => {
         entrance(row, tl => tl.from(row, {
-          x: compact ? 14 : 36, opacity: .15, duration: compact ? .5 : .7
+          x: 36, opacity: .15, duration: .7
         }));
       });
 
       const contact = page.querySelector('.contact');
       const contactTitle = contact.querySelector('.contact-hero h2');
       scrollEffects.set(contactTitle, gsap.fromTo(contactTitle, {
-        y: compact ? 30 : 100, rotationX: compact ? 0 : 14, scale: compact ? 1 : .94,
+        y: 100, rotationX: 14, scale: .94,
         transformPerspective: 1200, transformOrigin: 'left bottom', opacity: .25
       }, {
         y: 0, rotationX: 0, scale: 1, opacity: 1, ease: 'none',
@@ -246,17 +245,16 @@ export function setupServiceMotion() {
       finishFocused({ target: document.activeElement });
 
       const tilts = [];
-      const stopWebPointer = web && pointer && !compact ? setupWebPointerMotion(page, gsap) : () => {};
-      if (pointer && !compact) all('.service-projects .project-card').forEach(card => {
+      const stopWebPointer = web ? setupWebPointerMotion(page, gsap) : () => {};
+      all('.service-projects .project-card').forEach(card => {
         const move = event => {
           const box = card.getBoundingClientRect();
           card.style.setProperty('--tilt-y', `${((event.clientX - box.left) / box.width - .5) * 5}deg`);
           card.style.setProperty('--tilt-x', `${-((event.clientY - box.top) / box.height - .5) * 5}deg`);
         };
         const reset = () => { card.style.removeProperty('--tilt-x'); card.style.removeProperty('--tilt-y'); };
-        card.addEventListener('pointermove', move);
-        card.addEventListener('pointerleave', reset);
-        tilts.push(() => { card.removeEventListener('pointermove', move); card.removeEventListener('pointerleave', reset); reset(); });
+        const stop = trackPointerMotion(card, move, reset);
+        tilts.push(() => { stop(); reset(); });
       });
       return () => {
         stopDesignFormats();
@@ -280,19 +278,14 @@ export function setupServiceMotion() {
 }
 
 // Pointer movement has its own CSS properties, independent of scroll/entrance transforms.
-// Called within matchMedia so reduced motion, coarse pointers and resize revert all tweens.
+// Revert with the scroll animations when motion preferences or layout change.
 function setupWebPointerMotion(page, gsap) {
   const cleanup = [];
   function track(element, move, reset, properties) {
-    const pointerMove = event => { if (event.pointerType === 'mouse') move(event); };
-    element.addEventListener('pointermove', pointerMove);
-    element.addEventListener('pointerleave', reset);
-    element.addEventListener('pointercancel', reset);
+    const stop = trackPointerMotion(element, move, reset);
     element.addEventListener('focusin', reset);
     cleanup.push(() => {
-      element.removeEventListener('pointermove', pointerMove);
-      element.removeEventListener('pointerleave', reset);
-      element.removeEventListener('pointercancel', reset);
+      stop();
       element.removeEventListener('focusin', reset);
       properties.forEach(property => element.style.removeProperty(property));
     });
@@ -324,7 +317,7 @@ function setupWebPointerMotion(page, gsap) {
   return () => cleanup.forEach(stop => stop());
 }
 
-function setupAnimatedFAQ(gsap, ScrollTrigger, list, compact) {
+function setupAnimatedFAQ(gsap, ScrollTrigger, list) {
   const cleanup = [];
   list.querySelectorAll('details').forEach(details => {
     const summary = details.querySelector('summary');
@@ -342,7 +335,7 @@ function setupAnimatedFAQ(gsap, ScrollTrigger, list, compact) {
       const border = parseFloat(getComputedStyle(details).borderBottomWidth);
       const target = expanded ? details.getBoundingClientRect().height : summary.offsetHeight + border;
       tween = gsap.fromTo(details, { height, overflow: 'hidden' }, {
-        height: target, duration: compact ? .28 : .4, ease: 'power2.inOut',
+        height: target, duration: .4, ease: 'power2.inOut',
         onComplete: () => {
           details.open = expanded;
           gsap.set(details, { clearProps: 'height,overflow' });

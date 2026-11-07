@@ -46,9 +46,10 @@
 .crm-flow-caption > span { font-size: 24px; color: var(--fg); }
 @media (prefers-reduced-motion: no-preference) {
   html:not(.reduced-motion) .crm-run { transition: background .2s, translate .2s; }
+  html:not(.reduced-motion) .crm-flow.is-running .crm-format.is-current .crm-art-route { animation: crm-exchange .8s linear infinite; }
+  html:not(.reduced-motion) .crm-run:active { translate: 0 -3px; }
   @media (hover: hover) and (pointer: fine) {
     html:not(.reduced-motion) .crm-run:hover { translate: 0 -3px; }
-    html:not(.reduced-motion) .crm-flow.is-running .crm-format.is-current .crm-art-route { animation: crm-exchange .8s linear infinite; }
   }
 }
 @keyframes crm-exchange { to { stroke-dashoffset: -20; } }

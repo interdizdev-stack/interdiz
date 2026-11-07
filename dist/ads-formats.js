@@ -1,9 +1,10 @@
+import { trackPointerMotion } from './pointer-motion.js';
+
 const posters = [...document.querySelectorAll('.ads-format')];
 
 if (posters.length) {
   const { gsap } = window;
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  const pointer = matchMedia('(hover: hover) and (pointer: fine)');
   const timelines = new Map();
   const entered = new WeakSet();
   const visible = new Set();
@@ -92,13 +93,12 @@ if (posters.length) {
     const visual = card.querySelector('.ads-visual');
     observer.observe(visual);
     card.querySelector('.ads-replay').addEventListener('click', () => animate(card));
-    visual.addEventListener('pointermove', event => {
-      if (!pointer.matches || reduced()) return;
+    trackPointerMotion(visual, event => {
+      if (reduced()) return;
       const box = visual.getBoundingClientRect();
       card.style.setProperty('--ads-tilt-x', `${-((event.clientY - box.top) / box.height - .5) * 7}deg`);
       card.style.setProperty('--ads-tilt-y', `${((event.clientX - box.left) / box.width - .5) * 9}deg`);
-    });
-    visual.addEventListener('pointerleave', () => {
+    }, () => {
       card.style.removeProperty('--ads-tilt-x');
       card.style.removeProperty('--ads-tilt-y');
     });

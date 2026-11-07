@@ -1,3 +1,4 @@
+import { trackPointerMotion } from './pointer-motion.js';
 import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
 import { setupMobileMenu, setupScrollProgress } from './navigation.js';
@@ -301,7 +302,6 @@ function setupProcessAccordion() {
   // Only real pointer movement selects a hovered row. Layout changes and wheel
   // scrolling beneath a stationary pointer must not start another transition.
   list.addEventListener('pointermove', event => {
-    if (isCompactLayout()) return;
     if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover)').matches) return;
     if (list.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) return;
     const row = event.target.closest('.service');
@@ -545,15 +545,14 @@ function setupSolutionsCarousel() {
   });
 
   cards.forEach(card => {
-    card.addEventListener('pointermove', event => {
-      if (reduced || event.pointerType !== 'mouse' || drag?.moved) return;
+    trackPointerMotion(card, event => {
+      if (reduced || drag?.moved) return;
       const bounds = card.getBoundingClientRect();
       const x = event.clientX - bounds.left;
       const y = event.clientY - bounds.top;
       card.style.setProperty('--spot-x', `${x}px`);
       card.style.setProperty('--spot-y', `${y}px`);
-    }, { passive: true });
-    card.addEventListener('pointerleave', () => {
+    }, () => {
       card.style.removeProperty('--spot-x');
       card.style.removeProperty('--spot-y');
     });
@@ -782,8 +781,7 @@ function setupAnimations() {
   animationContext = gsap.context(() => {
     const media = gsap.matchMedia();
     media.add({ desktop: '(min-width: 1101px)', mobile: compactMedia.media }, context => {
-      const mobile = context.conditions.mobile;
-      const compact = mobile;
+      const compact = context.conditions.mobile;
       heroTrigger = null;
       // Keep the same three-scene sequence on phones, tablets and desktop.
       {
@@ -824,7 +822,7 @@ function setupAnimations() {
         heroTimeline.to(sceneState, { explosion: 1.4, rotation: 1.35, duration: 0.44 }, 0.07)
           .to(sceneState, { explosion: 0.16, rotation: 2.75, portal: 1, duration: 0.25 }, 0.51)
           .to(sceneState, { zoom: 1, rotation: 3.1, opacity: 0.24, duration: 0.25 }, 0.75);
-        gsap.from('.hero-intro', { y: compact ? 24 : 45, opacity: 0, duration: compact ? .65 : 1.3, ease: 'power3.out', clearProps: compact ? 'transform,opacity' : 'opacity' });
+        gsap.from('.hero-intro', { y: 45, opacity: 0, duration: 1.3, ease: 'power3.out', clearProps: compact ? 'transform,opacity' : 'opacity' });
         if (!compact) gsap.from('.hero-bottom', { y: 25, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out' });
       }
 
@@ -836,27 +834,22 @@ function setupAnimations() {
           trigger: '.manifesto',
           start: 'top bottom',
           end: 'top top',
-          scrub: smoother || compact ? true : 0.6,
+          scrub: smoother ? true : 0.6,
           invalidateOnRefresh: true
         }
       });
-      if (compact) {
-        const canvas = $('.hero .webgl canvas');
-        if (canvas) transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * 0.72, immediateRender: false }, 0);
-      } else {
-        transition.fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0);
-      }
       transition
-        .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * (compact ? 0.35 : 0.42), immediateRender: false }, 0)
-        .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * (compact ? 0.5 : 0.64), immediateRender: false }, 0)
-        .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * (compact ? 0.06 : 0.1) }, { y: 0 }, 0)
-        .fromTo('.manifesto-inner', { y: () => innerHeight * (compact ? 0.16 : 0.32) }, { y: 0 }, 0);
+        .fromTo('.hero .webgl', { y: 0, scale: 1 }, { y: () => innerHeight * 0.82, scale: 1.2, immediateRender: false }, 0)
+        .fromTo('.hero-grid', { y: 0 }, { y: () => innerHeight * 0.42, immediateRender: false }, 0)
+        .fromTo('.hero-end', { y: 0 }, { y: () => innerHeight * 0.64, immediateRender: false }, 0)
+        .fromTo('.manifesto > .section-kicker', { y: () => innerHeight * 0.1 }, { y: 0 }, 0)
+        .fromTo('.manifesto-inner', { y: () => innerHeight * 0.32 }, { y: 0 }, 0);
 
       // Use the section's layout coordinates: its inner content already has
       // a parallax transform, which must not shift these trigger positions.
       const cardsTop = () => $('.manifesto-inner').offsetTop + $('.solutions-stage').offsetTop;
       gsap.fromTo('.solution-card', {
-        '--solution-parallax-y': i => `${(compact ? 24 : mobile ? 70 : 140) + (i % 3) * (compact ? 8 : mobile ? 18 : 48)}px`
+        '--solution-parallax-y': i => `${140 + (i % 3) * 48}px`
       }, {
         '--solution-parallax-y': '0px',
         ease: 'none',
@@ -864,8 +857,8 @@ function setupAnimations() {
           id: 'solutions-cards-parallax',
           trigger: '.manifesto',
           start: () => `top+=${cardsTop()} bottom`,
-          end: () => `top+=${cardsTop()} ${compact ? '85%' : mobile ? '45%' : '50%'}`,
-          scrub: smoother || compact ? true : 0.6,
+          end: () => `top+=${cardsTop()} 50%`,
+          scrub: smoother ? true : 0.6,
           invalidateOnRefresh: true
         }
       });
@@ -898,10 +891,10 @@ function setupAnimations() {
 
         // Start the sideways entrance when the cases themselves enter view.
         gsap.fromTo('.gallery-window', {
-          x: () => compact ? Math.min(innerWidth * .18, 70) : Math.min(innerWidth * (mobile ? 0.8 : 0.65), mobile ? 360 : 900),
+          x: () => Math.min(innerWidth * 0.65, 900),
           opacity: 1
         }, {
-          x: 0, opacity: 1, duration: compact ? .55 : .8, ease: 'power3.out',
+          x: 0, opacity: 1, duration: .8, ease: 'power3.out',
           immediateRender: true, clearProps: 'transform,opacity',
           scrollTrigger: {
             id: 'projects-cases-side-reveal',
@@ -913,13 +906,12 @@ function setupAnimations() {
         });
       }
 
-      gsap.from('.service', { y: compact ? 18 : 35, opacity: 0, stagger: compact ? .05 : .08, duration: compact ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
-      gsap.from('.expertise h2', { y: compact ? 24 : 70, opacity: compact ? .65 : .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: compact ? true : .6 } });
+      gsap.from('.service', { y: 35, opacity: 0, stagger: .08, duration: .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
+      gsap.from('.expertise h2', { y: 70, opacity: .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: .6 } });
       // Move the FAQ content together while keeping its navigation anchor stationary.
       const faqSection = $('.approach');
       if (faqSection) {
-        const faqParallax = compact ? 18 : mobile ? 55 : 110;
-        gsap.fromTo(faqSection.children, { y: faqParallax }, {
+        gsap.fromTo(faqSection.children, { y: 110 }, {
           y: 0,
           ease: 'none',
           scrollTrigger: {
@@ -927,15 +919,14 @@ function setupAnimations() {
             trigger: faqSection.parentElement,
             start: () => `top+=${faqSection.offsetTop} bottom`,
             end: () => `top+=${faqSection.offsetTop} 20%`,
-            scrub: smoother || compact ? true : 0.6,
+            scrub: smoother ? true : 0.6,
             invalidateOnRefresh: true
           }
         });
       }
       gsap.from('.approach-testimonial', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.approach-testimonial', start: 'top 90%', once: true } });
-      if (compact) gsap.from('.contact-hero h2', { y: 24, opacity: 0, duration: .65, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact', start: 'top 90%', once: true } });
-      else gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
-      gsap.from('.contact-card', { ...(compact ? {} : { y: 40 }), opacity: 0, stagger: 0.12, duration: 0.7, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
+      gsap.from('.contact-hero h2', { y: 100, rotateX: 12, transformPerspective: 1200, opacity: 0.15, scrollTrigger: { trigger: '.contact', start: 'top 85%', end: 'top 15%', scrub: 0.75 } });
+      gsap.from('.contact-card', { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, clearProps: 'transform,opacity', scrollTrigger: { trigger: '.contact-grid', start: 'top 90%' } });
     });
 
     // Native sticky handles normal scrolling; pin its wrapper inside the
@@ -1071,17 +1062,15 @@ function setupCursor() {
    Card 3D Tilt Effect
    ======================================================== */
 function setupCardTilt() {
-  if (!matchMedia('(pointer: fine)').matches) return;
   $$('.project-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      if (reduced || isCompactLayout() || card.closest('.is-dragging')) return;
+    trackPointerMotion(card, e => {
+      if (reduced || card.closest('.is-dragging')) return;
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       card.style.setProperty('--tilt-y', `${x * 5}deg`);
       card.style.setProperty('--tilt-x', `${-y * 5}deg`);
-    });
-    card.addEventListener('mouseleave', () => {
+    }, () => {
       card.style.removeProperty('--tilt-y');
       card.style.removeProperty('--tilt-x');
     });
@@ -1097,13 +1086,6 @@ function loadScene() {
       if (disposed) return;
       scene = createScene($('#webgl'), reduced, sceneState);
       document.documentElement.classList.add('webgl-ready');
-      const transition = window.ScrollTrigger?.getById('hero-solutions-parallax')?.animation;
-      const canvas = $('#webgl canvas');
-      if (isCompactLayout() && transition && canvas) {
-        const progress = transition.progress();
-        transition.fromTo(canvas, { y: 0 }, { y: () => innerHeight * .72, immediateRender: false }, 0);
-        window.gsap.set(canvas, { y: innerHeight * .72 * progress });
-      }
       scene.refresh();
     } catch (error) {
       document.documentElement.classList.add('webgl-unavailable');

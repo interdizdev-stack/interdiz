@@ -69,5 +69,5 @@
 @media (prefers-reduced-motion: reduce) {
   html:has(.inner-page) { scroll-behavior: auto; }
   .inner-page *, .inner-page *::before, .inner-page *::after { transition: none; }
-  .page-project-grid .project-card:hover .project-image img { transform: scale(1.06); }
+  .page-project-grid .project-card:is(:hover, :active) .project-image img { transform: scale(1.06); }
 }

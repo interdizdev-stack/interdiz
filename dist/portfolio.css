@@ -31,7 +31,7 @@
 /* Text tabs use an underline; keep the shared keyboard-focus outline. */
 html[data-theme] .portfolio-categories button,
 html[data-theme] .portfolio-reset { border-color: transparent !important; }
-.portfolio-categories button:hover { color: var(--fg); }
+.portfolio-categories button:is(:hover, :active) { color: var(--fg); }
 .portfolio-categories button[aria-pressed="true"] { color: var(--fg); }
 .portfolio-categories button[aria-pressed="true"]::after { background: var(--lime); }
 html[data-theme="dark"] .portfolio-categories button[aria-pressed="true"] { color: var(--lime); }

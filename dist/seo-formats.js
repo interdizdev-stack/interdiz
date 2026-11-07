@@ -70,7 +70,7 @@ if (lab) {
     animation = window.gsap.context(() => {
       const timeline = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
       timeline.from(panels[active].children, {
-        y: compact.matches ? 12 : 22, opacity: 0, stagger: .045, duration: .55,
+        y: 22, opacity: 0, stagger: .045, duration: .55,
         clearProps: 'transform,opacity'
       }, 0);
       timeline.from(scene.querySelectorAll('[data-seo-piece]'), {

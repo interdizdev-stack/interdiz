@@ -49,11 +49,6 @@ html[data-theme="dark"].motion-enabled .solution-card {
   /* Keep scroll motion independent of the existing hover scale transition. */
   translate: 0 var(--solution-parallax-y, 0px);
 }
-@media (max-width: 900px) {
-  html[data-theme="dark"].motion-enabled .solutions-stage {
-    --solution-parallax-space: 128px;
-  }
-}
 .display-controls {
   position: fixed;
   right: 22px;

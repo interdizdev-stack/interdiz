@@ -1,6 +1,8 @@
+import { trackPointerMotion } from './pointer-motion.js';
+
 // All effects are installed inside service-motion's matchMedia context.
 // The tab controller owns scene transitions; this module moves only their outer layers.
-export function setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) {
+export function setupSEOPageMotion({ page, gsap, entrance }) {
   const lab = page.querySelector('.seo-lab');
   const visual = lab.querySelector('.seo-visual');
   const canvas = lab.querySelector('.seo-canvas');
@@ -10,12 +12,12 @@ export function setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) {
   entrance(lab, timeline => {
     timeline.from(lab.querySelector('.seo-lab-top'), { y: 12, opacity: 0, duration: .55 }, 0)
       .from(visual, {
-        x: compact ? 0 : -38, y: compact ? 18 : 0, opacity: .2,
-        clipPath: 'inset(0 100% 0 0)', duration: compact ? .7 : 1, ease: 'power3.out'
+        x: -38, opacity: .2,
+        clipPath: 'inset(0 100% 0 0)', duration: 1, ease: 'power3.out'
       }, .04)
       .from(lab.querySelector('.seo-panels'), {
-        x: compact ? 0 : 38, y: compact ? 14 : 0, opacity: .2,
-        duration: compact ? .6 : .85
+        x: 38, opacity: .2,
+        duration: .85
       }, .12)
       .from(lab.querySelector('.seo-lab-bottom'), { y: 10, opacity: 0, duration: .55 }, .24);
   }, 'top 94%');
@@ -24,29 +26,22 @@ export function setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) {
     '--seo-edge-progress': 1, ease: 'none',
     scrollTrigger: { id: 'seo-lab-edge', trigger: lab, start: 'top 92%', end: 'top 48%', scrub: true }
   });
-  gsap.fromTo(canvas, { '--seo-canvas-y': compact ? 6 : 14 }, {
-    '--seo-canvas-y': compact ? -6 : -14, ease: 'none',
+  gsap.fromTo(canvas, { '--seo-canvas-y': 14 }, {
+    '--seo-canvas-y': -14, ease: 'none',
     scrollTrigger: { id: 'seo-canvas-depth', trigger: lab.querySelector('.seo-lab-body'), start: 'top bottom', end: 'bottom top', scrub: .5 }
   });
   page.querySelectorAll('.service-questions details').forEach(row => {
     entrance(row, timeline => {
-      timeline.from(row, { x: compact ? 12 : 28, opacity: .2, duration: compact ? .55 : .75 }, 0)
+      timeline.from(row, { x: 28, opacity: .2, duration: .75 }, 0)
         .from(row.querySelector('summary > span'), { rotation: -90, opacity: 0, duration: .65 }, .08);
     });
   });
 
-  if (!pointer || compact) return () => {};
-
   function track(element, move, reset, properties) {
-    const handleMove = event => { if (event.pointerType === 'mouse') move(event); };
-    element.addEventListener('pointermove', handleMove);
-    element.addEventListener('pointerleave', reset);
-    element.addEventListener('pointercancel', reset);
+    const stop = trackPointerMotion(element, move, reset);
     element.addEventListener('focusin', reset);
     cleanup.push(() => {
-      element.removeEventListener('pointermove', handleMove);
-      element.removeEventListener('pointerleave', reset);
-      element.removeEventListener('pointercancel', reset);
+      stop();
       element.removeEventListener('focusin', reset);
       properties.forEach(property => element.style.removeProperty(property));
     });

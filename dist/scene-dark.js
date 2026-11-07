@@ -1,3 +1,4 @@
+import { trackPointerMotion } from './pointer-motion.js';
 import * as THREE from './vendor/three.module.js';
 import { measureCompactFraming } from './scene-framing.js';
 
@@ -156,7 +157,7 @@ export function createScene(container, reduced = false, state = { explosion:0, r
   const resizeObserver=new ResizeObserver(resize); resizeObserver.observe(container);
   const visibility=()=>requestRender();
   document.addEventListener('visibilitychange',visibility);
-  window.addEventListener('pointermove',pointerMove,{passive:true});
+  const stopPointer = trackPointerMotion(window, pointerMove, () => { pointer.x = 0; pointer.y = 0; requestRender(); });
   const lost=e=>{e.preventDefault();container.classList.add('context-lost');cancelAnimationFrame(raf);raf=0;};
   const restored=()=>{container.classList.remove('context-lost');requestRender();};
   renderer.domElement.addEventListener('webglcontextlost',lost);
@@ -166,6 +167,6 @@ export function createScene(container, reduced = false, state = { explosion:0, r
     state,
     refresh:requestRender,
     setReduced(value){ staticMotion=value; if(value){cancelAnimationFrame(raf);raf=0;}requestRender(); },
-    dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();resizeObserver.disconnect();window.removeEventListener('pointermove',pointerMove);document.removeEventListener('visibilitychange',visibility);scene.traverse(o=>o.geometry?.dispose());[limeMaterial,chromeMaterial,darkMaterial,ringMaterial].forEach(m=>m.dispose());env.dispose();renderer.dispose();renderer.domElement.remove();}
+    dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();resizeObserver.disconnect();stopPointer();document.removeEventListener('visibilitychange',visibility);scene.traverse(o=>o.geometry?.dispose());[limeMaterial,chromeMaterial,darkMaterial,ringMaterial].forEach(m=>m.dispose());env.dispose();renderer.dispose();renderer.domElement.remove();}
   };
 }

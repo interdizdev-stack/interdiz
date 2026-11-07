@@ -8,7 +8,6 @@ if (desk) {
   const visuals = drawers.map(drawer => drawer.querySelector('.support-visual'));
   const replays = drawers.map(drawer => drawer.querySelector('.support-replay'));
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  const compact = matchMedia('(max-width: 699px)');
   const visible = new Set();
   let active = 0;
   let pendingArt = 0;
@@ -38,8 +37,8 @@ if (desk) {
     illustration = window.gsap.context(() => {
       const timeline = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
       timeline.from(art.querySelectorAll('.support-piece'), {
-        x: (_, element) => Number(element.dataset.shift || 0) * (compact.matches ? .6 : 1),
-        y: (_, element) => Number(element.dataset.lift || 0) * (compact.matches ? .6 : 1),
+        x: (_, element) => Number(element.dataset.shift || 0),
+        y: (_, element) => Number(element.dataset.lift || 0),
         opacity: 0, duration: .9, stagger: .12, clearProps: 'transform,opacity'
       }, 0);
       timeline.fromTo(art.querySelector('.support-trace'), {
