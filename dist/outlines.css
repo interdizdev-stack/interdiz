@@ -218,6 +218,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 /* A fixed shortcut back to the first screen beside the display controls. */
 .quick-home {
   --quick-home-size: 45.738px;
+  position: relative;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -225,30 +226,41 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   height: var(--quick-home-size);
   flex: none;
   border-radius: 50%;
-  background: var(--bg);
+  background: conic-gradient(var(--lime) var(--page-progress, 0%), var(--line-strong) 0), var(--bg);
   color: var(--lime);
-  border: var(--outline-width) solid var(--line-strong);
+  border: 0;
   font-size: 27.951px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
 }
+.quick-home::before {
+  content: '';
+  position: absolute;
+  inset: var(--outline-width);
+  border: var(--outline-width) solid var(--bg);
+  border-radius: inherit;
+  background: var(--quick-home-fill, var(--bg));
+  pointer-events: none;
+}
+.quick-home > span { position: relative; }
 .quick-home:is(:focus-visible, :active, .is-launching) {
-  background: var(--lime);
+  --quick-home-fill: var(--lime);
   color: var(--bg);
-  border-color: var(--lime);
 }
 @media (hover: hover) {
   .quick-home:hover {
-    background: var(--lime);
+    --quick-home-fill: var(--lime);
     color: var(--bg);
-    border-color: var(--lime);
     box-shadow: 0 0 14px rgb(190 255 50 / .25);
   }
 }
 @media (prefers-reduced-motion: no-preference) {
   html:not(.reduced-motion) .quick-home {
-    transition: background-color .18s, color .18s, border-color .18s, box-shadow .18s;
+    transition: color .18s, box-shadow .18s;
+  }
+  html:not(.reduced-motion) .quick-home::before {
+    transition: background-color .18s;
   }
   html:not(.reduced-motion) .quick-home.is-launching {
     animation: quick-home-ring .55s ease-out;

@@ -44,6 +44,25 @@ export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutC
   return close;
 }
 
+export function setupScrollProgress(readPosition = () => scrollY) {
+  const shortcut = document.querySelector('.quick-home');
+  const bar = document.querySelector('.scroll-progress > span');
+  const root = document.documentElement;
+
+  function update() {
+    const range = root.scrollHeight - root.clientHeight;
+    const fraction = range > 0 ? Math.max(0, Math.min(1, readPosition() / range)) : 0;
+    shortcut?.style.setProperty('--page-progress', `${fraction * 100}%`);
+    if (bar) bar.style.transform = `scaleX(${fraction})`;
+  }
+
+  new ResizeObserver(update).observe(document.body);
+  addEventListener('resize', update);
+  addEventListener('pageshow', update);
+  update();
+  return update;
+}
+
 // Inner pages use native scrolling rather than the home page's GSAP timeline.
 export function setupPageNavigation() {
   const rememberHomeReturn = () => {
@@ -57,6 +76,7 @@ export function setupPageNavigation() {
   rememberHomeReturn();
   addEventListener('pageshow', rememberHomeReturn);
   const floatingNav = document.querySelector('#floating-nav');
+  const updateProgress = setupScrollProgress();
   const mobileMenu = document.querySelector('#mobile-menu');
   const compactMedia = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   setupMobileMenu({
@@ -72,6 +92,7 @@ export function setupPageNavigation() {
     floatingNav.setAttribute('aria-hidden', String(!visible));
   }
   addEventListener('scroll', updateFloatingNavigation, { passive: true });
+  addEventListener('scroll', updateProgress, { passive: true });
   addEventListener('resize', updateFloatingNavigation, { passive: true });
   addEventListener('pageshow', updateFloatingNavigation);
   floatingNav.addEventListener('focusout', () => requestAnimationFrame(updateFloatingNavigation));

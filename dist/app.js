@@ -1,6 +1,6 @@
 import { setupProjectDialog } from './projects.js';
 import { setupReviews } from './reviews.js';
-import { setupMobileMenu } from './navigation.js';
+import { setupMobileMenu, setupScrollProgress } from './navigation.js';
 import './footer.js';
 
 // Content and links are usable without animation or WebGL.
@@ -107,16 +107,13 @@ function updateActiveMenu() {
   });
 }
 
+const updateScrollProgress = setupScrollProgress(pageScroll);
 const updateProgress = () => {
-  const distance = document.documentElement.scrollHeight - innerHeight;
-  const position = pageScroll();
-  const progress = distance > 0 ? position / distance : 0;
-  const progressEl = $('.scroll-progress span');
-  if (progressEl) progressEl.style.transform = `scaleX(${progress})`;
+  updateScrollProgress();
 
   const floatNav = $('#floating-nav');
   if (floatNav) {
-    floatNav.classList.toggle('visible', position > 260);
+    floatNav.classList.toggle('visible', pageScroll() > 260);
   }
 };
 addEventListener('scroll', updateProgress, { passive: true });
