@@ -217,17 +217,18 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 
 /* A fixed shortcut back to the first screen beside the display controls. */
 .quick-home {
+  --quick-home-size: 37.8px;
   display: grid;
   place-items: center;
   overflow: hidden;
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
+  width: var(--quick-home-size);
+  height: var(--quick-home-size);
+  flex: none;
   border-radius: 50%;
   background: var(--bg);
   color: var(--lime);
   border: var(--outline-width) solid var(--line-strong);
-  font-size: 22px;
+  font-size: 23.1px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
