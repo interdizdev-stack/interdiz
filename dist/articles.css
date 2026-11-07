@@ -34,7 +34,7 @@ html[data-theme] .journal-motion[hidden] { display: none; }
 .journal-ribbon-track { display: flex; width: max-content; font-size: clamp(28px, 3.8vw, 62px); font-weight: 600; letter-spacing: -.055em; line-height: 1.2; }
 .journal-ribbon-track > span { flex: 0 0 auto; padding-right: 26px; }
 .journal-ribbon-track i { padding-inline: 24px; font-style: normal; color: var(--lime); }
-.journal-catalog { margin-inline: var(--pad); padding-block: clamp(65px, 8vw, 130px); scroll-margin-top: 110px; }
+.journal-catalog { margin-inline: var(--pad); padding-block: clamp(65px, 8vw, 130px); }
 .journal-catalog-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; margin-block: 44px 46px; }
 .journal-edition { color: var(--muted); font-size: 11px; padding-bottom: 8px; }
 .journal-empty { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 90px); align-items: center; border-block: var(--divider-width) solid var(--line); padding-block: clamp(36px, 4vw, 68px); }

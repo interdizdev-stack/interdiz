@@ -114,7 +114,6 @@ html[data-theme="dark"] .ai-motion-toggle { border-color: transparent; }
   padding: 30px 26px 34px 34px;
   border-top: 0;
   border-left: var(--divider-width) solid var(--line);
-  scroll-margin-top: 130px;
   transition: background .4s, border-color .4s;
 }
 .ai-scenario::before {
@@ -147,10 +146,17 @@ html[data-theme="dark"] .ai-motion-toggle { border-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   .ai-workbench *, .ai-workbench *::before { transition: none !important; }
 }
+@media (min-width: 1101px) and (min-height: 801px) {
+  /* Keep the caption and all four nodes inside the sticky panel's visible area. */
+  .ai-orbit { max-width: calc((100svh - 360px) / .88); margin-inline: auto; }
+}
 @media (min-width: 1101px) and (max-height: 800px) {
   .ai-map { max-width: 470px; padding: 20px; }
   .ai-orbit { max-width: 350px; margin-inline: auto; }
   .ai-map-bottom { min-height: 76px; padding-top: 16px; }
+}
+@media (min-width: 1101px) and (max-height: 620px) {
+  .ai-map { position: static; }
 }
 @media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
   .ai-workbench { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 24px; margin-top: 40px; }

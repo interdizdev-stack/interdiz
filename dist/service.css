@@ -5,7 +5,7 @@
   row-gap: var(--service-block-gap);
   padding-bottom: var(--service-block-gap);
 }
-.service-section { margin-inline: var(--pad); scroll-margin-top: 110px; }
+.service-section { margin-inline: var(--pad); }
 .service-intro .page-intro-layout { margin-top: -50px; padding-bottom: 0; }
 .service-intro .page-switch { margin-bottom: 79px; }
 .service-intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; }
@@ -107,7 +107,6 @@
     html:not(.reduced-motion) .service-page .page-text-link:hover > span { translate: 3px -3px; }
   }
 }
-html.reduced-motion:has(.service-page) { scroll-behavior: auto; }
 .reduced-motion .service-page *, .reduced-motion .service-page *::before, .reduced-motion .service-page *::after { transition: none; }
 .reduced-motion .service-line-effect { display: none; }
 .reduced-motion .service-row-trace { display: none; }

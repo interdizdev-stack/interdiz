@@ -31,12 +31,13 @@ if (workbench) {
 
   function update() {
     frame = 0;
-    const target = Math.max(150, innerHeight * .42);
+    // Use the same reading position as native fragment links and scrollIntoView.
+    const target = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     let nearest = 0;
     let distance = Infinity;
     scenarios.forEach((item, index) => {
       const rect = item.getBoundingClientRect();
-      const delta = Math.abs(rect.top + Math.min(rect.height * .4, 130) - target);
+      const delta = Math.abs(rect.top - target);
       if (delta < distance) { nearest = index; distance = delta; }
     });
     select(nearest);

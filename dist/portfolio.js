@@ -1,6 +1,16 @@
 import { setupProjectDialog } from './projects.js';
 import { setupPageNavigation } from './navigation.js';
 
+const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+function syncMotion() {
+  let paused = false;
+  try { paused = sessionStorage.getItem('interdiz-reduced') === 'true'; } catch {}
+  document.documentElement.classList.toggle('reduced-motion', paused || motionPreference.matches);
+}
+motionPreference.addEventListener('change', syncMotion);
+window.addEventListener('pageshow', syncMotion);
+syncMotion();
+
 setupProjectDialog();
 
 const controls = document.querySelector('.portfolio-toolbar');
