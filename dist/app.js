@@ -418,7 +418,7 @@ function setupSolutionsCarousel() {
 
   function restoreCard() {
     if (returnIndex === null) return;
-    swipeHint?.dismiss();
+    swipeHint?.stop();
     clearTimeout(settleTimer);
     requestedIndex = null;
     const card = cards[returnIndex];
@@ -426,6 +426,7 @@ function setupSolutionsCarousel() {
     const left = card.offsetLeft - cards[0].offsetLeft + (centered ? (card.offsetWidth - track.clientWidth) / 2 : 0);
     track.scrollTo({ left: Math.max(0, Math.min(track.scrollWidth - track.clientWidth, left)), behavior: 'instant' });
     render(returnIndex);
+    swipeHint?.sync();
   }
 
   function beginReturn() {
@@ -558,15 +559,15 @@ function setupSolutionsCarousel() {
     });
   });
   const sizing = new ResizeObserver(() => {
-    swipeHint?.sync();
     if (returnIndex !== null) { restoreCard(); return; }
     requestedIndex = null;
     render(nearestIndex());
+    swipeHint?.sync();
   });
   sizing.observe(track);
   $('.solutions-controls').hidden = false;
   render(0);
-  swipeHint = setupCarouselSwipeHint(track, cards[0]);
+  swipeHint = setupCarouselSwipeHint(track, cards);
   updateSolutionsHint = swipeHint?.sync;
   if (servicesEntry || homeEntry?.restoreScroll) beginReturn();
   addEventListener('pageshow', event => {
@@ -575,15 +576,18 @@ function setupSolutionsCarousel() {
   return restoreCard;
 }
 
-function setupCarouselSwipeHint(track, firstCard) {
+function setupCarouselSwipeHint(track, cards) {
   const gsap = window.gsap;
-  if (!gsap || !window.IntersectionObserver || !firstCard) return;
+  if (!gsap || !window.IntersectionObserver || !cards.length) return;
   let played = false;
-  let visible = false;
+  const visibleCards = new Set();
+  let delay;
+  let pointer;
   let animation;
-  let origin = 0;
 
   function stop() {
+    clearTimeout(delay);
+    delay = null;
     animation?.kill();
     animation = null;
     track.classList.remove('is-swipe-hint');
@@ -594,13 +598,20 @@ function setupCarouselSwipeHint(track, firstCard) {
     stop();
   }
   function sync() {
-    if (reduced || !isCompactLayout() || !visible) { stop(); return; }
-    if (played || track.scrollLeft > 4) return;
-    const distance = Math.min(80, track.clientWidth * .18, track.scrollWidth - track.clientWidth);
-    if (distance < 12) return;
+    if (reduced || !isCompactLayout() || document.hidden || !visibleCards.size) { stop(); return; }
+    if (played || delay || pointer || homeEntry?.pending) return;
+    delay = setTimeout(play, 220);
+  }
+  function play() {
+    delay = null;
+    const origin = track.scrollLeft;
+    const remaining = track.scrollWidth - track.clientWidth - origin;
+    const distance = Math.min(80, track.clientWidth * .18);
+    const shift = remaining >= distance || remaining >= origin
+      ? Math.min(distance, remaining) : -Math.min(distance, origin);
+    if (Math.abs(shift) < 12) return;
     played = true;
     observer.disconnect();
-    origin = track.scrollLeft;
     track.classList.add('is-swipe-hint');
     animation = gsap.timeline({
       onComplete: () => {
@@ -608,24 +619,43 @@ function setupCarouselSwipeHint(track, firstCard) {
         stop();
       }
     })
-      .to(track, { scrollLeft: origin + distance, duration: .6, ease: 'power2.inOut' })
+      .to(track, { scrollLeft: origin + shift, duration: .6, ease: 'power2.inOut' })
       .to(track, { scrollLeft: origin, duration: .75, ease: 'power2.inOut' }, '+=.16')
       .timeScale(1.1);
   }
   const observer = new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .55;
+    for (const entry of entries) {
+      if (entry.isIntersecting && entry.intersectionRatio >= .55) visibleCards.add(entry.target);
+      else visibleCards.delete(entry.target);
+    }
     sync();
   }, { threshold: .55, rootMargin: '0px 0px -8% 0px' });
-  observer.observe(firstCard);
-  // User input always takes over; never pull the carousel back during a swipe.
-  ['pointerdown', 'touchstart', 'keydown'].forEach(type => {
-    track.addEventListener(type, dismiss, { passive: true });
-  });
+  cards.forEach(card => observer.observe(card));
+  // A vertical gesture can bring the cards into view. A horizontal drag already demonstrates scrolling.
+  track.addEventListener('pointerdown', event => {
+    if (animation) dismiss();
+    if (played || !event.isPrimary) return;
+    stop();
+    pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  }, { passive: true });
+  track.addEventListener('pointermove', event => {
+    if (event.pointerId !== pointer?.id) return;
+    const dx = Math.abs(event.clientX - pointer.x);
+    if (dx > 6 && dx > Math.abs(event.clientY - pointer.y)) dismiss();
+  }, { passive: true });
+  const release = event => {
+    if (event.pointerId !== pointer?.id) return;
+    pointer = null;
+    sync();
+  };
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(type => track.addEventListener(type, release));
+  track.addEventListener('keydown', dismiss);
   track.addEventListener('wheel', event => {
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) dismiss();
   }, { passive: true });
   compactMedia.addEventListener('change', sync);
-  return { sync, dismiss };
+  document.addEventListener('visibilitychange', sync);
+  return { sync, dismiss, stop };
 }
 
 function setupProjectGallery() {
@@ -726,7 +756,7 @@ function setupProjectGallery() {
   }).observe(viewport);
   $('.gallery-controls').hidden = false;
   render();
-  swipeHint = setupCarouselSwipeHint(viewport, cards[0]);
+  swipeHint = setupCarouselSwipeHint(viewport, cards.slice(0, 1));
   if (projectsEntry) swipeHint?.dismiss();
   updateProjectsHint = swipeHint?.sync;
 }
@@ -1167,6 +1197,8 @@ async function init() {
     if (homeEntry?.pending) await homeEntry.finish(place);
     else place();
   }
+  updateSolutionsHint?.();
+  updateProjectsHint?.();
   updateProgress();
   if (sectionEntry) {
     // Let the cards paint before any offscreen WebGL construction can block the UI.
