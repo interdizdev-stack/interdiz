@@ -2050,6 +2050,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 /* ========================================================
    14. Reduced Motion & Fallbacks
    ======================================================== */
+html.reduced-motion { scroll-behavior: auto; }
 .reduced-motion .hero-chapter,
 .reduced-motion .hero-end,
 .reduced-motion .scene-stages {
@@ -2057,7 +2058,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 }
 .reduced-motion .project-image,
 .reduced-motion .project-preview,
-.reduced-motion .project-image img { transform: none; }
+.reduced-motion .project-card .project-image img { transform: none; }
 .reduced-motion .webgl {
   opacity: 1 !important;
 }
@@ -2085,6 +2086,11 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 /* ========================================================
    15. Responsive Adaptations
    ======================================================== */
+/* On laptops the floating menu spans the section labels when an anchor opens. */
+@media (min-width: 1101px) and (max-width: 1500px) and (pointer: fine) {
+  #smooth-content :is(.projects, .approach, .reviews, .contact) { padding-top: 104px; }
+}
+
 @media (max-width: 1100px) {
   .approach-content { width: 100%; }
   .gallery-navigation { grid-column: 1 / -1; justify-self: end; }

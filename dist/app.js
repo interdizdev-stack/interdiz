@@ -768,6 +768,8 @@ function setupAnimations() {
         updateProcessOnScroll?.();
       }
     });
+    // Focusing a control should scroll the page, never the fixed wrapper beneath the pointer.
+    smoother.wrapper().style.overflow = 'clip';
   }
 
   animationContext = gsap.context(() => {
@@ -906,12 +908,11 @@ function setupAnimations() {
 
       gsap.from('.service', { y: compact ? 18 : 35, opacity: 0, stagger: compact ? .05 : .08, duration: compact ? .45 : .65, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.service-list', start: 'top 92%', once: true } });
       gsap.from('.expertise h2', { y: compact ? 24 : 70, opacity: compact ? .65 : .2, scrollTrigger: { trigger: '.expertise', start: 'top 80%', end: 'top 25%', scrub: compact ? true : .6 } });
-      // Move the complete FAQ with scroll; use layout coordinates so its
-      // own transform cannot shift the trigger on refresh.
+      // Move the FAQ content together while keeping its navigation anchor stationary.
       const faqSection = $('.approach');
       if (faqSection) {
         const faqParallax = compact ? 18 : mobile ? 55 : 110;
-        gsap.fromTo(faqSection, { y: faqParallax }, {
+        gsap.fromTo(faqSection.children, { y: faqParallax }, {
           y: 0,
           ease: 'none',
           scrollTrigger: {
@@ -987,6 +988,7 @@ function anchorScrollTop(target) {
 
 // Native links remain useful in the non-script version; account for pinned sections here.
 $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
+  if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
   const target = $(link.getAttribute('href')); if (!target) return;
   event.preventDefault();
   if (link.closest('.mobile-menu')) closeMobileNavigation?.(false);
@@ -1145,13 +1147,13 @@ async function init() {
   if (initialSection) {
     const place = () => {
       const top = anchorScrollTop(initialSection);
-      if (smoother) smoother.scrollTo(top, false);
+      if (smoother) {
+        // Rechecking the return position must not rearm a jump at the same offset.
+        if (Math.abs(smoother.scrollTop() - top) > 1 || Math.abs(scrollY - top) > 1) smoother.scrollTo(top, false);
+      }
       else scrollTo({ top, behavior: 'instant' });
       window.ScrollTrigger?.update();
-      if (homeEntry?.pending) {
-        smoother?.scrollTrigger.getTween()?.progress(1);
-        if (servicesEntry) window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
-      }
+      if (homeEntry?.pending && servicesEntry) window.gsap?.getTweensOf('.manifesto-line, .solution-card').forEach(tween => tween.progress(1));
       updateProgress();
       updateActiveMenu();
     };

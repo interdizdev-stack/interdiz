@@ -3,7 +3,6 @@
 .hero-chapter-caption-text { text-transform: uppercase; }
 .compact-only, [hidden].compact-only { display: none; }
 .review-card__more { display: none; }
-.project-preview { display: contents; }
 html[data-theme] .mobile-menu {
   width: min(520px, calc(100% - 24px));
   max-height: calc(100dvh - 24px);
