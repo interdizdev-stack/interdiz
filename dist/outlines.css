@@ -217,7 +217,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 
 /* A fixed shortcut back to the first screen beside the display controls. */
 .quick-home {
-  --quick-home-size: 41.58px;
+  --quick-home-size: 45.738px;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -228,7 +228,7 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
   background: var(--bg);
   color: var(--lime);
   border: var(--outline-width) solid var(--line-strong);
-  font-size: 25.41px;
+  font-size: 27.951px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
