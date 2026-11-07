@@ -1055,6 +1055,12 @@ h1, h2, h3, h4, h5, h6,
 .solution-card .service-open:hover {
   background: var(--lime);
   color: #0c0e0c;
+  transform: none;
+}
+.solution-card .service-open::after {
+  position: absolute;
+  inset: 0;
+  content: "";
 }
 
 .solutions-toolbar {

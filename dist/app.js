@@ -392,6 +392,7 @@ function setupSolutionsCarousel() {
   let frame = 0;
   let settleTimer;
   let drag = null;
+  let suppressClick = false;
   let swipeHint;
   let returnIndex = null;
   // Store the service route, so another viewport or card order stays correct.
@@ -496,11 +497,10 @@ function setupSolutionsCarousel() {
 
   track.addEventListener('pointerdown', event => {
     if (event.pointerType !== 'mouse' || event.button !== 0) return;
-    if (event.target.closest('button, a')) return;
     returnIndex = null;
     requestedIndex = null;
     drag = { id: event.pointerId, x: event.clientX, left: track.scrollLeft, moved: false };
-    track.setPointerCapture(event.pointerId);
+    suppressClick = false;
   });
   track.addEventListener('pointermove', event => {
     if (!drag || event.pointerId !== drag.id) return;
@@ -508,6 +508,7 @@ function setupSolutionsCarousel() {
     if (!drag.moved && Math.abs(distance) < 6) return;
     if (!drag.moved) {
       drag.moved = true;
+      track.setPointerCapture(event.pointerId);
       track.classList.add('is-dragging');
       getSelection()?.removeAllRanges();
     }
@@ -518,13 +519,20 @@ function setupSolutionsCarousel() {
     if (!drag || event.pointerId !== drag.id) return;
     const completed = drag;
     drag = null;
+    suppressClick = completed.moved;
     track.classList.remove('is-dragging');
     if (track.hasPointerCapture(completed.id)) track.releasePointerCapture(completed.id);
     if (completed.moved) goTo(nearestIndex());
+    setTimeout(() => { suppressClick = false; }, 0);
   }
   track.addEventListener('pointerup', finishDrag);
   track.addEventListener('pointercancel', finishDrag);
   track.addEventListener('lostpointercapture', finishDrag);
+  track.addEventListener('pointerleave', event => { if (drag && !drag.moved) finishDrag(event); });
+  track.addEventListener('click', event => {
+    if (suppressClick) { event.preventDefault(); event.stopPropagation(); }
+  }, true);
+  track.addEventListener('dragstart', event => event.preventDefault());
 
   // Browser Back must restore the cards even if this visit began at the hero.
   track.addEventListener('click', event => {
