@@ -148,16 +148,16 @@ function setupMobileControlsClearance() {
   update();
 }
 
-setupProjectDialog({
-  onOpen() {
-    const activeSmoother = smoother;
-    const wasPaused = activeSmoother?.paused();
-    activeSmoother?.paused(true);
-    return () => {
-      if (activeSmoother === smoother) activeSmoother?.paused(wasPaused);
-    };
-  }
-});
+function pausePageForDialog() {
+  const activeSmoother = smoother;
+  const wasPaused = activeSmoother?.paused();
+  activeSmoother?.paused(true);
+  return () => {
+    if (activeSmoother === smoother) activeSmoother?.paused(wasPaused);
+  };
+}
+
+setupProjectDialog({ onOpen: pausePageForDialog });
 
 // Keep native summary keyboard activation while animating both directions.
 function setupProcessAccordion() {
@@ -1033,7 +1033,7 @@ function setupCursor() {
   document.addEventListener('mouseover', e => {
     const target = e.target.closest('a, button, .project-card, .gallery-window, .solutions-track, .reviews-wall, summary');
     const overReviews = target?.closest('.reviews-wall');
-    const overCard = target?.closest('.solutions-track, .project-card, .gallery-window, .reviews-wall');
+    const overCard = target?.closest('.solutions-track, .project-card, .gallery-window, .reviews-wall') && !(overReviews && target.matches('button, a'));
     dot.classList.toggle('cursor-card-active', Boolean(overCard));
     if (!target) {
       ring.className = 'swiss-cursor-ring';
@@ -1123,7 +1123,7 @@ async function init() {
   setupProjectGallery();
   setupProcessAccordion();
   setupFAQ();
-  updateReviewsMotion = setupReviews(() => reduced);
+  updateReviewsMotion = setupReviews(() => reduced, pausePageForDialog);
   setupTestimonialStickySize();
   setupMobileNavigation();
   setupMobileControlsClearance();

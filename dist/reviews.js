@@ -1,10 +1,10 @@
 // Local version of the moving card wall from https://interdiz.ru/#reviews.
-// Keep column membership stable when recycling in either direction.
-export function setupReviews(isReduced) {
+export function setupReviews(isReduced, pausePage) {
   const wall = document.querySelector('.reviews-wall');
   const track = wall?.querySelector('.reviews-track');
   const button = document.querySelector('.reviews-pause');
-  if (!wall || !track || !button) return;
+  const dialog = document.querySelector('#review-dialog');
+  if (!wall || !track || !button || !dialog) return;
   const compactLayout = matchMedia('(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)');
   const compact = () => compactLayout.matches;
   const heading = document.querySelector('.reviews-heading');
@@ -20,7 +20,10 @@ export function setupReviews(isReduced) {
   const next = navigation.querySelector('[data-review-next]');
   const filters = [...document.querySelectorAll('[data-reviews-filter]')];
   document.querySelector('.reviews-filters')?.removeAttribute('hidden');
-  cards.forEach((card, index) => {
+  const dialogContent = dialog.querySelector('.review-dialog-content');
+  let opener;
+  let restorePage;
+  cards.forEach(card => {
     const placeholder = card.querySelector('.review-card__author-icon[src$="/placeholder.webp"]');
     if (placeholder) {
       const initials = document.createElement('span');
@@ -30,23 +33,31 @@ export function setupReviews(isReduced) {
       placeholder.after(initials);
     }
     const quote = card.querySelector('.review-card__text');
-    quote.id = `review-text-${index + 1}`;
     const more = document.createElement('button');
     more.type = 'button';
-    more.className = 'review-card__more compact-only';
+    more.className = 'review-card__more';
     more.hidden = true;
     more.textContent = 'Читать полностью';
-    more.setAttribute('aria-controls', quote.id);
-    more.setAttribute('aria-expanded', 'false');
+    more.setAttribute('aria-controls', dialog.id);
+    more.setAttribute('aria-haspopup', 'dialog');
     card.append(more);
     more.addEventListener('click', () => {
-      const expanded = card.classList.toggle('is-expanded');
-      more.textContent = expanded ? 'Свернуть' : 'Читать полностью';
-      more.setAttribute('aria-expanded', String(expanded));
-      if (expanded) quote.tabIndex = 0;
-      else { quote.removeAttribute('tabindex'); quote.scrollTop = 0; }
+      opener = more;
+      dialogContent.replaceChildren(card.querySelector('.review-card__author').cloneNode(true), quote.cloneNode(true));
+      restorePage = pausePage();
+      dialog.showModal();
+      dialog.scrollTop = 0;
+      document.body.classList.add('dialog-open');
       update();
     });
+  });
+  dialog.addEventListener('close', () => {
+    dialogContent.replaceChildren();
+    if (!document.querySelector('dialog[open]')) document.body.classList.remove('dialog-open');
+    restorePage?.();
+    const focusTarget = opener?.hidden ? filters.find(filter => filter.getAttribute('aria-pressed') === 'true') : opener;
+    focusTarget?.focus({ preventScroll: true });
+    update();
   });
   wall.classList.add('reviews-enhanced');
   let source = 'all';
@@ -58,65 +69,41 @@ export function setupReviews(isReduced) {
   let previousTime = 0;
   let speed = 60;
   let columnStep = 0;
+  let cardsPerColumn = 1;
   let position = 0;
   let loopItems = [];
   let canLoop = false;
   let drag = null;
   let suppressClick = false;
   let resumeTimer;
-  let layoutFrame = 0;
 
   function updateReviewTruncation() {
-    if (!compact()) return;
-    cards.forEach(card => {
-      if (card.hidden || !card.isConnected) return;
+    loopItems.forEach(card => {
       const quote = card.querySelector('.review-card__text');
       const more = card.querySelector('.review-card__more');
-      const expanded = card.classList.contains('is-expanded');
-      card.classList.remove('is-truncated', 'is-expanded');
+      card.classList.remove('is-truncated');
       more.hidden = true;
       const truncated = quote.scrollHeight > quote.clientHeight + 1;
-      card.classList.toggle('is-truncated', truncated);
-      more.hidden = !truncated;
       if (truncated) {
+        more.hidden = false;
         const lineHeight = parseFloat(getComputedStyle(quote).lineHeight);
         quote.style.setProperty('--review-visible-lines', Math.max(1, Math.floor(quote.clientHeight / lineHeight)));
+        card.classList.add('is-truncated');
       }
-      const showFull = truncated && expanded;
-      card.classList.toggle('is-expanded', showFull);
-      more.textContent = showFull ? 'Свернуть' : 'Читать полностью';
-      more.setAttribute('aria-expanded', String(showFull));
-      if (showFull) quote.tabIndex = 0;
-      else { quote.removeAttribute('tabindex'); quote.scrollTop = 0; }
     });
   }
 
-  function updateCompactHeight() {
-    if (!compact() || layoutFrame) return;
-    layoutFrame = requestAnimationFrame(() => {
-      layoutFrame = 0;
-      if (!compact()) return;
-      const bounds = wall.getBoundingClientRect();
-      const visible = cards.filter(card => {
-        if (card.hidden) return false;
-        const rect = card.getBoundingClientRect();
-        const overlap = Math.min(rect.right, bounds.right) - Math.max(rect.left, bounds.left);
-        return overlap >= Math.min(rect.width / 2, bounds.width / 4);
-      });
-      if (visible.length) {
-        const height = Math.ceil(Math.max(...visible.map(card => card.getBoundingClientRect().height)));
-        track.style.setProperty('--compact-review-height', `${height}px`);
-      }
-      previous.disabled = !canLoop && wall.scrollLeft <= 2;
-      next.disabled = !canLoop && wall.scrollWidth - wall.clientWidth - wall.scrollLeft <= 2;
-    });
+  function updateNavigation() {
+    if (!compact()) return;
+    previous.disabled = !canLoop && wall.scrollLeft <= 2;
+    next.disabled = !canLoop && wall.scrollWidth - wall.clientWidth - wall.scrollLeft <= 2;
   }
 
   function moveCompact(direction) {
     const step = (cards.find(card => !card.hidden)?.offsetWidth ?? 0) + parseFloat(getComputedStyle(track).columnGap);
     if (canLoop) {
       setPosition(wall.scrollLeft + direction * step);
-      updateCompactHeight();
+      updateNavigation();
     } else {
       wall.scrollBy({ left: direction * step, behavior: isReduced() ? 'instant' : 'smooth' });
     }
@@ -125,15 +112,15 @@ export function setupReviews(isReduced) {
   function setPosition(value) {
     if (canLoop) {
       while (value < 0) {
-        const column = loopItems.pop();
-        loopItems.unshift(column);
-        track.prepend(column);
+        const column = loopItems.splice(-cardsPerColumn);
+        loopItems.unshift(...column);
+        track.prepend(...column);
         value += columnStep;
       }
       while (value >= columnStep) {
-        const column = loopItems.shift();
-        loopItems.push(column);
-        track.append(column);
+        const column = loopItems.splice(0, cardsPerColumn);
+        loopItems.push(...column);
+        track.append(...column);
         value -= columnStep;
       }
     }
@@ -145,46 +132,19 @@ export function setupReviews(isReduced) {
   }
   function measure() {
     stop();
-    const wallLeft = wall.getBoundingClientRect().left;
-    const ordered = [...track.querySelectorAll('.review-card')];
-    const anchor = ordered.find(card => !card.hidden && card.getBoundingClientRect().right > wallLeft);
-    const anchorLeft = anchor?.getBoundingClientRect().left;
+    loopItems = [...track.children].filter(card => !card.hidden);
     track.style.transform = '';
-    track.classList.remove('is-looping');
     navigation.hidden = !compact();
-    if (compact()) {
-      wall.tabIndex = 0;
-      track.replaceChildren(...ordered);
-      updateReviewTruncation();
-      loopItems = ordered.filter(card => !card.hidden);
-      columnStep = loopItems[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
-      canLoop = source === 'all' && loopItems.length > 1 && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
-      const target = anchor ? wall.scrollLeft + anchor.getBoundingClientRect().left - anchorLeft : wall.scrollLeft;
-      const placed = setPosition(target);
-      if (drag) drag.left += placed - target;
-      updateCompactHeight();
-      return;
-    }
-    wall.removeAttribute('tabindex');
-    track.style.removeProperty('--compact-review-height');
-    track.replaceChildren(...ordered);
-    if (source === 'all') {
-      loopItems = [];
-      for (let index = 0; index < ordered.length; index += 2) {
-        const column = document.createElement('div');
-        column.className = 'reviews-column';
-        column.setAttribute('role', 'presentation');
-        column.append(...ordered.slice(index, index + 2));
-        loopItems.push(column);
-      }
-      track.classList.add('is-looping');
-      track.replaceChildren(...loopItems);
-    } else loopItems = ordered.filter(card => !card.hidden);
+    if (compact()) wall.tabIndex = 0;
+    else wall.removeAttribute('tabindex');
+    cardsPerColumn = !compact() && source === 'all' ? 2 : 1;
+    updateReviewTruncation();
     columnStep = loopItems[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 16);
-    canLoop = loopItems.length > 1 && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
-    const target = anchor ? wall.scrollLeft + anchor.getBoundingClientRect().left - anchorLeft : wall.scrollLeft;
+    canLoop = source === 'all' && wall.scrollWidth - wall.clientWidth >= columnStep - 1;
+    const target = wall.scrollLeft;
     const placed = setPosition(target);
     if (drag) drag.left += placed - target;
+    updateNavigation();
   }
   function stop() {
     cancelAnimationFrame(frame);
@@ -202,7 +162,7 @@ export function setupReviews(isReduced) {
     const reduced = isReduced();
     const filtered = source !== 'all';
     const focused = wall.contains(document.activeElement);
-    const reading = compact() && Boolean(wall.querySelector('.review-card.is-expanded:not([hidden])'));
+    const reading = dialog.open;
     button.disabled = reduced || filtered;
     button.setAttribute('aria-pressed', String(paused));
     button.setAttribute('aria-label', reduced || filtered ? 'Лента отзывов без движения' : paused ? 'Продолжить движение отзывов' : 'Приостановить движение отзывов');
@@ -236,10 +196,8 @@ export function setupReviews(isReduced) {
   next.addEventListener('click', () => moveCompact(1));
   wall.addEventListener('scroll', () => {
     if (compact() && !frame && !drag) position = wall.scrollLeft;
-    updateCompactHeight();
+    updateNavigation();
   }, { passive: true });
-  const cardSizes = new ResizeObserver(updateCompactHeight);
-  cards.forEach(card => cardSizes.observe(card));
   wall.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
   wall.addEventListener('pointerleave', () => { hovering = false; });
   wall.addEventListener('focusin', update);

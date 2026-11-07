@@ -2,7 +2,6 @@
 .hero-region-mark-mobile { display: none; }
 .hero-chapter-caption-text { text-transform: uppercase; }
 .compact-only, [hidden].compact-only { display: none; }
-.review-card__more { display: none; }
 html[data-theme] .mobile-menu {
   width: min(520px, calc(100% - 24px));
   max-height: calc(100dvh - 24px);
@@ -178,17 +177,12 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .reviews-carousel { margin-top: 16px; padding-inline: var(--pad); }
   html[data-theme] .reviews-wall { overscroll-behavior-x: contain; scroll-snap-type: x mandatory; -webkit-mask-image: none; mask-image: none; }
   html[data-theme] .reviews-wall:is(.is-dragging, .is-auto-moving) { scroll-snap-type: none; }
-  html[data-theme] .reviews-track { display: flex; align-items: flex-start; height: var(--compact-review-height, auto); }
-  html[data-theme] :is(.review-card, .reviews-column) { width: calc((100% - 16px) / 2); min-width: 0; }
-  html[data-theme] .reviews-column > .review-card { width: 100%; }
+  html[data-theme] .reviews-track { display: flex; --review-card-height: 360px; }
+  html[data-theme] .review-card { width: calc((100% - 16px) / 2); }
   html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: calc((100% - 16px) / 2); }
   html[data-theme] .review-card { padding: 20px; scroll-snap-align: start; }
   html[data-theme] .review-card__text { font-size: 16px; line-height: 1.5; text-align: left; letter-spacing: 0; }
-  html[data-theme] .reviews-enhanced .review-card:not([hidden]) { display: flex; flex-direction: column; height: 360px; }
-  html[data-theme] .reviews-enhanced .review-card__text { flex: 1 1 auto; min-height: 0; overflow: hidden; }
-  html[data-theme] .reviews-enhanced .review-card.is-truncated:not(.is-expanded) .review-card__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--review-visible-lines); }
-  html[data-theme] .reviews-enhanced .review-card.is-expanded .review-card__text { overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
-  html[data-theme] .reviews-enhanced .review-card__more:not([hidden]) { display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; padding: 6px 10px; border-radius: 6px; border-color: var(--line-strong); background: var(--bg-surface); color: var(--fg); font-size: 14px; }
+  html[data-theme] .review-card__more:not([hidden]) { align-self: flex-start; min-height: 44px; }
   html[data-theme] :is(.review-card__author, .review-card__info) { justify-content: flex-start; text-align: left; }
   html[data-theme] .review-card__info { align-items: flex-start; }
   html[data-theme] .review-card__author-name { font-size: 16px; font-weight: 600; text-transform: none; }
@@ -257,7 +251,7 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .expertise-layout { gap: 24px; }
   html[data-theme] .approach-testimonial { padding: 24px 0 0; border-left: 0; border-top: var(--divider-width) solid var(--line-lime); }
   html[data-theme] .expertise-testimonial { border-top: 0; }
-  html[data-theme] :is(.review-card, .reviews-column) { width: calc(100% - 16px); }
+  html[data-theme] .review-card { width: calc(100% - 16px); }
   html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: 100%; }
   html[data-theme] .reviews-heading { flex-direction: column; }
   html[data-theme] .contact-grid { grid-template-columns: minmax(0, 1fr); }
