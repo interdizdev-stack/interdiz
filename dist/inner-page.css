@@ -62,6 +62,10 @@
   .page-project-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+@media (max-width: 699px), (max-width: 1100px) and (max-height: 500px) and (pointer: coarse) {
+  html[data-theme] :is(.service-page, .portfolio-page) .page-intro > .section-kicker { top: -10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:has(.inner-page) { scroll-behavior: auto; }
   .inner-page *, .inner-page *::before, .inner-page *::after { transition: none; }
