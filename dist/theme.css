@@ -66,6 +66,8 @@ html[data-theme="dark"].motion-enabled .solution-card {
 .display-controls.display-controls--motion {
   left: 22px;
   right: auto;
+  scale: 1.1;
+  transform-origin: bottom left;
 }
 .display-controls .motion-toggle {
   position: static;
