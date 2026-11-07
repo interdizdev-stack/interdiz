@@ -1,5 +1,5 @@
 import { setupDesignFormats } from './design-formats.js';
-import { revealSEOHeading, setupSEOPageMotion } from './seo-motion.js';
+import { setupSEOPageMotion } from './seo-motion.js';
 
 const compactQuery = '(max-width: 1100px), (pointer: coarse) and (max-width: 1400px)';
 
@@ -98,17 +98,12 @@ export function setupServiceMotion() {
       pulse(intro.querySelector('.section-kicker'));
       rise(intro.querySelector('.page-switch'));
       entrance(intro.querySelector('.service-title'), tl => {
-        if (seo) return revealSEOHeading(tl, heroLines, compact);
-        tl.from(heroLines, web ? {
+        tl.from(heroLines, {
           x: compact ? 14 : 48, rotationX: compact ? 0 : -18,
           transformPerspective: 1400, transformOrigin: '50% 100%',
           clipPath: 'inset(-20% 100% -20% -15%)', opacity: .15,
           stagger: .16, duration: compact ? .9 : 1.25, ease: 'power4.out',
           clearProps: 'transform,transformOrigin,opacity,clipPath'
-        } : {
-          x: i => (i ? 1 : -1) * (compact ? 22 : 68), y: compact ? 32 : 70,
-          rotationX: compact ? 0 : 10, transformPerspective: 1200, opacity: 0,
-          stagger: .12, duration: compact ? .75 : 1.15, ease: 'power4.out'
         });
       });
       all('.hero-description, .service-actions, .service-intro-note', intro).forEach(element => rise(element));
@@ -122,15 +117,11 @@ export function setupServiceMotion() {
       all('.service-section > .section-kicker, .contact > .section-kicker').forEach(pulse);
       all('.service-section > .service-title').forEach(title => {
         entrance(title, tl => {
-          if (seo) return revealSEOHeading(tl, all('.hero-line', title), compact);
-          tl.from(all('.hero-line', title), web ? {
+          tl.from(all('.hero-line', title), {
             x: i => (i ? 1 : -1) * (compact ? 8 : 36),
             rotationX: compact ? 0 : -12, transformPerspective: 1200,
             clipPath: 'inset(-20% 100% -20% -15%)', opacity: .25,
             stagger: .13, duration: compact ? .75 : 1.05, ease: 'power4.out'
-          } : {
-            x: i => (i ? 1 : -1) * (compact ? 18 : 52), y: compact ? 24 : 44,
-            opacity: .1, stagger: .09, duration: compact ? .6 : .85
           });
         });
       });

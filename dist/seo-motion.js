@@ -1,26 +1,5 @@
 // All effects are installed inside service-motion's matchMedia context.
 // The tab controller owns scene transitions; this module moves only their outer layers.
-export function revealSEOHeading(timeline, lines, compact) {
-  lines.forEach((line, index) => {
-    const start = index * .16;
-    timeline.from(line, {
-      x: compact ? 10 : 28, rotationY: compact ? 0 : -6,
-      transformPerspective: 1400, transformOrigin: 'left center',
-      clipPath: 'inset(-20% 100% -20% -12%)', opacity: .3,
-      duration: compact ? .85 : 1.1, ease: 'power3.out',
-      clearProps: 'transform,transformOrigin,clipPath,opacity'
-    }, start);
-    if (line.classList.contains('outline')) {
-      timeline.fromTo(line, { '--seo-scan-x': 0, '--seo-scan-alpha': 0 }, {
-        '--seo-scan-x': 100, '--seo-scan-alpha': .8,
-        duration: compact ? .8 : 1.05, ease: 'power3.out', clearProps: ''
-      }, start).to(line, {
-        '--seo-scan-alpha': 0, duration: .18, clearProps: '--seo-scan-x,--seo-scan-alpha'
-      }, start + (compact ? .68 : .9));
-    }
-  });
-}
-
 export function setupSEOPageMotion({ page, gsap, compact, pointer, entrance }) {
   const lab = page.querySelector('.seo-lab');
   const visual = lab.querySelector('.seo-visual');

@@ -74,16 +74,6 @@ html[data-theme="dark"] .seo-tabs > button::after { background: var(--lime); }
 .seo-lab-bottom { font-size: 11px; line-height: 1.5; }
 
 /* Page motion uses separate properties from the interactive scene animations. */
-.service-motion-enabled .seo-service .service-title .outline::after {
-  content: '';
-  position: absolute;
-  inset-block: 8%;
-  left: calc(var(--seo-scan-x, 0) * 1%);
-  width: var(--outline-width);
-  background: var(--lime);
-  opacity: var(--seo-scan-alpha, 0);
-  pointer-events: none;
-}
 .seo-service .seo-lab { position: relative; }
 .service-motion-enabled .seo-service .seo-lab::before {
   content: '';
