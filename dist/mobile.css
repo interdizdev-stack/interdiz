@@ -7,6 +7,7 @@ html[data-theme] .mobile-menu {
   width: min(468px, calc(.9 * (100% - 2em - 6px)));
   max-height: calc(.9 * (100dvh - 24px));
   margin: auto;
+  transform: translateY(-10px);
   padding: 21.6px;
   overflow: auto;
   overscroll-behavior: contain;
