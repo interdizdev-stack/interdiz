@@ -1,4 +1,6 @@
 .service-section { margin-inline: var(--pad); }
+.web-service .page-intro { padding-top: clamp(26px, 4vw, 66px); }
+.web-service .page-intro .section-kicker { position: relative; top: -20px; }
 .service-intro .page-switch { margin-bottom: 79px; }
 .service-intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; }
 .service-intro--ads .service-intro-bottom { padding-top: 23px; }
