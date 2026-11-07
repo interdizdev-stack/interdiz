@@ -217,6 +217,7 @@ export function setupReviews(isReduced) {
   }
   filters.forEach(filter => filter.addEventListener('click', () => {
     stop();
+    const previousHeight = wall.offsetHeight;
     source = filter.dataset.reviewsFilter;
     cards.forEach(card => { card.hidden = source !== 'all' && card.dataset.reviewPlatform !== source; });
     track.replaceChildren(...cards);
@@ -226,6 +227,8 @@ export function setupReviews(isReduced) {
     track.style.transform = '';
     wall.scrollLeft = 0;
     measure();
+    // The footer moves when the filtered desktop row has a different height.
+    if (wall.offsetHeight !== previousHeight) window.ScrollTrigger?.refresh();
     update();
   }));
   button.addEventListener('click', () => { paused = !paused; update(); });

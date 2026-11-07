@@ -24,24 +24,20 @@
   scrollbar-width: none;
   overflow-anchor: none;
   cursor: grab;
-  -webkit-mask-image: radial-gradient(ellipse at 50% -50%, #000 56%, rgba(0,0,0,.4) 65%, transparent 79%), linear-gradient(to top, transparent 30%, #000 50%);
-  mask-image: radial-gradient(ellipse at 50% -50%, #000 56%, rgba(0,0,0,.4) 65%, transparent 79%), linear-gradient(to top, transparent 30%, #000 50%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 .reviews-wall::-webkit-scrollbar { display: none; }
 .reviews-wall.is-paused, .reviews-wall.is-filtered, .reviews-wall:focus-within, .reduced-motion .reviews-wall { -webkit-mask-image: none; mask-image: none; }
 .swiss-cursor-ring.cursor-reviews .cursor-label { font-size: 13px; font-weight: 700; letter-spacing: .8px; }
 .reviews-wall.is-dragging { cursor: grabbing; user-select: none; }
-.reviews-track { display: flex; flex-flow: column wrap; align-content: flex-start; gap: 16px; height: clamp(640px, 52vw, 800px); width: 100%; will-change: transform; }
-.reviews-track.is-looping { flex-flow: row nowrap; align-items: flex-start; }
+.reviews-track { display: grid; grid-auto-flow: column; grid-template-rows: auto auto; grid-auto-columns: max(30vw, 300px); align-items: end; gap: 16px; width: 100%; will-change: transform; }
+.reviews-enhanced .reviews-track { display: flex; align-items: flex-end; }
 .reviews-column { display: flex; flex: 0 0 auto; flex-direction: column; gap: 16px; width: 30vw; min-width: 300px; }
 .reviews-column > .review-card { width: 100%; min-width: 0; }
 .review-card { flex: 0 0 auto; width: 30vw; min-width: 300px; margin: 0; padding: 24px; border: var(--outline-width) solid var(--line-strong); background: var(--bg); transition: border-color .4s ease; }
 .review-card:hover { border-color: var(--lime); }
 .review-card[hidden] { display: none; }
-/* Keep the wall's reserved height so filtering never moves the page. */
-.reviews-wall.is-filtered .reviews-track { flex-flow: row nowrap; align-items: flex-start; }
 .reviews-wall.is-filtered .review-card { flex-basis: calc(50% - 8px); width: auto; min-width: 0; }
 .review-card[data-review-platform="avito"] .review-card__date { font-weight: 600; }
 .review-card__author { display: flex; align-items: center; justify-content: center; gap: 10px; }

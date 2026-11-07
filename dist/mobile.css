@@ -178,14 +178,13 @@ html[data-theme] .mobile-menu-contact { position: relative; inset-block-start: -
   html[data-theme] .reviews-carousel { margin-top: 16px; padding-inline: var(--pad); }
   html[data-theme] .reviews-wall { overscroll-behavior-x: contain; scroll-snap-type: x mandatory; -webkit-mask-image: none; mask-image: none; }
   html[data-theme] .reviews-wall:is(.is-dragging, .is-auto-moving) { scroll-snap-type: none; }
-  html[data-theme] .reviews-track,
-  html[data-theme] .reviews-track.is-looping { flex-flow: row nowrap; align-items: flex-start; height: var(--compact-review-height, auto); }
+  html[data-theme] .reviews-track { display: flex; align-items: flex-start; height: var(--compact-review-height, auto); }
   html[data-theme] :is(.review-card, .reviews-column) { width: calc((100% - 16px) / 2); min-width: 0; }
   html[data-theme] .reviews-column > .review-card { width: 100%; }
   html[data-theme] .reviews-wall.is-filtered .review-card { flex-basis: calc((100% - 16px) / 2); }
   html[data-theme] .review-card { padding: 20px; scroll-snap-align: start; }
   html[data-theme] .review-card__text { font-size: 16px; line-height: 1.5; text-align: left; letter-spacing: 0; }
-  html[data-theme] .reviews-enhanced .review-card { display: flex; flex-direction: column; height: 360px; }
+  html[data-theme] .reviews-enhanced .review-card:not([hidden]) { display: flex; flex-direction: column; height: 360px; }
   html[data-theme] .reviews-enhanced .review-card__text { flex: 1 1 auto; min-height: 0; overflow: hidden; }
   html[data-theme] .reviews-enhanced .review-card.is-truncated:not(.is-expanded) .review-card__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--review-visible-lines); }
   html[data-theme] .reviews-enhanced .review-card.is-expanded .review-card__text { overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
