@@ -7,7 +7,7 @@
 .reviews-pause:hover:not(:disabled), .reviews-pause[aria-pressed="true"] { background: var(--lime); color: #0c0e0c; }
 .reviews-pause:disabled { opacity: .55; cursor: default; }
 .reviews-pause-icon { font-size: 16px; line-height: 1; }
-.reviews-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding-bottom: 40px; }
+.reviews-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding-bottom: 60px; }
 .reviews-filters[hidden] { display: none; }
 .reviews-filter { padding: 10px 16px; border-radius: 99px; background: var(--bg-surface); color: var(--fg); font-size: 14px; font-weight: 500; transition: background .2s, color .2s; }
 .reviews-filter:hover, .reviews-filter[aria-pressed="true"] { background: var(--lime); color: #0c0e0c; }
