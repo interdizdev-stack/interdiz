@@ -10,10 +10,10 @@ const source = await readFile(home, 'utf8');
 const footerPattern = /<footer\b[^>]*>[\s\S]*?<\/footer>/g;
 const footer = source.match(footerPattern)?.find(block => /class="contact"/.test(block));
 if (!footer) throw new Error('The home page contact footer is missing.');
-const shortcut = source.match(/<a class="quick-home"[^>]*>[^<]*<\/a>/)?.[0];
+const shortcut = source.match(/<a class="quick-home"[^>]*>[\s\S]*?<\/a>/)?.[0];
 if (!shortcut) throw new Error('The home page back-to-top link is missing.');
 const controls = `<div class="display-controls">\n    ${shortcut}\n  </div>`;
-const controlsPattern = /<div class="display-controls">\s*<a\b[^>]*>[^<]*<\/a>\s*<\/div>/;
+const controlsPattern = /<div class="display-controls">\s*<a class="quick-home"[^>]*>[\s\S]*?<\/a>\s*<\/div>/;
 const check = process.argv.includes('--check');
 
 async function syncDirectory(directory) {

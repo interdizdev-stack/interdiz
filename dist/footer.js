@@ -50,3 +50,17 @@ function setupCopyClipboard() {
 
 setupClock();
 setupCopyClipboard();
+
+const backToTop = document.querySelector('.quick-home');
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('reduced-motion')) return;
+    try { if (sessionStorage.getItem('interdiz-reduced') === 'true') return; } catch {}
+    backToTop.classList.add('is-launching');
+  });
+  const finishFlight = event => {
+    if (event.animationName === 'quick-home-flight') backToTop.classList.remove('is-launching');
+  };
+  backToTop.addEventListener('animationend', finishFlight);
+  backToTop.addEventListener('animationcancel', finishFlight);
+}
