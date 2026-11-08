@@ -1859,7 +1859,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
 }
 
 body:not(.inner-page) .project-case { width: min(960px, 92vw); }
-html[data-theme] body:not(.inner-page) .project-case {
+html[data-theme] .project-dialog.project-case {
   height: 100dvh;
   max-height: 100dvh;
 }
