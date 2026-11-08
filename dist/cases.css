@@ -13,7 +13,7 @@
 .case-stack li { padding: 7px 12px; background: var(--bg-surface); color: var(--fg-muted); font-size: 13px; line-height: 1.4; }
 .case-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 28px; margin-top: 32px; }
 .case-actions .contact-pill { margin: 0; }
-.project-dialog .case-stack { margin: 20px 0 28px; }
+.project-dialog .case-stack { margin: 10px 0 18px; }
 .project-dialog .case-actions { margin-top: 28px; }
 .project-dialog .dialog-link { margin: 0; }
 .project-dialog .dialog-link[hidden] { display: none; }

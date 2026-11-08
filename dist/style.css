@@ -1957,7 +1957,7 @@ html[data-theme] .project-dialog.project-case {
 }
 
 .project-case .dialog-inner { padding-top: 24px; }
-.project-case .dialog-inner h2 { margin-top: 0; }
+.project-case .dialog-inner h2 { margin-top: 0; margin-bottom: 5px; }
 .project-case-return { margin-top: 0; }
 
 .service-dialog-kicker {
