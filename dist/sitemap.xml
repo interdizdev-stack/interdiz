@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://interdiz.ru/</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/preview.gif</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/mama.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/health-culture.webp</image:loc></image:image>
@@ -14,6 +15,7 @@
   </url>
   <url>
     <loc>https://interdiz.ru/portfolio.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/preview.gif</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/mama.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/poplavok.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/health-culture.webp</image:loc></image:image>
@@ -189,5 +191,12 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/divo-dental/12.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/divo-dental/13.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/divo-dental/14.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/case-nos.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/site-first-screen.jpg</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-card-contacts.png</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-tote-light.png</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-pet-light.png</image:loc></image:image>
   </url>
 </urlset>

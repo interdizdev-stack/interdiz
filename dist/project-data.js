@@ -778,5 +778,53 @@ export const projects = [
         "height": 829
       }
     ]
+  },
+  {
+    "key": "nos",
+    "title": "NOS.",
+    "lines": [
+      "NOS."
+    ],
+    "categories": [
+      "web",
+      "identity"
+    ],
+    "sourceId": 10,
+    "description": "NOS. — разработка логотипа и сайта ветеринарной клиники с вниманием к каждой детали.",
+    "stack": [
+      "Web-design",
+      "UX/UI",
+      "Logotype"
+    ],
+    "behance": "",
+    "page": "case-nos.html",
+    "presentation": "assets/cases/nos/presentation.htm",
+    "preview": {
+      "src": "assets/cases/nos/preview.webp",
+      "width": 705,
+      "height": 470
+    },
+    "images": [
+      {
+        "src": "assets/cases/nos/assets/site-first-screen.jpg",
+        "width": 1425,
+        "height": 891
+      },
+      {
+        "src": "assets/cases/nos/assets/nos-brand-card-contacts.png",
+        "width": 1672,
+        "height": 941
+      },
+      {
+        "src": "assets/cases/nos/assets/nos-brand-tote-light.png",
+        "width": 1672,
+        "height": 941
+      },
+      {
+        "src": "assets/cases/nos/assets/nos-brand-pet-light.png",
+        "width": 1774,
+        "height": 887
+      }
+    ]
   }
 ];

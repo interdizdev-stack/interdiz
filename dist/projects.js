@@ -1,4 +1,5 @@
 import { projects } from './project-data.js';
+import { setupCasePresentation } from './case-presentation.js';
 
 export function setupProjectDialog({ onOpen } = {}) {
   const dialog = document.querySelector('.project-dialog:not(.service-dialog)');
@@ -11,6 +12,7 @@ export function setupProjectDialog({ onOpen } = {}) {
   const link = dialog.querySelector('.dialog-link');
   let opener;
   let restorePage;
+  let disposePresentation;
 
   document.querySelectorAll('[data-open-project]').forEach(button => {
     button.setAttribute('aria-haspopup', 'dialog');
@@ -28,7 +30,14 @@ export function setupProjectDialog({ onOpen } = {}) {
         tag.textContent = item;
         return tag;
       }));
-      gallery.replaceChildren(...project.images.map((sheet, index) => {
+      if (project.presentation) {
+        const frame = document.createElement('iframe');
+        frame.className = 'case-presentation-frame';
+        frame.title = `Презентация проекта ${project.title}`;
+        frame.src = `./${project.presentation}`;
+        disposePresentation = setupCasePresentation(frame);
+        gallery.replaceChildren(frame);
+      } else gallery.replaceChildren(...project.images.map((sheet, index) => {
         const original = document.createElement('a');
         original.className = 'case-sheet';
         original.href = `./${sheet.src}`;
@@ -73,6 +82,8 @@ export function setupProjectDialog({ onOpen } = {}) {
     restorePage = null;
     opener?.focus({ preventScroll: true });
     opener = null;
+    disposePresentation?.();
+    disposePresentation = null;
     gallery.replaceChildren();
   });
 }

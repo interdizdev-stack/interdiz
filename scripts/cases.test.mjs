@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { projects, categoryLabels } from '../dist/project-data.js';
 import { pages } from '../seo.config.mjs';
+import { setupCasePresentation } from '../dist/case-presentation.js';
 import { absolute, extractCaseImages, textContent } from './sync-seo.mjs';
 
 const root = new URL('../dist/', import.meta.url);
@@ -12,9 +13,9 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length);
+  assert.equal(projects.length, imported.projects.length + 1);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
-  assert.equal(projects.reduce((sum, project) => sum + project.images.length, 0), 105);
+  assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
     const project = projects.find(project => project.sourceId === source.id);
     assert.ok(project, `missing source case ${source.id}`);
@@ -74,4 +75,48 @@ test('catalog categories and ordinary links reach every full case without JavaSc
     assert.match(source, /data-project-gallery/);
     assert.match(source, /href="\.\/cases\.css"/);
   }
+});
+
+
+test('NOS case links the animated cover and the full presentation', async () => {
+  const project = projects.find(project => project.key === 'nos');
+  assert.ok(project);
+  assert.deepEqual(project.categories, ['web', 'identity']);
+  const page = await read(project.page);
+  const presentation = await read(project.presentation);
+  assert.match(page, /data-case-frame data-case-key="nos"/);
+  assert.match(presentation, /Разработка логотипа и сайта/);
+  assert.match(presentation, /nos-brand-card-contacts\.png/);
+  assert.match(presentation, /data-opening-animation="assets\/nos-site-opening-once\.gif"/);
+  assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
+  for (const file of ['index.html', 'portfolio.html']) {
+    const html = await read(file);
+    assert.match(html, /data-open-project="nos"/);
+    assert.match(html, /assets\/cases\/nos\/preview\.gif/);
+  }
+});
+
+
+test('embedded case resizes to its contents and releases its observer', () => {
+  const originalObserver = globalThis.ResizeObserver;
+  let onLoad, onResize, disconnected = false;
+  const body = { scrollHeight: 1800 };
+  const documentElement = { scrollHeight: 1700 };
+  const childWindow = { location: { href: 'http://example.test/case' }, addEventListener() {}, removeEventListener() {} };
+  const frame = {
+    style: {}, contentDocument: { body, documentElement, readyState: 'loading' }, contentWindow: childWindow,
+    addEventListener(type, cb) { if (type === 'load') onLoad = cb; },
+    removeEventListener() {}
+  };
+  globalThis.ResizeObserver = class { constructor(callback) { onResize = callback; } observe(element) { assert.equal(element, body); } disconnect() { disconnected = true; } };
+  try {
+    const dispose = setupCasePresentation(frame);
+    onLoad();
+    assert.equal(frame.style.height, '1800px');
+    body.scrollHeight = 2100;
+    onResize();
+    assert.equal(frame.style.height, '2100px');
+    dispose();
+    assert.ok(disconnected);
+  } finally { globalThis.ResizeObserver = originalObserver; }
 });

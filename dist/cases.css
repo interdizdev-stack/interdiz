@@ -26,3 +26,7 @@
   .case-page .case-actions { margin-inline: var(--pad); }
   .case-page .case-categories { gap: 8px 16px; }
 }
+
+/* The NOS case is an interactive presentation within the shared case shell. */
+.case-presentation-frame { display:block; width:100%; min-height:80vh; border:0; background:#ebe8e2; }
+.nos-cover { display:block; width:100%; height:100%; }
