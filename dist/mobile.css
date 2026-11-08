@@ -133,8 +133,8 @@ html[data-theme] .mobile-menu-contact > span { font-size: 18px; }
   html[data-theme] .project-tags { font-size: 12px; }
   html[data-theme] .project-badges { top: 12px; left: 12px; gap: 6px; }
   html[data-theme] :is(.project-number, .project-year) { padding: 5px 8px; font-size: 12px; letter-spacing: .5px; }
-  html[data-theme] .project-image .project-open { display: flex; position: static; align-items: center; min-height: 44px; padding: 8px 0; border-color: transparent; background: none; color: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: underline; text-underline-offset: .22em; transform: none; box-shadow: none; }
-  html[data-theme] .project-image:is(:hover, :focus-visible, :active) .project-open { background: var(--lime); color: #0c0e0c; }
+  html[data-theme] .project-image .project-open { display: inline-flex; position: static; align-items: center; min-height: 44px; margin-top: 12px; padding: 10px 20px; border-color: var(--contour-ink, #000); background: var(--lime); color: #0c0e0c; font-size: 14px; font-weight: 600; letter-spacing: 0; text-decoration: none; transform: none; box-shadow: none; }
+  html[data-theme] .project-image:is(:hover, :focus-visible, :active) .project-open { background: #d3ff7a; color: #0c0e0c; }
   html[data-theme] .gallery-footer { display: flex; align-items: flex-start; margin-top: 16px; padding: 0; border: 0; }
   html[data-theme] .gallery-footer .gallery-all { min-height: 48px; margin: 0; font-size: 14px; }
   html[data-theme] :is(.gallery-progress, .gallery-count, .gallery-navigation) { display: none; }
