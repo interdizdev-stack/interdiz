@@ -1858,7 +1858,7 @@ html[data-theme="dark"] .faq-plus { color: var(--lime); }
   overscroll-behavior: contain;
 }
 
-body:not(.inner-page) .project-case { width: min(1200px, 92vw); }
+body:not(.inner-page) .project-case { width: min(960px, 92vw); }
 
 .project-dialog::backdrop {
   background: rgba(0, 0, 0, 0.85);
