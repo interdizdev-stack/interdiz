@@ -1,0 +1,28 @@
+/* Original presentation sheets stay uncropped and in their original order. */
+.case-gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.case-sheet { display: block; min-width: 0; line-height: 0; cursor: zoom-in; }
+.case-sheet img { display: block; width: 100%; height: auto; }
+.case-sheet:focus-visible { outline: var(--outline-width) solid var(--lime); outline-offset: -4px; }
+.case-page .case-presentation { margin-inline: var(--pad); min-width: 0; }
+.case-page .page-switch { flex-wrap: wrap; }
+.case-page .page-switch-accent { overflow-wrap: anywhere; }
+.case-page .hero-line { white-space: normal; overflow-wrap: anywhere; hyphens: auto; }
+.case-categories { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 28px; }
+.case-categories a { color: var(--lime); font-size: 14px; text-decoration: underline; text-underline-offset: .25em; }
+.case-stack { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 24px 0 0; list-style: none; }
+.case-stack li { padding: 7px 12px; background: var(--bg-surface); color: var(--fg-muted); font-size: 13px; line-height: 1.4; }
+.case-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 28px; margin-top: 32px; }
+.case-actions .contact-pill { margin: 0; }
+.project-dialog .case-stack { margin: 20px 0 28px; }
+.project-dialog .case-actions { margin-top: 28px; }
+.project-dialog .dialog-link { margin: 0; }
+.project-dialog .dialog-link[hidden] { display: none; }
+.project-dialog .dialog-project-page { color: var(--lime); }
+.project-directions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-block: 8px; color: var(--lime); font-size: 12px; }
+.project-card[id] { scroll-margin-top: 32px; }
+@media (max-width: 699px) {
+  .case-page .case-intro > .section-kicker { top: 0; padding-bottom: 14px; }
+  .case-page .case-presentation { margin-inline: 0; }
+  .case-page .case-actions { margin-inline: var(--pad); }
+  .case-page .case-categories { gap: 8px 16px; }
+}

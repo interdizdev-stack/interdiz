@@ -73,8 +73,8 @@ for (const [index, page] of pages.entries()) {
     assert.doesNotMatch(JSON.stringify(graph), /AggregateRating|Review|priceCurrency|streetAddress/);
     if (page.kind !== 'home') {
       const breadcrumb = graph.find(entity => entity['@type'] === 'BreadcrumbList');
-      assert.deepEqual(breadcrumb.itemListElement.map(item => item.position), [1, 2]);
-      assert.deepEqual(breadcrumb.itemListElement.map(item => item.item), [site.url, url]);
+      assert.deepEqual(breadcrumb.itemListElement.map(item => item.position), page.kind === 'case' ? [1, 2, 3] : [1, 2]);
+      assert.deepEqual(breadcrumb.itemListElement.map(item => item.item), page.kind === 'case' ? [site.url, absolute('portfolio.html'), url] : [site.url, url]);
     }
   });
 

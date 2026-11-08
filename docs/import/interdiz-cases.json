@@ -1,0 +1,932 @@
+{
+  "source": "https://interdiz.ru/portfolio/data.json",
+  "projects": [
+    {
+      "id": 1,
+      "name": "Pierre Magnol",
+      "title": "Pierre Magnol",
+      "description": "Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp",
+        "11.webp",
+        "12.webp",
+        "13.webp",
+        "14.webp",
+        "15.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/246354277/Pierre-Magnol-Digital-Storefront-Development",
+      "stack": [
+        "Web-design",
+        "UX/UI"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Health Culture",
+      "title": "Health Culture",
+      "description": "Культура здоровья: дизайн с ощущением чистоты: Health Culture",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/248062171/Health-Culture-design-with-a-sense-of-purity",
+      "stack": [
+        "Brand-book",
+        "Logotype"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Home 30",
+      "title": "Home 30",
+      "description": "Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/246912169/Urban-Luxury-in-Black-Orange-Hostel-Website-Concept",
+      "stack": [
+        "Web-design",
+        "UX/UI",
+        "WordPress",
+        "Отель.Тензор",
+        "Logotype"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "SA",
+      "title": "SA",
+      "description": "С Востока на весь мир — фирменный стиль Shogun Auto",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp",
+        "11.webp",
+        "12.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/246098169/From-East-to-World-Shogun-Auto-Brand-Identity",
+      "stack": [
+        "Logotype",
+        "Brand-book"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Kyrilka",
+      "title": "Kyrilka",
+      "description": "Kyrilka — контрастный дизайн для современной цифровой витрины",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/248739383/Kyrilka-Modern-E-commerce-Showcase",
+      "stack": [
+        "Web-design",
+        "UX/UI",
+        "ShopScript",
+        "Мой склад",
+        "TG/MAX бот"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Mama",
+      "title": "Mama",
+      "description": "Для мам, которым важно мягкое  чувство уверенности: разработка лендинга и ASO-креативов для приложения Я-Мама",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp",
+        "11.webp",
+        "12.webp",
+        "13.webp",
+        "14.webp",
+        "15.webp"
+      ],
+      "beurl": "",
+      "stack": [
+        "Web-design",
+        "UX/UI"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Поплавок",
+      "title": "Поплавок",
+      "description": "Поплавок — новая digital-глава культового ресторана у воды в Астрахани",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp"
+      ],
+      "beurl": "",
+      "stack": [
+        "Web-design",
+        "UX/UI",
+        "WordPress",
+        "TG/MAX бот"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Иван Грозный - Перезагрузка",
+      "title": "Иван Грозный - Перезагрузка",
+      "description": "Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp"
+      ],
+      "beurl": "",
+      "stack": [
+        "AI",
+        "Реклама",
+        "Video",
+        "Design"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Divo Dental",
+      "title": "Divo Dental",
+      "description": "Divo Dental — разработка логотипа для современной стоматологии",
+      "preview": "preview.webp",
+      "images": [
+        "1.webp",
+        "2.webp",
+        "3.webp",
+        "4.webp",
+        "5.webp",
+        "6.webp",
+        "7.webp",
+        "8.webp",
+        "9.webp",
+        "10.webp",
+        "11.webp",
+        "12.webp",
+        "13.webp",
+        "14.webp"
+      ],
+      "beurl": "https://www.behance.net/gallery/249932083/The-Geometry-of-Trust-A-Logo-for-a-Modern-Dental-Brand",
+      "stack": [
+        "Logotype",
+        "Brand-book"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "source": "https://interdiz.ru/portfolio/1/preview.webp",
+      "file": "assets/cases/pierre-magnol/preview.webp",
+      "sha256": "f962af8c271b876bfa27bd0e313420204e051a5832bcfe999651cf4a43a03324",
+      "bytes": 172528
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/1.webp",
+      "file": "assets/cases/pierre-magnol/1.webp",
+      "sha256": "d5b41069113cc29daf65eecb0015dbf210c1975a8e5194a1a08b9967454c8d3b",
+      "bytes": 214056
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/2.webp",
+      "file": "assets/cases/pierre-magnol/2.webp",
+      "sha256": "0281539f382b26e6bc9b20c38e1a825c50ad338b20183836f6df2698d6a67ba3",
+      "bytes": 137076
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/3.webp",
+      "file": "assets/cases/pierre-magnol/3.webp",
+      "sha256": "4ab9526940ba6c0af7250417209fea4321c08169aed2685d73098720efad5aac",
+      "bytes": 120652
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/4.webp",
+      "file": "assets/cases/pierre-magnol/4.webp",
+      "sha256": "5966cbd789a8bb84bff969c584301cc8d3740b3b21a03f8cc423d45da23e10c0",
+      "bytes": 212992
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/5.webp",
+      "file": "assets/cases/pierre-magnol/5.webp",
+      "sha256": "8b2f84addb39e20b6394f567b11eb52c0ac6adb3be4f8e1f915eaf29b8b30ab2",
+      "bytes": 197400
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/6.webp",
+      "file": "assets/cases/pierre-magnol/6.webp",
+      "sha256": "403a82d1d9a5c81c3192f75808ea8dc4f4844d676d102573fbea1fb352cb701c",
+      "bytes": 257618
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/7.webp",
+      "file": "assets/cases/pierre-magnol/7.webp",
+      "sha256": "9d42db3e825b88ab50c5d808137d3554c6fc67a7096d50966f17f2863b46db7a",
+      "bytes": 163234
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/9.webp",
+      "file": "assets/cases/pierre-magnol/9.webp",
+      "sha256": "58d15a302922b43f23299debc424d97705c5a871bd89b80fc99e981c2293a25b",
+      "bytes": 354508
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/8.webp",
+      "file": "assets/cases/pierre-magnol/8.webp",
+      "sha256": "b3374c728ff45bd147568593df5c0c7336f8b6b548f83b7383b3a5b79e6e6181",
+      "bytes": 286660
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/10.webp",
+      "file": "assets/cases/pierre-magnol/10.webp",
+      "sha256": "a94abc4c93050128f2c1542bc8945b450fbc6f9d80721546b11884beac36a65e",
+      "bytes": 335404
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/11.webp",
+      "file": "assets/cases/pierre-magnol/11.webp",
+      "sha256": "3ec6c62c6a6acc7e85aad4d458dc2c2c3349e4184322ca3bfd308d60b9bb3f27",
+      "bytes": 190576
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/12.webp",
+      "file": "assets/cases/pierre-magnol/12.webp",
+      "sha256": "54054a1fa01365274d146675f7536ae9d9129ecc611d51ca9632d5658a420f68",
+      "bytes": 351242
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/13.webp",
+      "file": "assets/cases/pierre-magnol/13.webp",
+      "sha256": "722d85027e70ab4d5e969014f915064844182cc44bedd61a2b3d19263d8386b5",
+      "bytes": 304748
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/14.webp",
+      "file": "assets/cases/pierre-magnol/14.webp",
+      "sha256": "51d82920fe46be0e465a3ed5bdfcee2eada076781df8d9be190231c936435589",
+      "bytes": 291344
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/1/15.webp",
+      "file": "assets/cases/pierre-magnol/15.webp",
+      "sha256": "fb7a412f96053d986e7bc8347652e8989b7f99e6aea7b04a5e4fbe391e71f507",
+      "bytes": 163546
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/preview.webp",
+      "file": "assets/cases/health/preview.webp",
+      "sha256": "01d8968fe84714188cea335ca063a5cfa0d8924473ef2981d1b3a4625bd692bd",
+      "bytes": 299094
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/1.webp",
+      "file": "assets/cases/health/1.webp",
+      "sha256": "a76d9e4ea32ae425891993281313dd736f3e629e715f288c101f1e32546bafc6",
+      "bytes": 341174
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/3.webp",
+      "file": "assets/cases/health/3.webp",
+      "sha256": "1246fc3461d3380f6656ad6c0964173d143606d228ba2d880accfc5add046262",
+      "bytes": 307408
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/8.webp",
+      "file": "assets/cases/health/8.webp",
+      "sha256": "d3d5d96c72944569e0ff0fa56b6310f102527f1e7dfd1e25cae3c4a9e44a0221",
+      "bytes": 214264
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/4.webp",
+      "file": "assets/cases/health/4.webp",
+      "sha256": "f0ef05ae1d1ac4ba0a44c45357038b0950df0ce8de4677d07f5c62a6511931e0",
+      "bytes": 472484
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/2.webp",
+      "file": "assets/cases/health/2.webp",
+      "sha256": "28300c9782ee9ae8a14cfdcfee9d2b00b59551ce6fea5989c3e31359bfdecbf7",
+      "bytes": 351926
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/6.webp",
+      "file": "assets/cases/health/6.webp",
+      "sha256": "5a220dc582774a4a1c5b1592a7effddd904975fbd400eaf141fcab04effb0699",
+      "bytes": 220538
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/5.webp",
+      "file": "assets/cases/health/5.webp",
+      "sha256": "f06c5d476d4367dec5236c50518ae5bd97470506d67b1de4db233a5d8a87b1ce",
+      "bytes": 267840
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/7.webp",
+      "file": "assets/cases/health/7.webp",
+      "sha256": "1f69d4103d22f05ccd4afee61e8a8fef71735ba83956642773eda24b12263d91",
+      "bytes": 491436
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/9.webp",
+      "file": "assets/cases/health/9.webp",
+      "sha256": "95dbac3e63940c778c2dbd47a264326dde216f3b80c7e3e873764d9c514931da",
+      "bytes": 280222
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/2/10.webp",
+      "file": "assets/cases/health/10.webp",
+      "sha256": "1349d613dc6cb183a73a33ee6a4639027e0dc7c13825a2adb0d782025b6bf2e2",
+      "bytes": 341874
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/preview.webp",
+      "file": "assets/cases/home30/preview.webp",
+      "sha256": "8bc977ab0ff686244807fac595e8c4bd674d1925e40a8015841806b12a06dd85",
+      "bytes": 31288
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/1.webp",
+      "file": "assets/cases/home30/1.webp",
+      "sha256": "0058921dac2097afaf5c21dffa2c9207d9ec3518fa8f0d9518186b047efd72d7",
+      "bytes": 108442
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/3.webp",
+      "file": "assets/cases/home30/3.webp",
+      "sha256": "22002b1c007938613ba4091f52e30e75bdd59710f21adb3619873314e9d6f360",
+      "bytes": 105392
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/2.webp",
+      "file": "assets/cases/home30/2.webp",
+      "sha256": "0fdb512369a629893f84c5e594c87bd28e5eea7f5492da11f9c1688a6c8613a8",
+      "bytes": 259002
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/5.webp",
+      "file": "assets/cases/home30/5.webp",
+      "sha256": "880fee833bf77b23f8534fe08c6807d5a811251720fc89b94e46a59e8de39100",
+      "bytes": 207366
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/6.webp",
+      "file": "assets/cases/home30/6.webp",
+      "sha256": "3ebaa73b14c6f7045029fa4b0b28ebf980a21772403379de84f8d228f00fb011",
+      "bytes": 516716
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/9.webp",
+      "file": "assets/cases/home30/9.webp",
+      "sha256": "4614bdd1c1a0ec5d4a5b2a24338ba52ec290770bb7a55d001297c7897c7841ec",
+      "bytes": 309176
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/4.webp",
+      "file": "assets/cases/home30/4.webp",
+      "sha256": "6e5ee8ae1c4658559a47298bbda97f09143048124c45d749ea830a0e0abbef82",
+      "bytes": 628696
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/7.webp",
+      "file": "assets/cases/home30/7.webp",
+      "sha256": "1f00089cd5592c7918e08d53bfb1ce704df652d2febe6dfe9f71c6acc27f034a",
+      "bytes": 594552
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/8.webp",
+      "file": "assets/cases/home30/8.webp",
+      "sha256": "ec3bcb6c615c9fc1ba773ae5c811e5a76ccbe51ec20f90baba6238310e011755",
+      "bytes": 834680
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/3/10.webp",
+      "file": "assets/cases/home30/10.webp",
+      "sha256": "af8a8276782686c22a084505728224100d6b0aa8a54aa4c8f85da4a5ede59443",
+      "bytes": 530096
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/preview.webp",
+      "file": "assets/cases/shogun-auto/preview.webp",
+      "sha256": "eea534d51b7b802a9ee1f71ba899095ebaf664c827a47555d812b44842db7e43",
+      "bytes": 43776
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/1.webp",
+      "file": "assets/cases/shogun-auto/1.webp",
+      "sha256": "8623e75301838d9dd0f63c6034498f723347aaf57d9a42efe08e0209a0556ada",
+      "bytes": 132462
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/6.webp",
+      "file": "assets/cases/shogun-auto/6.webp",
+      "sha256": "008be480e6795e443898f8f3e0d937e3517a7aa2de888bc85b9a35c575dcaf6e",
+      "bytes": 65228
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/2.webp",
+      "file": "assets/cases/shogun-auto/2.webp",
+      "sha256": "f381aa1a2099d80ba4b871dd4164ba546ee14403650645241a8adafbbbacc27a",
+      "bytes": 192056
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/4.webp",
+      "file": "assets/cases/shogun-auto/4.webp",
+      "sha256": "94f6feb285ece793062b156fecff4757517ee8b523e47104b4482f6d545825ad",
+      "bytes": 137548
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/5.webp",
+      "file": "assets/cases/shogun-auto/5.webp",
+      "sha256": "b8efc27323684dc0864870ee3820cc25a9a912f24b49834deb89f1abe49d5946",
+      "bytes": 154512
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/7.webp",
+      "file": "assets/cases/shogun-auto/7.webp",
+      "sha256": "1271c6d790efd286de9e663e50a4724782b5c22ae4d4c2820187de8b18411905",
+      "bytes": 63610
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/3.webp",
+      "file": "assets/cases/shogun-auto/3.webp",
+      "sha256": "6475ce9aaa0e88d8bccabab48e582ebb921e2a31c48457bb721d87d0bccdbde8",
+      "bytes": 333504
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/8.webp",
+      "file": "assets/cases/shogun-auto/8.webp",
+      "sha256": "158279fe2102e88a7ea446063b3953b5b0e6b93b38f713d7a6f5f5e76260b7a2",
+      "bytes": 121260
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/9.webp",
+      "file": "assets/cases/shogun-auto/9.webp",
+      "sha256": "6ff72aa873f34fce2c620e4da16741a820e8f07d448d88dd495c5ff02e01be99",
+      "bytes": 284860
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/12.webp",
+      "file": "assets/cases/shogun-auto/12.webp",
+      "sha256": "0fede489d7269d1610885172cffd64f41573b8a466c7ce880da49240e58f92d2",
+      "bytes": 260426
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/10.webp",
+      "file": "assets/cases/shogun-auto/10.webp",
+      "sha256": "9c1c2a585996648e965f9033b56ecf48c17ab5ed481a8cf34fcf2384e599b811",
+      "bytes": 278602
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/4/11.webp",
+      "file": "assets/cases/shogun-auto/11.webp",
+      "sha256": "8b399e27efad124c8e3bcc25202684250d5a0df03cce45c87b7306371f3267d1",
+      "bytes": 138744
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/preview.webp",
+      "file": "assets/cases/kyrilka/preview.webp",
+      "sha256": "051b487deeb292fa6a0cb21ecbd6dc0f4d48151d66fac0a82eaac482332a4342",
+      "bytes": 106494
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/4.webp",
+      "file": "assets/cases/kyrilka/4.webp",
+      "sha256": "ba9980d47aaa48905c750faf7659e19a46a754c7d83d0a470809158586ab22b6",
+      "bytes": 159480
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/3.webp",
+      "file": "assets/cases/kyrilka/3.webp",
+      "sha256": "0f37ab28cbab847c42d4bb2ee9ad2d05c4a82ca389a9f0335bd4edeb4c780723",
+      "bytes": 164350
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/1.webp",
+      "file": "assets/cases/kyrilka/1.webp",
+      "sha256": "ebd004b29addefcfaf6455c02cf57e4487f8913c6ca02360258b0c89c3557551",
+      "bytes": 183724
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/2.webp",
+      "file": "assets/cases/kyrilka/2.webp",
+      "sha256": "fd7a464fb95b0d5dff6951940caf59197ffe8a746ca95e8d3efe226d22165c95",
+      "bytes": 163338
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/6.webp",
+      "file": "assets/cases/kyrilka/6.webp",
+      "sha256": "824e5e0269923f2e2ab3be966930a86ee19ab9cdffcdd98bb82e626959ee0e10",
+      "bytes": 145256
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/5.webp",
+      "file": "assets/cases/kyrilka/5.webp",
+      "sha256": "2558add10ee38af1c13dc8c31b2e7be6e6e8ee17b6b8219913cb6c83e85c3969",
+      "bytes": 199928
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/8.webp",
+      "file": "assets/cases/kyrilka/8.webp",
+      "sha256": "46ecce33f5aa34df0f6c182e081f70db3221ecc1ff21ff1c1f66ac13ed1a4897",
+      "bytes": 102352
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/7.webp",
+      "file": "assets/cases/kyrilka/7.webp",
+      "sha256": "10685e5cb8b074523a4149c652c1339a48e0a403d9af437f16eb9bae321822f3",
+      "bytes": 82226
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/9.webp",
+      "file": "assets/cases/kyrilka/9.webp",
+      "sha256": "0604da857f3d74478bcd96bd312d04c8ea67aa8c79f642e6d090fd8b15dc8579",
+      "bytes": 97294
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/5/10.webp",
+      "file": "assets/cases/kyrilka/10.webp",
+      "sha256": "7a4a1ed7769125af016ee4852aead60134397e89b49f370daf0b9728af77c965",
+      "bytes": 59074
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/preview.webp",
+      "file": "assets/cases/mama/preview.webp",
+      "sha256": "23239900b4c32e392b78bebba9a8e3d8951ceda08b5c2cf0de573424f570559e",
+      "bytes": 220180
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/1.webp",
+      "file": "assets/cases/mama/1.webp",
+      "sha256": "50d1f2962e65ff8f06e2f75a12c2b3b66c26f4c7143a3814bdf82c3aeab05852",
+      "bytes": 144086
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/3.webp",
+      "file": "assets/cases/mama/3.webp",
+      "sha256": "28e175fee273eb29507d4c3d51fcb72233dd126b87a8abae3687bdde1f9de48c",
+      "bytes": 132002
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/2.webp",
+      "file": "assets/cases/mama/2.webp",
+      "sha256": "4fae7fb916aa4742dc683705b4fb26188b2a412655a5fe8cff1fef102910ce42",
+      "bytes": 175556
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/6.webp",
+      "file": "assets/cases/mama/6.webp",
+      "sha256": "a9e0cb293dd1075b850867687fbca786c33deed5e2b82fe229c67c56636132ba",
+      "bytes": 69996
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/5.webp",
+      "file": "assets/cases/mama/5.webp",
+      "sha256": "579f1fa52476e08057e4e643a82296866b0c930d5f5eb4663115b6f36b9b447a",
+      "bytes": 202544
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/4.webp",
+      "file": "assets/cases/mama/4.webp",
+      "sha256": "c56c6240db5f8ee8f9d9cfef917a9d0ddce50200a7502843b67ba9f9d10b0f18",
+      "bytes": 275840
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/8.webp",
+      "file": "assets/cases/mama/8.webp",
+      "sha256": "e4109a535202565ea082b430d0557c420e52f6dc9bfe5b45226fb28ac551a911",
+      "bytes": 114998
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/7.webp",
+      "file": "assets/cases/mama/7.webp",
+      "sha256": "cb5d97fdd38a25a0e2c8dfef41fff4c0b1889719812b9ae1bf3d5b6b18850e4f",
+      "bytes": 181050
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/9.webp",
+      "file": "assets/cases/mama/9.webp",
+      "sha256": "55783d7d771d497e09a1351acd647e57c16656d8a3a86531ae0eae137a9768d2",
+      "bytes": 115258
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/10.webp",
+      "file": "assets/cases/mama/10.webp",
+      "sha256": "f582112e03c83b5f29ac508ff41fa113da63437e8eb9154d856e4184e5357343",
+      "bytes": 154478
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/12.webp",
+      "file": "assets/cases/mama/12.webp",
+      "sha256": "d4f93f365c85744b03bfa14b631fcdda66b9985ec02ef2b78d0a233c7a438d4b",
+      "bytes": 120838
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/11.webp",
+      "file": "assets/cases/mama/11.webp",
+      "sha256": "0ea1067971e0b97ee549fa7ecb0746703cd30e51f9075c373cf51ce954561455",
+      "bytes": 335364
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/15.webp",
+      "file": "assets/cases/mama/15.webp",
+      "sha256": "aa316cb490c3446a24593e80316d4de7b8d145597cade84f33ef61e1f24f63eb",
+      "bytes": 157558
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/13.webp",
+      "file": "assets/cases/mama/13.webp",
+      "sha256": "15d9ece79d2a80db34b0aa19c25452c595e61fc1bd5a9ae2853c03f38404543a",
+      "bytes": 194400
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/6/14.webp",
+      "file": "assets/cases/mama/14.webp",
+      "sha256": "476cd72fd02562c8313649be8debbcea4d70179c8979ed85d0bbf5e965df22df",
+      "bytes": 217528
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/preview.webp",
+      "file": "assets/cases/poplavok/preview.webp",
+      "sha256": "a3d33e8ce715a89dbf4883fe8783effbe4445277801f5f716e76193145924fd0",
+      "bytes": 324324
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/1.webp",
+      "file": "assets/cases/poplavok/1.webp",
+      "sha256": "204cdc0541500b6a0a47f932bf38c5b416fa10ee371d7d61369cd67a7a8fec9c",
+      "bytes": 53946
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/3.webp",
+      "file": "assets/cases/poplavok/3.webp",
+      "sha256": "5e3fba7964dc9ecba8815694674409630c327a854ec25bec196b5d2b86314a6e",
+      "bytes": 81976
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/5.webp",
+      "file": "assets/cases/poplavok/5.webp",
+      "sha256": "bb62ba70eb3343bd9a2bb64fe7ade7053207fff1e40efd149fbbacaf1c1b9c67",
+      "bytes": 57690
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/2.webp",
+      "file": "assets/cases/poplavok/2.webp",
+      "sha256": "c33d04482884679ee97ff4776564157acf977c718a434a383e31af1299c89981",
+      "bytes": 97850
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/8.webp",
+      "file": "assets/cases/poplavok/8.webp",
+      "sha256": "f8f03d818defe8816cbbf982a59e26131e605e1489c6c4c7d9518908ac3f8a87",
+      "bytes": 22442
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/4.webp",
+      "file": "assets/cases/poplavok/4.webp",
+      "sha256": "0f070cc5b17bc50948e307e221ad09377b021bac88526e1a588767c973f4a53f",
+      "bytes": 93608
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/7.webp",
+      "file": "assets/cases/poplavok/7.webp",
+      "sha256": "9ddfb4f6217e3c69e8e25ff9cd12034ddde027a8e83eac136a618098f8f4c954",
+      "bytes": 30320
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/6.webp",
+      "file": "assets/cases/poplavok/6.webp",
+      "sha256": "286c0f0e350361cc4f614fbc391355f2a83f1757186295dcaf9501ce832ecbb8",
+      "bytes": 101294
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/9.webp",
+      "file": "assets/cases/poplavok/9.webp",
+      "sha256": "0c7e7d5aab573d2cdf1f24575ed7c96fe231fd044a73c7b368b954358b1582b6",
+      "bytes": 117442
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/7/10.webp",
+      "file": "assets/cases/poplavok/10.webp",
+      "sha256": "86da98283be343feea9ec112ee5d531c37ac13abafd453be9d394a9d2ffd529d",
+      "bytes": 62318
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/preview.webp",
+      "file": "assets/cases/ivan-grozny/preview.webp",
+      "sha256": "87776450b93d2ab5abcde58b3f98ef1e6f39b31e3039b82b1760421ab9d1ffd2",
+      "bytes": 532432
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/1.webp",
+      "file": "assets/cases/ivan-grozny/1.webp",
+      "sha256": "63791d98c0aaf27f1c59804f30293fcb9bd8fb92c1f17c3ee421f36474efd01d",
+      "bytes": 591196
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/2.webp",
+      "file": "assets/cases/ivan-grozny/2.webp",
+      "sha256": "46235b16f8fd4a68f88d1caf0d492a14fa7cebcf9dc3ef6993e4448ae64c6cc9",
+      "bytes": 819502
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/9.webp",
+      "file": "assets/cases/ivan-grozny/9.webp",
+      "sha256": "6bb9774cd1ba22024096fccb0c6ba0d7bfb2f7501abdb73b5cd96470fd0adc2a",
+      "bytes": 508688
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/7.webp",
+      "file": "assets/cases/ivan-grozny/7.webp",
+      "sha256": "e002e8d6b8ce7bfccd6352711c4bbae91444c128d967d1e1d2da49dfc15e18ba",
+      "bytes": 555996
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/3.webp",
+      "file": "assets/cases/ivan-grozny/3.webp",
+      "sha256": "2455dd176e06d9136cea695ff191459d28412e718d739cfeae78634b99245948",
+      "bytes": 1022652
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/8.webp",
+      "file": "assets/cases/ivan-grozny/8.webp",
+      "sha256": "f4b501e3d80a88807fdb46b38652b83c22805f0fbf08b98a504454375fe530d3",
+      "bytes": 690486
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/4.webp",
+      "file": "assets/cases/ivan-grozny/4.webp",
+      "sha256": "b1d123624c79199df8f3b397757921c7915ceefe249f9cbe0c78035896692548",
+      "bytes": 1255146
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/6.webp",
+      "file": "assets/cases/ivan-grozny/6.webp",
+      "sha256": "53348575c8cf44f1617456661dae046ab3cbea83903fa83c890935d664c8a69d",
+      "bytes": 976140
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/8/5.webp",
+      "file": "assets/cases/ivan-grozny/5.webp",
+      "sha256": "6fc20a6f17971ec9f2d02229d802608b62eea98b83a6e6807192b5416739cdb9",
+      "bytes": 1336086
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/preview.webp",
+      "file": "assets/cases/divo-dental/preview.webp",
+      "sha256": "8e5e08da4b2e1ba4e0ec53fa3cc51a739c95a83f1c472d2e1d53d1a0500bc332",
+      "bytes": 598386
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/2.webp",
+      "file": "assets/cases/divo-dental/2.webp",
+      "sha256": "dd7bf6cc9641ac5e1b525f9e5e4638d076d7bc74eae4936628cca0c6625228cf",
+      "bytes": 127478
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/6.webp",
+      "file": "assets/cases/divo-dental/6.webp",
+      "sha256": "13f1e531428f6843f0f1c0acba27df10ebf0e05c5051cc5aeb28fb5289546b5b",
+      "bytes": 78270
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/3.webp",
+      "file": "assets/cases/divo-dental/3.webp",
+      "sha256": "4dae8e4ef03d2b911601ea331c0ef4ce0f5159ae3f5520a21dc72d534481405f",
+      "bytes": 382328
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/5.webp",
+      "file": "assets/cases/divo-dental/5.webp",
+      "sha256": "b0c0b0c01f3b35293c9496ee2dcefc66d17060946bcd3a2b37d9f14d5b0dcb1f",
+      "bytes": 351514
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/8.webp",
+      "file": "assets/cases/divo-dental/8.webp",
+      "sha256": "2492bfcf9c41c2b1f9aae20df066ad2a4fbd2eca5167549b135538782edfdc66",
+      "bytes": 519960
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/10.webp",
+      "file": "assets/cases/divo-dental/10.webp",
+      "sha256": "d7a063fd374f1a9f37cb8545cc05c30b34ff9d1b4f83cc15c5ca83d9800a0f30",
+      "bytes": 61586
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/12.webp",
+      "file": "assets/cases/divo-dental/12.webp",
+      "sha256": "1664d5fd5db87db9239b10f8be010ff19ca8665b7e5aa95144390a0f62a2b97d",
+      "bytes": 82316
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/9.webp",
+      "file": "assets/cases/divo-dental/9.webp",
+      "sha256": "3eb29e8f3e7db53001605506ee904d2064e380d38f38debb1c486618017e0945",
+      "bytes": 442584
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/1.webp",
+      "file": "assets/cases/divo-dental/1.webp",
+      "sha256": "3574d47ef672166580cd8edaa0e239f021a9adbe4503b6dddabf7f28eaceaeaf",
+      "bytes": 592900
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/11.webp",
+      "file": "assets/cases/divo-dental/11.webp",
+      "sha256": "bd7be06f5d084511736694fee4b254c368d4b982f9e41f6a2928b78a193f3a04",
+      "bytes": 315552
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/14.webp",
+      "file": "assets/cases/divo-dental/14.webp",
+      "sha256": "b7242d589cf37fd4130bf6c826124ac7c686141dc73428c3a28ad45619e6b565",
+      "bytes": 19802
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/4.webp",
+      "file": "assets/cases/divo-dental/4.webp",
+      "sha256": "92326d99b08256d72eac94df172ff4ea924985d47bbef95a82968861f6a21d37",
+      "bytes": 800116
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/13.webp",
+      "file": "assets/cases/divo-dental/13.webp",
+      "sha256": "ab63c28a0f578971b53e7466482b03a741a1ad02e42d22d2c8bacafcbade8709",
+      "bytes": 352022
+    },
+    {
+      "source": "https://interdiz.ru/portfolio/9/7.webp",
+      "file": "assets/cases/divo-dental/7.webp",
+      "sha256": "8dce4e93b1d0f3eea7b3f13d252fbdc109c8bdb8497409a8168991a7c2208a83",
+      "bytes": 672464
+    }
+  ]
+}

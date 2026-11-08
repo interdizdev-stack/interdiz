@@ -9,6 +9,7 @@ const end = '<!-- SEO:END -->';
 const blockPattern = /  <!-- SEO:START[^]*?<!-- SEO:END -->\r?\n/;
 export const absolute = relative => new URL(relative, site.url).href;
 const ref = id => ({ '@id': id });
+const casePage = key => pages.find(page => page.kind === 'case' && page.projectKey === key);
 const orgId = absolute('#organization');
 const websiteId = absolute('#website');
 
@@ -47,6 +48,13 @@ export function extractProjects(html) {
     description: required(textContent(contents(card, 'p').at(-1) || ''), 'project description'),
     image: absolute(required(card.match(/<img\b[^>]*src="([^"]+)"/)?.[1], 'project image')),
     imageAlt: textContent(card.match(/<img\b[^>]*alt="([^"]*)"/)?.[1] || ''),
+  }));
+}
+
+export function extractCaseImages(html) {
+  const gallery = html.match(/<div class="case-gallery" data-case-gallery>([^]*?)<\/div>/)?.[1] || '';
+  return [...gallery.matchAll(/<img\b[^>]*src="([^"]+)"[^>]*width="(\d+)"[^>]*height="(\d+)"[^>]*alt="([^"]*)"/g)].map(match => ({
+    '@type': 'ImageObject', contentUrl: absolute(match[1]), width: Number(match[2]), height: Number(match[3]), caption: textContent(match[4]),
   }));
 }
 
@@ -91,8 +99,22 @@ export function structuredData(page, html, home) {
     webpage.breadcrumb = ref(`${url}#breadcrumb`);
     graph.push({ '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Главная', item: site.url },
-      { '@type': 'ListItem', position: 2, name: page.name, item: url },
+      ...(page.kind === 'case' ? [{ '@type': 'ListItem', position: 2, name: 'Портфолио', item: absolute('portfolio.html') }] : []),
+      { '@type': 'ListItem', position: page.kind === 'case' ? 3 : 2, name: page.name, item: url },
     ] });
+  }
+  if (page.kind === 'case') {
+    const images = extractCaseImages(html);
+    required(images.length, 'case presentation images');
+    const projectId = `${url}#project`;
+    webpage.mainEntity = ref(projectId);
+    graph.push({
+      '@type': 'CreativeWork', '@id': projectId, url, name: page.name,
+      description: textContent(required(html.match(/<p class="hero-description case-description">([^]*?)<\/p>/)?.[1], 'case description')),
+      inLanguage: site.language, creator: ref(orgId), mainEntityOfPage: ref(pageId),
+      thumbnailUrl: absolute(page.image), image: images,
+      keywords: contents(required(html.match(/<ul class="case-stack"[^>]*>([^]*?)<\/ul>/)?.[1], 'case stack'), 'li').map(textContent),
+    });
   }
   if (page.faqSection) {
     const faqId = `${url}#faq`;
@@ -107,7 +129,7 @@ export function structuredData(page, html, home) {
       url: `${url}#${page.projectSection}`, numberOfItems: projects.length,
       itemListElement: projects.map((project, index) => ({
         '@type': 'ListItem', position: index + 1,
-        item: { '@type': 'CreativeWork', '@id': absolute(`portfolio.html#project-${project.key}`), name: project.name, description: project.description, image: project.image, creator: ref(orgId) },
+        item: { '@type': 'CreativeWork', '@id': absolute(`${casePage(project.key)?.path || 'portfolio.html'}#${casePage(project.key) ? 'project' : `project-${project.key}`}`), url: absolute(casePage(project.key)?.path || `portfolio.html#project-${project.key}`), name: project.name, description: project.description, image: project.image, creator: ref(orgId) },
       })),
     };
     required(projects.length, 'project cards');
@@ -166,7 +188,8 @@ export async function syncSEO({ check = false } = {}) {
     const head = required(html.match(/<head>[^]*?<\/head>/)?.[0], `${page.file} head`);
     const cleanHead = head.replace(blockPattern, '').replace(/  <title\b[^]*?<\/title>\r?\n/g, '').replace(/  <meta name="description"[^>]*>\r?\n/g, '');
     outputs.set(page.file, html.replace(head, cleanHead.replace('</head>', `${renderHead(page, html, home)}</head>`)));
-    const images = extractProjects(html).map(project => `    <image:image><image:loc>${escape(project.image)}</image:loc></image:image>`);
+    const images = [...extractProjects(html).map(project => project.image), ...extractCaseImages(html).map(image => image.contentUrl)]
+      .map(image => `    <image:image><image:loc>${escape(image)}</image:loc></image:image>`);
     sitemapPages.push(`  <url>\n    <loc>${escape(absolute(page.path))}</loc>\n${[...new Set(images)].join('\n')}\n  </url>`);
   }
   outputs.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${sitemapPages.join('\n')}\n</urlset>\n`);

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./outlines.css">
   <link rel="stylesheet" href="./reviews.css">
   <link rel="stylesheet" href="./mobile.css">
+  <link rel="stylesheet" href="./cases.css">
   <script src="./theme.js"></script>
   <script src="./page-transitions.js"></script>
   <script src="./home-entry.js"></script>
@@ -206,7 +207,8 @@
           "position": 1,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-mama",
+            "@id": "https://interdiz.ru/case-mama.html#project",
+            "url": "https://interdiz.ru/case-mama.html",
             "name": "Я — мама",
             "description": "Цифровая забота, которую чувствуешь.",
             "image": "https://interdiz.ru/assets/mama.webp",
@@ -220,7 +222,8 @@
           "position": 2,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-poplavok",
+            "@id": "https://interdiz.ru/case-poplavok.html#project",
+            "url": "https://interdiz.ru/case-poplavok.html",
             "name": "Поплавок",
             "description": "Новая digital-глава ресторана у воды.",
             "image": "https://interdiz.ru/assets/poplavok.webp",
@@ -234,7 +237,8 @@
           "position": 3,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-health",
+            "@id": "https://interdiz.ru/case-health.html#project",
+            "url": "https://interdiz.ru/case-health.html",
             "name": "Health Culture",
             "description": "Айдентика с ощущением чистоты.",
             "image": "https://interdiz.ru/assets/health-culture.webp",
@@ -248,7 +252,8 @@
           "position": 4,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-pierre-magnol",
+            "@id": "https://interdiz.ru/case-pierre-magnol.html#project",
+            "url": "https://interdiz.ru/case-pierre-magnol.html",
             "name": "Pierre Magnol",
             "description": "Цифровая витрина цветочного бутика.",
             "image": "https://interdiz.ru/assets/pierre-magnol.webp",
@@ -262,7 +267,8 @@
           "position": 5,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-home30",
+            "@id": "https://interdiz.ru/case-home30.html#project",
+            "url": "https://interdiz.ru/case-home30.html",
             "name": "HOME30",
             "description": "Сайт хостела в чёрно-оранжевых тонах.",
             "image": "https://interdiz.ru/assets/home30.webp",
@@ -276,7 +282,8 @@
           "position": 6,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-shogun-auto",
+            "@id": "https://interdiz.ru/case-shogun-auto.html#project",
+            "url": "https://interdiz.ru/case-shogun-auto.html",
             "name": "Shogun Auto",
             "description": "С Востока на весь мир — фирменный стиль.",
             "image": "https://interdiz.ru/assets/shogun-auto.webp",
@@ -290,7 +297,8 @@
           "position": 7,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-kyrilka",
+            "@id": "https://interdiz.ru/case-kyrilka.html#project",
+            "url": "https://interdiz.ru/case-kyrilka.html",
             "name": "Kyrilka",
             "description": "Контрастный дизайн цифровой витрины.",
             "image": "https://interdiz.ru/assets/kyrilka.webp",
@@ -304,7 +312,8 @@
           "position": 8,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-ivan-grozny",
+            "@id": "https://interdiz.ru/case-ivan-grozny.html#project",
+            "url": "https://interdiz.ru/case-ivan-grozny.html",
             "name": "Иван Грозный — Перезагрузка",
             "description": "ТВ-реклама и афиши, в которых оживает история.",
             "image": "https://interdiz.ru/assets/ivan-grozny.webp",
@@ -318,7 +327,8 @@
           "position": 9,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-divo-dental",
+            "@id": "https://interdiz.ru/case-divo-dental.html#project",
+            "url": "https://interdiz.ru/case-divo-dental.html",
             "name": "Divo Dental",
             "description": "Логотип для современной стоматологии.",
             "image": "https://interdiz.ru/assets/divo-dental.webp",
@@ -674,7 +684,7 @@
         <div class="project-track">
           <!-- Project 01: Mama -->
           <article class="project-card" data-project="mama">
-            <button class="project-image" type="button" data-open-project="mama" aria-label="Открыть проект Я — мама">
+            <a class="project-image" data-open-project="mama" aria-label="Открыть проект Я — мама" href="./case-mama.html">
               <span class="project-preview">
                 <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
                 <span class="project-badges">
@@ -684,7 +694,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Я — мама</h3>
@@ -699,7 +709,7 @@
 
           <!-- Project 02: Poplavok -->
           <article class="project-card" data-project="poplavok">
-            <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок">
+            <a class="project-image" data-open-project="poplavok" aria-label="Открыть проект Поплавок" href="./case-poplavok.html">
               <span class="project-preview">
                 <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -709,7 +719,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Поплавок</h3>
@@ -724,7 +734,7 @@
 
           <!-- Project 03: Health Culture -->
           <article class="project-card" data-project="health">
-            <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture">
+            <a class="project-image" data-open-project="health" aria-label="Открыть проект Health Culture" href="./case-health.html">
               <span class="project-preview">
                 <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -734,7 +744,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Health Culture</h3>
@@ -748,7 +758,7 @@
           </article>
 
           <article class="project-card" data-project="pierre-magnol">
-            <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol">
+            <a class="project-image" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" href="./case-pierre-magnol.html">
               <span class="project-preview">
                 <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -758,7 +768,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Pierre Magnol</h3>
@@ -773,7 +783,7 @@
 
 
           <article class="project-card" data-project="home30">
-            <button class="project-image" type="button" data-open-project="home30" aria-label="Открыть проект HOME30">
+            <a class="project-image" data-open-project="home30" aria-label="Открыть проект HOME30" href="./case-home30.html">
               <span class="project-preview">
                 <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -783,7 +793,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>HOME30</h3>
@@ -798,7 +808,7 @@
 
 
           <article class="project-card" data-project="shogun-auto">
-            <button class="project-image" type="button" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto">
+            <a class="project-image" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto" href="./case-shogun-auto.html">
               <span class="project-preview">
                 <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -808,7 +818,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Shogun Auto</h3>
@@ -823,7 +833,7 @@
 
 
           <article class="project-card" data-project="kyrilka">
-            <button class="project-image" type="button" data-open-project="kyrilka" aria-label="Открыть проект Kyrilka">
+            <a class="project-image" data-open-project="kyrilka" aria-label="Открыть проект Kyrilka" href="./case-kyrilka.html">
               <span class="project-preview">
                 <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -833,7 +843,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Kyrilka</h3>
@@ -848,7 +858,7 @@
 
 
           <article class="project-card" data-project="ivan-grozny">
-            <button class="project-image" type="button" data-open-project="ivan-grozny" aria-label="Открыть проект Иван Грозный — Перезагрузка">
+            <a class="project-image" data-open-project="ivan-grozny" aria-label="Открыть проект Иван Грозный — Перезагрузка" href="./case-ivan-grozny.html">
               <span class="project-preview">
                 <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -858,7 +868,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Иван Грозный — Перезагрузка</h3>
@@ -873,7 +883,7 @@
 
 
           <article class="project-card" data-project="divo-dental">
-            <button class="project-image" type="button" data-open-project="divo-dental" aria-label="Открыть проект Divo Dental">
+            <a class="project-image" data-open-project="divo-dental" aria-label="Открыть проект Divo Dental" href="./case-divo-dental.html">
               <span class="project-preview">
                 <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
@@ -883,7 +893,7 @@
               </span>
 
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Смотреть проект ↗</span></span>
-            </button>
+            </a>
             <div class="project-info">
               <div>
                 <h3>Divo Dental</h3>
@@ -1313,8 +1323,13 @@
     <div class="dialog-inner">
       <h2 id="dialog-title"></h2>
       <p class="dialog-description" id="dialog-description"></p>
-      <img class="dialog-image" alt="" width="1920" height="1280">
-      <button type="button" class="contact-pill contact-pill--filled project-case-return" data-close-project>Вернуться на главную <span aria-hidden="true">↩</span></button>
+      <ul class="case-stack" aria-label="Состав работ и технологии"></ul>
+      <div class="case-gallery" data-project-gallery></div>
+      <div class="case-actions">
+        <button type="button" class="contact-pill contact-pill--filled project-case-return" data-close-project>Вернуться на главную <span aria-hidden="true">↩</span></button>
+        <a class="page-text-link dialog-project-page">Отдельная страница кейса <span aria-hidden="true">↗</span></a>
+        <a class="dialog-link" target="_blank" rel="noopener noreferrer" hidden>Кейс на Behance ↗</a>
+      </div>
     </div>
   </dialog>
 

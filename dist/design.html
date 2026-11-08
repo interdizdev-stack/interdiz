@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./inner-page.css">
   <link rel="stylesheet" href="./service.css">
   <link rel="stylesheet" href="./design-formats.css">
+  <link rel="stylesheet" href="./cases.css">
   <script src="./theme.js"></script>
   <script src="./page-transitions.js"></script>
   <script defer src="./vendor/gsap.min.js"></script>
@@ -201,7 +202,8 @@
           "position": 1,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-health",
+            "@id": "https://interdiz.ru/case-health.html#project",
+            "url": "https://interdiz.ru/case-health.html",
             "name": "Health Culture",
             "description": "Айдентика с ощущением чистоты.",
             "image": "https://interdiz.ru/assets/health-culture.webp",
@@ -215,7 +217,8 @@
           "position": 2,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-shogun-auto",
+            "@id": "https://interdiz.ru/case-shogun-auto.html#project",
+            "url": "https://interdiz.ru/case-shogun-auto.html",
             "name": "Shogun Auto",
             "description": "С Востока на весь мир — фирменный стиль.",
             "image": "https://interdiz.ru/assets/shogun-auto.webp",
@@ -546,13 +549,13 @@
       <h2 class="service-title" id="work-title"><span class="hero-line">У КАЖДОГО</span><span class="hero-line outline">СВОЙ ХАРАКТЕР<span class="title-dot">.</span></span></h2>
       <p class="hero-description">Два проекта из портфолио студии: визуальные системы для разных продуктов и аудиторий.</p>
       <div class="page-project-grid service-projects"><article class="project-card" data-topic="health" data-categories="identity">
-          <button class="project-image" type="button" data-open-project="health" aria-label="Открыть проект Health Culture" aria-haspopup="dialog">
+          <a class="project-image" data-open-project="health" aria-label="Открыть проект Health Culture" aria-haspopup="dialog" href="./case-health.html">
             <span class="project-preview">
               <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
               <span class="project-badges" aria-hidden="true"><span class="project-number">[ 03 ]</span></span>
             </span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
-          </button>
+          </a>
           <div class="project-info">
             <div>
               <p class="project-topic mono-meta">Здоровье</p>
@@ -562,13 +565,13 @@
           </div>
         </article>
 <article class="project-card" data-topic="commerce" data-categories="identity">
-          <button class="project-image" type="button" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto" aria-haspopup="dialog">
+          <a class="project-image" data-open-project="shogun-auto" aria-label="Открыть проект Shogun Auto" aria-haspopup="dialog" href="./case-shogun-auto.html">
             <span class="project-preview">
               <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
               <span class="project-badges" aria-hidden="true"><span class="project-number">[ 06 ]</span></span>
             </span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
-          </button>
+          </a>
           <div class="project-info">
             <div>
               <p class="project-topic mono-meta">Торговля и авто</p>
@@ -675,14 +678,21 @@
     <a class="contact-pill contact-pill--filled mobile-menu-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </dialog>
 
-  <dialog class="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
-    <button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button>
+  <dialog class="project-dialog project-case" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="project-case-toolbar">
+      <span class="dialog-kicker mono-meta">[ КЕЙС INTERDIZ ]</span>
+      <button type="button" class="contact-pill contact-pill--filled project-case-close" data-close-project autofocus>Закрыть <span aria-hidden="true">×</span></button>
+    </div>
     <div class="dialog-inner">
-      <span class="dialog-kicker mono-meta">[ ПРОЕКТ INTERDIZ ]</span>
       <h2 id="dialog-title"></h2>
       <p class="dialog-description" id="dialog-description"></p>
-      <img class="dialog-image" alt="" width="1920" height="1280">
-      <a class="dialog-link" hidden></a>
+      <ul class="case-stack" aria-label="Состав работ и технологии"></ul>
+      <div class="case-gallery" data-project-gallery></div>
+      <div class="case-actions">
+        <button type="button" class="contact-pill contact-pill--filled project-case-return" data-close-project>Вернуться к проектам <span aria-hidden="true">↩</span></button>
+        <a class="page-text-link dialog-project-page">Отдельная страница кейса <span aria-hidden="true">↗</span></a>
+        <a class="dialog-link" target="_blank" rel="noopener noreferrer" hidden>Кейс на Behance ↗</a>
+      </div>
     </div>
   </dialog>
   <div class="display-controls">

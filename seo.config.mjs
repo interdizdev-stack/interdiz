@@ -1,3 +1,5 @@
+import { projects } from './dist/project-data.js';
+
 // Public production identity. Keep URLs independent of previews and theme/filter parameters.
 export const site = {
   url: 'https://interdiz.ru/',
@@ -80,4 +82,10 @@ export const pages = [
     image: 'assets/og-support.png', imageAlt: 'InterDIZ — поддержка сайта: обновления, стабильность и развитие',
     faqSection: 'questions', catalogName: 'Задачи поддержки сайта',
   },
+  ...projects.map(project => ({
+    file: project.page, path: project.page, kind: 'case', projectKey: project.key,
+    name: project.title, title: `${project.title} — кейс InterDIZ`,
+    description: project.description,
+    image: project.preview.src, imageAlt: `Проект InterDIZ — ${project.title}`,
+  })),
 ];

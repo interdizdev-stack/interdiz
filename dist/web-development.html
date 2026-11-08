@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./mobile.css">
   <link rel="stylesheet" href="./inner-page.css">
   <link rel="stylesheet" href="./service.css">
+  <link rel="stylesheet" href="./cases.css">
   <script src="./theme.js"></script>
   <script src="./page-transitions.js"></script>
   <script defer src="./vendor/gsap.min.js"></script>
@@ -200,7 +201,8 @@
           "position": 1,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-poplavok",
+            "@id": "https://interdiz.ru/case-poplavok.html#project",
+            "url": "https://interdiz.ru/case-poplavok.html",
             "name": "Поплавок",
             "description": "Сайт ресторана у воды. Дизайн и разработка.",
             "image": "https://interdiz.ru/assets/poplavok.webp",
@@ -214,7 +216,8 @@
           "position": 2,
           "item": {
             "@type": "CreativeWork",
-            "@id": "https://interdiz.ru/portfolio.html#project-pierre-magnol",
+            "@id": "https://interdiz.ru/case-pierre-magnol.html#project",
+            "url": "https://interdiz.ru/case-pierre-magnol.html",
             "name": "Pierre Magnol",
             "description": "Цифровая витрина цветочного бутика.",
             "image": "https://interdiz.ru/assets/pierre-magnol.webp",
@@ -457,17 +460,17 @@
       <p class="hero-description">Разные продукты, аудитории и визуальные языки. Посмотрите, как задачи превращаются в интерфейсы.</p>
       <div class="page-project-grid service-projects">
         <article class="project-card">
-          <button class="project-image" type="button" data-open-project="poplavok" aria-label="Открыть проект Поплавок" aria-haspopup="dialog">
+          <a class="project-image" data-open-project="poplavok" aria-label="Открыть проект Поплавок" aria-haspopup="dialog" href="./case-poplavok.html">
             <span class="project-preview"><img src="./assets/poplavok.webp" alt="Дизайн сайта ресторана Поплавок" width="1920" height="1280" loading="lazy" decoding="async"><span class="project-badges" aria-hidden="true"><span class="project-number">[ 01 ]</span></span></span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
-          </button>
+          </a>
           <div class="project-info"><div><p class="project-topic mono-meta">Рестораны и отели</p><h3>Поплавок</h3><p>Сайт ресторана у воды. Дизайн и разработка.</p></div></div>
         </article>
         <article class="project-card">
-          <button class="project-image" type="button" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" aria-haspopup="dialog">
+          <a class="project-image" data-open-project="pierre-magnol" aria-label="Открыть проект Pierre Magnol" aria-haspopup="dialog" href="./case-pierre-magnol.html">
             <span class="project-preview"><img src="./assets/pierre-magnol.webp" alt="Цифровая витрина цветочного бутика Pierre Magnol" width="2800" height="1868" loading="lazy" decoding="async"><span class="project-badges" aria-hidden="true"><span class="project-number">[ 02 ]</span></span></span>
             <span class="project-open" aria-hidden="true">Смотреть проект ↗</span>
-          </button>
+          </a>
           <div class="project-info"><div><p class="project-topic mono-meta">Торговля и авто</p><h3>Pierre Magnol</h3><p>Цифровая витрина цветочного бутика.</p></div></div>
         </article>
       </div>
@@ -574,14 +577,21 @@
     <a class="contact-pill contact-pill--filled mobile-menu-contact" href="#contact">Обсудить проект <span aria-hidden="true">↗</span></a>
   </dialog>
 
-  <dialog class="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
-    <button type="button" class="dialog-close" aria-label="Закрыть проект">✕</button>
+  <dialog class="project-dialog project-case" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="project-case-toolbar">
+      <span class="dialog-kicker mono-meta">[ КЕЙС INTERDIZ ]</span>
+      <button type="button" class="contact-pill contact-pill--filled project-case-close" data-close-project autofocus>Закрыть <span aria-hidden="true">×</span></button>
+    </div>
     <div class="dialog-inner">
-      <span class="dialog-kicker mono-meta">[ ПРОЕКТ INTERDIZ ]</span>
       <h2 id="dialog-title"></h2>
       <p class="dialog-description" id="dialog-description"></p>
-      <img class="dialog-image" alt="" width="1920" height="1280">
-      <a class="dialog-link" hidden></a>
+      <ul class="case-stack" aria-label="Состав работ и технологии"></ul>
+      <div class="case-gallery" data-project-gallery></div>
+      <div class="case-actions">
+        <button type="button" class="contact-pill contact-pill--filled project-case-return" data-close-project>Вернуться к проектам <span aria-hidden="true">↩</span></button>
+        <a class="page-text-link dialog-project-page">Отдельная страница кейса <span aria-hidden="true">↗</span></a>
+        <a class="dialog-link" target="_blank" rel="noopener noreferrer" hidden>Кейс на Behance ↗</a>
+      </div>
     </div>
   </dialog>
   <div class="display-controls">
