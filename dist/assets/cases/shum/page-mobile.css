@@ -1,0 +1,5 @@
+.shum-meta-compact { display: none; }
+@media (max-width: 600px) {
+  .shum-meta-full { display: none; }
+  .shum-meta-compact { display: inline; }
+}
