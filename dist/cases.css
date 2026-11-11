@@ -31,9 +31,20 @@
   }
   .project-dialog.project-case::-webkit-scrollbar { display: none; }
   .project-case .case-gallery { margin-inline: -20px; }
-  html[data-theme] .project-case-toolbar { flex-wrap: wrap; }
+  html[data-theme] .project-case-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 7px;
+  }
+  html[data-theme] .project-case-toolbar .dialog-kicker { grid-column: 1; }
+  html[data-theme] .project-case-toolbar .project-case-close {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: start;
+  }
   html[data-theme] .project-case-toolbar .case-stack {
-    flex-basis: 100%;
+    grid-column: 1;
+    min-width: 0;
     margin: 0;
   }
   html[data-theme] .project-case-toolbar .case-stack li {
