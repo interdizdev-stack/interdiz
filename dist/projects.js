@@ -8,6 +8,14 @@ export function setupProjectDialog({ onOpen } = {}) {
   const description = dialog.querySelector('.dialog-description');
   const gallery = dialog.querySelector('[data-project-gallery]');
   const stack = dialog.querySelector('.case-stack');
+  const toolbar = dialog.querySelector('.project-case-toolbar');
+  const mobileLayout = matchMedia('(max-width: 700px)');
+  const placeStack = () => {
+    if (mobileLayout.matches) toolbar.append(stack);
+    else description.after(stack);
+  };
+  mobileLayout.addEventListener('change', placeStack);
+  placeStack();
   const pageLink = dialog.querySelector('.dialog-project-page');
   const link = dialog.querySelector('.dialog-link');
   let opener;

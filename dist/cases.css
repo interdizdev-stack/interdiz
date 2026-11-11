@@ -31,6 +31,11 @@
   }
   .project-dialog.project-case::-webkit-scrollbar { display: none; }
   .project-case .case-gallery { margin-inline: -20px; }
+  html[data-theme] .project-case-toolbar { flex-wrap: wrap; }
+  html[data-theme] .project-case-toolbar .case-stack {
+    flex-basis: 100%;
+    margin: 0;
+  }
 }
 @media (max-width: 699px) {
   .case-page .case-intro > .section-kicker { top: 0; padding-bottom: 14px; }
