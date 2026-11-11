@@ -99,6 +99,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'kyrilka') {
+        const frame = document.createElement('iframe');
+        frame.className = 'kyrilka-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Kyrilka';
+        frame.src = './assets/cases/kyrilka/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;

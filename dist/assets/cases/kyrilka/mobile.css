@@ -1,0 +1,48 @@
+@font-face {
+  font-family: Body;
+  src: url('../../inter-cyrillic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: Display;
+  src: url('../ami/assets/unbounded.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #080808; color: #f5f5f3; font-family: Body, Arial, sans-serif; }
+main { overflow: hidden; }
+.pad { padding: 64px 7%; }
+.eyebrow { color: #fc6820; font-size: 10px; font-weight: 700; letter-spacing: .13em; margin: 0 0 23px; }
+h1, h2 { font-family: Display, Arial, sans-serif; font-weight: 800; line-height: 1.13; letter-spacing: -.065em; margin: 0 0 26px; overflow-wrap: anywhere; }
+h1 { font-size: clamp(32px, 9.1vw, 62px); }
+h2 { font-size: clamp(29px, 7.8vw, 54px); }
+h1 span, h2 span { color: #fc6820; }
+p { font-size: 16px; line-height: 1.65; margin: 0 0 16px; }
+.hero { padding: 30px 7% 0; }
+.hero h1 { margin-top: 50px; }
+.photo { width: 100%; background-repeat: no-repeat; background-size: 100% auto; background-color: #080808; }
+.hero-photo { margin: 20px -8.15% 0; width: 116.3%; aspect-ratio: 1.6; background-image: url('1.webp'); background-position: center top; }
+.intro { background: #1b110c; }
+.tablet { aspect-ratio: 2.05; background-image: url('2.webp'); background-position: center top; }
+.phone-catalog { aspect-ratio: 1.18; background-image: url('4.webp'); background-position: center top; }
+.visual { background: #f06421; color: #0d0d0d; }
+.visual .eyebrow, .visual h2 span { color: #fff; }
+.palette { display: flex; gap: 8px; margin-top: 28px; }
+.palette span { flex: 1; height: 48px; background: #111; }
+.palette span:nth-child(2) { background: #fff; }
+.palette span:nth-child(3) { background: #ff9d57; }
+.phone-product { aspect-ratio: 1.2; background-image: url('5.webp'); background-position: center bottom; }
+.desktop { aspect-ratio: 1.6; background-image: url('1.webp'); background-position: center top; }
+.integration { background: #1b110c; }
+.result { border-bottom: 1px solid #49382d; }
+footer { background: #1b110c; }
+footer h2 { margin-bottom: 0; }
+.original { padding: 0 7% 40px; background: #1b110c; }
+.original summary { cursor: pointer; padding: 16px 0; font-size: 14px; }
+.original img { display: block; width: 100%; height: auto; }
+@media (min-width: 600px) {
+  .pad, .hero { padding-inline: 10%; }
+  .hero-photo { margin-inline: -12.5%; width: 125%; aspect-ratio: 1.65; }
+  .desktop { aspect-ratio: 1.65; }
+}
