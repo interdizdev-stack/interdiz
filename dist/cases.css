@@ -178,3 +178,14 @@ html[data-theme] .project-image .ami-cover {
   html[data-theme] .project-dialog.project-case:has(iframe.shogun-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
   .project-case .case-gallery:has(> iframe.shogun-mobile-presentation) { margin-inline: -20px; }
 }
+
+/* Mobile Ivan Grozny presentation; desktop retains the original sheets. */
+.ivan-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #090806; }
+@media (max-width: 960px) {
+  .case-gallery:has(> .ivan-mobile-presentation) > .case-sheet { display: none; }
+  .case-gallery > .ivan-mobile-presentation { display: block; }
+}
+@media (max-width: 699px) {
+  html[data-theme] .project-dialog.project-case:has(iframe.ivan-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
+  .project-case .case-gallery:has(> iframe.ivan-mobile-presentation) { margin-inline: -20px; }
+}

@@ -108,6 +108,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'ivan-grozny') {
+        const frame = document.createElement('iframe');
+        frame.className = 'ivan-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Иван Грозный — Перезагрузка';
+        frame.src = './assets/cases/ivan-grozny/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;
