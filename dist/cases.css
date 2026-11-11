@@ -48,8 +48,8 @@
     margin: 0;
   }
   html[data-theme] .project-case-toolbar .case-stack li {
-    padding: 6.3px 10.8px;
-    font-size: 11.7px;
+    padding: 5.67px 9.72px;
+    font-size: 10.53px;
   }
 }
 @media (max-width: 699px) {
