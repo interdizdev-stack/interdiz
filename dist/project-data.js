@@ -9,6 +9,61 @@ export const categoryLabels = {
 };
 export const projects = [
   {
+    "key": "viar",
+    "title": "ВИАР",
+    "lines": [
+      "ВИАР"
+    ],
+    "categories": [
+      "web",
+      "identity",
+      "automation"
+    ],
+    "sourceId": 13,
+    "description": "ВИАР — разработка сайта и логотипа VR-клуба в Твери: удобное бронирование, рост числа клиентов и продолжение работы над CRM.",
+    "stack": [
+      "Web-design",
+      "UX/UI",
+      "Logotype",
+      "CRM"
+    ],
+    "behance": "",
+    "page": "case-viar.html",
+    "presentation": "assets/cases/viar/presentation.htm",
+    "preview": {
+      "src": "assets/cases/viar/preview.webp",
+      "width": 1200,
+      "height": 900
+    },
+    "images": [
+      {
+        "src": "assets/cases/viar/assets/home.png",
+        "width": 1265,
+        "height": 712
+      },
+      {
+        "src": "assets/cases/viar/assets/mobile.png",
+        "width": 375,
+        "height": 811
+      },
+      {
+        "src": "assets/cases/viar/assets/identity-entrance.webp",
+        "width": 696,
+        "height": 550
+      },
+      {
+        "src": "assets/cases/viar/assets/identity-tickets.webp",
+        "width": 834,
+        "height": 385
+      },
+      {
+        "src": "assets/cases/viar/assets/booking.png",
+        "width": 1280,
+        "height": 720
+      }
+    ]
+  },
+  {
     "key": "shum",
     "title": "ШУМ",
     "lines": [

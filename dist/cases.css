@@ -200,3 +200,8 @@ html[data-theme] .project-image .ami-cover {
   html[data-theme] .project-dialog.project-case:has(iframe.divo-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
   .project-case .case-gallery:has(> iframe.divo-mobile-presentation) { margin-inline: -20px; }
 }
+
+@media (max-width: 699px) {
+  html[data-theme] .project-dialog.project-case:has(iframe[src$="/viar/presentation.htm"]) { width:100%; max-width:100%; border:0; border-radius:0; }
+  .project-case .case-gallery:has(> iframe[src$="/viar/presentation.htm"]) { margin-inline:-20px; }
+}
