@@ -79,3 +79,6 @@ h2 { overflow-wrap:anywhere; } .review-grid > *, .intro-grid > *, .identity-grid
 
 /* Preserve the original proportions of every screen mockup. */
 .hero-device img, .laptop-screen img, .tablet img, .phone img, .booking-mock img, .birthday-screen img { height:auto; }
+
+/* The host sizes embedded presentations; only the host should scroll. */
+html.is-embedded { overflow-y:hidden; }
