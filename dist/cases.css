@@ -20,11 +20,14 @@
 .project-dialog .dialog-project-page { color: var(--lime); }
 .project-directions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-block: 8px; color: var(--lime); font-size: 12px; }
 .project-card[id] { scroll-margin-top: 32px; }
+.mochi-meta-compact { display: none; }
 @media (max-width: 699px) {
   .case-page .case-intro > .section-kicker { top: 0; padding-bottom: 14px; }
   .case-page .case-presentation { margin-inline: 0; }
   .case-page .case-actions { margin-inline: var(--pad); }
   .case-page .case-categories { gap: 8px 16px; }
+  .mochi-meta-full { display: none; }
+  .mochi-meta-compact { display: inline; }
 }
 
 /* The NOS case is an interactive presentation within the shared case shell. */

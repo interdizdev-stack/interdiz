@@ -47,3 +47,10 @@
 .is-embedded .cover{min-height:800px}
 @media(max-width:1050px){.is-embedded .cover{min-height:720px}}
 @media(max-width:700px){.is-embedded .cover{min-height:0}}
+@media(max-width:700px){
+ .cover-copy{min-width:0}
+ .cover h1{font-size:clamp(24px,7.6vw,38px);overflow-wrap:anywhere}
+ .cover h1 span{max-width:100%}
+ .flavor-example h3{font-size:clamp(18px,5vw,23px);overflow-wrap:anywhere}
+ .receipt-frame img{aspect-ratio:auto;object-fit:contain}
+}
