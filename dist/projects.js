@@ -117,6 +117,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'divo-dental') {
+        const frame = document.createElement('iframe');
+        frame.className = 'divo-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Divo Dental';
+        frame.src = './assets/cases/divo-dental/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;

@@ -189,3 +189,14 @@ html[data-theme] .project-image .ami-cover {
   html[data-theme] .project-dialog.project-case:has(iframe.ivan-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
   .project-case .case-gallery:has(> iframe.ivan-mobile-presentation) { margin-inline: -20px; }
 }
+
+/* Mobile presentation for Divo Dental. */
+.divo-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #ebe9e5; }
+@media (max-width: 960px) {
+  .case-gallery:has(> .divo-mobile-presentation) > .case-sheet { display: none; }
+  .case-gallery > .divo-mobile-presentation { display: block; }
+}
+@media (max-width: 699px) {
+  html[data-theme] .project-dialog.project-case:has(iframe.divo-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
+  .project-case .case-gallery:has(> iframe.divo-mobile-presentation) { margin-inline: -20px; }
+}
