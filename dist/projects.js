@@ -63,6 +63,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'health') {
+        const frame = document.createElement('iframe');
+        frame.className = 'health-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Health Culture';
+        frame.src = './assets/cases/health/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;
