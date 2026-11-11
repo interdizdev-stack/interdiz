@@ -205,3 +205,15 @@ html[data-theme] .project-image .ami-cover {
   html[data-theme] .project-dialog.project-case:has(iframe[src$="/viar/presentation.htm"]) { width:100%; max-width:100%; border:0; border-radius:0; }
   .project-case .case-gallery:has(> iframe[src$="/viar/presentation.htm"]) { margin-inline:-20px; }
 }
+
+/* VIAR: keep the real logo and caption clear of the project controls. */
+.viar-cover { background:#070b25; }
+.project-card .viar-cover .viar-cover-art { object-position: 60% center; }
+.viar-cover-copy { position:absolute; left:5%; top:48%; transform:translateY(-50%); width:clamp(100px, 24cqw, 205px); display:flex; flex-direction:column; align-items:flex-start; color:#fff; }
+.project-card .project-image .viar-cover .viar-cover-logo { display:block; position:static; width:100%; height:auto; object-fit:contain; transform:none; filter:none; }
+.viar-cover-subtitle, .viar-cover-detail { display:block; font-family:var(--text), sans-serif; font-weight:700; line-height:1.2; letter-spacing:.08em; }
+.viar-cover-subtitle { font-size:clamp(10px, 1.8cqw, 16px); margin-top:clamp(0px, .4cqw, 5px); }
+.viar-cover-detail { color:#f0803f; font-size:clamp(8px, 1.35cqw, 12px); margin-top:clamp(7px, 1.2cqw, 12px); }
+
+.viar-cover-subtitle { white-space:nowrap; }
+@media (max-width:699px) { .viar-cover-subtitle { font-size:9px; } }

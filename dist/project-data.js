@@ -31,9 +31,9 @@ export const projects = [
     "page": "case-viar.html",
     "presentation": "assets/cases/viar/presentation.htm",
     "preview": {
-      "src": "assets/cases/viar/preview.webp",
-      "width": 1200,
-      "height": 900
+      "src": "assets/cases/viar/preview-v2.webp",
+      "width": 1672,
+      "height": 941
     },
     "images": [
       {
