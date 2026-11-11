@@ -72,6 +72,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'pierre-magnol') {
+        const frame = document.createElement('iframe');
+        frame.className = 'pierre-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Pierre Magnol';
+        frame.src = './assets/cases/pierre-magnol/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;
