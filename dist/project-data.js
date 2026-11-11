@@ -9,6 +9,54 @@ export const categoryLabels = {
 };
 export const projects = [
   {
+    "key": "shum",
+    "title": "ШУМ",
+    "lines": [
+      "ШУМ"
+    ],
+    "categories": [
+      "web"
+    ],
+    "sourceId": 12,
+    "description": "ШУМ — интерактивный сайт автостудии с 3D-сценой автомобиля и каталогом оборудования.",
+    "stack": [
+      "Web-design",
+      "UX/UI",
+      "3D",
+      "E-commerce"
+    ],
+    "behance": "",
+    "page": "case-shum.html",
+    "presentation": "assets/cases/shum/presentation.htm",
+    "preview": {
+      "src": "assets/cases/shum/preview.webp",
+      "width": 1265,
+      "height": 712
+    },
+    "images": [
+      {
+        "src": "assets/cases/shum/assets/home.jpg",
+        "width": 1265,
+        "height": 712
+      },
+      {
+        "src": "assets/cases/shum/assets/interior.jpg",
+        "width": 1265,
+        "height": 712
+      },
+      {
+        "src": "assets/cases/shum/assets/security.jpg",
+        "width": 1265,
+        "height": 712
+      },
+      {
+        "src": "assets/cases/shum/assets/catalog.jpg",
+        "width": 1265,
+        "height": 712
+      }
+    ]
+  },
+  {
     "key": "ami",
     "title": "AMI!",
     "lines": [

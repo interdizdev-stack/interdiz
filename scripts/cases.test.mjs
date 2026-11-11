@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 2);
+  assert.equal(projects.length, imported.projects.length + 3);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
@@ -140,4 +140,18 @@ test('embedded case resizes to its contents and releases its observer', () => {
     dispose();
     assert.ok(disconnected);
   } finally { globalThis.ResizeObserver = originalObserver; }
+});
+
+
+test('SHUM case preserves the approved animated presentation and opens from both project lists', async () => {
+  const project = projects.find(project => project.key === 'shum');
+  assert.ok(project);
+  assert.deepEqual(project.categories, ['web']);
+  const page = await read(project.page);
+  const presentation = await read(project.presentation);
+  assert.match(page, /data-case-frame data-case-key="shum"/);
+  assert.match(presentation, /SHUM-scroll-highquality\.webp/);
+  assert.match(presentation, /ШУМ/);
+  assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
+  for (const file of ['index.html','portfolio.html']) assert.match(await read(file), /data-open-project="shum"[^>]+href="\.\/case-shum\.html"/);
 });
