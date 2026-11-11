@@ -31,6 +31,18 @@
 .case-presentation-frame { display:block; width:100%; min-height:80vh; border:0; background:#ebe8e2; }
 .nos-cover { display:block; width:100%; height:100%; }
 
+@media (max-width: 699px) {
+  html[data-theme] .project-dialog.project-case:has(iframe[src$="/ami/presentation.htm"]) {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .project-case .case-gallery:has(> iframe[src$="/ami/presentation.htm"]) {
+    margin-inline: -20px;
+  }
+}
+
 @font-face {
   font-family: 'AMI Cover';
   src: url('./assets/cases/ami/assets/unbounded.ttf') format('truetype');

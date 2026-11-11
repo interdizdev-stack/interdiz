@@ -122,14 +122,15 @@ test('embedded case resizes to its contents and releases its observer', () => {
   const originalObserver = globalThis.ResizeObserver;
   let onLoad, onResize, disconnected = false;
   const body = { scrollHeight: 1800 };
+  let content;
   const documentElement = { scrollHeight: 1700 };
   const childWindow = { location: { href: 'http://example.test/case' }, addEventListener() {}, removeEventListener() {} };
   const frame = {
-    style: {}, contentDocument: { body, documentElement, readyState: 'loading' }, contentWindow: childWindow,
+    style: {}, contentDocument: { body, documentElement, querySelector: () => content, readyState: 'loading' }, contentWindow: childWindow,
     addEventListener(type, cb) { if (type === 'load') onLoad = cb; },
     removeEventListener() {}
   };
-  globalThis.ResizeObserver = class { constructor(callback) { onResize = callback; } observe(element) { assert.equal(element, body); } disconnect() { disconnected = true; } };
+  globalThis.ResizeObserver = class { constructor(callback) { onResize = callback; } observe(element) { assert.equal(element, content || body); } disconnect() { disconnected = true; } };
   try {
     const dispose = setupCasePresentation(frame);
     onLoad();
@@ -137,6 +138,13 @@ test('embedded case resizes to its contents and releases its observer', () => {
     body.scrollHeight = 2100;
     onResize();
     assert.equal(frame.style.height, '2100px');
+    let contentHeight = 2001.2;
+    content = { getBoundingClientRect: () => ({ height: contentHeight }) };
+    onLoad();
+    assert.equal(frame.style.height, '2002px');
+    contentHeight = 1200;
+    onResize();
+    assert.equal(frame.style.height, '1200px');
     dispose();
     assert.ok(disconnected);
   } finally { globalThis.ResizeObserver = originalObserver; }
