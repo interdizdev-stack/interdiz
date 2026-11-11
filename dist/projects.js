@@ -81,11 +81,11 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
-      if (project.key === 'poplavok') {
+      if (project.key === 'home30') {
         const frame = document.createElement('iframe');
-        frame.className = 'poplavok-mobile-presentation';
-        frame.title = 'Мобильная презентация проекта Поплавок';
-        frame.src = './assets/cases/poplavok/mobile.htm';
+        frame.className = 'home30-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта HOME30';
+        frame.src = './assets/cases/home30/mobile.htm';
         frame.loading = 'lazy';
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);

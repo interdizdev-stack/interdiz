@@ -34,6 +34,7 @@
 .mama-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #fcf1e5; }
 .health-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #faf1f4; }
 .pierre-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #fdfcfa; }
+.home30-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #050505; }
 @media (max-width: 960px) {
   .case-gallery:has(> .mama-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .mama-mobile-presentation { display: block; }
@@ -41,6 +42,8 @@
   .case-gallery > .health-mobile-presentation { display: block; }
   .case-gallery:has(> .pierre-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .pierre-mobile-presentation { display: block; }
+  .case-gallery:has(> .home30-mobile-presentation) > .case-sheet { display: none; }
+  .case-gallery > .home30-mobile-presentation { display: block; }
 }
 @media (max-width: 699px) {
   html[data-theme] .project-dialog.project-case:has(iframe.mama-mobile-presentation) {
@@ -64,6 +67,13 @@
     border-radius: 0;
   }
   .project-case .case-gallery:has(> iframe.pierre-mobile-presentation) { margin-inline: -20px; }
+  html[data-theme] .project-dialog.project-case:has(iframe.home30-mobile-presentation) {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .project-case .case-gallery:has(> iframe.home30-mobile-presentation) { margin-inline: -20px; }
 }
 
 @media (max-width: 699px) {
@@ -146,15 +156,4 @@ html[data-theme] .project-image .ami-cover {
   color: var(--fg-muted);
   font: 500 clamp(11px, 1.6cqw, 14px)/1 var(--text);
   font-variant-numeric: tabular-nums;
-}
-
-/* The original Поплавок sheets remain the desktop presentation. */
-.poplavok-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #e7dee4; }
-@media (max-width: 960px) {
-  .case-gallery:has(> .poplavok-mobile-presentation) > .case-sheet { display: none; }
-  .case-gallery > .poplavok-mobile-presentation { display: block; }
-}
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe.poplavok-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
-  .project-case .case-gallery:has(> iframe.poplavok-mobile-presentation) { margin-inline: -20px; }
 }
