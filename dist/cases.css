@@ -157,3 +157,14 @@ html[data-theme] .project-image .ami-cover {
   font: 500 clamp(11px, 1.6cqw, 14px)/1 var(--text);
   font-variant-numeric: tabular-nums;
 }
+
+/* Mobile Shogun Auto presentation; desktop retains the original sheets. */
+.shogun-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #080808; }
+@media (max-width: 960px) {
+  .case-gallery:has(> .shogun-mobile-presentation) > .case-sheet { display: none; }
+  .case-gallery > .shogun-mobile-presentation { display: block; }
+}
+@media (max-width: 699px) {
+  html[data-theme] .project-dialog.project-case:has(iframe.shogun-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
+  .project-case .case-gallery:has(> iframe.shogun-mobile-presentation) { margin-inline: -20px; }
+}
