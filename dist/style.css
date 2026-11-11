@@ -1259,6 +1259,11 @@ h1, h2, h3, h4, h5, h6,
   transform: translateX(var(--image-shift, 0px)) scale(1.1);
 }
 
+html[data-theme] .project-card .project-image[data-open-project="shum"] img {
+  object-fit: contain;
+  transform: none;
+}
+
 .project-badges {
   position: absolute;
   left: 20px;
