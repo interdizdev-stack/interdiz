@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 4);
+  assert.equal(projects.length, imported.projects.length + 5);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
@@ -36,6 +36,27 @@ test('all source cases and every original presentation sheet have been imported'
     assert.deepEqual(work.image, images);
     assert.deepEqual(work.keywords, source.stack);
     assert.ok(pages.some(page => page.kind === 'case' && page.file === project.page));
+  }
+});
+
+test('MOCHI MOOD is reachable from both project lists and keeps its interactive presentation', async () => {
+  const project = projects.find(item => item.key === 'mochi-mood');
+  assert.ok(project);
+  const page = await read(project.page);
+  const presentation = await read(project.presentation);
+  const styles = await read('assets/cases/mochi-mood/case.css');
+  const behavior = await read('assets/cases/mochi-mood/case.js');
+  assert.match(page, /data-case-frame data-case-key="mochi-mood"/);
+  assert.match(presentation, /data-case-content/);
+  assert.match(presentation, /id="sample-tray"/);
+  assert.match(presentation, /id="motion-range"/);
+  assert.match(presentation, /site-scroll-hq\.gif/);
+  assert.doesNotMatch(presentation, /127\.0\.0\.1|localhost/);
+  assert.match(styles, /\.is-embedded \.cover\{min-height:800px\}/);
+  assert.match(behavior, /showBox\(6\)/);
+  assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
+  for (const file of ['index.html', 'portfolio.html']) {
+    assert.match(await read(file), /data-open-project="mochi-mood"[^>]+href="\.\/case-mochi-mood\.html"/);
   }
 });
 

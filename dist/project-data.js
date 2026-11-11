@@ -977,5 +977,53 @@ export const projects = [
         "height": 887
       }
     ]
+  },
+  {
+    "key": "mochi-mood",
+    "title": "MOCHI MOOD",
+    "lines": [
+      "MOCHI MOOD"
+    ],
+    "categories": [
+      "web"
+    ],
+    "sourceId": 14,
+    "description": "MOCHI MOOD — визуальный кейс сайта японских десертов: каталог вкусов, конструктор бокса и оформление заказа.",
+    "stack": [
+      "Web-design",
+      "UX/UI",
+      "Каталог",
+      "Конструктор бокса"
+    ],
+    "behance": "",
+    "page": "case-mochi-mood.html",
+    "presentation": "assets/cases/mochi-mood/presentation.htm",
+    "preview": {
+      "src": "assets/cases/mochi-mood/preview.webp",
+      "width": 1425,
+      "height": 990
+    },
+    "images": [
+      {
+        "src": "assets/cases/mochi-mood/assets/screens/desktop-home.jpg",
+        "width": 1425,
+        "height": 990
+      },
+      {
+        "src": "assets/cases/mochi-mood/assets/screens/desktop-catalog.jpg",
+        "width": 1425,
+        "height": 990
+      },
+      {
+        "src": "assets/cases/mochi-mood/assets/screens/desktop-builder.jpg",
+        "width": 1425,
+        "height": 990
+      },
+      {
+        "src": "assets/cases/mochi-mood/assets/screens/mobile-home.jpg",
+        "width": 375,
+        "height": 811
+      }
+    ]
   }
 ];

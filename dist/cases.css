@@ -87,13 +87,15 @@
 }
 
 @media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe[src$="/ami/presentation.htm"]) {
+  html[data-theme] .project-dialog.project-case:has(iframe[src$="/ami/presentation.htm"]),
+  html[data-theme] .project-dialog.project-case:has(iframe[src$="/mochi-mood/presentation.htm"]) {
     width: 100%;
     max-width: 100%;
     border: 0;
     border-radius: 0;
   }
-  .project-case .case-gallery:has(> iframe[src$="/ami/presentation.htm"]) {
+  .project-case .case-gallery:has(> iframe[src$="/ami/presentation.htm"]),
+  .project-case .case-gallery:has(> iframe[src$="/mochi-mood/presentation.htm"]) {
     margin-inline: -20px;
   }
 }

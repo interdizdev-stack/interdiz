@@ -15,6 +15,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/kyrilka.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/portfolio.html</loc>
@@ -31,6 +32,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/kyrilka.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/articles.html</loc>
@@ -226,5 +228,12 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-card-contacts.png</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-tote-light.png</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/nos/assets/nos-brand-pet-light.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/case-mochi-mood.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/desktop-home.jpg</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/desktop-catalog.jpg</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/desktop-builder.jpg</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/mobile-home.jpg</image:loc></image:image>
   </url>
 </urlset>
