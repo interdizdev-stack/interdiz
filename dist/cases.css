@@ -32,6 +32,22 @@ html[data-theme] .project-case .dialog-inner :is(#dialog-title, #dialog-descript
   white-space: nowrap;
   border: 0;
 }
+html[data-theme] .project-case-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+}
+html[data-theme] .project-case-toolbar .dialog-kicker { grid-column: 1; }
+html[data-theme] .project-case-toolbar .project-case-close {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: start;
+}
+html[data-theme] .project-case-toolbar .case-stack {
+  grid-column: 1;
+  min-width: 0;
+  margin: 0;
+}
 @media (max-width: 700px) {
   html[data-theme] .project-dialog.project-case {
     width: 100%;
@@ -43,22 +59,7 @@ html[data-theme] .project-case .dialog-inner :is(#dialog-title, #dialog-descript
   .project-dialog.project-case::-webkit-scrollbar { display: none; }
   .project-case .case-gallery { margin-inline: -20px; }
   html[data-theme] .project-case .dialog-inner { padding-top: 0; }
-  html[data-theme] .project-case-toolbar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 8px 7px;
-  }
-  html[data-theme] .project-case-toolbar .dialog-kicker { grid-column: 1; }
-  html[data-theme] .project-case-toolbar .project-case-close {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    align-self: start;
-  }
-  html[data-theme] .project-case-toolbar .case-stack {
-    grid-column: 1;
-    min-width: 0;
-    margin: 0;
-  }
+  html[data-theme] .project-case-toolbar { gap: 8px 7px; }
   html[data-theme] .project-case-toolbar .case-stack li {
     padding: 5.67px 9.72px;
     font-size: 10.53px;
