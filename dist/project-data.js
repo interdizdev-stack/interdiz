@@ -30,8 +30,8 @@ export const projects = [
     "presentation": "assets/cases/ami/presentation.htm",
     "preview": {
       "src": "assets/cases/ami/preview.webp",
-      "width": 1536,
-      "height": 1024
+      "width": 1774,
+      "height": 887
     },
     "images": [
       {
