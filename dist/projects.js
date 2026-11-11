@@ -54,6 +54,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         original.append(image);
         return original;
       }));
+      if (project.key === 'mama') {
+        const frame = document.createElement('iframe');
+        frame.className = 'mama-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Я — мама';
+        frame.src = './assets/cases/mama/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       pageLink.href = `./${project.page}`;
       if (link) {
         link.hidden = !project.behance;
