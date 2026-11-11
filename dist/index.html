@@ -200,11 +200,26 @@
       "@id": "https://interdiz.ru/#project-list",
       "name": "Проекты студии InterDIZ",
       "url": "https://interdiz.ru/#projects",
-      "numberOfItems": 10,
+      "numberOfItems": 11,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "@id": "https://interdiz.ru/case-ami.html#project",
+            "url": "https://interdiz.ru/case-ami.html",
+            "name": "AMI!",
+            "description": "Маленькие камеры. Большие моменты.",
+            "image": "https://interdiz.ru/assets/cases/ami/preview.webp",
+            "creator": {
+              "@id": "https://interdiz.ru/#organization"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-nos.html#project",
@@ -219,7 +234,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 2,
+          "position": 3,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-mama.html#project",
@@ -234,7 +249,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 3,
+          "position": 4,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-poplavok.html#project",
@@ -249,7 +264,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 4,
+          "position": 5,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-health.html#project",
@@ -264,7 +279,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 6,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-pierre-magnol.html#project",
@@ -279,7 +294,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 7,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-home30.html#project",
@@ -294,7 +309,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 7,
+          "position": 8,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-shogun-auto.html#project",
@@ -309,7 +324,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 8,
+          "position": 9,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-kyrilka.html#project",
@@ -324,7 +339,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 9,
+          "position": 10,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-ivan-grozny.html#project",
@@ -339,7 +354,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 10,
+          "position": 11,
           "item": {
             "@type": "CreativeWork",
             "@id": "https://interdiz.ru/case-divo-dental.html#project",
@@ -697,10 +712,18 @@
       </div>
       <div class="gallery-window" id="project-gallery" role="region" aria-label="Галерея проектов" tabindex="0">
         <div class="project-track">
+          <article class="project-card" data-project="ami">
+            <a class="project-image" data-open-project="ami" aria-label="Открыть проект AMI!" href="./case-ami.html">
+              <span class="project-preview"><img src="./assets/cases/ami/preview.webp" alt="Моментальная камера AMI! и персонаж Манго" width="1536" height="1024" loading="eager" decoding="async"><span class="project-badges"><span class="project-number">[ 01 / 11 ]</span></span></span>
+              <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Посмотреть проект ↗</span></span>
+            </a>
+            <div class="project-info"><div><h3>AMI!</h3><p>Маленькие камеры. Большие моменты.</p></div><div class="project-tags mono-meta"><span>ИНТЕРНЕТ-МАГАЗИН</span><span>WOOCOMMERCE / UX·UI</span></div></div>
+          </article>
+
           <!-- Project 01: NOS -->
           <article class="project-card" data-project="nos">
             <a class="project-image" data-open-project="nos" aria-label="Открыть проект NOS." href="./case-nos.html">
-              <span class="project-preview"><picture class="nos-cover"><source media="(prefers-reduced-motion: reduce)" srcset="./assets/cases/nos/preview.webp"><img src="./assets/cases/nos/preview.gif" data-nos-cover data-animated="./assets/cases/nos/preview.gif" data-still="./assets/cases/nos/preview.webp" alt="Анимация логотипа NOS. на тёмном фоне" width="705" height="470" loading="eager" decoding="async"></picture><span class="project-badges"><span class="project-number">[ 01 / 10 ]</span></span></span>
+              <span class="project-preview"><picture class="nos-cover"><source media="(prefers-reduced-motion: reduce)" srcset="./assets/cases/nos/preview.webp"><img src="./assets/cases/nos/preview.gif" data-nos-cover data-animated="./assets/cases/nos/preview.gif" data-still="./assets/cases/nos/preview.webp" alt="Анимация логотипа NOS. на тёмном фоне" width="705" height="470" loading="eager" decoding="async"></picture><span class="project-badges"><span class="project-number">[ 02 / 11 ]</span></span></span>
               <span class="project-open"><span class="desktop-only">СМОТРЕТЬ ПРОЕКТ ↗</span><span class="compact-only">Посмотреть проект ↗</span></span>
             </a>
             <div class="project-info"><div><h3>NOS.</h3><p>Ветеринария с вниманием к каждому.</p></div><div class="project-tags mono-meta"><span>ЛОГОТИП</span><span>САЙТ / UX·UI</span></div></div>
@@ -712,7 +735,7 @@
               <span class="project-preview">
                 <img src="./assets/mama.webp" alt="Мягкие объёмные формы и типографика проекта Я — мама" width="1920" height="1281" loading="eager" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 02 / 10 ]</span>
+                  <span class="project-number">[ 03 / 11 ]</span>
                   <span class="project-year mono-meta">2025</span>
                 </span>
               </span>
@@ -737,7 +760,7 @@
               <span class="project-preview">
                 <img src="./assets/poplavok.webp" alt="Сайт ресторана Поплавок на экране ноутбука" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 03 / 10 ]</span>
+                  <span class="project-number">[ 04 / 11 ]</span>
                   <span class="project-year mono-meta">2025</span>
                 </span>
               </span>
@@ -762,7 +785,7 @@
               <span class="project-preview">
                 <img src="./assets/health-culture.webp" alt="Фирменный стиль бренда Health Culture" width="1920" height="1280" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 04 / 10 ]</span>
+                  <span class="project-number">[ 05 / 11 ]</span>
                   <span class="project-year mono-meta">2024</span>
                 </span>
               </span>
@@ -786,7 +809,7 @@
               <span class="project-preview">
                 <img src="./assets/pierre-magnol.webp" alt="Pierre Magnol — премиальный цветочный бутик, где флористика рассматривается как форма искусства" width="1920" height="1281" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 05 / 10 ]</span>
+                  <span class="project-number">[ 06 / 11 ]</span>
                   <span class="project-year mono-meta">WEB</span>
                 </span>
               </span>
@@ -811,7 +834,7 @@
               <span class="project-preview">
                 <img src="./assets/home30.webp" alt="Городская роскошь в черно-оранжевых тонах: разработка веб-сайта хостела HOME30" width="1920" height="1281" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 06 / 10 ]</span>
+                  <span class="project-number">[ 07 / 11 ]</span>
                   <span class="project-year mono-meta">WEB</span>
                 </span>
               </span>
@@ -836,7 +859,7 @@
               <span class="project-preview">
                 <img src="./assets/shogun-auto.webp" alt="С Востока на весь мир — фирменный стиль Shogun Auto" width="1400" height="934" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 07 / 10 ]</span>
+                  <span class="project-number">[ 08 / 11 ]</span>
                   <span class="project-year mono-meta">BRAND</span>
                 </span>
               </span>
@@ -861,7 +884,7 @@
               <span class="project-preview">
                 <img src="./assets/kyrilka.webp" alt="Kyrilka — контрастный дизайн для современной цифровой витрины" width="1920" height="1226" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 08 / 10 ]</span>
+                  <span class="project-number">[ 09 / 11 ]</span>
                   <span class="project-year mono-meta">WEB</span>
                 </span>
               </span>
@@ -886,7 +909,7 @@
               <span class="project-preview">
                 <img src="./assets/ivan-grozny.webp" alt="Иван Грозный — когда история оживает: разработка ТВ-рекламы и афиш для регионального конкурса" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 09 / 10 ]</span>
+                  <span class="project-number">[ 10 / 11 ]</span>
                   <span class="project-year mono-meta">CAMPAIGN</span>
                 </span>
               </span>
@@ -911,7 +934,7 @@
               <span class="project-preview">
                 <img src="./assets/divo-dental.webp" alt="Divo Dental — разработка логотипа для современной стоматологии" width="2800" height="1868" loading="lazy" decoding="async">
                 <span class="project-badges">
-                  <span class="project-number">[ 10 / 10 ]</span>
+                  <span class="project-number">[ 11 / 11 ]</span>
                   <span class="project-year mono-meta">BRAND</span>
                 </span>
               </span>
@@ -933,7 +956,7 @@
       </div>
       <div class="gallery-footer">
         <div class="gallery-progress" aria-hidden="true"><span></span></div>
-        <span class="gallery-count solutions-count mono-meta compact-only"><span data-gallery-current>1</span><span> из 9</span></span>
+        <span class="gallery-count solutions-count mono-meta compact-only"><span data-gallery-current>1</span><span> из 11</span></span>
         <a class="gallery-all" href="./portfolio.html">Все проекты <span aria-hidden="true">↗</span></a>
         <div class="gallery-navigation">
           <p class="gallery-hint" aria-hidden="true">Листайте, чтобы увидеть больше</p>

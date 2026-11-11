@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 1);
+  assert.equal(projects.length, imported.projects.length + 2);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
@@ -96,6 +96,27 @@ test('NOS case links the animated cover and the full presentation', async () => 
   }
 });
 
+
+test('AMI case keeps the approved presentation and opens from both project lists', async () => {
+  const project = projects.find(project => project.key === 'ami');
+  assert.ok(project);
+  assert.deepEqual(project.categories, ['web']);
+  const page = await read(project.page);
+  const presentation = await read(project.presentation);
+  assert.match(page, /data-case-frame data-case-key="ami"/);
+  assert.match(page, /href="https:\/\/fotoami\.ru\/"/);
+  assert.match(presentation, /Наталья Груничева/);
+  assert.match(presentation, /WooCommerce/);
+  assert.doesNotMatch(presentation, /прототип|демонстрационная концепция/i);
+  for (const name of ['hero-snap-loop-hq.webp', 'site-scroll-hq.webp', 'mobile-scroll-hq.webp', 'mobile-catalog.png', 'mobile-product.png']) {
+    assert.ok(presentation.includes(`assets/${name}`), name);
+    assert.ok((await readFile(new URL(`assets/cases/ami/assets/${name}`, root))).length > 0);
+  }
+  assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
+  for (const file of ['index.html', 'portfolio.html']) {
+    assert.match(await read(file), /data-open-project="ami"[^>]+href="\.\/case-ami\.html"/);
+  }
+});
 
 test('embedded case resizes to its contents and releases its observer', () => {
   const originalObserver = globalThis.ResizeObserver;

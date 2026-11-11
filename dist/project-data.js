@@ -9,6 +9,54 @@ export const categoryLabels = {
 };
 export const projects = [
   {
+    "key": "ami",
+    "title": "AMI!",
+    "lines": [
+      "AMI!"
+    ],
+    "categories": [
+      "web"
+    ],
+    "sourceId": 11,
+    "description": "AMI! — дизайн и разработка работающего интернет-магазина моментальных камер на WordPress и WooCommerce.",
+    "stack": [
+      "Web-design",
+      "UX/UI",
+      "WordPress",
+      "WooCommerce"
+    ],
+    "behance": "",
+    "page": "case-ami.html",
+    "presentation": "assets/cases/ami/presentation.htm",
+    "preview": {
+      "src": "assets/cases/ami/preview.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    "images": [
+      {
+        "src": "assets/cases/ami/assets/hero-desktop.png",
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/ami/assets/campaign-mango.png",
+        "width": 1536,
+        "height": 1024
+      },
+      {
+        "src": "assets/cases/ami/assets/mobile-home.png",
+        "width": 400,
+        "height": 899
+      },
+      {
+        "src": "assets/cases/ami/assets/campaign-pink.png",
+        "width": 1536,
+        "height": 1024
+      }
+    ]
+  },
+  {
     "key": "pierre-magnol",
     "title": "Pierre Magnol",
     "lines": [
