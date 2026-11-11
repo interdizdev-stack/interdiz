@@ -21,6 +21,17 @@
 .project-directions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-block: 8px; color: var(--lime); font-size: 12px; }
 .project-card[id] { scroll-margin-top: 32px; }
 .mochi-meta-compact { display: none; }
+@media (max-width: 700px) {
+  html[data-theme] .project-dialog.project-case {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    border-radius: 0;
+    scrollbar-width: none;
+  }
+  .project-dialog.project-case::-webkit-scrollbar { display: none; }
+  .project-case .case-gallery { margin-inline: -20px; }
+}
 @media (max-width: 699px) {
   .case-page .case-intro > .section-kicker { top: 0; padding-bottom: 14px; }
   .case-page .case-presentation { margin-inline: 0; }
@@ -51,58 +62,6 @@
   .case-gallery:has(> .kyrilka-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .kyrilka-mobile-presentation { display: block; }
 }
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe.mama-mobile-presentation) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe.mama-mobile-presentation) { margin-inline: -20px; }
-  html[data-theme] .project-dialog.project-case:has(iframe.health-mobile-presentation) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe.health-mobile-presentation) { margin-inline: -20px; }
-  html[data-theme] .project-dialog.project-case:has(iframe.pierre-mobile-presentation) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe.pierre-mobile-presentation) { margin-inline: -20px; }
-  html[data-theme] .project-dialog.project-case:has(iframe.home30-mobile-presentation) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe.home30-mobile-presentation) { margin-inline: -20px; }
-  html[data-theme] .project-dialog.project-case:has(iframe.kyrilka-mobile-presentation) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe.kyrilka-mobile-presentation) { margin-inline: -20px; }
-}
-
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe[src$="/ami/presentation.htm"]),
-  html[data-theme] .project-dialog.project-case:has(iframe[src$="/mochi-mood/presentation.htm"]) {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-  }
-  .project-case .case-gallery:has(> iframe[src$="/ami/presentation.htm"]),
-  .project-case .case-gallery:has(> iframe[src$="/mochi-mood/presentation.htm"]) {
-    margin-inline: -20px;
-  }
-}
-
 @font-face {
   font-family: 'AMI Cover';
   src: url('./assets/cases/ami/assets/unbounded.ttf') format('truetype');
@@ -179,10 +138,6 @@ html[data-theme] .project-image .ami-cover {
   .case-gallery:has(> .shogun-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .shogun-mobile-presentation { display: block; }
 }
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe.shogun-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
-  .project-case .case-gallery:has(> iframe.shogun-mobile-presentation) { margin-inline: -20px; }
-}
 
 /* Mobile Ivan Grozny presentation; desktop retains the original sheets. */
 .ivan-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #090806; }
@@ -190,20 +145,12 @@ html[data-theme] .project-image .ami-cover {
   .case-gallery:has(> .ivan-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .ivan-mobile-presentation { display: block; }
 }
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe.ivan-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
-  .project-case .case-gallery:has(> iframe.ivan-mobile-presentation) { margin-inline: -20px; }
-}
 
 /* Mobile presentation for Divo Dental. */
 .divo-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #ebe9e5; }
 @media (max-width: 960px) {
   .case-gallery:has(> .divo-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .divo-mobile-presentation { display: block; }
-}
-@media (max-width: 699px) {
-  html[data-theme] .project-dialog.project-case:has(iframe.divo-mobile-presentation) { width: 100%; max-width: 100%; border: 0; border-radius: 0; }
-  .project-case .case-gallery:has(> iframe.divo-mobile-presentation) { margin-inline: -20px; }
 }
 
 /* VIAR: keep the real logo and caption clear of the project controls. */
