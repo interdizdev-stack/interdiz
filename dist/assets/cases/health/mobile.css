@@ -1,54 +1,77 @@
 @font-face {
   font-family: CaseText;
   src: url('../../inter-cyrillic.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
   font-display: swap;
 }
 @font-face {
   font-family: CaseText;
   src: url('../../inter-latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
   font-display: swap;
   unicode-range: U+0000-024F;
 }
 @font-face {
   font-family: CaseDisplay;
   src: url('BebasNeue-Bold.ttf') format('truetype');
+  font-style: normal;
   font-weight: 700;
   font-display: swap;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: #fdf4f7; color: #003b1a; font-family: CaseText, Arial, sans-serif; }
-main { overflow: hidden; }
-.pad { padding: 62px 7%; }
-.eyebrow { margin: 0 0 20px; font-size: 11px; font-weight: 700; letter-spacing: .1em; }
-h1, h2 { font-family: CaseDisplay, Arial, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .01em; line-height: 1.05; margin: 0 0 24px; overflow-wrap: normal; }
-h1 { font-size: clamp(34px, 10vw, 64px); }
-h2 { font-size: clamp(31px, 8.3vw, 58px); }
-h1 span, h2 span { color: #f42a8c; }
-p { font-size: 16px; line-height: 1.65; margin: 0; }
-.hero { padding: 30px 7% 55px; background: #fdf4f7; }
-.brand { width: 100%; aspect-ratio: 1.9; background: url('6.webp') center top / 100% auto no-repeat; margin: 20px auto 25px; }
-.hero p:last-child { max-width: 38ch; }
-.intro { background: #003b1a; color: #faf1f4; }
-.intro h2 span { color: #ff62a8; }
-.photo { display: block; width: 100%; height: auto; }
-.concept-lines { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-.concept-lines span { padding: 9px 12px; border: 1px solid #003b1a; border-radius: 30px; font-size: 10px; font-weight: 700; letter-spacing: .05em; }
-.visual { background: #f8d5e4; }
-.palette { display: flex; gap: 8px; margin-top: 28px; }
-.palette span { height: 50px; flex: 1; background: #003b1a; }
-.palette span:nth-child(2) { background: #008b39; }
-.palette span:nth-child(3) { background: #f42a8c; }
-.palette span:nth-child(4) { background: #faf1f4; }
-.logo-detail { width: 100%; aspect-ratio: 1.9; background: url('6.webp') center top / 100% auto no-repeat; margin: 30px 0; }
-.result { background: #003b1a; color: #faf1f4; }
-.result h2 span, footer h2 span { color: #ff62a8; }
-footer { background: #f42a8c; color: #003b1a; }
-footer h2 { margin-bottom: 0; }
-footer h2 span { color: #faf1f4; }
-.original { background: #f42a8c; padding: 0 7% 40px; }
-.original summary { cursor: pointer; padding: 16px 0; font-size: 14px; }
+html, body { width: 100%; margin: 0; background: #fdf4f7; }
+body { color: #003b1a; font-family: CaseText, Arial, sans-serif; }
+main { overflow: clip; }
+.art, .wordmark svg { display: block; width: 100%; height: auto; }
+.hero { background: #fdf4f7; border-top: 7px solid #f43191; }
+.hero-branches { position: relative; height: clamp(145px, 45vw, 300px); overflow: hidden; }
+.hero-branches svg { display: block; position: absolute; height: auto; }
+.branch-left { left: 0; top: 0; width: min(52%, 310px); }
+.branch-right { right: 0; top: 0; width: min(19%, 110px); }
+.features { display: grid; gap: 18px; padding: 8px 7% 32px; }
+.features > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: start; gap: 12px; }
+.features h2 { margin: 0; font: 700 clamp(17px, 4vw, 21px)/1 CaseDisplay, sans-serif; }
+.features p { margin: 0; font-size: clamp(12px, 3vw, 13px); font-weight: 600; line-height: 1.4; text-transform: uppercase; overflow-wrap: break-word; }
+.wordmark { padding: 0; margin: 0; font-size: 0; }
+.hero-statement { padding: 56px 6% 0; text-align: center; }
+.headline, .subhead, .section h2, .copy h3 { font-family: CaseDisplay, sans-serif; font-weight: 700; text-transform: uppercase; }
+.headline { margin: 0; font-size: clamp(24px, 6.3vw, 37px); line-height: 1.05; }
+.headline span, .section h2 span, .copy strong, .end-credit span { color: #f43191; }
+.subhead { margin: 12px 0 0; font-size: clamp(16px, 4.3vw, 21px); line-height: 1.2; }
+.intro-text, .copy { font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; line-height: 1.48; text-transform: uppercase; }
+.intro-text { max-width: 34rem; padding: 60px 7% 24px; margin: 0 auto; }
+.intro-text p, .copy p { margin: 0; }
+.intro-text p + p, .copy p + p { margin-top: 1em; }
+.grass { margin: 0; }
+.section { background: #fdf4f7; }
+.section h2 { margin: 0; font-size: clamp(25px, 6.7vw, 42px); line-height: 1.1; text-align: center; overflow-wrap: anywhere; }
+.positioning { padding-top: 60px; }
+.positioning > h2, .positioning > .subhead, .visual > h2, .logo-section > h2 { padding-inline: 6%; text-align: center; }
+.positioning .inset-photo { margin-top: 42px; }
+.inset-photo { width: 68%; margin-left: 6%; }
+.copy { max-width: 36rem; padding: 35px 7% 58px; margin-inline: auto; }
+.copy h3 { margin: 26px 0 10px; font-size: clamp(19px, 4.8vw, 24px); line-height: 1.15; }
+.copy h3:first-child { margin-top: 0; }
+.copy ul { padding-left: 1.1em; margin: 0 0 1em; }
+.copy li + li { margin-top: .25em; }
+.visual .plant { margin: 0 0 28px; }
+.visual > .copy { padding-bottom: 32px; }
+.product-grid { display: grid; grid-template-columns: 58% 1fr; align-items: end; gap: 8%; padding: 0 6% 64px; }
+.product-small { margin-bottom: 0; }
+.logo-section { padding-top: 10px; }
+.logo { width: 90%; margin: 44px auto 0; }
+.logo-section .copy { padding-bottom: 42px; }
+.logo-section .inset-photo { padding-bottom: 44px; }
+.graphic-section .monogram { width: 65%; margin: 0 4% 0 auto; }
+.graphic-section .copy { padding-top: 30px; }
+.result .copy { padding-block: 58px; }
+.end { position: relative; background: #fdf4f7; }
+.end-credit { padding: 40px 8% 0; text-align: right; font-size: 12px; line-height: 1.6; font-weight: 700; }
+.end-credit span { font: 700 21px CaseDisplay, sans-serif; }
+.original { background: #fdf4f7; padding: 0 6% 30px; }
+.original summary { cursor: pointer; padding: 16px 0; color: #003b1a; font-size: 14px; }
+.original summary:focus-visible { outline: 2px solid #003b1a; outline-offset: 3px; }
 .original img { display: block; width: 100%; height: auto; }
-@media (min-width: 600px) {
-  .pad, .hero { padding-inline: 10%; }
-  .brand, .logo-detail { max-width: 600px; }
-}
+@media (max-width: 360px) { .features > div { grid-template-columns: 78px minmax(0, 1fr); } }
