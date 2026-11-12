@@ -90,9 +90,6 @@ summary:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .end { position: relative; background: #fdf4f7; }
 .end-credit { padding: 40px 8% 0; text-align: right; font-size: 12px; line-height: 1.6; font-weight: 700; }
 .end-credit span { font: 700 21px CaseDisplay, sans-serif; }
-.original { background: #fdf4f7; padding: 0 6% 30px; }
-.original summary { cursor: pointer; padding: 16px 0; color: #003b1a; font-size: 14px; }
-.original img { display: block; width: 100%; height: auto; }
 @media (min-width: 600px) {
   .positioning {
     display: grid;
