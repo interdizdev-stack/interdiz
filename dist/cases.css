@@ -97,6 +97,7 @@ html[data-theme] .project-case-toolbar .case-stack {
 .nos-cover { display:block; width:100%; height:100%; }
 
 .mama-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #fcf1e5; }
+.poplavok-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #e6dce4; }
 .health-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #faf1f4; }
 .pierre-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #fdfcfa; }
 .home30-mobile-presentation { display: none; width: 100%; min-height: 80vh; border: 0; background: #050505; }
@@ -104,6 +105,8 @@ html[data-theme] .project-case-toolbar .case-stack {
 @media (max-width: 960px) {
   .case-gallery:has(> .mama-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .mama-mobile-presentation { display: block; }
+  .case-gallery:has(> .poplavok-mobile-presentation) > .case-sheet { display: none; }
+  .case-gallery > .poplavok-mobile-presentation { display: block; }
   .case-gallery:has(> .health-mobile-presentation) > .case-sheet { display: none; }
   .case-gallery > .health-mobile-presentation { display: block; }
   .case-gallery:has(> .pierre-mobile-presentation) > .case-sheet { display: none; }

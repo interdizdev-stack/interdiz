@@ -65,6 +65,15 @@ export function setupProjectDialog({ onOpen } = {}) {
         disposePresentation = setupCasePresentation(frame);
         gallery.append(frame);
       }
+      if (project.key === 'poplavok') {
+        const frame = document.createElement('iframe');
+        frame.className = 'poplavok-mobile-presentation';
+        frame.title = 'Мобильная презентация проекта Поплавок';
+        frame.src = './assets/cases/poplavok/mobile.htm';
+        frame.loading = 'lazy';
+        disposePresentation = setupCasePresentation(frame);
+        gallery.append(frame);
+      }
       if (project.key === 'health') {
         const frame = document.createElement('iframe');
         frame.className = 'health-mobile-presentation';
