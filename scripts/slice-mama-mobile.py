@@ -1,4 +1,4 @@
-"""Rebuild the mobile case artwork from the numbered desktop sheets (requires Pillow).
+"""Rebuild the mobile case artwork and the desktop ending from the original sheets (requires Pillow).
 
 Coordinates below are original pixels, with the right and bottom edges exclusive.
 Join adjacent sheets before cropping so photographs and lettering keep one scale.
@@ -11,6 +11,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1] / "dist/assets/cases/mama"
 OUT = ROOT / "mobile-art"
+ENDING_BOTTOM = 545  # End of the closing statement on sheet 15, before the credits.
 
 
 @lru_cache
@@ -57,5 +58,8 @@ if __name__ == "__main__":
     for i, (l, r) in enumerate([(69, 415), (424, 770), (779, 1125)], 1):
         region(f"card-{i}", 13, 14, l, 600, r, 42)
         region(f"card-{i + 3}", 14, 14, l, 65, r, 803)
-    region("care", 14, 15, 0, 1020, 1200, 545)
-    region("thanks", 15, 15, 0, 879, 1200, 1296)
+    region("care", 14, 15, 0, 1020, 1200, ENDING_BOTTOM)
+    published = ROOT / "presentation"
+    published.mkdir(exist_ok=True)
+    last = sheet(15)
+    last.crop((0, 0, last.width, ENDING_BOTTOM)).save(published / "15.webp", lossless=True)

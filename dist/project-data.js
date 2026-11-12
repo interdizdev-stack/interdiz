@@ -676,9 +676,9 @@ export const projects = [
         "height": 1297
       },
       {
-        "src": "assets/cases/mama/15.webp",
+        "src": "assets/cases/mama/presentation/15.webp",
         "width": 1200,
-        "height": 1296
+        "height": 545
       }
     ]
   },

@@ -66,6 +66,3 @@ img { display: block; width: 100%; height: auto; }
   overscroll-behavior-x: contain;
 }
 .promo-track img { width: min(81vw, 346px); flex: none; scroll-snap-align: start; }
-.credits { display: grid; grid-template-columns: auto auto; justify-content: center; gap: .25em 1em; margin: 2em var(--inset); font-size: .875rem; }
-.credits dt { font-weight: 600; }
-.credits dd { margin: 0; }
