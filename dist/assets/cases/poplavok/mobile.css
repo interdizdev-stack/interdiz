@@ -47,7 +47,11 @@ main { overflow: clip; }
 .prose p { margin: 0; }
 .prose p + p { margin-top: 1em; }
 .closing { background: #e6dce4; padding: 0 16px 28px; }
-.closing-art { display: block; width: 100%; height: auto; }
+.closing-line { display: block; height: auto; margin-inline: auto; }
+.closing-line--first { width: calc(120% * 282 / 650); }
+.closing-line--second { width: calc(120% * 345 / 650); }
+.closing-line--third { width: calc(120% * 540 / 650); }
+.closing-line--fourth { width: calc(120% * 190 / 650); }
 @media (min-width: 700px) {
   .copy { padding: 42px 8% 58px; }
 }
