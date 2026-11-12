@@ -31,6 +31,10 @@ main { overflow: clip; }
   width: min(120%, 504px);
   font-size: 0;
 }
+/* All artwork is scaled from the same original canvas, not stretched by word length. */
+.copy h2 {
+  width: min(calc(120% * var(--heading-ratio)), calc(504px * var(--heading-ratio)));
+}
 .heading { display: block; width: 100%; height: auto; }
 .heading-split { display: none; margin-inline: auto; }
 @media (max-width: 480px) {
