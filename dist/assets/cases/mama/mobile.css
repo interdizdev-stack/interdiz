@@ -1,15 +1,8 @@
 @font-face {
-  font-family: CaseSans;
-  src: url('../../inter-cyrillic.woff2') format('woff2');
-  font-weight: 100 900;
+  font-family: 'Mama Sans';
+  src: url('../ami/assets/manrope.ttf') format('truetype');
+  font-weight: 200 800;
   font-display: swap;
-}
-@font-face {
-  font-family: CaseSans;
-  src: url('../../inter-latin.woff2') format('woff2');
-  font-weight: 100 900;
-  font-display: swap;
-  unicode-range: U+0000-024F;
 }
 * { box-sizing: border-box; }
 body {
@@ -18,7 +11,7 @@ body {
   margin: 0;
   background: #fff6e9;
   color: #512e2c;
-  font: 400 clamp(16px, 4vw, 18px)/1.55 CaseSans, Arial, sans-serif;
+  font: 400 1rem/1.55 'Mama Sans', Arial, sans-serif;
 }
 h1, h2 { margin: 0; }
 img { display: block; width: 100%; height: auto; }
@@ -26,6 +19,10 @@ img { display: block; width: 100%; height: auto; }
   max-width: 42rem;
   margin-inline: auto;
   padding: 1rem var(--inset) var(--chapter-space);
+  font-size: clamp(.875rem, calc(.8125rem + .3125vw), .9375rem);
+  font-weight: 320;
+  line-height: 1.65;
+  color: #5d443d;
 }
 .copy h2 { max-width: 27rem; margin-bottom: 1.4rem; }
 .copy p, .copy ul { margin: 0; }
