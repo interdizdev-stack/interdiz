@@ -49,7 +49,7 @@ main { overflow: clip; }
 .closing { background: #e6dce4; padding: 0 16px 28px; }
 .closing-line { display: block; height: auto; margin-inline: auto; }
 .closing-line--first { width: calc(144% * 282 / 650); }
-.closing-line--second { width: calc(144% * 345 / 650); margin-top: calc(-144% * 12 / 650); }
+.closing-line--second { width: calc(144% * 345 / 650); }
 .closing-line--third-a { width: calc(144% * 278 / 650); }
 .closing-line--third-b { width: calc(144% * 262 / 650); }
 .closing-line--fourth { width: calc(144% * 190 / 650); }
