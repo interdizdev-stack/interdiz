@@ -23,8 +23,22 @@ main { overflow: clip; }
   color: #352c33;
   text-align: center;
 }
-.copy h1, .copy h2 { margin: 0 auto 26px; width: min(100%, 420px); font-size: 0; }
+.copy h1, .copy h2 {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 0 26px;
+  width: min(120%, 504px);
+  font-size: 0;
+}
 .heading { display: block; width: 100%; height: auto; }
+.heading-split { display: none; margin-inline: auto; }
+@media (max-width: 480px) {
+  .heading-full { display: none; }
+  .heading-split { display: block; }
+  .heading-split-first { width: 67.35%; }
+  .heading-split-second { width: 32.65%; }
+}
 .prose { max-width: 42rem; margin: auto; font: 600 clamp(18px, 4.2vw, 22px)/1.35 'Case Serif', Georgia, serif; }
 .prose p { margin: 0; }
 .prose p + p { margin-top: 1em; }
