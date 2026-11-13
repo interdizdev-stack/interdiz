@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0c0e0c">
+    <meta name="description" content="CHAT — портфолио-кейс многосайтовой системы общения с клиентами. Виджет, рабочее место команды и архитектура реального времени.">
+    <title>CHAT — пространство диалога / Product case</title>
+    <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/oswald.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="case.css">
+    <script src="case.js" defer></script>
+  </head>
+  <body>
+    <div data-case-content>
+      <a class="skip" href="#about">Перейти к кейсу</a>
+      <header class="masthead"><a class="identity" href="#top" aria-label="CHAT — начало кейса"><span class="brand-mark" aria-hidden="true"></span> INTERDIZ<span class="slash">/</span> DIGITAL PRODUCTS</a>
+        <nav aria-label="Разделы кейса"><a href="#workspace">Интерфейс</a><a href="#system">Система</a><a href="#result">Результат <span aria-hidden="true">↗</span></a></nav></header>
+      <main id="top">
+        <section class="hero">
+          <div class="hero-meta"><span>PRODUCT DESIGN & DEVELOPMENT</span><span>WEB APPLICATION · 2026</span></div>
+          <div class="hero-title">
+            <h1>CHAT<span class="title-dot">.</span></h1>
+            <p>Одно пространство.<br>Каждый диалог.</p></div>
+          <div class="hero-bottom">
+            <p>Система общения с клиентами:<br>от первого сообщения до ответа команды.</p><a href="#about" class="round-link" aria-label="Смотреть кейс">↓</a><span class="hero-index">ПОРТФОЛИО / 01</span></div>
+          <div class="hero-stage">
+            <div class="browser-bar">
+              <div class="window-dots"><i></i><i></i><i></i></div><span>CHAT / рабочее пространство</span><span class="live">Демо-данные</span></div><img class="product-shot" src="assets/application-dark.png" width="1280" height="720" alt="Рабочее пространство чата в тёмной теме, снимок QA-среды"></div>
+          <div class="hero-foot"><span>WIDGET + OPERATOR WORKSPACE + MULTI-SITE</span><span>DESIGNED TO KEEP THE CONVERSATION GOING ↗</span></div>
+        </section>
+
+        <section class="about light pad" id="about">
+          <div class="section-line"><span>01 / КОНТЕКСТ</span><span>ОТ РАЗРОЗНЕННЫХ СООБЩЕНИЙ К ОБЩЕЙ РАБОТЕ</span></div>
+          <div class="editorial">
+            <h2>Клиент пишет.<br>Команда подхватывает.</h2>
+            <div class="body-copy">
+              <p>У бизнеса несколько сайтов и каналов связи. У клиента — один вопрос. Чат объединяет обращения в рабочем пространстве конкретного сайта, где команда видит историю и отвечает вместе.</p>
+              <p>Задача проекта — связать лёгкий встраиваемый виджет, удобный интерфейс операторов и надёжное хранение сообщений. С понятными правами доступа и установкой backend на обычный PHP-хостинг.</p></div></div>
+          <dl class="project-facts">
+            <div><dt>Продукт</dt><dd>Многосайтовая чат-система</dd></div>
+            <div><dt>Объём работы</dt><dd>Архитектура · UX/UI · разработка</dd></div>
+            <div><dt>Основа интерфейса</dt><dd>Brand UI / UIKIT владельца</dd></div></dl>
+          <div class="problem-solution">
+            <div><span class="tiny">ЗАДАЧА</span>
+              <h3>Не потерять контекст.</h3>
+              <p>Обращения из разных источников, несколько операторов и возвращающиеся посетители требуют общей истории и понятного состояния диалога.</p></div>
+            <div><span class="tiny">РЕШЕНИЕ</span>
+              <h3>Сохранить разговор целиком.</h3>
+              <p>Единая очередь сайта, участие нескольких менеджеров, имена отправителей и восстановление истории после потери связи.</p></div></div>
+        </section>
+
+        <section class="channels pad">
+          <div class="section-line"><span>02 / КАНАЛЫ</span><span>РАЗНЫЕ ТОЧКИ ВХОДА. ОБЩИЙ КОНТЕКСТ.</span></div>
+          <h2>Ближе к клиенту.<br><span class="muted">Где бы он ни написал.</span></h2>
+          <div class="channel-flow">
+            <div class="channel-list"><span><b>↗</b> Виджет на сайте</span><span><b>↗</b> Telegram</span><span><b>↗</b> MAX</span><span><b>↗</b> VK</span><span><b>↗</b> Авито</span></div>
+            <div class="flow-connector" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="inbox-object"><span class="brand-mark" aria-hidden="true"></span><strong>Одна очередь.<br>Вся команда.</strong><span class="tiny">В ПРЕДЕЛАХ СВОЕГО САЙТА</span></div></div>
+          <div class="split-note">
+            <p>Источник обращения остаётся видимым в списке. Оператор читает историю и отвечает из той же переписки.</p>
+            <p class="muted">Внешние каналы подключаются отдельно. Доступные вложения и состояния доставки зависят от API канала.</p></div>
+        </section>
+
+        <section class="workspace-section light pad" id="workspace">
+          <div class="section-line"><span>03 / РАБОЧЕЕ ПРОСТРАНСТВО</span><span>МЕНЬШЕ ПОИСКА. БОЛЬШЕ РАЗГОВОРА.</span></div>
+          <div class="section-heading">
+            <h2>Всё, что нужно<br>для следующего ответа.</h2>
+            <div class="theme-picker" hidden role="group" aria-label="Тема демонстрационного интерфейса">
+              <button type="button" data-theme-choice="dark" aria-pressed="true">Тёмная</button>
+              <button type="button" data-theme-choice="light" aria-pressed="false">Светлая</button></div></div>
+          <div class="workspace-frame"><img class="product-shot" id="theme-workspace" src="assets/application-dark.png" width="1280" height="720" alt="Рабочее пространство чата в тёмной теме, снимок QA-среды"></div>
+          <div class="annotations">
+            <div><span>01</span>
+              <h3>Понятная очередь</h3>
+              <p>Фильтры, поиск и непрочитанные помогают ориентироваться в обращениях.</p></div>
+            <div><span>02</span>
+              <h3>Фокус на переписке</h3>
+              <p>История, вложения и имена операторов собраны в одной переписке.</p></div>
+            <div><span>03</span>
+              <h3>Контекст по запросу</h3>
+              <p>Контакты и участники помогают разобраться в контексте обращения.</p></div></div>
+          <p class="caption">Снимки работающего приложения в QA-среде от 11 ноября 2026 года. Все данные синтетические; фотография номера создана с помощью ИИ.</p>
+        </section>
+
+        <section class="widget-section pad">
+          <div class="section-line"><span>04 / ВИДЖЕТ И МОБИЛЬНЫЙ СЦЕНАРИЙ</span><span>ОДИН ПРОДУКТ. ДВЕ СТОРОНЫ ДИАЛОГА.</span></div>
+          <div class="mobile-layout">
+            <div class="mobile-copy">
+              <h2>Начать легко.<br>Продолжить —<br><em>где удобно.</em></h2>
+              <p>Посетитель пишет с сайта. Менеджер отвечает с компьютера или телефона. История остаётся общей.</p>
+              <div class="detail-row"><span>Виджет</span>
+                <p>Встраивается скриптом. Светлая, тёмная и системная тема; палитра для каждого сайта.</p></div>
+              <div class="detail-row"><span>Телефон</span>
+                <p>Переход от списка к переписке, доступные действия и отдельная кнопка отправки.</p></div></div>
+            <div class="device-pair">
+              <figure class="device-image widget-image">
+                <div class="widget-crop"><img src="assets/widget-light.png" width="1280" height="720" alt="Светлый виджет на тестовом сайте"></div>
+                <figcaption>Виджет на сайте · QA, 11 ноября</figcaption></figure>
+              <figure class="device-image mobile-image"><img src="assets/application-mobile.png" width="390" height="843" alt="Рабочая панель оператора на мобильном экране">
+                <figcaption>Панель оператора · QA, 11 ноября</figcaption></figure></div></div>
+          <p class="caption">Снимки работающего виджета и панели оператора на синтетических данных. Виджет изолирован от CSS сайта через Shadow DOM.</p>
+        </section>
+
+        <section class="system light pad" id="system">
+          <div class="section-line"><span>05 / АРХИТЕКТУРА</span><span>НАДЁЖНОСТЬ ЗА ПРЕДЕЛАМИ ЭКРАНА</span></div>
+          <div class="editorial">
+            <h2>Связь может пропасть.<br>История — остаться.</h2>
+            <p class="body-copy">PHP и MySQL хранят сообщения и управляют доступом. Node.js передаёт события в реальном времени. После переподключения клиенты восстанавливают историю из backend.</p></div>
+          <div class="architecture" aria-label="Виджет и панель обращаются к PHP API для хранения и к Node.js для доставки событий; Node.js сохраняет сообщения через PHP; MySQL — источник истины">
+            <div class="architecture-clients">
+              <div><span class="tiny">CLIENT</span><strong>Виджет</strong><small>Сайт посетителя</small></div>
+              <div><span class="tiny">CLIENT</span><strong>Панель</strong><small>Команда сайта</small></div></div>
+            <div class="arch-arrow" aria-hidden="true">↔</div>
+            <div class="architecture-services">
+              <div><span class="tiny">PERSISTENCE & ACCESS</span><strong>PHP / API</strong><small>Права · история · файлы</small></div><span class="service-link">↑ Сохранение через PHP</span>
+              <div class="realtime"><span class="tiny">REALTIME TRANSPORT</span><strong>Node.js / WebSocket</strong><small>События · соединения · доставка</small></div></div>
+            <div class="arch-arrow" aria-hidden="true">↔</div>
+            <div class="database"><span class="tiny">SOURCE OF TRUTH</span><strong>MySQL</strong><small>Сообщения и метаданные</small></div></div>
+          <div class="engineering-notes">
+            <div>
+              <h3>Повтор без дублей</h3>
+              <p>Ключи идемпотентности защищают отправку при повторных запросах.</p></div>
+            <div>
+              <h3>Защищённые вложения</h3>
+              <p>Файлы выдаёт PHP после проверки прав. В базе хранятся метаданные.</p></div>
+            <div>
+              <h3>Гибкое размещение</h3>
+              <p>Панель и API — на PHP/MySQL-хостинге. Realtime — отдельный Node.js-сервис.</p></div></div>
+          <div class="roles">
+            <h3>У каждого —<br>своя зона доступа.</h3>
+            <dl>
+              <div><dt>super_admin</dt><dd>Создаёт сайты и назначает администраторов. По умолчанию не читает переписки клиентов.</dd></div>
+              <div><dt>site_admin</dt><dd>Управляет своим сайтом и его командой. Видит переписки этого сайта.</dd></div>
+              <div><dt>manager</dt><dd>Читает и ведёт диалоги только своего сайта. В одной переписке могут участвовать несколько менеджеров.</dd></div></dl></div>
+        </section>
+
+        <section class="design-system pad">
+          <div class="section-line"><span>06 / ВИЗУАЛЬНЫЙ ЯЗЫК</span><span>BRAND UI 1.5.2 / OWNER’S UIKIT</span></div>
+          <div class="type-layout">
+            <h2>Тихий интерфейс.<br><span class="lime">Заметное действие.</span></h2>
+            <div class="type-specimen"><span class="tiny">MANROPE / UI TYPEFACE</span><strong>Аа Bb 012</strong>
+              <p>Привет. Давайте начнём разговор.</p><span class="alphabet">АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span></div></div>
+          <div class="swatches">
+            <div class="swatch lime-swatch"><span>ACCENT</span><strong>#C1F000</strong></div>
+            <div class="swatch ink-swatch"><span>INK</span><strong>#090A0A</strong></div>
+            <div class="swatch graphite-swatch"><span>GRAPHITE</span><strong>#292C2C</strong></div>
+            <div class="swatch white-swatch"><span>WHITE</span><strong>#FFFFFF</strong></div></div>
+          <div class="system-detail">
+            <p>Лайм выделяет действие и выбранный раздел. Нейтральные поверхности оставляют внимание тексту. Светлая и тёмная темы используют общие токены.</p>
+            <p>В интерфейсе — Manrope, радиусы 4 / 6 / 8 px и сенсорные цели от 44 px. Для пузырьков сообщений — 16 px. Крупный Oswald используется только в оформлении кейса.</p></div></section>
+
+        <section class="evidence light pad">
+          <div class="section-line"><span>07 / РЕАЛЬНОЕ ПРИЛОЖЕНИЕ</span><span>СКРИНШОТЫ, А НЕ ТОЛЬКО МАКЕТЫ</span></div>
+          <div class="section-heading">
+            <h2>За подачей —<br>работающая система.</h2>
+            <p>Снимки локальной QA-среды от 11 ноября 2026 года. Переписка синтетическая, фотография номера создана с помощью ИИ.</p></div>
+          <div class="evidence-grid"><a class="screenshot-button" target="_blank" rel="noopener" href="assets/application-dark.png" data-title="Работающее приложение · тёмная тема · QA, 11 ноября 2026"><img src="assets/application-dark.png" width="1280" height="720" alt="Реальная панель операторов в тёмной теме: список диалогов, переписка и сведения о посетителе" loading="lazy"><span>Тёмная тема <b aria-hidden="true">↗</b></span></a><a class="screenshot-button" target="_blank" rel="noopener" href="assets/application-light.png" data-title="Работающее приложение · светлая тема · QA, 11 ноября 2026"><img src="assets/application-light.png" width="1280" height="720" alt="Реальная панель операторов в светлой теме" loading="lazy"><span>Светлая тема <b aria-hidden="true">↗</b></span></a></div>
+          <p class="caption">Нажмите на снимок, чтобы рассмотреть его в полном размере.</p></section>
+
+        <section class="result pad" id="result">
+          <div class="section-line"><span>08 / РЕЗУЛЬТАТ</span><span>ПРОДУКТ ОТ ПЕРВОГО КАСАНИЯ ДО ИСТОРИИ</span></div>
+          <h2>Разговор продолжается.<br><span class="muted">Система держит контекст.</span></h2>
+          <div class="result-content">
+            <p>Создана связная система: встраиваемый виджет, рабочее место команды, подключаемые каналы и backend с разделением доступа по сайтам.</p>
+            <ul><li>Общая история и несколько менеджеров в диалоге</li><li>Переподключение, повторы и восстановление сообщений</li><li>Светлая и тёмная темы на UIKIT владельца</li><li>Отдельные права платформы, сайта и оператора</li></ul></div>
+          <p class="result-note">Кейс описывает реализованные сценарии и архитектуру проекта. Бизнес-метрики и рост конверсии не заявляются: измерения для этого кейса не проводились.</p>
+          <div class="closing"><span class="brand-mark" aria-hidden="true"></span><strong>Спасибо<br>за внимание.</strong><a href="#top" aria-label="Вернуться к началу кейса">↑</a></div>
+          <div class="section-line footer-line"><span>INTERDIZ / CHAT</span><span>PRODUCT DESIGN & DEVELOPMENT · 2026</span></div></section>
+      </main>
+    </div>
+    <template id="screenshot-viewer">
+      <dialog class="chat-image-viewer" aria-label="Просмотр снимка">
+        <link rel="stylesheet" href="viewer.css">
+        <div class="viewer-bar">
+          <p></p>
+          <a target="_blank" rel="noopener">Оригинал ↗</a>
+          <form method="dialog">
+            <button aria-label="Закрыть изображение" autofocus>×</button></form>
+        </div>
+        <img alt="">
+      </dialog>
+    </template>
+  </body>
+</html>

@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 5);
+  assert.equal(projects.length, imported.projects.length + 6);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
@@ -69,6 +69,27 @@ test('114 local images match the imported originals byte for byte', async () => 
     assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256, asset.file);
     assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
     assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  }
+});
+
+test('CHAT opens one responsive presentation with its original typefaces from both galleries', async () => {
+  const project = projects.find(item => item.key === 'chat');
+  assert.deepEqual(project.categories, ['automation']);
+  const page = await read(project.page);
+  assert.ok(page.includes(`data-case-key="chat" src="./${project.presentation}"`));
+  assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
+  for (const file of ['index.html', 'portfolio.html']) {
+    assert.match(await read(file), /data-open-project="chat"[^>]+href="\.\/case-chat\.html"/);
+  }
+  const presentation = await read(project.presentation);
+  assert.match(presentation, /data-case-content/);
+  assert.equal((presentation.match(/<section\b/g) || []).length, 9);
+  const styles = await read('assets/cases/chat/case.css');
+  for (const family of ['manrope', 'oswald']) {
+    const font = `assets/${family}.woff2`;
+    assert.ok(styles.includes(`url('${font}')`));
+    const bytes = await readFile(new URL(`assets/cases/chat/${font}`, root));
+    assert.equal(bytes.toString('ascii', 0, 4), 'wOF2');
   }
 });
 

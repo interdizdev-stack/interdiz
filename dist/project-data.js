@@ -1025,5 +1025,54 @@ export const projects = [
         "height": 811
       }
     ]
+  },
+  {
+    "key": "chat",
+    "title": "CHAT",
+    "lines": [
+      "CHAT"
+    ],
+    "categories": [
+      "automation"
+    ],
+    "sourceId": 15,
+    "description": "CHAT — система общения с клиентами для нескольких сайтов. Виджет и рабочее место операторов объединяют обращения и сохраняют историю переписки.",
+    "stack": [
+      "UX/UI",
+      "PHP",
+      "MySQL",
+      "Node.js",
+      "WebSocket"
+    ],
+    "behance": "",
+    "page": "case-chat.html",
+    "presentation": "assets/cases/chat/presentation.htm",
+    "preview": {
+      "src": "assets/cases/chat/preview.webp",
+      "width": 808,
+      "height": 632
+    },
+    "images": [
+      {
+        "src": "assets/cases/chat/assets/application-dark.png",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/cases/chat/assets/widget-light.png",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/cases/chat/assets/application-mobile.png",
+        "width": 390,
+        "height": 843
+      },
+      {
+        "src": "assets/cases/chat/assets/application-light.png",
+        "width": 1280,
+        "height": 720
+      }
+    ]
   }
 ];

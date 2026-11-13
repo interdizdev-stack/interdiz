@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "CHAT Manrope";
+  src: url("assets/manrope.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+.chat-image-viewer {
+  position: fixed;
+  inset: 0;
+  width: min(96vw, 1280px);
+  max-height: 94dvh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #59614f;
+  border-radius: 8px;
+  background: #101211;
+  color: #fff;
+  font: 500 13px/1.45 "CHAT Manrope", sans-serif;
+}
+.chat-image-viewer::backdrop { background: #000d; }
+.chat-image-viewer .viewer-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+}
+.chat-image-viewer p { flex: 1; margin: 0; }
+.chat-image-viewer a { color: #c1f000; white-space: nowrap; }
+.chat-image-viewer form { margin: 0; }
+.chat-image-viewer button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #59614f;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 25px;
+  cursor: pointer;
+}
+.chat-image-viewer img { display: block; width: 100%; height: auto; }

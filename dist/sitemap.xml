@@ -16,6 +16,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/portfolio.html</loc>
@@ -33,6 +34,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/ivan-grozny.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/divo-dental.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/articles.html</loc>
@@ -235,5 +237,12 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/desktop-catalog.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/desktop-builder.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mochi-mood/assets/screens/mobile-home.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/case-chat.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/assets/application-dark.png</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/assets/widget-light.png</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/assets/application-mobile.png</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/chat/assets/application-light.png</image:loc></image:image>
   </url>
 </urlset>
