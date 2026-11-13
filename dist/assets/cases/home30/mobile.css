@@ -27,17 +27,20 @@ body {
   margin: 0;
   background: #000;
   color: #fff;
-  font: 400 clamp(16px, 2.5vw, 20px)/1.48 Montserrat, sans-serif;
+  font: 400 clamp(14px, 2.2vw, 18px)/1.48 Montserrat, sans-serif;
 }
 
 h1, h2, h3, p, ul, dl, dd { margin: 0; }
 svg, .original img { display: block; width: 100%; height: auto; }
 main { display: flow-root; }
 section, footer { margin-block: var(--space); }
-header + section { margin-top: 0; }
+section { margin-top: calc(var(--space) + 40px); }
+header + section { margin-top: 40px; }
 .spread, .product, footer, .original { padding-inline: var(--gutter); }
 .spread { display: grid; align-items: start; gap: 1.15rem; }
-.spread + .spread, section > svg, section > svg + .spread { margin-top: var(--space); }
+.spread + .spread { margin-top: calc(var(--space) + 40px); }
+section > svg, section > svg + .spread { margin-top: var(--space); }
+.brand-logo { width: calc(100% - 20px); margin-inline: 10px; }
 .copy { max-width: 58ch; }
 .copy > * + p { margin-top: 1em; }
 ul { padding: 0; list-style: none; }
