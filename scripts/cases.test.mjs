@@ -74,8 +74,11 @@ test('114 local images match the imported originals byte for byte', async () => 
 
 test('CHAT opens one responsive presentation with its original typefaces from both galleries', async () => {
   const project = projects.find(item => item.key === 'chat');
-  assert.deepEqual(project.categories, ['automation']);
+  assert.deepEqual(project.categories, ['automation', 'ai']);
   const page = await read(project.page);
+  for (const category of project.categories) {
+    assert.ok(page.includes(`href="./portfolio.html?category=${category}#portfolio-catalog"`));
+  }
   assert.ok(page.includes(`data-case-key="chat" src="./${project.presentation}"`));
   assert.deepEqual(extractCaseImages(page).map(image => image.contentUrl), project.images.map(image => absolute(image.src)));
   for (const file of ['index.html', 'portfolio.html']) {

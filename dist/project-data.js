@@ -1033,7 +1033,8 @@ export const projects = [
       "CHAT"
     ],
     "categories": [
-      "automation"
+      "automation",
+      "ai"
     ],
     "sourceId": 15,
     "description": "CHAT — система общения с клиентами для нескольких сайтов. Виджет и рабочее место операторов объединяют обращения и сохраняют историю переписки.",
