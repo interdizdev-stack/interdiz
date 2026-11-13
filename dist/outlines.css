@@ -1,3 +1,5 @@
+@import url("./quick-home.css");
+
 /* Shared two-pixel outlines for both themes and all screen sizes. */
 :root { --transparent-button-outline-width: var(--outline-width); }
 
@@ -213,72 +215,6 @@ html[data-theme="dark"] .footer-bottom .wordmark { color: #fff; }
 }
 @media (max-width: 600px) {
   .footer-bottom .footer-copyright { align-self: center; text-align: center; }
-}
-
-/* A fixed shortcut back to the first screen beside the display controls. */
-.quick-home {
-  --quick-home-size: 45.738px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  width: var(--quick-home-size);
-  height: var(--quick-home-size);
-  flex: none;
-  border-radius: 50%;
-  background: conic-gradient(var(--lime) var(--page-progress, 0%), var(--line-strong) 0), var(--bg);
-  color: var(--lime);
-  border: 0;
-  font-size: 27.951px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1;
-}
-.quick-home::before {
-  content: '';
-  position: absolute;
-  inset: var(--outline-width);
-  border: var(--outline-width) solid var(--bg);
-  border-radius: inherit;
-  background: var(--quick-home-fill, var(--bg));
-  pointer-events: none;
-}
-.quick-home > span { position: relative; }
-.quick-home:is(:focus-visible, :active, .is-launching) {
-  --quick-home-fill: var(--lime);
-  color: var(--bg);
-}
-@media (hover: hover) {
-  .quick-home:hover {
-    --quick-home-fill: var(--lime);
-    color: var(--bg);
-    box-shadow: 0 0 14px rgb(190 255 50 / .25);
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  html:not(.reduced-motion) .quick-home {
-    transition: color .18s, box-shadow .18s;
-  }
-  html:not(.reduced-motion) .quick-home::before {
-    transition: background-color .18s;
-  }
-  html:not(.reduced-motion) .quick-home.is-launching {
-    animation: quick-home-ring .55s ease-out;
-  }
-  html:not(.reduced-motion) .quick-home.is-launching > span {
-    animation: quick-home-flight .55s cubic-bezier(.22,.68,.26,1);
-  }
-}
-@keyframes quick-home-flight {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  18% { transform: translateY(3px) scaleY(.88); opacity: 1; }
-  45% { transform: translateY(-130%) scaleY(1.15); opacity: 0; }
-  46% { transform: translateY(120%); opacity: 0; }
-  78% { transform: translateY(-2px); opacity: 1; }
-}
-@keyframes quick-home-ring {
-  from { box-shadow: 0 0 0 0 rgb(190 255 50 / .65); }
-  to { box-shadow: 0 0 0 9px rgb(190 255 50 / 0); }
 }
 
 .approach .faq-cta { font-weight: 700; }

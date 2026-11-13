@@ -85,6 +85,11 @@ html[data-theme] .project-case-toolbar .case-stack {
   .project-case .case-gallery { margin-inline: calc(-1 * clamp(25px, 5vw, 60px)); }
 }
 @media (max-width: 700px) {
+  .project-case .case-top-controls {
+    position: fixed;
+    right: max(12px, env(safe-area-inset-right));
+    margin: 0;
+  }
   html[data-theme] .project-dialog.project-case {
     width: 100%;
     max-width: 100%;

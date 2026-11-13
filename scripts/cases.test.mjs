@@ -11,6 +11,20 @@ const root = new URL('../dist/', import.meta.url);
 const read = file => readFile(new URL(file, root), 'utf8');
 const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-cases.json', import.meta.url), 'utf8'));
 
+test('every case presentation also loads the back-to-top control when opened directly', async () => {
+  const shortcut = new URL('standalone-case.js', root).href;
+  for (const project of projects) {
+    const page = await read(project.page);
+    const frames = page.matchAll(/<iframe\b(?=[^>]*\bdata-case-frame\b)[^>]*\bsrc="([^"]+)"/gi);
+    for (const [, source] of frames) {
+      const presentation = new URL(source, new URL(project.page, root));
+      const html = await readFile(presentation, 'utf8');
+      const scripts = [...html.matchAll(/<script\b[^>]*type="module"[^>]*src="([^"]+)"/gi)];
+      assert.ok(scripts.some(([, src]) => new URL(src, presentation).href === shortcut), source);
+    }
+  }
+});
+
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
   assert.equal(projects.length, imported.projects.length + 10);

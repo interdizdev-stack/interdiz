@@ -20,3 +20,25 @@ export function setupQuickHome(control, scroller) {
   control.addEventListener('animationend', finishFlight);
   control.addEventListener('animationcancel', finishFlight);
 }
+
+export function createCaseShortcut(scroller, content) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'quick-home';
+  button.title = 'Наверх';
+  button.setAttribute('aria-label', 'Наверх');
+  const arrow = document.createElement('span');
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.textContent = '↑';
+  button.append(arrow);
+  setupQuickHome(button, scroller);
+
+  const update = () => button.style.setProperty('--page-progress', `${scrollFraction(scroller) * 100}%`);
+  const scrollTarget = scroller === document.scrollingElement ? document : scroller;
+  scrollTarget.addEventListener('scroll', update, { passive: true });
+  const observer = new ResizeObserver(update);
+  observer.observe(scroller);
+  observer.observe(content);
+  update();
+  return button;
+}
