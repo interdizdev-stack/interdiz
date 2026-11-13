@@ -1144,5 +1144,69 @@ export const projects = [
         "height": 844
       }
     ]
+  },
+  {
+    "key": "viking",
+    "title": "ВИКИНГ",
+    "lines": [
+      "ВИКИНГ"
+    ],
+    "categories": [
+      "web"
+    ],
+    "sourceId": 17,
+    "description": "Сайт фитнес-клуба «ВИКИНГ» в Екатеринбурге помогает новичку выбрать программу, познакомиться с тренерами и подготовиться к первой тренировке.",
+    "stack": [
+      "UX/UI",
+      "HTML/CSS",
+      "JavaScript",
+      "Адаптивная вёрстка",
+      "SEO"
+    ],
+    "behance": "",
+    "page": "case-viking.html",
+    "presentation": "assets/cases/viking/presentation.htm",
+    "preview": {
+      "src": "assets/cases/viking/preview.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    "images": [
+      {
+        "src": "assets/cases/viking/screens/desktop-hero.webp",
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/viking/screens/desktop-programs.webp",
+        "width": 1440,
+        "height": 1015
+      },
+      {
+        "src": "assets/cases/viking/screens/desktop-coaches.webp",
+        "width": 1440,
+        "height": 852
+      },
+      {
+        "src": "assets/cases/viking/screens/desktop-booking.webp",
+        "width": 620,
+        "height": 956
+      },
+      {
+        "src": "assets/cases/viking/screens/mobile-hero.webp",
+        "width": 390,
+        "height": 844
+      },
+      {
+        "src": "assets/cases/viking/screens/mobile-program-detail.webp",
+        "width": 390,
+        "height": 844
+      },
+      {
+        "src": "assets/cases/viking/screens/mobile-booking.webp",
+        "width": 390,
+        "height": 844
+      }
+    ]
   }
 ];
