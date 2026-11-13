@@ -11,6 +11,7 @@ await syncSEO();
 
 const root = fileURLToPath(new URL('./dist/', import.meta.url));
 const port = Number(process.env.PORT || 3000);
+const host = process.env.HOST || '127.0.0.1';
 const types = { '.html': 'text/html; charset=utf-8', '.htm': 'text/html; charset=utf-8', '.gif': 'image/gif', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8' };
 
 http.createServer(async (request, response) => {
@@ -43,8 +44,8 @@ http.createServer(async (request, response) => {
   } catch {
     response.writeHead(404).end('Not found');
   }
-}).listen(port, '127.0.0.1', () => {
-  console.log(`InterDIZ is running at http://localhost:${port}`);
+}).listen(port, host, () => {
+  console.log(`InterDIZ is listening on ${host}:${port}`);
 }).on('error', error => {
   console.error(error.message);
   process.exitCode = 1;
