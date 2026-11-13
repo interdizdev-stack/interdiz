@@ -18,6 +18,24 @@
 .project-dialog .dialog-link { margin: 0; }
 .project-dialog .dialog-link[hidden] { display: none; }
 .project-dialog .dialog-project-page { color: var(--lime); }
+.project-case .case-top-controls {
+  position: sticky;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 5;
+  width: max-content;
+  margin: 0 max(22px, env(safe-area-inset-right)) 18px auto;
+}
+.case-top-controls .quick-home { padding: 0; border: 0 !important; }
+body:has(.project-case[open]) > .display-controls:has(.quick-home) { visibility: hidden; }
+@media (max-width: 1100px), (pointer: coarse) and (max-width: 1400px) {
+  .project-case .case-top-controls {
+    bottom: max(12px, env(safe-area-inset-bottom));
+    margin-right: max(12px, env(safe-area-inset-right));
+    margin-bottom: 12px;
+    transform: scale(.9);
+    transform-origin: bottom right;
+  }
+}
 .project-directions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-block: 8px; color: var(--lime); font-size: 12px; }
 .project-card[id] { scroll-margin-top: 32px; }
 .mochi-meta-compact { display: none; }

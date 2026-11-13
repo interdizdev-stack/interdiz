@@ -1,5 +1,29 @@
 import { projects } from './project-data.js';
 import { setupCasePresentation } from './case-presentation.js';
+import { scrollFraction, setupQuickHome } from './quick-home.js';
+
+function setupCaseShortcut(dialog) {
+  const panel = document.createElement('div');
+  panel.className = 'case-top-controls';
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'quick-home';
+  button.title = 'Наверх';
+  button.setAttribute('aria-label', 'Наверх');
+  const arrow = document.createElement('span');
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.textContent = '↑';
+  button.append(arrow);
+  panel.append(button);
+  dialog.append(panel);
+  setupQuickHome(button, dialog);
+
+  const update = () => button.style.setProperty('--page-progress', `${scrollFraction(dialog) * 100}%`);
+  dialog.addEventListener('scroll', update, { passive: true });
+  const observer = new ResizeObserver(update);
+  observer.observe(dialog);
+  observer.observe(dialog.querySelector('.dialog-inner'));
+}
 
 export function setupProjectDialog({ onOpen } = {}) {
   const dialog = document.querySelector('.project-dialog:not(.service-dialog)');
@@ -12,6 +36,7 @@ export function setupProjectDialog({ onOpen } = {}) {
   toolbar.append(stack);
   const pageLink = dialog.querySelector('.dialog-project-page');
   const link = dialog.querySelector('.dialog-link');
+  setupCaseShortcut(dialog);
   let opener;
   let restorePage;
   let disposePresentation;

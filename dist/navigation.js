@@ -1,3 +1,5 @@
+import { scrollFraction } from './quick-home.js';
+
 // Shared dialog interactions for the home page and inner pages.
 export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutChange }) {
   if (!menu) return () => {};
@@ -45,13 +47,12 @@ export function setupMobileMenu({ menu, toggles, compactMedia, onOpen, onLayoutC
 }
 
 export function setupScrollProgress(readPosition = () => scrollY) {
-  const shortcut = document.querySelector('.quick-home');
+  const shortcut = document.querySelector('a.quick-home');
   const bar = document.querySelector('.scroll-progress > span');
   const root = document.documentElement;
 
   function update() {
-    const range = root.scrollHeight - root.clientHeight;
-    const fraction = range > 0 ? Math.max(0, Math.min(1, readPosition() / range)) : 0;
+    const fraction = scrollFraction(root, readPosition());
     shortcut?.style.setProperty('--page-progress', `${fraction * 100}%`);
     if (bar) bar.style.transform = `scaleX(${fraction})`;
   }

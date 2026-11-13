@@ -1,3 +1,5 @@
+import { setupQuickHome } from './quick-home.js';
+
 // Shared by the home page and every inner page.
 let clockStarted = false;
 export function setupClock() {
@@ -51,16 +53,5 @@ function setupCopyClipboard() {
 setupClock();
 setupCopyClipboard();
 
-const backToTop = document.querySelector('.quick-home');
-if (backToTop) {
-  backToTop.addEventListener('click', () => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('reduced-motion')) return;
-    try { if (sessionStorage.getItem('interdiz-reduced') === 'true') return; } catch {}
-    backToTop.classList.add('is-launching');
-  });
-  const finishFlight = event => {
-    if (event.animationName === 'quick-home-flight') backToTop.classList.remove('is-launching');
-  };
-  backToTop.addEventListener('animationend', finishFlight);
-  backToTop.addEventListener('animationcancel', finishFlight);
-}
+const backToTop = document.querySelector('a.quick-home');
+if (backToTop) setupQuickHome(backToTop);
