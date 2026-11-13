@@ -1256,5 +1256,69 @@ export const projects = [
         "height": 560
       }
     ]
+  },
+  {
+    "key": "vr-crm",
+    "title": "VIAR CRM",
+    "lines": [
+      "VIAR CRM"
+    ],
+    "categories": [
+      "automation"
+    ],
+    "sourceId": 19,
+    "description": "VIAR CRM объединяет расписание оборудования, групповые бронирования и оплату в VR-клубе. Гость записывается с телефона, администратор ведёт участников и расчёты в одной карточке визита.",
+    "stack": [
+      "UX/UI",
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "JavaScript"
+    ],
+    "behance": "",
+    "page": "case-vr-crm.html",
+    "presentation": "assets/cases/vr-crm/presentation.htm",
+    "preview": {
+      "src": "assets/cases/vr-crm/cover.jpg",
+      "width": 808,
+      "height": 632
+    },
+    "images": [
+      {
+        "src": "assets/cases/vr-crm/screens/schedule-dark.webp",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/schedule-detail-dark.webp",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/booking-dark.webp",
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/payment-dark.webp",
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/public-mobile-dark.webp",
+        "width": 390,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/staff-mobile-dark.webp",
+        "width": 390,
+        "height": 1000
+      },
+      {
+        "src": "assets/cases/vr-crm/screens/schedule-light.webp",
+        "width": 1440,
+        "height": 900
+      }
+    ]
   }
 ];

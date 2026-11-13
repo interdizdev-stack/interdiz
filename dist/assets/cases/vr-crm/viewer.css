@@ -1,0 +1,6 @@
+@import url('../crm/viewer.css');
+.crm-viewer { background: #080e2b; color: #fff; border-color: #34367f; }
+.crm-viewer-tools button { background: #071130; border-color: #6e75a4; }
+.crm-viewer-tools button[aria-pressed="true"] { background: #e7863e; color: #01051d; }
+.crm-viewer-stage { background: #01051d; }
+.crm-viewer-caption a { color: #e7863e; }

@@ -20,6 +20,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/crm/cover.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/preview.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/cover.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/portfolio.html</loc>
@@ -41,6 +42,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/crm/cover.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/preview.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/cover.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/articles.html</loc>
@@ -278,5 +280,15 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/moss.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/orbi.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/bean.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/case-vr-crm.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/schedule-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/schedule-detail-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/booking-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/payment-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/public-mobile-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/staff-mobile-dark.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/vr-crm/screens/schedule-light.webp</image:loc></image:image>
   </url>
 </urlset>

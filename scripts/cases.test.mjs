@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 9);
+  assert.equal(projects.length, imported.projects.length + 10);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
