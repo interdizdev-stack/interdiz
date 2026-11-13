@@ -1208,5 +1208,53 @@ export const projects = [
         "height": 844
       }
     ]
+  },
+  {
+    "key": "mascots",
+    "title": "Четыре характера",
+    "lines": [
+      "ЧЕТЫРЕ",
+      "ХАРАКТЕРА"
+    ],
+    "categories": [
+      "ai"
+    ],
+    "sourceId": 18,
+    "description": "«Четыре характера» — коллекция анимированных маскотов Buddy, Moss, Orbi и Bean. Кейс показывает концепцию, дизайн и движение каждого персонажа.",
+    "stack": [
+      "Концепция",
+      "Дизайн персонажей",
+      "Анимация"
+    ],
+    "behance": "",
+    "page": "case-mascots.html",
+    "presentation": "assets/cases/mascots/presentation.htm",
+    "preview": {
+      "src": "assets/cases/mascots/preview.webp",
+      "width": 1440,
+      "height": 800
+    },
+    "images": [
+      {
+        "src": "assets/cases/mascots/assets/buddy.webp",
+        "width": 560,
+        "height": 560
+      },
+      {
+        "src": "assets/cases/mascots/assets/moss.webp",
+        "width": 560,
+        "height": 560
+      },
+      {
+        "src": "assets/cases/mascots/assets/orbi.webp",
+        "width": 560,
+        "height": 560
+      },
+      {
+        "src": "assets/cases/mascots/assets/bean.webp",
+        "width": 560,
+        "height": 560
+      }
+    ]
   }
 ];

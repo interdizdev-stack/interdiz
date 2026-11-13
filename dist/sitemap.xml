@@ -19,6 +19,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/chat/preview.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/crm/cover.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/portfolio.html</loc>
@@ -39,6 +40,7 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/chat/preview.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/crm/cover.jpg</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/preview.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/preview.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://interdiz.ru/articles.html</loc>
@@ -269,5 +271,12 @@
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/screens/mobile-hero.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/screens/mobile-program-detail.webp</image:loc></image:image>
     <image:image><image:loc>https://interdiz.ru/assets/cases/viking/screens/mobile-booking.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://interdiz.ru/case-mascots.html</loc>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/buddy.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/moss.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/orbi.webp</image:loc></image:image>
+    <image:image><image:loc>https://interdiz.ru/assets/cases/mascots/assets/bean.webp</image:loc></image:image>
   </url>
 </urlset>
