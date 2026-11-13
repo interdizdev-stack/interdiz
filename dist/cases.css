@@ -236,3 +236,88 @@ html[data-theme] .project-image .ami-cover {
 
 .viar-cover-subtitle { white-space:nowrap; }
 @media (max-width:699px) { .viar-cover-subtitle { font-size:9px; } }
+
+@font-face {
+  font-family: 'Mascots Manrope';
+  src: url('./assets/cases/chat/assets/manrope.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mascots Playfair';
+  src: url('./assets/cases/mascots/assets/playfair-display-italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+}
+.mascots-poster {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  display: grid;
+  grid-template-rows: 24% minmax(0, 1fr);
+  background: #f3f2ea;
+  color: #20251c;
+  font-family: 'Mascots Manrope', sans-serif;
+}
+.mascots-title {
+  align-self: center;
+  justify-self: end;
+  margin-right: 4%;
+  font-size: min(7.2cqw, 15cqh);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.075em;
+  white-space: nowrap;
+}
+.mascots-title em {
+  font-family: 'Mascots Playfair', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -.06em;
+  margin-inline-start: .075em;
+}
+.mascots-cast {
+  display: grid;
+  grid-template: minmax(0, 1fr) / repeat(4, minmax(0, 1fr));
+}
+.mascots-portrait {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  padding: 1cqh 0 72px;
+  align-items: end;
+}
+.mascots-portrait--dizzy { background: #d8e6a8; }
+.mascots-portrait--moss { background: #c7e4cc; }
+.mascots-portrait--orbi { background: #d7cdf0; }
+.mascots-portrait--bean { background: #f6de86; }
+.mascots-figure {
+  align-self: stretch;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.project-card .project-image .mascots-portrait img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.4);
+  filter: none;
+}
+.mascots-name {
+  font-size: clamp(10px, 2cqw, 18px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -.035em;
+}
+@container (max-width: 470px) {
+  .mascots-portrait { padding-bottom: 60px; }
+  .mascots-title { font-size: min(6.6cqw, 14cqh); }
+}
+@container (max-width: 520px) {
+  .mascots-cover .project-year { display: none; }
+}

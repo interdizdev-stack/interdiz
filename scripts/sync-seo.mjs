@@ -47,7 +47,7 @@ export function extractProjects(html) {
     key: required(card.match(/data-open-project="([^"]+)"/)?.[1], 'project key'),
     name: required(textContent(contents(card, 'h3')[0] || ''), 'project title'),
     description: required(textContent(contents(card, 'p').at(-1) || ''), 'project description'),
-    image: absolute(required(card.match(/<img\b[^>]*src="([^"]+)"/)?.[1], 'project image')),
+    image: absolute(required(card.match(/data-cover-image="([^"]+)"/)?.[1] || card.match(/<img\b[^>]*src="([^"]+)"/)?.[1], 'project image')),
     imageAlt: textContent(card.match(/<img\b[^>]*alt="([^"]*)"/)?.[1] || ''),
   }));
 }
