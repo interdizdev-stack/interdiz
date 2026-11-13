@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "CRM Manrope";
+  src: url("../chat/assets/manrope.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+.crm-viewer {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(96vw, 1440px);
+  max-width: 100%;
+  max-height: 94dvh;
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #343a37;
+  border-radius: 8px;
+  background: #101212;
+  color: #f5f6f5;
+  font: 500 14px/1.5 "CRM Manrope", sans-serif;
+  overscroll-behavior: contain;
+}
+.crm-viewer[open] { display: flex; flex-direction: column; }
+.crm-viewer::backdrop { background: rgb(0 0 0 / 82%); }
+.crm-viewer-tools, .crm-viewer-caption { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; padding: 8px 12px; }
+.crm-viewer-tools form { margin: 0 0 0 auto; }
+.crm-viewer-tools button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 8px;
+  border: 1px solid #758079;
+  border-radius: 4px;
+  background: #171919;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.crm-viewer-tools button[aria-pressed="true"] { background: #c1f000; color: #090a0a; }
+.crm-viewer-stage { min-height: 0; overflow: auto; background: #090a0a; }
+.crm-viewer-stage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 70dvh;
+  margin: auto;
+  cursor: zoom-in;
+}
+.crm-viewer-stage.is-zoomed img { width: max(150%, var(--image-width)); max-width: none; max-height: none; cursor: zoom-out; }
+.crm-viewer-caption { justify-content: space-between; }
+.crm-viewer-caption a { color: #c1f000; }
+@media (max-width: 480px) {
+  .crm-viewer-tools { gap: 4px; padding: 6px; }
+}

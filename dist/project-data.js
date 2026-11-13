@@ -1075,5 +1075,74 @@ export const projects = [
         "height": 720
       }
     ]
+  },
+  {
+    "key": "crm",
+    "title": "CRM студии",
+    "lines": [
+      "CRM СТУДИИ"
+    ],
+    "categories": [
+      "automation",
+      "ai"
+    ],
+    "sourceId": 16,
+    "description": "CRM для веб-студии объединяет контакты клиентов, услуги, периодические платежи и документы. В кейсе показаны учёт оплат и создание договоров на основе данных клиента.",
+    "stack": [
+      "UX/UI",
+      "Laravel",
+      "PHP",
+      "MariaDB"
+    ],
+    "behance": "",
+    "page": "case-crm.html",
+    "presentation": "assets/cases/crm/presentation.htm",
+    "preview": {
+      "src": "assets/cases/crm/cover.jpg",
+      "width": 1600,
+      "height": 1200
+    },
+    "images": [
+      {
+        "src": "assets/cases/crm/screens/clients-light.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/services-dark.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/details-light.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/contacts-light.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/finance-light.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/documents-light.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "assets/cases/crm/screens/contacts-mobile-light.webp",
+        "width": 390,
+        "height": 844
+      },
+      {
+        "src": "assets/cases/crm/screens/services-mobile-dark.webp",
+        "width": 390,
+        "height": 844
+      }
+    ]
   }
 ];

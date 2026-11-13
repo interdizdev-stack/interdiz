@@ -1,0 +1,132 @@
+/* Brand UI 1.0.5 — typography, colours and components used by the CRM case. */
+@font-face {
+  font-family: Manrope;
+  src: url("../chat/assets/manrope.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: Oswald;
+  src: url("../chat/assets/oswald.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
+:root {
+  --ui-color-accent: #C1F000;
+  --ui-color-accent-hover: #D2FF24;
+  --ui-color-accent-active: #AAD400;
+  --ui-color-ink: #090A0A;
+  --ui-color-white: #FFFFFF;
+  --ui-color-graphite: #292C2C;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 24px;
+  --ui-space-6: 32px;
+  --ui-space-7: 48px;
+  --ui-space-8: 64px;
+  --ui-space-9: 96px;
+  --ui-space-inline: 10px;
+  --ui-space-control-x: 18px;
+  --ui-space-control-y: 11px;
+  --ui-radius-sm: 4px;
+  --ui-radius-md: 6px;
+  --ui-radius-lg: 8px;
+  --ui-radius-full: 9999px;
+  --ui-motion-normal: 180ms;
+  --ui-font-size-xs: 12px;
+  --ui-font-size-sm: 14px;
+  --ui-font-size-md: 16px;
+  --ui-font-size-lg: 20px;
+  --ui-font-size-display: 40px;
+  --ui-font-size-control: 13px;
+  --ui-font-size-h2: 24px;
+  --ui-font-size-h1: 32px;
+  --ui-font-size-page: 36px;
+  --ui-font-weight-regular: 400;
+  --ui-font-weight-medium: 500;
+  --ui-font-weight-semibold: 600;
+  --ui-font-weight-bold: 700;
+  --ui-line-height-tight: 1.2;
+  --ui-line-height-heading: 1.3;
+  --ui-line-height-body: 1.6;
+  --ui-letter-spacing-caps: 0.02em;
+  --ui-font-body: Manrope, Arial, sans-serif;
+  --ui-font-heading: Oswald, Arial, sans-serif;
+  --ui-type-display-font-family: Oswald, Arial, sans-serif;
+  --ui-type-display-font-size: 40px;
+  --ui-type-display-font-weight: 500;
+  --ui-type-display-line-height: 1.2;
+  --ui-type-display-letter-spacing: 0;
+  --ui-type-display-min-size: 32px;
+  --ui-type-h4-font-family: Manrope, Arial, sans-serif;
+  --ui-type-h4-font-size: 18px;
+  --ui-type-h4-font-weight: 600;
+  --ui-type-h4-line-height: 1.3;
+  --ui-type-h4-letter-spacing: 0;
+  --ui-type-body-font-family: Manrope, Arial, sans-serif;
+  --ui-type-body-font-size: 16px;
+  --ui-type-body-font-weight: 400;
+  --ui-type-body-line-height: 1.6;
+  --ui-type-body-letter-spacing: 0;
+  --ui-type-caption-font-family: Manrope, Arial, sans-serif;
+  --ui-type-caption-font-size: 12px;
+  --ui-type-caption-font-weight: 500;
+  --ui-type-caption-line-height: 1.6;
+  --ui-type-caption-letter-spacing: 0;
+  --ui-shadow-md: 0 8px 24px rgba(0, 0, 0, .18);
+  --ui-shadow-lg: 0 12px 36px rgba(0, 0, 0, .2);
+  --ui-z-skip: 1100;
+  --ui-control-md: 44px;
+  --ui-control-chip: 32px;
+  --ui-icon-md: 18px;
+  --ui-layout-container: 1200px;
+  --ui-border-width: 1px;
+  --ui-bg: #F5F6F5;
+  --ui-surface: #FFFFFF;
+  --ui-field: #F0F2F0;
+  --ui-text: #171919;
+  --ui-muted: #646D68;
+  --ui-border: #DCE1DD;
+  --ui-subtle: #E9ECE9;
+  --ui-accent-text: #4E6800;
+  --ui-border-control: #7D8680;
+}
+.case-ink {
+  --ui-bg: #101212;
+  --ui-surface: #171919;
+  --ui-field: #242727;
+  --ui-text: #F5F6F5;
+  --ui-muted: #A4ADA8;
+  --ui-border: #343A37;
+  --ui-subtle: #242A26;
+  --ui-accent-text: #C1F000;
+  --ui-border-control: #758079;
+}
+
+* { box-sizing: border-box; }
+body { font: var(--ui-font-weight-regular) var(--ui-font-size-md)/var(--ui-line-height-body) var(--ui-font-body); }
+h1, h2, h3, p, dl, ul { margin: 0 0 1rem; }
+a { color: var(--ui-accent-text); }
+a:focus-visible { outline: 2px solid var(--ui-accent-text); outline-offset: 3px; }
+.mb-0 { margin-bottom: 0 !important; }
+.mt-4 { margin-top: 1.5rem; }
+.text-muted { color: var(--ui-muted); }
+.justify-content-center { justify-content: center; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--ui-space-inline); min-height: var(--ui-control-md); padding: var(--ui-space-control-y) var(--ui-space-control-x); border: 1px solid transparent; border-radius: var(--ui-radius-sm); background: var(--ui-color-accent); color: var(--ui-color-ink); font-size: var(--ui-font-size-control); font-weight: var(--ui-font-weight-bold); line-height: 1.5; text-decoration: none; }
+.btn:hover { background: var(--ui-color-accent-hover); }
+.btn:active { background: var(--ui-color-accent-active); }
+.lucide { width: var(--ui-icon-md); height: var(--ui-icon-md); stroke-width: 1.7; flex-shrink: 0; vertical-align: middle; }
+.brand-display { font-family: var(--ui-type-display-font-family); font-size: var(--ui-type-display-font-size); font-weight: var(--ui-type-display-font-weight); line-height: var(--ui-type-display-line-height); letter-spacing: var(--ui-type-display-letter-spacing); overflow-wrap: anywhere; }
+.brand-display { font-size: clamp(var(--ui-type-display-min-size), 3.5vw, var(--ui-type-display-font-size)); }
+.brand-h4 { font-family: var(--ui-type-h4-font-family); font-size: var(--ui-type-h4-font-size); font-weight: var(--ui-type-h4-font-weight); line-height: var(--ui-type-h4-line-height); letter-spacing: var(--ui-type-h4-letter-spacing); overflow-wrap: anywhere; }
+.brand-body { font-family: var(--ui-type-body-font-family); font-size: var(--ui-type-body-font-size); font-weight: var(--ui-type-body-font-weight); line-height: var(--ui-type-body-line-height); letter-spacing: var(--ui-type-body-letter-spacing); overflow-wrap: anywhere; }
+.brand-caption { font-family: var(--ui-type-caption-font-family); font-size: var(--ui-type-caption-font-size); font-weight: var(--ui-type-caption-font-weight); line-height: var(--ui-type-caption-line-height); letter-spacing: var(--ui-type-caption-letter-spacing); overflow-wrap: anywhere; }
+.brand-tag { display: inline-flex; align-items: center; gap: var(--ui-space-2); max-width: 100%; min-height: var(--ui-control-chip); padding: var(--ui-space-1) var(--ui-space-3); color: var(--ui-text); background: var(--ui-field); border: var(--ui-border-width) solid var(--ui-border-control); border-radius: var(--ui-radius-full); font: var(--ui-font-weight-medium) var(--ui-font-size-xs)/var(--ui-line-height-heading) var(--ui-font-body); overflow-wrap: anywhere; }
+.brand-tag { border-color: var(--ui-border); }
+.brand-tag--accent { color: var(--ui-accent-text); background: var(--ui-subtle); }
+.brand-skip-link { position: fixed; top: var(--ui-space-3); left: var(--ui-space-3); z-index: var(--ui-z-skip); transform: translateY(calc(-100% - var(--ui-space-5))); padding: var(--ui-space-3) var(--ui-space-4); color: var(--ui-text); background: var(--ui-surface); border: var(--ui-border-width) solid var(--ui-border-control); border-radius: var(--ui-radius-sm); }
+.brand-skip-link:focus { transform: none; }

@@ -13,7 +13,7 @@ const imported = JSON.parse(await readFile(new URL('../docs/import/interdiz-case
 
 test('all source cases and every original presentation sheet have been imported', async () => {
   assert.equal(imported.projects.length, 9);
-  assert.equal(projects.length, imported.projects.length + 6);
+  assert.equal(projects.length, imported.projects.length + 7);
   assert.equal(new Set(projects.map(project => project.sourceId)).size, projects.length);
   assert.equal(projects.filter(project => imported.projects.some(source => source.id === project.sourceId)).reduce((sum, project) => sum + project.images.length, 0), 105);
   for (const source of imported.projects) {
@@ -93,6 +93,26 @@ test('CHAT opens one responsive presentation with its original typefaces from bo
     assert.ok(styles.includes(`url('${font}')`));
     const bytes = await readFile(new URL(`assets/cases/chat/${font}`, root));
     assert.equal(bytes.toString('ascii', 0, 4), 'wOF2');
+  }
+});
+
+test('CRM links both categories and keeps desktop and phone screens in one presentation', async () => {
+  const project = projects.find(item => item.key === 'crm');
+  assert.deepEqual(project.categories, ['automation', 'ai']);
+  const page = await read(project.page);
+  for (const category of project.categories) {
+    assert.ok(page.includes(`href="./portfolio.html?category=${category}#portfolio-catalog"`));
+  }
+  assert.ok(page.includes(`data-case-key="crm" src="./${project.presentation}"`));
+  const presentation = await read(project.presentation);
+  assert.match(presentation, /data-case-content/);
+  const screens = [...presentation.matchAll(/<a[^>]+href="(screens\/[^"]+)"[^>]+data-caption=/g)].map(match => match[1]);
+  const directory = new URL('.', new URL(project.presentation, root));
+  assert.deepEqual([...new Set(screens)].map(path => new URL(path, directory).href), project.images.map(image => new URL(image.src, root).href));
+  assert.ok(screens.includes('screens/contacts-mobile-light.webp'));
+  assert.ok(screens.includes('screens/services-mobile-dark.webp'));
+  for (const file of ['index.html', 'portfolio.html']) {
+    assert.match(await read(file), /data-open-project="crm"[^>]+href="\.\/case-crm\.html"/);
   }
 });
 
