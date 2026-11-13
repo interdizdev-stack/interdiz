@@ -20,13 +20,19 @@ p + p, ul + p { margin-top: .8em; }
 ul { padding: 0; list-style: none; }
 p + ul { margin-top: .65em; }
 section { margin-top: clamp(32px, 8vw, 72px); }
-.title { margin-bottom: clamp(20px, 5vw, 48px); }
-.script {
-  width: fit-content;
-  max-width: 86%;
-  margin: 0 7% clamp(20px, 5vw, 44px);
+.title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 94%;
+  min-height: clamp(48px, 12vw, 92px);
+  margin: 0 auto clamp(20px, 5vw, 48px);
+  padding: 8px 6%;
+  border-block: 1px solid currentColor;
+  text-align: left;
 }
-.script svg { width: min(78vw, 435px); }
+.title svg { width: calc(var(--title-width) * .1vw); max-width: 100%; }
+.title-meta { margin-left: auto; font: 500 clamp(14px, 3.6vw, 22px)/1 Cormorant, serif; white-space: nowrap; }
 .copy, .text, .type-notes { width: 86%; max-width: 42rem; margin-inline: auto; }
 .copy { padding-block: clamp(20px, 6vw, 54px); }
 .spread { display: grid; gap: clamp(22px, 5vw, 44px); align-items: center; }
@@ -34,7 +40,7 @@ section { margin-top: clamp(32px, 8vw, 72px); }
 .spread > svg { width: 74%; }
 .about > svg, .reverse > svg { justify-self: end; }
 .about > svg { width: 64%; margin-right: 6.5%; }
-.specimen { width: 65%; max-width: 420px; margin: clamp(32px, 8vw, 72px) auto 0; }
+.specimen { width: 52%; max-width: 320px; margin: 0 auto; }
 .type-notes { display: grid; gap: 28px; margin-top: 12px; }
 .type-notes h3 { width: fit-content; margin: 0 auto 12px; }
 .type-notes h3 svg { height: 38px; width: auto; }
