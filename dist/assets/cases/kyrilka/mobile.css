@@ -35,7 +35,7 @@ h1 img { width: 19.08em; margin-inline: auto; }
 
 h2 { margin: var(--space) var(--gutter) 0; }
 /* Section artwork has 17–18px capitals in a 30px strip. */
-h2 img, .design-title svg { display: block; width: auto; height: calc(30em / var(--source-cap-height, 18)); }
+h2 img, .design-title > svg { display: block; width: auto; height: calc(30em / var(--source-cap-height, 18)); }
 h2 img { margin-inline: auto; }
 .design-title { display: grid; justify-items: center; row-gap: .3em; }
 
