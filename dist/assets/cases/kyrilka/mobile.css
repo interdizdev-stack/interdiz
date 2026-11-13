@@ -17,8 +17,11 @@ main {
 .inset-right { width: 88%; margin-left: auto; }
 .portrait { width: min(85%, 570px); margin-left: auto; }
 
+/* One em is the visible capital height in the original lettering. */
+h1, h2 { font-size: clamp(10px, 3.4vw, 16px); line-height: 1; }
 h1 { margin: 14px var(--gutter) 24px; }
-h1 img { width: min(100%, 820px); margin-inline: auto; }
+/* The phone and tablet title crops have 50px capitals at their native size. */
+h1 img { width: 19.08em; margin-inline: auto; }
 .disciplines img { width: min(78%, 440px); margin-inline: auto; }
 
 .copy {
@@ -31,14 +34,17 @@ h1 img { width: min(100%, 820px); margin-inline: auto; }
 .copy img { width: 100%; }
 
 h2 { margin: var(--space) var(--gutter) 0; }
-h2 img { width: auto; max-width: 100%; height: clamp(17px, 4.5vw, 25px); margin-inline: auto; }
-h2 .design-title { width: min(96%, 680px); height: auto; }
+/* Section artwork has 17–18px capitals in a 30px strip. */
+h2 img, .design-title svg { display: block; width: auto; height: calc(30em / var(--source-cap-height, 18)); }
+h2 img { margin-inline: auto; }
+.design-title { display: flex; flex-wrap: wrap; justify-content: center; gap: .3em .45em; }
+.design-title svg { flex: none; }
 
 footer { display: grid; gap: var(--space); margin-top: var(--space); }
 .signoff img { width: min(83%, 700px); margin-inline: auto; }
-.thanks { width: min(68%, 295px); margin-inline: auto; }
 
 @media (min-width: 640px) {
+  h1 img { width: 34.86em; }
   .copy { max-width: 1060px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
   .copy:has(> :only-child) { grid-template-columns: minmax(0, 490px); justify-content: end; }
   .copy > :last-child:nth-child(3) { grid-column: 2; }
