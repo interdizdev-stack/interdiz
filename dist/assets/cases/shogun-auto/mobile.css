@@ -4,8 +4,8 @@ body { margin: 0; color: #fff; }
 main {
   display: flow-root;
   --gutter: clamp(18px, 5.6vw, 48px);
-  --text-scale: .75;
-  --type-unit: calc(clamp(.54px, .155vw, .74px) * var(--text-scale));
+  --heading-scale: .75;
+  --text-scale: .6;
 }
 img, svg { display: block; max-width: 100%; height: auto; }
 p, h1, h2, h3 { margin: 0; }
@@ -21,7 +21,9 @@ p, h1, h2, h3 { margin: 0; }
   gap: clamp(22px, 5vw, 44px);
 }
 .spread + .spread { padding-top: 0; }
+.title { --text-scale: var(--heading-scale); }
 .title, .signature, .thanks {
+  --type-unit: calc(clamp(.54px, .155vw, .74px) * var(--text-scale));
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -31,11 +33,11 @@ p, h1, h2, h3 { margin: 0; }
   width: calc(var(--width) * var(--type-unit));
   max-width: calc(100% * var(--text-scale));
 }
-.spread > .copy, .color-note {
-  width: calc(min(100%, 410px) * var(--text-scale));
-  justify-self: end;
-}
+.spread > .copy, .color-note { justify-self: end; }
+.spread > .copy { width: calc(min(100%, 410px) * var(--text-scale)); }
 .copy img { width: 100%; }
+.color-note { width: calc(min(100%, 410px) * var(--heading-scale)); }
+.color-note .copy { width: calc(100% * var(--text-scale) / var(--heading-scale)); }
 .color-note .title { margin-bottom: 12px; }
 .signature { justify-content: center; flex-direction: column; margin: 1.5rem 0; }
 .design-credit { width: calc(clamp(106px, 24vw, 150px) * var(--text-scale)); justify-self: center; }
